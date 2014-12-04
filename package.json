@@ -1,0 +1,14 @@
+{
+  "name": "ec.appcms-doc",
+  "version": "0.0.1",
+  "description": "Documentation Repository for App CMS.",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.entrecode.de:7999/cms/ec.appcms-doc.git"
+  },
+  "author": "Ruben Deyhle <deyhle@entrecode.de>",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-md2html": "^0.2.1"
+  }
+}

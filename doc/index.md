@@ -2,9 +2,5 @@
 
 Welcome to the entrecode Documentation Website.
 
+- [API Documentation](./apidoc)
 - [Link Relations](./rel)
-
-Deprecated:
-
-- [Accounts API Documentation](./accounts_api_documentation)
-- [Data Manager API Documentation](./datamanager_documentation)

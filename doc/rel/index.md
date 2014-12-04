@@ -5,7 +5,7 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | Link Relation                 | Description                                    |
 |-------------------------------|------------------------------------------------|
 |[account](./rel/account)       |A single entrecode account|
-|[account/change-email-verification](./rel/account/change-email-verification)||
+|[account/change-email-verification](./rel/account/change-email-verification)|Verify an eMail change|
 |[account/token](./rel/account/token)|A single token assigned to an [account](./rel/account) |
 |[account/tokens](./rel/account/tokens)|List of tokens assigned to an [account](./rel/account) |
 |[accounts](./rel/accounts)     |List of entrecode accounts|

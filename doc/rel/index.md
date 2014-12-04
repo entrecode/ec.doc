@@ -14,6 +14,7 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 |[asset/file](./rel/asset/file) |File of a Data Manager Asset|
 |[assets/deleted](./rel/assets/deleted)|List of deleted Data Manager Assets|
 |[assets](./rel/assets)         |List of Data Manager Assets|
+|[auth](./rel/auth)             |Account Server API Entry Point |
 |[auth/email-available](./rel/auth/email-available)|Check availability of eMail Addresses for Registration|
 |[auth/email-verification](./rel/auth/email-verification)|Verify an eMail Address|
 |[auth/login](./rel/auth/login) |Log in with an account|

@@ -1,6 +1,9 @@
 # account 
 A single entrecode Account.
 
+* [GET](#get)   
+* [PUT](#post)
+
 ## GET
 Show a single entrecode Account.
 

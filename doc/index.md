@@ -6,5 +6,5 @@ Welcome to the entrecode Documentation Website.
 
 Deprecated:
 
-- [Accounts API Documentation](accounts_api_documentation)
-- [Data Manager API Documentation](datamanager_documentation)
+- [Accounts API Documentation](./accounts_api_documentation)
+- [Data Manager API Documentation](./datamanager_documentation)

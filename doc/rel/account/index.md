@@ -2,7 +2,7 @@
 A single entrecode Account.
 
 * [GET](#get)   
-* [PUT](#post)
+* [PUT](#put)
 
 ## GET
 Show a single entrecode Account.
@@ -12,7 +12,7 @@ Show a single entrecode Account.
 #### Headers
 |Header|Value|
 |------|-----|
-|Authorization|`Bearer `\<token\>|
+|Authorization|`Bearer `token|
 
 ### Response: 200 ok
 
@@ -87,7 +87,7 @@ To change account data, the following has to be sent in a PUT Request:
 |Header|Value|
 |------|-----|
 |Content-Type|`application/json`|
-|Authorization|`Bearer `\<token\>|
+|Authorization|`Bearer `token|
 
 #### Body
 

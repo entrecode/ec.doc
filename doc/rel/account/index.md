@@ -16,6 +16,8 @@ Show a single entrecode Account.
 
 ### Response: 200 ok
 
+JSON Schema: [https://entrecode.de/schema/account](https://entrecode.de/schema/account)
+
 #### Links
 | Relation     | Description     | Methods     | Templated     |
 |--------------|-----------------|-------------|---------------|
@@ -90,6 +92,8 @@ To change account data, the following has to be sent in a PUT Request:
 |Authorization|`Bearer `token|
 
 #### Body
+
+JSON Schema: [https://entrecode.de/schema/account-template](https://entrecode.de/schema/account-template)
 
 |Input field     |Description        |
 |----------------|-------------------|

@@ -2,5 +2,5 @@
 
 Welcome to the entrecode Documentation Website.
 
-- [API Documentation](./apidoc)
-- [Link Relations](./rel)
+- [API Documentation](./apidoc/)
+- [Link Relations](./rel/)

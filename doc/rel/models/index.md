@@ -70,7 +70,10 @@ JSON Schema: [https://entrecode.de/schema/model-template](https://entrecode.de/s
 
 |Input field     |Description        |
 |----------------|-------------------|
-|…           |…|
+|title           |The Model title.
+|rights          |Model rights.
+|fields          |Model fields. Mandatory fields (with reserved titles) should not be included here
+
 
 ### Response: 201 created
 

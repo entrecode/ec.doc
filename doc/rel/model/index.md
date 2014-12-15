@@ -49,10 +49,64 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
     },
     "fields": [
         {
-            "title": "description",
-            "type": "text",
-            "readOnly": "true",
-            ...
+            "title": "id",
+            "type": "id",
+            "readOnly": true,
+            "required": true,
+            "unique": true,
+            "localizable": false,
+            "mutable": false,
+            "validation": null
+        },
+        {
+            "title": "created",
+            "type": "datetime",
+            "readOnly": true,
+            "required": true,
+            "unique": false,
+            "localizable": false,
+            "mutable": false,
+            "validation": null
+        },
+        {
+            "title": "modified",
+            "type": "datetime",
+            "readOnly": true,
+            "required": true,
+            "unique": false,
+            "localizable": false,
+            "mutable": false,
+            "validation": null
+        },
+        {
+            "title": "creator",
+            "type": "entry",
+            "readOnly": true,
+            "required": true,
+            "unique": false,
+            "localizable": false,
+            "mutable": false,
+            "validation": "account"
+        },
+        {
+            "title": "name",
+            "type": "title",
+            "readOnly": false,
+            "required": true,
+            "unique": false,
+            "localizable": true,
+            "mutable": true,
+            "validation": "^[A-Z]\w*$"
+        },
+        {
+            "title": "website",
+            "type": "url",
+            "readOnly": false,
+            "required": false,
+            "unique": false,
+            "localizable": true,
+            "mutable": true,
+            "validation": null
         },
         ...
     ]
@@ -89,7 +143,9 @@ JSON Schema: [https://entrecode.de/schema/model-template](https://entrecode.de/s
 
 |Input field     |Description        |
 |----------------|-------------------|
-|…           |…|
+|title           |Optional. Can be used to change the model title.
+|rights          |Optional. Can be used to change the model rights by setting the rights flags. Always include the full object.
+|fields          |Optional. Can be used to change the fields. Always include the full object.
 
 ### Response: 200 ok
 

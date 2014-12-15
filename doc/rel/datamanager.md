@@ -9,6 +9,7 @@ A single Data Manager Space.
 |collection    |Collection of Data Managers. Includes this Data Manager. |GET, POST|No.|
 |ec:assets     |Collection of assets associated with this Data Manager Space. |GET, POST|No.|
 |ec:assets/deleted|Collection of deleted assets associated with this Data Manager Space. |GET|No.|
+|ec:models     |Collection of models associated with this Data Manager Space. |GET, POST|No.|
 |ec:customer   |The customer this Data Manager Space belongs to.| GET | No. |
 
 ##### Properties

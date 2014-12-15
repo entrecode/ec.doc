@@ -24,5 +24,7 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 |[auth/register](./auth/register)|Register for an account|
 |[datamanager](./datamanager)|Single Data Manager|
 |[datamanagers](./datamanagers)|List of Data Managers|
+|[model](./model)|Single Model|
+|[models](./models)|List of Models|
 
 

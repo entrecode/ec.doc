@@ -27,7 +27,7 @@ JSON Schema: [https://entrecode.de/schema/models](https://entrecode.de/schema/mo
 |prev          |The previous page of items in a collection. If there are no previous pages of items, this link is not returned in the response.|GET|No.|
 |first|The first page of items in a collection. This link is returned only when on pages other than the first one.|GET|No.
 |ec:datamanager|The data manager these models belong to.|GET,PUT|No.|
-|ec:models/by-id |Retrieves an individual model resource based on the specified identifier. |GET|Yes. Requires the modelID.
+|ec:model/by-id |Retrieves an individual model resource based on the specified identifier. |GET|Yes. Requires the modelID.
 
 
 #### Properties

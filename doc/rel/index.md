@@ -26,5 +26,6 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 |[datamanagers](./datamanagers)|List of Data Managers|
 |[model](./model)|Single Model|
 |[models](./models)|List of Models|
-
+|[tag](./tag)|Single Tag|
+|[tags](./tags)|List of Tag|
 

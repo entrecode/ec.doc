@@ -33,6 +33,7 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
 |title         |The title of a model, unique in this data manager. Always singular and lower case.
 |rights        |JSON object of available rights on this model (Object with boolean keys: get, put, postPublic, postPrivate, delete)
 |fields        |JSON array with field definition objects
+|locales	   |JSON array with supportet locales by this model. Like `de-DE` or `en-US`.
 
 #### Example
 
@@ -47,6 +48,10 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
         "postPrivate": false,
         "delete": false
     },
+    "locales": [
+    	"en-US",
+    	"de-DE"
+    ],
     "fields": [
         {
             "title": "id",

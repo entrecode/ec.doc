@@ -35,6 +35,7 @@ JSON Schema: [https://entrecode.de/schema/account](https://entrecode.de/schema/a
 |language      |The primary UI language for this account in shortened [RFC5646](http://tools.ietf.org/html/rfc5646) Syntax (`en`, `de`, …)
 |state         |The account state, one of `active`, `inactive`, `blocked`, `deleted`
 |hasPassword   |(optional) Boolean indicating if the user has a password set
+|hasPendingEmail   |(optional) Boolean indicating if the user has a pending email change
 |isPrincess    |(optional) User Princess level of this account (unsigned Integer). Only included when accessing user is princess.
 |openID        |(optional) Array of linked OAuth / Open ID Connect accounts. Each Array item is an object including the fields `sub` (subject), `iss` (issuer), `pending` (true/false), `email` and `name` (as given from the OAuth issuer)
 

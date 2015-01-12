@@ -29,6 +29,8 @@ To create a new Data Manager Space, POST to the collection resource with the fol
 |title         |A string title for this Data Manager Space.|
 |description   |A longer description for this Data Manager Space.|
 
+Note that locales can not be set on creation, but are always set to the default (`en_US`).
+
 ##### Output
 
 * **201 created** if everything went well. The response is the new `ec:datamanager` resource.

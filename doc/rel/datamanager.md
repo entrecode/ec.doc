@@ -20,12 +20,14 @@ A single Data Manager Space.
 |description   |A longer description for this Data Manager Space.|
 |rights        |Array of available rights (`manageRights`, `editModel`, `editEntries`, `editAssets`, `manageAPIs`). Not included rights are not available.
 |created       |Timestamp of the creation of this Data Manager Space as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|
+|locales       |Array of available locales ([RFC4646](https://tools.ietf.org/html/rfc4646)) in this Data Manager Space.|
+|defaultLocale |The default locale of this Data Manager Space. Included in `locales`.|
 
 #### PUT ec:datamanager
 
 *TBD!*
 
-Title and description of the Data Manager can be changed, as well as rights.
+Title and description of the Data Manager can be changed, as well as rights. Locales can be added or deleted and a defaultLocale can be set.
 
 ##### Properties
 | Name         | Description     |
@@ -33,6 +35,7 @@ Title and description of the Data Manager can be changed, as well as rights.
 |title         |A string title for this Data Manager Space.|
 |description   |A longer description for this Data Manager Space.|
 |rights        |Array of rights (`manageRights`, `editModel`, `editEntries`, `editAssets`, `manageAPIs`). 
+|*tbd* locales, defaultLocale|
 
 ##### Output
 

@@ -26,7 +26,7 @@ To modify an asset, a PUT call is required containing the following properties a
 | Name         | Description     |
 |--------------|-----------------|
 |title         |A string title for this Asset. If omitted, no change is done.|
-|tags          |Array of string tags for this asset. If the sent array is missing tags that were in the original resource, those will be deleted. Always send the complete list of tags. If the property is missing altogether, no tags will be added or deleted.|
+|tags          |Array of string tags for this asset. If the sent array is missing tags that were in the original resource, those will be deleted. Always send the complete list of tags. If the property is missing altogether, no tags will be added or deleted. Note that Comma (,), Plus (+) and Space ( ) are not allowed in tag names.|
 |files         |Optional array of files. Include to change locale of single files (`ec:asset/file` resource properties `url` and `locale` are required). If included, all files have to be included in the array. Files not included will be deleted.
 
 To merge two assets, include a link relation to another asset in a PUT request (HAL links list should contain an `ec:asset` link relation). The target asset(s) will be merged into this one, if possible. 

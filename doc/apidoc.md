@@ -58,6 +58,8 @@ To sort by a different than the default property, the following query string par
 
 **Ranges:** A query string parameter of the form `{property}From={value}` and `{property}To={value}` can be used for specifying ranges. If only one of the two is given, the other is minimum resp. maximum.
 
+**Multiple-Exact-Match:** A parameter with multiple values can be filtered for exact match of all or any of a number of given values. `{property}={value1},{value2}` matches all resources where one of the two values is matched. `{property}={value1}+{value2}` matches all resources where both of the two values are matched. Note that properties with this functionality must not have values that contain `,`, `+` or ` ` (Space) characters.
+
 ###### Examples:
 
 * `resource?page=2` items 11 to 20
@@ -71,5 +73,7 @@ To sort by a different than the default property, the following query string par
 * `resource?priceFrom=100` all items with a price >= 100
 * `resource?priceTo=100` all items with a price <=100
 * `resource?priceFrom=50&priceTo=100` all items with a price between 50 and 100
+* `resource?tag=foo,bar` all items with the tag foo or bar
+* `resource?tag=foo+bar` all items with the tags foo and bar
 
 All combinations are possible.

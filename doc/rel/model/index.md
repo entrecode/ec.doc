@@ -175,3 +175,24 @@ If the authentication header is missing or invalid, the following error response
 
 #### Body
 An error object.
+
+## DELETE
+Delete a model.
+
+### Request
+
+#### Headers
+|Header|Value|
+|------|-----|
+|Content-Type|`application/json`|
+|Authorization|`Bearer `token|
+
+### Response: 204 ok
+The model was successfully deleted.
+
+### Error Response: 403 forbidden
+
+If the model could not be deleted. Either has entries or is mandatory model.
+
+#### Body
+An error object.

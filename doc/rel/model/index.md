@@ -31,6 +31,7 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
 |--------------|-----------------|
 |modelID       |The unique identifier for a model as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).|
 |title         |The title of a model, unique in this data manager. Always singular and lower case.
+|description	|Optional. A detailed description of this model.
 |rights        |JSON object of available rights on this model (Object with boolean keys: get, put, postPublic, postPrivate, delete)
 |fields        |JSON array with field definition objects
 |locales	   |JSON array with supportet locales by this model. Like `de-DE` or `en-US`.
@@ -149,8 +150,10 @@ JSON Schema: [https://entrecode.de/schema/model-template](https://entrecode.de/s
 |Input field     |Description        |
 |----------------|-------------------|
 |title           |Optional. Can be used to change the model title.
+|description		|Optional. Can be used to change the model description.
 |rights          |Optional. Can be used to change the model rights by setting the rights flags. Always include the full object.
 |fields          |Optional. Can be used to change the fields. Always include the full object.
+|locales		| Optional. Can be uesed to change the supported locales of this model.
 
 ### Response: 200 ok
 

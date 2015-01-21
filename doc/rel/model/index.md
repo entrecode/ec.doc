@@ -56,6 +56,7 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
     "fields": [
         {
             "title": "id",
+            "description": "",
             "type": "id",
             "readOnly": true,
             "required": true,
@@ -66,6 +67,7 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
         },
         {
             "title": "created",
+            "description": "",
             "type": "datetime",
             "readOnly": true,
             "required": true,
@@ -76,6 +78,7 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
         },
         {
             "title": "modified",
+            "description": "",
             "type": "datetime",
             "readOnly": true,
             "required": true,
@@ -86,6 +89,7 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
         },
         {
             "title": "creator",
+            "description": "",
             "type": "entry",
             "readOnly": true,
             "required": true,
@@ -96,6 +100,7 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
         },
         {
             "title": "name",
+            "description": "",
             "type": "title",
             "readOnly": false,
             "required": true,
@@ -106,6 +111,7 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
         },
         {
             "title": "website",
+            "description": "",
             "type": "url",
             "readOnly": false,
             "required": false,

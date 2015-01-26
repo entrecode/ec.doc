@@ -1,5 +1,22 @@
-### [Resource: ec:datamanager](id:datamanager)
+# datamanager
 A single Data Manager Space.
+
+* [GET](#get)
+* [PUT](#put)
+
+# GET
+Show a single Data Manager.
+
+### Request
+
+#### Headers
+|Header|Value|
+|------|-----|
+|Authorization|`Bearer `token|
+
+### Response: 200 ok
+
+JSON Schema: [https://entrecode.de/schema/datamanager](https://entrecode.de/schema/datamanager)
 
 ##### Links
 | Relation     | Description     | Methods     | Templated     |
@@ -23,20 +40,50 @@ A single Data Manager Space.
 |locales       |Array of available locales ([RFC4646](https://tools.ietf.org/html/rfc4646)) in this Data Manager Space.|
 |defaultLocale |The default locale of this Data Manager Space. Included in `locales`.|
 
-#### PUT ec:datamanager
+### Error Response: 401 unauthorized
+If the authentication header is missing or invalid, the following error response is triggered:
 
-*TBD!*
+#### Headers
+|Header|Value|
+|------|-----|
+|WWW-Authenticate|`Bearer`|
 
-Title and description of the Data Manager can be changed, as well as rights. Locales can be added or deleted and a defaultLocale can be set.
+#### Body
+An error object.
 
-##### Properties
+
+## PUT
+Title and description of the Data Manager can be changed. Locales can be added or deleted and a defaultLocale can be set.
+
+#### Headers
+|Header|Value|
+|------|-----|
+|Content-Type|`application/json`|
+|Authorization|`Bearer `token|
+
+#### Body
 | Name         | Description     |
 |--------------|-----------------|
 |title         |A string title for this Data Manager Space.|
 |description   |A longer description for this Data Manager Space.|
-|rights        |Array of rights (`manageRights`, `editModel`, `editEntries`, `editAssets`, `manageAPIs`). 
-|*tbd* locales, defaultLocale|
+|locales       |Array of available locales ([RFC4646](https://tools.ietf.org/html/rfc4646)) in this Data Manager Space.|
+|defaultLocale |The default locale of this Data Manager Space. Included in `locales`.|
 
-##### Output
+### Response: 200 ok
+The datamanager was successfully changed. Response body contains the datamanager.
 
-* **200 ok** if everything went well
+### Error Response: 400 bad request
+
+If the sent body is no JSON or not valid, the following error response is triggered:
+
+#### Body
+An error object.
+
+### Error Response: 401 unauthorized
+
+If the authentication header is missing or invalid, the following error response is triggered:
+
+#### Headers
+|Header|Value|
+|------|-----|
+|WWW-Authenticate|`Bearer`|

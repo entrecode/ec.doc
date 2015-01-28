@@ -87,3 +87,21 @@ If the authentication header is missing or invalid, the following error response
 |Header|Value|
 |------|-----|
 |WWW-Authenticate|`Bearer`|
+
+### Response: 405 method not allowed
+If the user has no right to edit this datamanager.
+
+#### Body
+An error object.
+
+## DELETE
+Delet a datamanager.
+
+#### Headers
+|Header|Value|
+|------|-----|
+|Content-Type|`application/json`|
+|Authorization|`Bearer `token|
+
+### Response: 204 no content
+The datamanager was deleted.

@@ -3,8 +3,9 @@ A single Data Manager Space.
 
 * [GET](#get)
 * [PUT](#put)
+* [DELETE](#delete)
 
-# GET
+## GET
 Show a single Data Manager.
 
 ### Request

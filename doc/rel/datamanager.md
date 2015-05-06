@@ -37,6 +37,7 @@ JSON Schema: [https://entrecode.de/schema/datamanager](https://entrecode.de/sche
 |title         |A string title for this Data Manager Space.|
 |description   |A longer description for this Data Manager Space.|
 |rights        |Array of available rights (`manageRights`, `editModel`, `editEntries`, `editAssets`, `manageAPIs`). Not included rights are not available.
+|publicAssetRights|Array of available rights for public assets API (`get`, `put`, `postPrivate`, `postPublic`). Not included rights are not available.
 |created       |Timestamp of the creation of this Data Manager Space as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|
 |locales       |Array of available locales ([RFC4646](https://tools.ietf.org/html/rfc4646)) in this Data Manager Space.|
 |defaultLocale |The default locale of this Data Manager Space. Included in `locales`.|
@@ -68,6 +69,7 @@ Title and description of the Data Manager can be changed. Locales can be added o
 |title         |A string title for this Data Manager Space.|
 |description   |A longer description for this Data Manager Space.|
 |locales       |Array of available locales ([RFC4646](https://tools.ietf.org/html/rfc4646)) in this Data Manager Space.|
+|publicAssetRights|Array of available rights for public assets API (`get`, `put`, `postPrivate`, `postPublic`). Not included rights are not available.
 |defaultLocale |The default locale of this Data Manager Space. Included in `locales`.|
 
 ### Response: 200 ok

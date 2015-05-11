@@ -72,7 +72,7 @@ JSON Schema: [https://entrecode.de/schema/model-template](https://entrecode.de/s
 
 |Input field     |Description        |
 |----------------|-------------------|
-|tag             |The new tag name. Note that Comma (,), Plus (+) and Space( ) are not allowed in tags.
+|tag             |The new tag name. Note that only lowercase characters, numbers and _ are allowed in tags.
 
 ### Response: 200 ok
 

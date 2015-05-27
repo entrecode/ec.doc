@@ -30,7 +30,7 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
 | Name         | Description     |
 |--------------|-----------------|
 |modelID       |The unique identifier for a model as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).|
-|title         |The title of a model, unique in this data manager. Always singular and lower case.
+|title         |The title of a model, unique in this data manager. Should be singular and lower case. Must only use a-z, A-Z, 0-9, _, -. Maximum length 256.
 |description	|Optional. A detailed description of this model.
 |rights        |JSON object of available rights on this model (Object with boolean keys: get, put, postPublic, postPrivate, delete)
 |fields        |JSON array with field definition objects

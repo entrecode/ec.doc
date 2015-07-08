@@ -1,7 +1,6 @@
 site_name: entrecode Documentation
 docs_dir: ./doc
-theme: readthedocs
-
+theme: amelia
 pages:
 - Data Manager:
     - Basics: Previous Version/datamanager_documentation.md

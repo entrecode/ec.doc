@@ -1,3 +1,9 @@
 site_name: entrecode Documentation
 docs_dir: ./doc
 theme: readthedocs
+
+pages:
+- Data Manager:
+    - Basics: Previous Version/datamanager_documentation.md
+    - Link Relations: Previous Version/rel/index.md
+- Home: index.md

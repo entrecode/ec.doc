@@ -1,0 +1,3 @@
+site_name: entrecode Documentation
+docs_dir: ./doc
+theme: readthedocs

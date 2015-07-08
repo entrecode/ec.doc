@@ -1,4 +1,4 @@
-# Data Manager API Documentation
+# Data Manager Basics
 
 This document describes the Hypermedia REST API of the entrecode Data Manager API.
 

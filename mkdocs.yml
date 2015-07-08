@@ -2,3 +2,8 @@ site_name: 'entrecode API Documentation'
 docs_dir: ./doc
 theme: readthedocs
 extra_css: ['style.css']
+pages:
+- Home: 'index.md'
+- App Server: 'app_manager.md'
+- App Server Resources:
+    - 'App': 'app_manager_resources/app.md'

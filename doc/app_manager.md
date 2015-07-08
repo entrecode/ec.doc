@@ -7,25 +7,25 @@ In short, data is partitioned in *resources* which manifest in *representations.
 * **Entry Point:** [https://appserver.entrecode.de/](https://appserver.entrecode.de/)
 * **[Richardson](http://martinfowler.com/articles/richardsonMaturityModel.html) Maturity Level:** 3 (full Hypermedia)
 * **Media Type:** `application/hal+json` ([HAL](https://tools.ietf.org/html/draft-kelly-json-hal-06))
-* **Root Resource:** `ec:apps` [(App List)](app_manager_resources/app#list)
+* **Root Resource:** `ec:apps` [(App List)](resources/app#list)
 * **Authentication:** Bearer Token aquired using the [Account Server API](../Account_Server/basics/)
 
 
 ## State Diagram
 
-[![State Diagram](statediagram.svg)](statediagram.svg)
+[![State Diagram](statediagram.svg)](img/statediagram.svg)
 
 ## Workflow
 
-An [App](app_manager_resources/app) is a single, isolated entity. All other resources are dependent on a single App – they cannot be shared between Apps. 
+An [App](resources/app) is a single, isolated entity. All other resources are dependent on a single App – they cannot be shared between Apps. 
 
-An App can have a arbitrary number of [Platforms](app_manager_resources/platform). A Platform is a special configuration for building the App. It consists of exactly one [CodeSource](app_manager_resources/codesource), exactly one [DataSource](app_manager_resources/datasource) and at least one (but possible more) [Targets](app_manager_resources/target). Dependent on its type, the platform will build a specialized product when a [Deployment](app_manager_resources/deployment) is created.
+An App can have a arbitrary number of [Platforms](resources/platform). A Platform is a special configuration for building the App. It consists of exactly one [CodeSource](resources/codesource), exactly one [DataSource](resources/datasource) and at least one (but possible more) [Targets](resources/target). Dependent on its type, the platform will build a specialized product when a [Deployment](resources/deployment) is created.
 
-Available CodeSource Types, DataSource Types, Target Types and Platform Types can be obtained by getting the [Types](app_manager_resources/types) resource. There may be dependencies: a type may require an explicit platform (e.g. the TargetType 'App Store' could only work with the PlatformType 'iOS').
+Available CodeSource Types, DataSource Types, Target Types and Platform Types can be obtained by getting the [Types](resources/types) resource. There may be dependencies: a type may require an explicit platform (e.g. the TargetType 'App Store' could only work with the PlatformType 'iOS').
 
-When creating a [Deployment](app_manager_resources/deployment) for a [Platforms](app_manager_resources/platform), the App Server will obtain Code from the [CodeSource](app_manager_resources/codesource), Data from the [DataSource](app_manager_resources/datasource), then build it according to the [Platforms](app_manager_resources/platform) and finally publish it to all configured [Targets](app_manager_resources/target) of the Platform.
+When creating a [Deployment](resources/deployment) for a [Platforms](resources/platform), the App Server will obtain Code from the [CodeSource](resources/codesource), Data from the [DataSource](resources/datasource), then build it according to the [Platforms](resources/platform) and finally publish it to all configured [Targets](resources/target) of the Platform.
 
-A [Deployment](app_manager_resources/deployment)
+A [Deployment](resources/deployment)
 
 ## Link Relations
 
@@ -37,21 +37,21 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 
 | Link Relation             | Target Resource                               | Description |
 |---------------------------|-----------------------------------------------------------|-------------|
-| `ec:app`                  | [App](app_manager_resources/app)                          | A single App|
-| `ec:app/by-id`            | [App](app_manager_resources/app)                          | Templated Link Relation to a specific App by `appID` |
-| `ec:app/codesource`       | [CodeSource](app_manager_resources/codesource)            | The configured CodeSource of a Platform |
-| `ec:app/codesources`      | [CodeSource List](app_manager_resources/codesource#list)  | CodeSources configured in an App |
-| `ec:app/datasource`       | [DataSource](app_manager_resources/datasource)            | The configured DataSource of a Platform |
-| `ec:app/datasources`      | [DataSource List](app_manager_resources/datasource#list)  | DataSources configured in an App |
-| `ec:app/deployment`       | [Deployment](app_manager_resources/deployment)            | A single Deployment of a Platform |
-| `ec:app/deployment/latest`| [Deployment](app_manager_resources/deployment)            | The latest Deployment of a Platform |
-| `ec:app/deployments`      | [Deployment List](app_manager_resources/deployment#list)  | All Deployments of a Platform. Also used to create a new Deployment |
-| `ec:app/platform`         | [Platform](app_manager_resources/platform)                | A single Platform |
-| `ec:app/platform/by-id`   | [Platform](app_manager_resources/platform)                | Templated Link Relation to a specific Platform by `platformID` |
-| `ec:app/platforms/options`| [Platform List](app_manager_resources/platform#list)      | Filter Options of the Platform List |
-| `ec:app/platforms`        | [Platform List](app_manager_resources/platform#list)      | A list of Platforms of an App |
-| `ec:app/target`           | [Target](app_manager_resources/target)                    | A configured Target of a Platform |
-| `ec:app/targets`          | [Target List](app_manager_resources/target#list)          | Targets configured in an App |
-| `ec:apps`                 | [App List](app_manager_resources/app#list)                | List of Apps |
-| `ec:apps/options`         | [App List](app_manager_resources/app#list)                | Filter Options of the App List |
-| `ec:apps/types`           | [App Manager Type Info](app_manager_resources/types)      | Information about available CodeSource-, DataSource-, Target- and Platform-Types |
+| `ec:app`                  | [App](resources/app)                          | A single App|
+| `ec:app/by-id`            | [App](resources/app)                          | Templated Link Relation to a specific App by `appID` |
+| `ec:app/codesource`       | [CodeSource](resources/codesource)            | The configured CodeSource of a Platform |
+| `ec:app/codesources`      | [CodeSource List](resources/codesource#list)  | CodeSources configured in an App |
+| `ec:app/datasource`       | [DataSource](resources/datasource)            | The configured DataSource of a Platform |
+| `ec:app/datasources`      | [DataSource List](resources/datasource#list)  | DataSources configured in an App |
+| `ec:app/deployment`       | [Deployment](resources/deployment)            | A single Deployment of a Platform |
+| `ec:app/deployment/latest`| [Deployment](resources/deployment)            | The latest Deployment of a Platform |
+| `ec:app/deployments`      | [Deployment List](resources/deployment#list)  | All Deployments of a Platform. Also used to create a new Deployment |
+| `ec:app/platform`         | [Platform](resources/platform)                | A single Platform |
+| `ec:app/platform/by-id`   | [Platform](resources/platform)                | Templated Link Relation to a specific Platform by `platformID` |
+| `ec:app/platforms/options`| [Platform List](resources/platform#list)      | Filter Options of the Platform List |
+| `ec:app/platforms`        | [Platform List](resources/platform#list)      | A list of Platforms of an App |
+| `ec:app/target`           | [Target](resources/target)                    | A configured Target of a Platform |
+| `ec:app/targets`          | [Target List](resources/target#list)          | Targets configured in an App |
+| `ec:apps`                 | [App List](resources/app#list)                | List of Apps |
+| `ec:apps/options`         | [App List](resources/app#list)                | Filter Options of the App List |
+| `ec:apps/types`           | [App Manager Type Info](resources/types)      | Information about available CodeSource-, DataSource-, Target- and Platform-Types |

@@ -3,7 +3,21 @@ docs_dir: ./doc
 theme: readthedocs
 extra_css: ['style.css']
 pages:
-- Home: 'index.md'
-- App Server: 'app_manager.md'
-- App Server Resources:
-    - 'App': 'app_manager_resources/app.md'
+- Basics: 'index.md'
+- Account Server: 'account_server.md'
+- App Manager: 'app_manager.md'
+- Data Manager: 'data_manager.md'
+- Account Server Resources:
+    - 'Account': 'resources/account.md'
+    - 'Auth': 'resources/auth.md'
+    - 'Token': 'resources/token.md'
+- App Manager Resources:
+    - 'App': 'resources/app.md'
+- Data Manager Resources:
+    - 'Asset': 'resources/asset.md'
+    - 'DataManager': 'resources/datamanager.md'
+    - 'Model': 'resources/model.md'
+    - 'Tag': 'resources/tag.md'
+- SDKs:
+    - 'Data Manager Java SDK': 'sdk/datamanager.java.md'
+    - 'Data Manager JavaScript SDK': 'sdk/datamanager.js.md'

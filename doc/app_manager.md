@@ -1,3 +1,19 @@
+# The App Manager
+
+The App Manager is a technical tool for configuring, building and deploying Apps. An App can have multiple platforms to run on. 
+
+# Workflow
+
+An [App](resources/app) is a single, isolated entity. All other resources are dependent on a single App – they cannot be shared between Apps. 
+
+An App can have a arbitrary number of [Platforms](resources/platform). A Platform is a special configuration for building the App. It consists of exactly one [CodeSource](resources/codesource), exactly one [DataSource](resources/datasource) and at least one (but possible more) [Targets](resources/target). Dependent on its type, the platform will build a specialized product when a [Deployment](resources/deployment) is created.
+
+Available CodeSource Types, DataSource Types, Target Types and Platform Types can be obtained by getting the [Types](resources/types) resource. There may be dependencies: a type may require an explicit platform (e.g. the TargetType 'App Store' could only work with the PlatformType 'iOS').
+
+When creating a [Deployment](resources/deployment) for a [Platforms](resources/platform), the App Server will obtain Code from the [CodeSource](resources/codesource), Data from the [DataSource](resources/datasource), then build it according to the [Platforms](resources/platform) and finally publish it to all configured [Targets](resources/target) of the Platform.
+
+A [Deployment](resources/deployment) is either running, failed or successfully finished.
+
 # App Manager API 
 
 The entrecode App Manager API is *REST API,* or rather *Hypermedia API.* This means that the term *REST* is actually understood as [intended by Roy T. Fielding](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) – including the *Hypermedia Constraint.* See [this blog post](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven) for a more in-depth description of REST and the difference to a simple HTTP-based API which is often mistakenly called *REST API.*
@@ -11,23 +27,13 @@ In short, data is partitioned in *resources* which manifest in *representations.
 * **Authentication:** Bearer Token aquired using the [Account Server API](../Account_Server/basics/)
 
 
-## State Diagram
+# State Diagram
 
-[![State Diagram](statediagram.svg)](img/statediagram.svg)
+[![State Diagram](img/statediagram.svg)](img/statediagram.svg)
 
-## Workflow
 
-An [App](resources/app) is a single, isolated entity. All other resources are dependent on a single App – they cannot be shared between Apps. 
 
-An App can have a arbitrary number of [Platforms](resources/platform). A Platform is a special configuration for building the App. It consists of exactly one [CodeSource](resources/codesource), exactly one [DataSource](resources/datasource) and at least one (but possible more) [Targets](resources/target). Dependent on its type, the platform will build a specialized product when a [Deployment](resources/deployment) is created.
-
-Available CodeSource Types, DataSource Types, Target Types and Platform Types can be obtained by getting the [Types](resources/types) resource. There may be dependencies: a type may require an explicit platform (e.g. the TargetType 'App Store' could only work with the PlatformType 'iOS').
-
-When creating a [Deployment](resources/deployment) for a [Platforms](resources/platform), the App Server will obtain Code from the [CodeSource](resources/codesource), Data from the [DataSource](resources/datasource), then build it according to the [Platforms](resources/platform) and finally publish it to all configured [Targets](resources/target) of the Platform.
-
-A [Deployment](resources/deployment)
-
-## Link Relations
+# Link Relations
 
 Link Relation names are those registered with the [IANA](http://www.iana.org/assignments/link-relations/link-relations.xhtml). Additionally, custom link relations are used which are built in the form `https://doc.entrecode.de/en/latest/App_Manager/#link-relations/<relation>`. Those relations are also links to their own documentation (on this page). 
 For brevity, [CURIE Syntax](http://www.w3.org/TR/curie/) is used which results in relation names of the form `ec:<relation>/<optional_subrelation>`. 
@@ -54,4 +60,4 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | `ec:app/targets`          | [Target List](resources/target#list)          | Targets configured in an App |
 | `ec:apps`                 | [App List](resources/app#list)                | List of Apps |
 | `ec:apps/options`         | [App List](resources/app#list)                | Filter Options of the App List |
-| `ec:apps/types`           | [App Manager Type Info](resources/types)      | Information about available CodeSource-, DataSource-, Target- and Platform-Types |
+| `ec:apps/types`           | [App Manager Type Info](resources/apptypes)      | Information about available CodeSource-, DataSource-, Target- and Platform-Types |

@@ -13,6 +13,12 @@ pages:
     - 'Token': 'resources/token.md'
 - App Manager Resources:
     - 'App': 'resources/app.md'
+    - 'CodeSource': 'resources/codesource.md'
+    - 'DataSource': 'resources/datasource.md'
+    - 'Deployment': 'resources/deployment.md'
+    - 'Platform': 'resources/platform.md'
+    - 'Target': 'resources/target.md'
+    - 'Types': 'resources/apptypes.md'
 - Data Manager Resources:
     - 'Asset': 'resources/asset.md'
     - 'DataManager': 'resources/datamanager.md'

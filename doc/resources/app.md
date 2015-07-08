@@ -1,147 +1,60 @@
-# datamanager
-A single Data Manager Space.
+# Single App
 
-* [GET](#get)
-* [PUT](#put)
-* [DELETE](#delete)
+The single App Resource represents an isolated “space”. An App can have any number of platforms. 
 
-## GET
-Show a single Data Manager.
+The JSON Schema is [https://entrecode.de/schema/app](https://entrecode.de/schema/app).
 
-### Request
+# Properties
 
-#### Headers
-|Header|Value|
-|------|-----|
-|Authorization|`Bearer `token|
+| Property | Type | Format | Description | Writable |
+|----------|------|--------|-------------|----------|
+|appID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for an App | No. Gets generated on creation. |
+|created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of the App| No. Gets written on creation. |
+|title|String||Friendly name for the App|Yes|
 
-### Response: 200 ok
+# Relations
 
-JSON Schema: [https://entrecode.de/schema/datamanager](https://entrecode.de/schema/datamanager)
+| Relation Name | Target Resource | Description |Possible Methods |
+|---------------|-----------------|-------------|-----------------|
+| self          | [App](#)| The resource itself | GET, PUT, DELETE |
+| collection    | [App List](#list)| List of all available Apps | GET, POST|
+| ec:app/platforms | [Platform List](resources/platform#list) | List of this App´s platforms | GET, POST |
+| ec:app/codesources | [CodeSource List](resources/codesource#list) | List of CodeSources configured for this App | GET, POST |
+| ec:app/datasources | [DataSource List](resources/datasource#list) | List of DataSources configured for this App | GET, POST |
+| ec:app/targets | [Target List](resources/target#list) | List of Targets configured for this App | GET, POST |
 
-##### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |An entrecode Data Manager Space.|GET, PUT  |No.            |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|collection    |Collection of Data Managers. Includes this Data Manager. |GET, POST|No.|
-|ec:assets     |Collection of assets associated with this Data Manager Space. |GET, POST|No.|
-|ec:assets/deleted|Collection of deleted assets associated with this Data Manager Space. |GET|No.|
-|ec:models     |Collection of models associated with this Data Manager Space. |GET, POST|No.|
-|ec:customer   |The customer this Data Manager Space belongs to.| GET | No. |
+# List
 
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|dataManagerID |The unique identifier for this Data Manager Space as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).|
-|title         |A string title for this Data Manager Space.|
-|description   |A longer description for this Data Manager Space.|
-|rights        |Array of available rights (`manageRights`, `editModel`, `editEntries`, `editAssets`, `manageAPIs`). Not included rights are not available.
-|publicAssetRights|Array of available rights for public assets API (`get`, `put`, `postPrivate`, `postPublic`). Not included rights are not available.
-|created       |Timestamp of the creation of this Data Manager Space as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|
-|locales       |Array of available locales ([RFC4646](https://tools.ietf.org/html/rfc4646)) in this Data Manager Space.|
-|defaultLocale |The default locale of this Data Manager Space. Included in `locales`.|
+The App List Resource is a [Generic List Resource](/#generic-list-resources) with embedded App Resources.
 
-### Error Response: 401 unauthorized
-If the authentication header is missing or invalid, the following error response is triggered:
+Additionally, it is the entry point for the App Manager API. Because of that, it has an additional `msg` property with a greeting string (including the API Server version number). 
 
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
+# Possible Actions
 
-#### Body
-An error object.
+## Read
 
+To read a single App Resource, clients may perform GET on a `ec:app` relation.
 
-## PUT
-Title and description of the Data Manager can be changed. Locales can be added or deleted and a defaultLocale can be set.
+To read the App List Resource, clients may perform GET on a `ec:apps` relation or on the `collection` relation of a single App resource.
 
-#### Headers
-|Header|Value|
-|------|-----|
-|Content-Type|`application/json`|
-|Authorization|`Bearer `token|
+In both cases, the success status code is **200 OK.**
 
-#### Body
-| Name         | Description     |
-|--------------|-----------------|
-|title         |A string title for this Data Manager Space.|
-|description   |A longer description for this Data Manager Space.|
-|locales       |Array of available locales ([RFC4646](https://tools.ietf.org/html/rfc4646)) in this Data Manager Space.|
-|publicAssetRights|Array of available rights for public assets API (`get`, `put`, `postPrivate`, `postPublic`). Not included rights are not available.
-|defaultLocale |The default locale of this Data Manager Space. Included in `locales`.|
+## Create
 
-### Response: 200 ok
-The datamanager was successfully changed. Response body contains the datamanager.
+To create a new App Resource, clients may perform a POST on `ec:apps` (the list resource). The JSON Schema for creating a new App is [https://entrecode.de/schema/app-template](https://entrecode.de/schema/app-template). 
 
-### Error Response: 400 bad request
+The success status code is **201 Created** and the response body is the newly created single App resource.
 
-If the sent body is no JSON or not valid, the following error response is triggered:
+## Edit
 
-#### Body
-An error object.
+To update an existing App Resource, clients may perform a PUT on `ec:app` or `self` at a single App Resource. The JSON Schema for editing an App is [https://entrecode.de/schema/app-template](https://entrecode.de/schema/app-template). 
 
-### Error Response: 401 unauthorized
+The success status code is **200 OK** and the response body is the updated single App resource.
 
-If the authentication header is missing or invalid, the following error response is triggered:
+## Delete
 
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
+To delete an existing App Resource, clients may perform a DELETE on `ec:app` or `self` at a single App Resource. This marks the App for deletion and makes it (including all related subresources) unavailable over the API. At some later point, it will even be wiped from the App Server.
 
-### Response: 405 method not allowed
-If the user has no right to edit this datamanager.
+*Currently it is not possible to restore a deleted App using the API, so handle this method with care!*
 
-#### Body
-An error object.
-
-## DELETE
-Delet a datamanager.
-
-#### Headers
-|Header|Value|
-|------|-----|
-|Content-Type|`application/json`|
-|Authorization|`Bearer `token|
-
-### Response: 204 no content
-The datamanager was deleted.
-
-### Entry Point: [ec:datamanagers](id:datamanagers)
-When accessing the Entry Point, the list of available data managers is returned.
-
-##### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |Collection of data managers.|GET, POST|No.          |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|next          |The next page of items in a collection. If there are no further pages of items, this link is not returned in the response.|GET|No.|
-|prev          |The previous page of items in a collection. If there are no previous pages of items, this link is not returned in the response.|GET|No.|
-|first|The first page of items in a collection. This link is returned only when on pages other than the first one.|GET|No.
-|ec:datamanager/by-id |Retrieves an individual data manager resource based on the specified identifier. |GET|Yes. Requires the dataManagerID.
-
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|count         |Number of items included in this page|
-|total         |Total number of items |
-
-##### Embedded
-`ec:datamanager` Resources.
-
-#### POST ec:datamanagers
-To create a new Data Manager Space, POST to the collection resource with the following template:
-
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|title         |A string title for this Data Manager Space.|
-|description   |A longer description for this Data Manager Space.|
-
-Note that locales can not be set on creation, but are always set to the default (`en_US`).
-
-##### Output
-
-* **201 created** if everything went well. The response is the new `ec:datamanager` resource.
+The success status code is **204 No Content** with an empty response body.

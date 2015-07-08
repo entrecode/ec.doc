@@ -1,4 +1,4 @@
-site_name: 'entrecode Documentation'
+site_name: 'entrecode API Documentation'
 docs_dir: ./doc
 theme: readthedocs
-extra_css: ['test.css']
+extra_css: ['style.css']

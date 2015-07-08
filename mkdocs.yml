@@ -1,9 +1,4 @@
-site_name: entrecode Documentation
+site_name: 'entrecode Documentation'
 docs_dir: ./doc
 theme: readthedocs
 extra_css: ['test.css']
-pages:
-- Data Manager:
-    - Basics: Previous Version/datamanager_documentation.md
-    - Link Relations: Previous Version/rel/index.md
-- Home: index.md

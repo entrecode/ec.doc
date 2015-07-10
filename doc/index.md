@@ -1,6 +1,6 @@
 
 
-ACHJA? This document describes the Hypermedia REST APIs of the entrecode Systems.
+This document describes the Hypermedia REST APIs of the entrecode Systems.
 
 ## Available APIs
 

@@ -36,6 +36,7 @@ JSON Schema: [https://entrecode.de/schema/datamanager](https://entrecode.de/sche
 |dataManagerID |The unique identifier for this Data Manager Space as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).|
 |title         |A string title for this Data Manager Space.|
 |description   |A longer description for this Data Manager Space.|
+|hexColor      |A color to quickly identify a Data Manager Space in the frontend. Defaults to `#d23738`|
 |rights        |Array of available rights (`manageRights`, `editModel`, `editEntries`, `editAssets`, `manageAPIs`). Not included rights are not available.
 |publicAssetRights|Array of available rights for public assets API (`get`, `put`, `postPrivate`, `postPublic`). Not included rights are not available.
 |created       |Timestamp of the creation of this Data Manager Space as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|

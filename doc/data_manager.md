@@ -83,6 +83,7 @@ These types are simple data types.
 |Type|Description|Entry Structure|Validation|Sortable|Filterable|Example|
 |----|-----------|---------------|----------|--------|----------|-------|
 |text|A simple string value of any length. For common formats, better use [Convenience Types](#convenience-types).|String|Regular Expression|yes|exact, search|`"foo"`|
+|formattedText|Same as `text` type, but for formatted text.|String|Regular Expression|yes|exact, search|`"foo"`|
 |number|A signed integer number. Keep integer limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range|`7`|
 |decimal|A floating point number. Keep precision limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range|`4.2`|
 |boolean|A simple true/false flag.|Boolean|—|no|exact|`true`|

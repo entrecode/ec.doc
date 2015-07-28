@@ -77,3 +77,17 @@ To sort by a different than the default property, the following query string par
 * `resource?tag=foo+bar` all items with the tags foo and bar
 
 All combinations are possible.
+
+### Cross-Origin Resource Sharing (CORS)
+
+The [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) usually prevents browsers from accessing remote APIs using XMLHTTPRequests (AJAX). This results in an error message like “No 'Access-Control-Allow-Origin' header is present on the requested resource.” and fails requests. To make our APIs accessable using Web Clients, we support [Cross-Origin Resource Sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (CORS). *And not the crude hack that is JSONP.* This means, we generally send the following HTTP Headers:
+
+```
+Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS
+Access-Control-Allow-Origin: *
+Access-Control-Expose-Headers: Allow
+```
+
+Additionally, we send `Access-Control-Allow-Headers` with whatever is requested via `Access-Control-Request-Headers`.
+
+*Preflight Requests* (HTTP OPTIONS calls) are responded to with an HTTP 204 (no content).

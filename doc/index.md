@@ -90,4 +90,4 @@ Access-Control-Expose-Headers: Allow
 
 Additionally, we send `Access-Control-Allow-Headers` with whatever is requested via `Access-Control-Request-Headers`.
 
-*Preflight Requests* (HTTP OPTIONS calls) are responded to with an HTTP 204 (no content).
+*Preflight Requests* (HTTP OPTIONS calls) are responded to with an HTTP 200.

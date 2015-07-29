@@ -32,6 +32,7 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
 |modelID       |The unique identifier for a model as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).|
 |title         |The title of a model, unique in this data manager. Should be singular and lower case. Must only use a-z, A-Z, 0-9, _, -. Maximum length 256.
 |description	|Optional. A detailed description of this model.
+|titleField		| The field which should be used as title in editor frontend. Default: `id`
 |rights        |JSON object of available rights on this model (Object with boolean keys: get, put, postPublic, postPrivate, delete)
 |fields        |JSON array with field definition objects
 |locales	   |JSON array with supportet locales by this model. Like `de-DE` or `en-US`.
@@ -42,6 +43,7 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
 {
     "modelID": "886aa7bb-a8f5-4164-8123-ae0e35bb9b35",
     "title": "recipe",
+    "titleField": "name",
     "rights": {
         "get": true,
         "put": true,

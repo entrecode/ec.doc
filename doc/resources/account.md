@@ -38,6 +38,9 @@ JSON Schema: [https://entrecode.de/schema/account](https://entrecode.de/schema/a
 |hasPendingEmail   |(optional) Boolean indicating if the user has a pending email change
 |isPrincess    |(optional) User Princess level of this account (unsigned Integer). Only included when accessing user is princess.
 |openID        |(optional) Array of linked OAuth / Open ID Connect accounts. Each Array item is an object including the fields `sub` (subject), `iss` (issuer), `pending` (true/false), `email` and `name` (as given from the OAuth issuer)
+|permissions   |Permissions that are directly assigned to this account (excluding group permissions).|
+|groups        |Groups this account is assigned to, including group permissions (permissions inherited by group membership). Is an Array of objects containing `name`, `groupID` and a `permissions` array). Groups are not linked to the group resource because other members may not be disclosed.|
+
 
 #### Example
 ```
@@ -49,6 +52,27 @@ JSON Schema: [https://entrecode.de/schema/account](https://entrecode.de/schema/a
   "language": "en",
   "openID": [ ],
   "state": "active",
+  "permissions": [
+    "a:b:c",
+    "d:e:f
+  ],
+  "groups": [
+    {
+      "name": "datamanager-user",
+      "groupID": "fc8aff95-fd00-4f98-ac06-61659b48657b",
+      "permissions": [
+        "dm-create"
+      ]
+    },
+    {
+      "name": "appserver-user"
+      "groupID": "a6b78f95-fd00-4f98-ac06-61659b45f3e2",
+      "permissions": [
+        "app-create",
+        "app:platform-create:web"
+      ]
+    }
+  ]
   "_links": {
     "self": {
       "href": "https://accounts.entrecode.de/account?accountID=00000000-0000-4444-8888-000000000000"
@@ -105,10 +129,15 @@ JSON Schema: [https://entrecode.de/schema/account-template](https://entrecode.de
 |language        |(optional) new language in shortened [RFC5646](http://tools.ietf.org/html/rfc5646) Syntax (`de`, `en`…)|
 |oldPassword     |(required for newPassword) current password for this account|
 |openID     |(optional) Array of linked OAuth / OpenID Connect acconuts. Each Array item is an object including the fields `sub` (subject), `iss` (issuer), `pending` (true/false), `email` and `name` (as given from the OAuth issuer)|
+|permissions|(optional) Array of permissions. Note that this array has to be complete – non-included permissions will be revoked. If the property is missing, no changes in permissions are done. Note that permissions may be rejected (e.g. it is not possible to assign *).|
 
 When changing `state` and/or `isPrincess`, the logged in user to perform this action needs to have princess (root/admin) access.
 
 Deleting an OAuth / OpenID Connect connection is only allowed if `hasPassword` is true or an other connection which is not pending exists.
+
+Editing the groups array is not possible using the Account Resource. Sending the property with a PUT request has no effect. To add accounts to a group, the group resource has to be edited.
+
+Editing of `permissions` is not allowed by default, but only for special users (administrators/business account managers).
 
 ### Response: 204 no content
 

@@ -10,6 +10,7 @@ pages:
 - Account Server Resources:
     - 'Account': 'resources/account.md'
     - 'Auth': 'resources/auth.md'
+    - 'Group': 'resources/group.md'
     - 'Token': 'resources/token.md'
 - App Manager Resources:
     - 'App': 'resources/app.md'

@@ -118,10 +118,16 @@ JSON Schema: [https://entrecode.de/schema/group-template](https://entrecode.de/s
 
 |Input field     |Description        |
 |----------------|-------------------|
-|name           |(optional) new name|
-|permissions|(optional) Array of permissions. Note that this array has to be complete – non-included permissions will be revoked. If the property is missing, no changes in permissions are done. Note that permissions may be rejected (e.g. it is not possible to assign *).|
+|name           |new name|
+|permissions| Array of permissions. Note that this array has to be complete – non-included permissions will be revoked. Note that permissions may be rejected (e.g. it is not possible to assign *).|
 
 Embedded or linked: partial `ec:account` resources (with one of `accountID`, `email` or `_links.self` correctly set). Note that if at least one account resource is linked or embedded, the member accounts get rewritten. I.e., missing accounts will be removed.
+If no accounts are sent, no changes are done. Therefore, you cannot remove all accounts from a group.
+
+It is also possible to make partial changes (i.e. only edit `name`, only edit `permissions` or only edit embedded accounts). In this case, the existing values should just be sent along to prevent errors.
+If a property is changed, the client needs the corresponding permission – otherwise the change is being ignored while the rest of the edit is processed.
+
+Note that it is possible to remove the client's own account (that gets added to the group on creation automatically). 
 
 ### Response: 200 ok
 
@@ -153,11 +159,13 @@ Identical to [PUT](#put), but `name` and `permissions` are both required. Accoun
 
 Also, the creator will get the right to edit and delete the group.
 
-Response: 200 ok with the new group.
+Response: 201 created with the new group.
 
 ## DELETE
 
 Deletes the group, no questions asked. Response: 204 no content.
+
+Also deletes any permissions that were set for this group (account- and group-permissions).
 
 # [Group List](id:groups)
 List of groups.

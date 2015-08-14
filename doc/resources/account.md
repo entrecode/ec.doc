@@ -36,11 +36,11 @@ JSON Schema: [https://entrecode.de/schema/account](https://entrecode.de/schema/a
 |state         |The account state, one of `active`, `inactive`, `blocked`, `deleted`
 |hasPassword   |(optional) Boolean indicating if the user has a password set
 |hasPendingEmail   |(optional) Boolean indicating if the user has a pending email change
-|isPrincess    |(optional) User Princess level of this account (unsigned Integer). Only included when accessing user is princess.
 |openID        |(optional) Array of linked OAuth / Open ID Connect accounts. Each Array item is an object including the fields `sub` (subject), `iss` (issuer), `pending` (true/false), `email` and `name` (as given from the OAuth issuer)
 |permissions   |Permissions that are directly assigned to this account (excluding group permissions).|
 |groups        |Groups this account is assigned to, including group permissions (permissions inherited by group membership). Is an Array of objects containing `name`, `groupID` and a `permissions` array). Groups are not linked to the group resource because other members may not be disclosed.|
 
+*Note to deprecated `isPrincess` field: This field is not included anymore. Just check for membership in the `Princesses` group.*
 
 #### Example
 ```
@@ -125,19 +125,30 @@ JSON Schema: [https://entrecode.de/schema/account-template](https://entrecode.de
 |email           |(optional) new email|
 |newPassword     |(optional) new password|
 |state           |(optional) the new account state, one of `active`, `inactive`, `blocked`, `deleted`|
-|isPrincess|(optional, boolean) grants princess priviledges (admin/root)|
 |language        |(optional) new language in shortened [RFC5646](http://tools.ietf.org/html/rfc5646) Syntax (`de`, `en`…)|
 |oldPassword     |(required for newPassword) current password for this account|
 |openID     |(optional) Array of linked OAuth / OpenID Connect acconuts. Each Array item is an object including the fields `sub` (subject), `iss` (issuer), `pending` (true/false), `email` and `name` (as given from the OAuth issuer)|
 |permissions|(optional) Array of permissions. Note that this array has to be complete – non-included permissions will be revoked. If the property is missing, no changes in permissions are done. Note that permissions may be rejected (e.g. it is not possible to assign *).|
 
-When changing `state` and/or `isPrincess`, the logged in user to perform this action needs to have princess (root/admin) access.
+All fields are optional and need their own permission. Fields where no permission is available will be ignored.
+
+Permissions:
+
+```
+acc:edit:<uuid>:language,email,openid,password
+acc:change-state:<uuid>
+acc:set-permissions:acc:<uuid>
+```
+
+For setting permissions, additionally the permission `acc:permissions:<permission>` is needed.
+The permission `acc:set-password:<uuid>` enables changing the password without the need for `oldPassword` to be set.
 
 Deleting an OAuth / OpenID Connect connection is only allowed if `hasPassword` is true or an other connection which is not pending exists.
 
 Editing the groups array is not possible using the Account Resource. Sending the property with a PUT request has no effect. To add accounts to a group, the group resource has to be edited.
 
-Editing of `permissions` is not allowed by default, but only for special users (administrators/business account managers).
+
+*Note to deprecated `isPrincess` field: This field is not included anymore. Just add account to the `Princesses` group.*
 
 ### Response: 204 no content
 
@@ -185,6 +196,6 @@ List of accounts. Only accessible as privileged user.
 |total         |Total number of items |
 
 ##### Embedded
-account Resources with the properties `accountID`, `created`, `email`, `language`, `state`, `isPrincess`
+account Resources. 
 
-*To also retrieve the `hasPassword` and `openID` fields, follow the `self` link to access the full resource.*
+*Note that the full account resources are returned from version 0.4 on, no need to follow the self relation first.*

@@ -57,9 +57,10 @@ The success status data is **204 No Content** with an empty response body.
 
 
 # DataSource Types
+All DataSource types SHOULD contain a required property `hexColor` in the config_schema. `hexColor` SHOULD be the regex format `^#[A-Fa-f0-9]{6}$` (`#d23738`).
 
 ## ownDataManager
 
 Pulls data out of a Data Manager.
 
-A config object with key `url` is needed, linking to the generated API of the Data Manager.
+Expected configuration: a JSON object with the key `url` is needed, linking to the generated API of the Data Manager, and the key `hexColor`, with the desired color shown in the editor frontend (format: `#d23738`).

@@ -57,12 +57,13 @@ The success status code is **204 No Content** with an empty response body.
 
 
 # CodeSource Types
+All CodeSource types SHOULD contain a required property `hexColor` in the config_schema. `hexColor` SHOULD be the regex format `^#[A-Fa-f0-9]{6}$` (`#d23738`).
 
 ## remoteGit
 
 Pulls a remote Git Repository.
 
-Expected configuration: a JSON object with the key `giturl` that contains a valid Git URL. 
+Expected configuration: a JSON object with the key `giturl` that contains a valid Git URL and the key `hexColor` with the desired color shown in the editor frontend (format: `#d23738`).
 
 For private repositories, SSH can be used. The following public Key has to be allowed access:
 

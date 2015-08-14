@@ -60,7 +60,12 @@ To delete an existing Platform Resource, clients may perform a DELETE on `ec:pla
 The success status code is **204 No Content** with an empty response body.
 
 # Platform Types
+All Platform types SHOULD contain a required property `hexColor` in the config_schema. `hexColor` SHOULD be the regex format `^#[A-Fa-f0-9]{6}$` (`#d23738`).
 
 ## staticWebsite
 
-Generates a static Website. No configuration needed. Expects valid CodeSource and DataSource.
+Generates a static Website.
+
+Expected configuration: a JSON object with the key `hexColor` with the desired color shown in the editor frontend (format: `#d23738`).
+
+Expects valid CodeSource and DataSource.

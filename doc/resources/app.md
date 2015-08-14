@@ -11,6 +11,7 @@ The JSON Schema is [https://entrecode.de/schema/app](https://entrecode.de/schema
 |appID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for an App | No. Gets generated on creation. |
 |created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of the App| No. Gets written on creation. |
 |title|String||Friendly name for the App|Yes|
+|hexColor|String|6-digit hex color `#rrggbb` `/^#[A-Fa-f0-9]{6}$/`|Color identifier for editor.|Yes|
 
 # Relations
 

@@ -57,19 +57,28 @@ The success status data is **204 No Content** with an empty response body.
 
 
 # Target Types
+All Target types SHOULD contain a required property `hexColor` in the config_schema. `hexColor` SHOULD be the regex format `^#[A-Fa-f0-9]{6}$` (`#d23738`).
 
 ## localWebServer
 
-No configuration necessary. The build result is served directly by the App Server.
+Expected configuration: a JSON object with the key hexColor` with the desired color shown in the editor frontend (format: `#d23738`).
+
+The build result is served directly by the App Server.
+
 This target can only be used with the [staticWebsite](resources/platform#staticwebsite) platform.
 
 
 ## entrecodeS3
 
-No configuration necessary. The build result is served from Amazon S3.
+Expected configuration: a JSON object with the key `hexColor` with the desired color shown in the editor frontend (format: `#d23738`).
+
+The build result is served from Amazon S3.
+
 This target can only be used with the [staticWebsite](resources/platform#staticwebsite) platform.
 
 
 ## backupS3
 
-No configuration necessary. The build result is served as zipped Archive from Amazon S3.
+Expected configuration: a JSON object with the key `hexColor` with the desired color shown in the editor frontend (format: `#d23738`).
+
+The build result is served as zipped Archive from Amazon S3.

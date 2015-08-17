@@ -20,8 +20,9 @@ The JSON Schema is [https://entrecode.de/schema/target](https://entrecode.de/sch
 | self          | [Target](#)| The resource itself | GET, PUT, DELETE |
 | collection    | [Target List](#list)| List of all available Targets | GET, POST|
 | ec:app | [App](resources/app) | The app this target is corresponding to. | GET, PUT, DELETE |
+| ec:app/platform| [Platforms](resources/platform) | Platforms that use this codeSource. (optional) | GET, PUT, DELETE |
 
-*Note that there is no relation to a ec:app/platform, because targets can be used in multiple platforms.*
+*Note that a target cannot be deleted if it is used in at least one platform.*
 
 # List
 
@@ -51,7 +52,7 @@ The success status data is **200 OK** and the response body is the updated singl
 
 ## Delete
 
-To delete an existing Target Resource, clients may perform a DELETE on `ec:app/target` or `self` at a single Target Resource. This is only possible if the target is not used in any platform.
+To delete an existing Target Resource, clients may perform a DELETE on `ec:app/target` or `self` at a single Target Resource. This is only possible if the target is not used in any platform (would trigger an error 403 with code 3370).
 
 The success status data is **204 No Content** with an empty response body.
 

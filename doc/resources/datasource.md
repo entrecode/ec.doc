@@ -20,8 +20,9 @@ The JSON Schema is [https://entrecode.de/schema/datasource](https://entrecode.de
 | self          | [DataSource](#)| The resource itself | GET, PUT, DELETE |
 | collection    | [DataSource List](#list)| List of all available DataSources | GET, POST|
 | ec:app | [App](resources/app) | The app this dataSource is corresponding to. | GET, PUT, DELETE |
+| ec:app/platform| [Platforms](resources/platform) | Platforms that use this dataSource. (optional) | GET, PUT, DELETE |
 
-*Note that there is no relation to a ec:app/platform, because dataSources can be used in multiple platforms.*
+*Note that a dataSource cannot be deleted if it is used in at least one platform.*
 
 # List
 
@@ -51,7 +52,7 @@ The success status data is **200 OK** and the response body is the updated singl
 
 ## Delete
 
-To delete an existing DataSource Resource, clients may perform a DELETE on `ec:app/datasource` or `self` at a single DataSource Resource. This is only possible if the dataSource is not used in any platform.
+To delete an existing DataSource Resource, clients may perform a DELETE on `ec:app/datasource` or `self` at a single DataSource Resource. This is only possible if the dataSource is not used in any platform (would trigger an error 403 with code 3370).
 
 The success status data is **204 No Content** with an empty response body.
 

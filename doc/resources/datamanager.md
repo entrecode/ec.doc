@@ -36,6 +36,7 @@ JSON Schema: [https://entrecode.de/schema/datamanager](https://entrecode.de/sche
 |dataManagerID |The unique identifier for this Data Manager Space as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).|
 |title         |A string title for this Data Manager Space.|
 |description   |A longer description for this Data Manager Space.|
+|config   		|A JSON object for various configurations (for future use).|
 |hexColor      |A color to quickly identify a Data Manager Space in the frontend. Defaults to `#d23738`|
 |rights        |Array of available rights (`manageRights`, `editModel`, `editEntries`, `editAssets`, `manageAPIs`). Not included rights are not available.
 |publicAssetRights|Array of available rights for public assets API (`get`, `put`, `postPrivate`, `postPublic`). Not included rights are not available.
@@ -69,6 +70,7 @@ Title and description of the Data Manager can be changed. Locales can be added o
 |--------------|-----------------|
 |title         |A string title for this Data Manager Space.|
 |description   |A longer description for this Data Manager Space.|
+|config   	   	|A JSON object for various configurations (for future use).|
 |locales       |Array of available locales ([RFC4646](https://tools.ietf.org/html/rfc4646)) in this Data Manager Space.|
 |publicAssetRights|Array of available rights for public assets API (`get`, `put`, `postPrivate`, `postPublic`). Not included rights are not available.
 |defaultLocale |The default locale of this Data Manager Space. Included in `locales`.|

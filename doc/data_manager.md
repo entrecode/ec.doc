@@ -34,7 +34,7 @@ In the following table is specified if and how a property can be changed once it
 |---------------|----------------
 |title          | This results in the removal of the old field and creates a new field with the given title (Only allowed if required is `false`).
 |description    | Every change.
-|type           | None.
+|type           | only formattedText <> text
 |readOnly       | Every change.
 |required       | Only change to `false`.
 |unique         | Only change to `false`.

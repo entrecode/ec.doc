@@ -30,7 +30,6 @@ In short, data is partitioned in *resources* which manifest in *representations.
 # State Diagram
 
 [![State Diagram](img/statediagram.svg)](img/statediagram.svg)
-[![State Diagram](img/statediagram.png)](img/statediagram.png)
 
 
 # Link Relations

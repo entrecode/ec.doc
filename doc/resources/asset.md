@@ -13,7 +13,7 @@ A single asset.
 |--------------|-----------------|
 |assetID |The unique identifier for this asset as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).|
 |title         |A string title for this Asset. Inferred from the original file name of the uploaded file.|
-|type         |Asset type, one of `image`, `video`, `audio`, `generic`, `document`, `spreadsheet`
+|type         |Asset type, one of `image`, `video`, `audio`, `plain`, `document`, `spreadsheet`
 |created       |Timestamp of the creation of this asset as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|
 |tags          |Array of string tags for this asset|
 |files         |Array of actual files for this asset, containing `ec:asset/file` subresources.
@@ -63,7 +63,7 @@ A single deleted asset.
 |--------------|-----------------|
 |assetID |The unique identifier for this asset as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).|
 |title         |A string title for this Asset. Inferred from the original file name of the uploaded file.|
-|type         |Asset type, one of `image`, `video`, `audio`, `generic`, `document`, `spreadsheet`
+|type         |Asset type, one of `image`, `video`, `audio`, `plain`, `document`, `spreadsheet`
 |created       |Timestamp of the creation of this asset as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|
 |deleted       |Timestamp of the deletion of this asset as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|
 |tags          |Array of string tags for this asset|

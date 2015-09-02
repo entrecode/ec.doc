@@ -20,10 +20,10 @@ The JSON Schema is [https://entrecode.de/schema/platform](https://entrecode.de/s
 |---------------|-----------------|-------------|-----------------|
 | self          | [Platform](#)| The resource itself | GET, DELETE |
 | collection    | [Platform List](#list)| List of all available Platforms | GET, POST|
-| ec:app | [App](./app) | The app this Platform is corresponding to. | GET, PUT, DELETE |
+| ec:app | [App](./app/) | The app this Platform is corresponding to. | GET, PUT, DELETE |
 | ec:app/codesource | [CodeSource](./codesource/) | The Code Source of the Platform | GET, PUT |
 | ec:app/datasource | [DataSource](./datasource/) | The Data Source of the Platform | GET, PUT |
-| ec:app/target | [Target](./target) | A Target of the Platform (may occur several times) | GET, PUT |
+| ec:app/target | [Target](./target/) | A Target of the Platform (may occur several times) | GET, PUT |
 | ec:app/deployment/latest | [Deployment](./deployment/) | The latest deployment of this Platform | GET |
 | ec:app/deployments | [Deployment List](./deployment/#list) | List of deployments that were executed for this platform. POST to this link relation to create a new deployment for the platform. | GET, POST |
 

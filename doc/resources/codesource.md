@@ -1,6 +1,6 @@
 # Single CodeSource
 
-The single CodeSource Resource represents a file source that is needed for [Deployments](./deployment/#list) of a [Platform](./platform). 
+The single CodeSource Resource represents a file source that is needed for [Deployments](./deployment/#list) of a [Platform](./platform/). 
 It has a specific [CodeSourceType](#codesource-types) that defines the behavior when deploying.
 
 The JSON Schema is [https://entrecode.de/schema/codesource](https://entrecode.de/schema/codesource).

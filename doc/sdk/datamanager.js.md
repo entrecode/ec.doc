@@ -298,7 +298,7 @@ For node.js acceptable inputs are:
 
 For browsers acceptable inputs are:
 
-* [FormData](https://developer.mozilla.org/de/docs/Web/API/FormData)
+* [FormData](https://developer.mozilla.org/docs/web/api/formdata)
 
 	Example: 
 

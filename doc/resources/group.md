@@ -1,44 +1,41 @@
-# group 
+# Single Group 
 A single entrecode Permission Group.
 
 Groups are instances – just as accounts – that can have permissions assigned to. Accounts can be added to groups, which grants the group permissions to all those accounts.
 Membership in a group is always equal for all users (i.e. there is no "special" group membership). However, the creator of the group gets the right to edit the group (permissions and members) as personal permission assigned to his account.
 
-* [GET](#get)   
-* [PUT](#put)
-* [DELETE] (#delete)
+The JSON Schema is [https://entrecode.de/schema/group](https://entrecode.de/schema/group)
 
-## GET
-Show a single group.
+# Properties
 
-### Request
+| Property | Type | Format | Description | Writable |
+|----------|------|--------|-------------|----------|
+|groupID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for a group | No. Gets generated on creation. |
+|name   | String | | Name of the permission group. Has to be unique. | Yes|
+|permissions   |Array[String]|[Shiro](https://www.npmjs.com/package/shiro-trie) permission string|Permissions that are assigned to this group. |Yes|
 
-#### Headers
-|Header|Value|
-|------|-----|
-|Authorization|`Bearer `token|
+# Relations
 
-### Response: 200 ok
+| Relation Name | Target Resource | Description |Possible Methods |
+|---------------|-----------------|-------------|-----------------|
+| self          | [Group](#)| The resource itself | GET, PUT |
+| collection    | [Group List](#list)| List of all available Groups | GET |
+| ec:account| [Account](resources/account) | Embedded partial Account resources (containing `self` link, `accountID` and `email`) | GET |
 
-JSON Schema: [https://entrecode.de/schema/group](https://entrecode.de/schema/group)
 
-#### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |An entrecode permission group|GET, PUT, DELETE |No.            |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|collection    |Collection of groups. Includes this group.|GET, POST|No.|
+# List
 
-#### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|groupID     |The unique identifier for a group as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).
-|name          |Name of the permission group|
-|permissions   |Permissions that are directly assigned to this account (excluding group permissions).|
+The Group List Resource is a [Generic List Resource](/#generic-list-resources) with embedded Group Resources.
 
-#### Embedded
+# Possible Actions
 
-Account resources (containing `self` link, `accountID` and `email`).
+## Read
+
+To read a single Group Resource, clients may perform GET on a `ec:group` relation.
+
+To read the Group List Resource, clients may perform GET on a `ec:groups` relation or on the `collection` relation of a single Group resource.
+
+In both cases, the success status code is **200 OK.**
 
 
 #### Example
@@ -87,39 +84,21 @@ Account resources (containing `self` link, `accountID` and `email`).
 }
 ```
 
-### Error Response: 401 unauthorized
-If the authentication header is missing or invalid, the following error response is triggered:
 
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
+## Create
 
-#### Body
-An error object.
+To create a new Group Resource, clients may perform a POST on `ec:groups` (the list resource). The JSON Schema for creating a new Group is [https://entrecode.de/schema/group-template](https://entrecode.de/schema/group-template). 
+
+Identical to [Edit](#edit), but `name` and `permissions` are both required. Accounts can also be linked, however the account creating the group is added automatically.
+
+Also, the creator will get the right to edit and delete the group.
+
+The success status code is **201 Created** and the response body is the newly created single Group resource.
 
 
+## Edit
 
-## PUT
-Edit an entrecode permission group.
-To change group name, account memberships or permissions, the following has to be sent in a PUT Request:
-
-### Request
-
-#### Headers
-|Header|Value|
-|------|-----|
-|Content-Type|`application/json`|
-|Authorization|`Bearer `token|
-
-#### Body
-
-JSON Schema: [https://entrecode.de/schema/group-template](https://entrecode.de/schema/group-template)
-
-|Input field     |Description        |
-|----------------|-------------------|
-|name           |new name|
-|permissions| Array of permissions. Note that this array has to be complete – non-included permissions will be revoked. Note that permissions may be rejected (e.g. it is not possible to assign *).|
+To update an existing Group Resource, clients may perform a PUT on `ec:group` or `self` at a single Group Resource. The JSON Schema for editing a Group is [https://entrecode.de/schema/group-template](https://entrecode.de/schema/group-template). 
 
 Embedded or linked: partial `ec:account` resources (with one of `accountID`, `email` or `_links.self` correctly set). Note that if at least one account resource is linked or embedded, the member accounts get rewritten. I.e., missing accounts will be removed.
 If no accounts are sent, no changes are done. Therefore, you cannot remove all accounts from a group.
@@ -129,62 +108,13 @@ If a property is changed, the client needs the corresponding permission – othe
 
 Note that it is possible to remove the client's own account (that gets added to the group on creation automatically). 
 
-### Response: 200 ok
-
-The group was edited successfully.
-
-### Error Response: 400 bad request
-
-If the sent body is no JSON or not valid, the following error response is triggered:
-
-#### Body
-An error object.
+The success status code is **200 OK** and the response body is the updated single Group resource.
 
 
-### Error Response: 401 unauthorized
+## Delete
 
-If the authentication header is missing or invalid, the following error response is triggered:
-
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
-
-#### Body
-An error object.
-
-## POST
-
-Identical to [PUT](#put), but `name` and `permissions` are both required. Accounts can also be linked, however the account creating the group is added automatically.
-
-Also, the creator will get the right to edit and delete the group.
-
-Response: 201 created with the new group.
-
-## DELETE
-
-Deletes the group, no questions asked. Response: 204 no content.
-
+To delete an existing Group Resource, clients may perform a DELETE on `ec:group` or `self` at a single Group Resource. 
 Also deletes any permissions that were set for this group (account- and group-permissions).
 
-# [Group List](id:groups)
-List of groups.
+The success status code is **204 No Content** with an empty response body.
 
-##### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |Collection of groups.|GET|No.          |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|next          |The next page of items in a collection. If there are no further pages of items, this link is not returned in the response.|GET|No.|
-|prev          |The previous page of items in a collection. If there are no previous pages of items, this link is not returned in the response.|GET|No.|
-|first|The first page of items in a collection. This link is returned only when on pages other than the first one.|GET|No.
-|ec:group/by-id |Retrieves an individual group resource based on the specified identifier. |GET|Yes. Requires the groupID.
-
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|count         |Number of items included in this page|
-|total         |Total number of items |
-
-##### Embedded
-group Resources

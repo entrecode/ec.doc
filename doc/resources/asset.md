@@ -1,158 +1,91 @@
-### [Resource: ec:api/asset](id:api/asset)
+# Single Asset
 A single asset.
 
-##### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |An entrecode Asset.|GET, PUT, POST, DELETE  |No.            |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|collection    |Collection of assets. Includes this asset. |GET, POST|No.|
+Assets are abstract representations of a file, that can be available in multiple variants (e.g. different image sizes or localizations).
 
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|assetID |The unique identifier for this asset as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).|
-|title         |A string title for this Asset. Inferred from the original file name of the uploaded file.|
-|type         |Asset type, one of `image`, `video`, `audio`, `plain`, `document`, `spreadsheet`
-|created       |Timestamp of the creation of this asset as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|
-|tags          |Array of string tags for this asset|
-|files         |Array of actual files for this asset, containing `ec:asset/file` subresources.
-|private		| Whether or not the asset was created private.
+The JSON Schema is [https://entrecode.de/schema/asset](https://entrecode.de/schema/asset)
 
+# Properties
 
-#### PUT ec:api/asset
-To modify an asset, a PUT call is required containing the following properties as JSON body:
+| Property | Type | Format | Description | Writable |
+|----------|------|--------|-------------|----------|
+| assetID | String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for an Asset | No. Gets generated on creation. |
+|title| String||A string title for this Asset. Inferred from the original file name of the uploaded file.|Yes
+|type | String  | one of `image`, `video`, `audio`, `plain`, `document`, `spreadsheet` | Asset type | No|
+|created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of the Asset| No. Gets written on creation. |
+|deleted       | String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the deletion of the Asset. Only included when the asset is in the trash.|No|
+|tags  | Array[String]| [Tag](./tag) |Array of string tags for this asset| Yes |
+|files |Array[JSON]| [File](#file-subresource)  |Array of actual files for this asset | Yes|
+|private	| Boolean|	| Whether or not the asset was created private.|Yes|
 
-| Name         | Description     |
-|--------------|-----------------|
-|title         |A string title for this Asset. If omitted, no change is done.|
-|files         |Optional array of files. Include to change locale of single files (`ec:asset/file` resource properties `url` and `locale` are required). If included, all files have to be included in the array. Files not included will be deleted.
-|private		| To change the private state of this asset.
+# Relations
 
-To merge two assets, include a link relation to another asset in a PUT request (HAL links list should contain an `ec:api/asset` link relation). The target asset(s) will be merged into this one, if possible. 
+| Relation Name | Target Resource | Description |Possible Methods |
+|---------------|-----------------|-------------|-----------------|
+| self          | [Asset](#)| The resource itself | GET, PUT, DELETE |
+| collection    | [Asset List](#list)| List of all available Assets | GET, POST |
+| ec:asset/best-file | File | Content-negotiated “best suited” file of this asset | GET |
+| ec:datamanager| [Data Manager](./datamanager/) | Data Manager this resource belongs to | GET, PUT |
+| ec:tag| [Tag](./tag/) | Tag of this asset | GET, PUT, DELETE |
 
+# File Subresource
+This subresource is included in the [Asset](#) resource.
 
-#### POST ec:api/asset
-To add an additional representation to an asset resource (e.g. another image resolution or document localized for another locale), the new file is POSTed to the `ec:api/asset` resource with content type multipart/form-data ([RFC 2388](http://tools.ietf.org/html/rfc2388)). The field name has to be `file`.
+| Property | Type | Format | Description | Writable |
+|----------|------|--------|-------------|----------|
+|mimetype | String | [RFC 2046](http://tools.ietf.org/html/rfc2046)    |The MIME Media type for this file| No |
+|url | String |[RFC 3986](https://tools.ietf.org/html/rfc3986) | The URL of the file for retrieval | No |
+|size   | Number | Integer  |Size of the file in Bytes| No |
+|resolution   | JSON  | | JSON object with additional metadata for this file. For image assets, it will contain properties like `width` and `height` to indicate the image resolution. | No |
+|locale | String  | [RFC5646](http://tools.ietf.org/html/rfc5646) Syntax (`en-US`, `de-DE`, …)      |Locale of the asset file | Yes |
+|created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of the file| No |
+|modified| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the last modification of this file| No |
 
-##### Output
+# List
 
-* **200 ok** if everything went well
+The Asset List Resource is a [Generic List Resource](/#generic-list-resources) with embedded Asset Resources.
 
-#### DELETE ec:asset
-To delete an asset, including its file representations, send a DELETE request to the `ec:api/asset` resource. This will permanently delete the asset.
+## Read
 
-##### Output
+To read a single Asset Resource, clients may perform GET on a `ec:asset` relation.
 
-* **204 no content** if everything went well
+To read the Asset List Resource, clients may perform GET on a `ec:assets` relation or on the `collection` relation of a single Asset resource.
 
+In both cases, the success status code is **200 OK.**
 
-### [Resource: ec:asset/deleted](id:asset-deleted)
-A single deleted asset.
+## Create
 
-##### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |An entrecode Asset.|GET, DELETE  |No.            |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|collection    |Collection of deleted assets. Includes this asset. |GET|No.|
-|ec:datamanager|The Data Manager Space this asset belongs to. |GET,PUT |No.|
-
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|assetID |The unique identifier for this asset as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).|
-|title         |A string title for this Asset. Inferred from the original file name of the uploaded file.|
-|type         |Asset type, one of `image`, `video`, `audio`, `plain`, `document`, `spreadsheet`
-|created       |Timestamp of the creation of this asset as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|
-|deleted       |Timestamp of the deletion of this asset as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|
-|tags          |Array of string tags for this asset|
-|file          |Array of actual files for this asset, containing `ec:asset/file` subresources.
-
-#### DELETE ec:assets/deleted
-In order to restore/destroy a deleted asset a delete request to the specific asset needs to be called. 
-
-##### Parameter
-| Name         | Description     |
-|--------------|-----------------|
-|destroy (optional) |Parameter for destroying (irreversible delete) this asset. (`?destroy=destroy`)|
-
-##### Output
-* **200 OK** If everything went well. The `ec:asset` resource is included in the response
-* **204 NO CONTENT** If the asset was successfully purged/destroyed.
-
-### [Resource ec:assets/deleted](id:assets-deleted)
-Collection of deleted assets in Data Manager.
-
-##### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |Collection of deleted assets.|GET|No.          |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|next          |The next page of items in a collection. If there are no further pages of items, this link is not returned in the response.|GET|No.|
-|prev          |The previous page of items in a collection. If there are no previous pages of items, this link is not returned in the response.|GET|No.|
-|first|The first page of items in a collection. This link is returned only when on pages other than the first one.|GET|No.
-|ec:datamanager|The data manager these assets belong to.|GET,PUT|No.|
-|ec:assets/deleted/by-id |Retrieves an individual deleted asset resource based on the specified identifier. |GET|Yes. Requires the assetID.
-
-
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|count         |Number of items included in this page|
-|total         |Total number of items |
-
-##### Embedded
-`ec:asset/deleted` Resources.
-
-
-
-### [Resource: ec:api/assets](id:api/assets)
-Collection of assets in a Data Manager.
-
-##### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |Collection of assets.|GET, POST|No.          |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|next          |The next page of items in a collection. If there are no further pages of items, this link is not returned in the response.|GET|No.|
-|prev          |The previous page of items in a collection. If there are no previous pages of items, this link is not returned in the response.|GET|No.|
-|first|The first page of items in a collection. This link is returned only when on pages other than the first one.|GET|No.
-|ec:api/assets/by-id |Retrieves an individual asset resource based on the specified identifier. |GET|Yes. Requires the assetID.
-|ec:api     | Link to the public API of this data manager| GET | No. |
-
-
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|count         |Number of items included in this page|
-|total         |Total number of items |
-
-##### Embedded
-`ec:api/asset` Resources.
-
-#### POST ec:assets
 To create a new asset, upload a file with content type multipart/form-data ([RFC 2388](http://tools.ietf.org/html/rfc2388)). MIME Type and basic properties are inferred from the uploaded file(s). The field name has to be `file`. 
 Multiple files can be uploaded at once to create multiple assets with one call.
 
 Additionally a boolean field `private` can be sent to specify if the created asset should be private (read: only accessible by the creating user) or public (read: accessible by everyone in the data manager).
 
-##### Output
+Response: **201 created** if everything went well. Response will contain link relations to newly created asset(s). They will not be embedded, however.
 
-* **201 created** if everything went well. Response will contain link relations to newly created asset(s). They will not be embedded, however.
+## Edit
+
+To update an existing Asset Resource, clients may perform a PUT on `ec:asset` or `self` at a single Asset Resource.
+
+Partial updates are possible.
+
+Files:  Include to change locale of single files (`ec:asset/file` resource properties `url` and `locale` are required). If included, all files have to be included in the array. Files not included will be deleted.
+
+To merge two assets, include a link relation to another asset in a PUT request (HAL links list should contain an `ec:api/asset` link relation). The target asset(s) will be merged into this one, if possible. 
+
+To add an additional representation to an asset resource (e.g. another image resolution or document localized for another locale), the new file is POSTed to the `ec:api/asset` resource with content type multipart/form-data ([RFC 2388](http://tools.ietf.org/html/rfc2388)). The field name has to be `file`.
+
+## Delete
+
+To delete an asset, including its file representations, send a DELETE request to the `ec:api/asset` resource. This will move the asset to the trash.
+
+## Deleted Assets
+
+Deleted assets are the same as regular assets, however they have the `deleted` timestamp set. They get permanently deleted after some time.
+
+To *permanently delete* a deleted asset right away, it has to be called with HTTP DELETE and the query string parameter `destroy=destroy`.
+Output is **204 NO CONTENT**.
+
+To *restore* a deleted asset, simple call DELETE on the deleted asset, without any additional query string parameter.
+Output is **200 OK**.
 
 
-
-#### Resource: ec:asset/file
-This subresource is included in the ec:api/asset resource.
-
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|mimetype      |The MIME Media type ([RFC 2046](http://tools.ietf.org/html/rfc2046)) for this file 
-|url           |The URI ([RFC 3986](https://tools.ietf.org/html/rfc3986)) of the file for retrieval
-|size          |Size of the file in Bytes
-|resolution    |JSON object with additional metadata for this file. For image assets, it will contain properties like `width` and `height` to indicate the image resolution.
-|locale        |Locale of the asset file in [RFC5646](http://tools.ietf.org/html/rfc5646) Syntax (`en-US`, `de-DE`, …)
-|created       |Timestamp of the creation of the file as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|
-|modified       |Timestamp of the last modification of this file as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|

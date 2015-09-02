@@ -1,46 +1,47 @@
-# account 
+# Single Account 
+
 A single entrecode Account.
 
-* [GET](#get)   
-* [PUT](#put)
+The JSON Schema is [https://entrecode.de/schema/account](https://entrecode.de/schema/account).
 
-## GET
-Show a single entrecode Account.
-
-### Request
-
-#### Headers
-|Header|Value|
-|------|-----|
-|Authorization|`Bearer `token|
-
-### Response: 200 ok
-
-JSON Schema: [https://entrecode.de/schema/account](https://entrecode.de/schema/account)
-
-#### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |An entrecode Account|GET, PUT  |No.            |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|[ec:account/tokens](https://entrecode.de/doc/rel/account/tokens)|Collection of access tokens for this account|GET|No.|
-|collection    |Collection of accounts. Includes this account. Only included if user is princess.|GET|No.|
-
-#### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|accountID     |The unique identifier for an account as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).
-|created       |Date (UTC) of creation of this account in [RFC3339](https://tools.ietf.org/html/rfc3339) format.
-|email         |The primary eMail address of the account
-|language      |The primary UI language for this account in shortened [RFC5646](http://tools.ietf.org/html/rfc5646) Syntax (`en`, `de`, …)
-|state         |The account state, one of `active`, `inactive`, `blocked`, `deleted`
-|hasPassword   |(optional) Boolean indicating if the user has a password set
-|hasPendingEmail   |(optional) Boolean indicating if the user has a pending email change
-|openID        |(optional) Array of linked OAuth / Open ID Connect accounts. Each Array item is an object including the fields `sub` (subject), `iss` (issuer), `pending` (true/false), `email` and `name` (as given from the OAuth issuer)
-|permissions   |Permissions that are directly assigned to this account (excluding group permissions).|
-|groups        |Groups this account is assigned to, including group permissions (permissions inherited by group membership). Is an Array of objects containing `name`, `groupID` and a `permissions` array). Groups are not linked to the group resource because other members may not be disclosed.|
+# Properties
+| Property | Type | Format | Description | Writable |
+|----------|------|--------|-------------|----------|
+|accountID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for an App | No. Gets generated on creation. |
+|created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of the Account| No. Gets written on creation. |
+|email         |String|valid eMail Address|The primary eMail address of the account| Yes|
+|language      |String|Shortened [RFC5646](http://tools.ietf.org/html/rfc5646) Syntax (`en`, `de`, …)|The primary UI language for this account|Yes|
+|state         |String|`active`, `inactive`, `blocked`, `deleted`|The account state|Yes
+|hasPassword   |Boolean|| Optional. Indicates if the user has a password set.|No|
+|hasPendingEmail   |Boolean|| Optional. Indicates if the user has a pending email change|No|
+|openID        |Array |OAuth Accounts|of linked OAuth / Open ID Connect accounts. Each Array item is an object including the fields `sub` (subject), `iss` (issuer), `pending` (true/false), `email` and `name` (as given from the OAuth issuer)|Yes|
+|permissions   |Array[String]|[Shiro](https://www.npmjs.com/package/shiro-trie) permission string|Permissions that are directly assigned to this account (excluding group permissions).|Yes|
+|groups        |Array|objects containing `name`, `groupID` and a `permissions` array| Groups this account is assigned to, including group permissions (permissions inherited by group membership). Groups are not linked to the group resource because other members may not be disclosed.|No. Edit the group resource to change memberships.|
 
 *Note to deprecated `isPrincess` field: This field is not included anymore. Just check for membership in the `Princesses` group.*
+
+# Relations
+
+| Relation Name | Target Resource | Description |Possible Methods |
+|---------------|-----------------|-------------|-----------------|
+| self          | [Account](#)| The resource itself | GET, PUT |
+| collection    | [Account List](#list)| List of all available Accounts | GET |
+| ec:account/tokens | [Token List](resources/token#list) | Collection of access tokens for this account | GET |
+
+# List
+
+The Account List Resource is a [Generic List Resource](/#generic-list-resources) with embedded Account Resources.
+
+# Possible Actions
+
+## Read
+
+To read a single Account Resource, clients may perform GET on a `ec:account` relation.
+
+To read the Account List Resource, clients may perform GET on a `ec:accounts` relation or on the `collection` relation of a single App resource.
+
+In both cases, the success status code is **200 OK.**
+
 
 #### Example
 ```
@@ -91,44 +92,13 @@ JSON Schema: [https://entrecode.de/schema/account](https://entrecode.de/schema/a
 }
 ```
 
-### Error Response: 401 unauthorized
-If the authentication header is missing or invalid, the following error response is triggered:
+## Create
 
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
+To create a new Account Resource, the Signup process has to be executed. See `ec:auth/register` relation.
 
-#### Body
-An error object.
+## Edit
 
-
-
-## PUT
-Edit an entrecode Account.
-To change account data, the following has to be sent in a PUT Request:
-
-### Request
-
-#### Headers
-|Header|Value|
-|------|-----|
-|Content-Type|`application/json`|
-|Authorization|`Bearer `token|
-
-#### Body
-
-JSON Schema: [https://entrecode.de/schema/account-template](https://entrecode.de/schema/account-template)
-
-|Input field     |Description        |
-|----------------|-------------------|
-|email           |(optional) new email|
-|newPassword     |(optional) new password|
-|state           |(optional) the new account state, one of `active`, `inactive`, `blocked`, `deleted`|
-|language        |(optional) new language in shortened [RFC5646](http://tools.ietf.org/html/rfc5646) Syntax (`de`, `en`…)|
-|oldPassword     |(required for newPassword) current password for this account|
-|openID     |(optional) Array of linked OAuth / OpenID Connect acconuts. Each Array item is an object including the fields `sub` (subject), `iss` (issuer), `pending` (true/false), `email` and `name` (as given from the OAuth issuer)|
-|permissions|(optional) Array of permissions. Note that this array has to be complete – non-included permissions will be revoked. If the property is missing, no changes in permissions are done. Note that permissions may be rejected (e.g. it is not possible to assign *).|
+To update an existing App Resource, clients may perform a PUT on `ec:app` or `self` at a single App Resource. The JSON Schema for editing an App is [https://entrecode.de/schema/account-template](https://entrecode.de/schema/account-template). 
 
 All fields are optional and need their own permission. Fields where no permission is available will be ignored.
 
@@ -143,59 +113,16 @@ acc:set-permissions:acc:<uuid>
 For setting permissions, additionally the permission `acc:permissions:<permission>` is needed.
 The permission `acc:set-password:<uuid>` enables changing the password without the need for `oldPassword` to be set.
 
-Deleting an OAuth / OpenID Connect connection is only allowed if `hasPassword` is true or an other connection which is not pending exists.
+Deleting an OAuth / OpenID Connect connection is only allowed if `hasPassword` is true or an other connection which is not pending exists. Adding a connection is not possible via PUT, instead a signup has to be done with an authenticated access token.
+
+Updating the password requires the two fields `oldPassword` and `newPassword`.
 
 Editing the groups array is not possible using the Account Resource. Sending the property with a PUT request has no effect. To add accounts to a group, the group resource has to be edited.
 
-
 *Note to deprecated `isPrincess` field: This field is not included anymore. Just add account to the `Princesses` group.*
 
-### Response: 204 no content
+The success status code is **200 OK** and the response body is the updated single App resource.
 
-The account was edited successfully.
+## Delete
 
-### Error Response: 400 bad request
-
-If the sent body is no JSON or not valid, the following error response is triggered:
-
-#### Body
-An error object.
-
-
-### Error Response: 401 unauthorized
-
-If the authentication header is missing or invalid, the following error response is triggered:
-
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
-
-#### Body
-An error object.
-
-
-
-# [Account List](id:accounts)
-List of accounts. Only accessible as privileged user.
-
-##### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |Collection of accounts.|GET|No.          |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|next          |The next page of items in a collection. If there are no further pages of items, this link is not returned in the response.|GET|No.|
-|prev          |The previous page of items in a collection. If there are no previous pages of items, this link is not returned in the response.|GET|No.|
-|first|The first page of items in a collection. This link is returned only when on pages other than the first one.|GET|No.
-|ec:account/by-id |Retrieves an individual account resource based on the specified identifier. |GET|Yes. Requires the accountID.
-
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|count         |Number of items included in this page|
-|total         |Total number of items |
-
-##### Embedded
-account Resources. 
-
-*Note that the full account resources are returned from version 0.4 on, no need to follow the self relation first.*
+Deletion is not possible at the moment. However, the `state` can be set to `deleted`.

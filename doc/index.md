@@ -1,46 +1,52 @@
-
+# entrecode API Documentation
 
 This document describes the Hypermedia REST APIs of the entrecode Systems.
-
-## Available APIs
-
-### Account Server API
-
-The account server handles user accounts, registration, authentication and authorization.
-
-The **Entry Point** is [`https://accounts.angus.entrecode.de/`](https://accounts.angus.entrecode.de/), root relation: [ec:auth](https://entrecode.de/doc/rel/auth)
-
-### Data Manager API
-
-A user can, in general, have any number of Data Manager “Spaces”. The exact number may be limited by the customers plan. A single Data Manager Space manages Assets (Files) and Models with Entries (RESTful Resources).
-
-The **Entry Point** is [`https://datamanager.angus.entrecode.de/`](https://datamanager.angus.entrecode.de/), root relation: [ec:datamanagers](https://entrecode.de/doc/rel/datamanagers)
-
-## Basics
 
 All entrecode APIs are *REST APIs,* or rather *Hypermedia APIs.* This means that the term *REST* is actually understood as [intended by Roy T. Fielding](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) – including the *Hypermedia Constraint.* See [this blog post](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven) for a more in-depth description of REST and the difference to a simple HTTP-based API which is often mistakenly called *REST API.*
 
 In short, data is partitioned in *resources* which manifest in *representations.* Those are transferred using a *standardized format* ([JSON HAL](https://tools.ietf.org/html/draft-kelly-json-hal-06)) with *standardized methods* (HTTP/1.1, [RFC 7230](http://tools.ietf.org/html/rfc7230)). Application flow between resources is defined by link relations. URLs are subject to change and must not be hard coded. Instead, link relations can be used to explore and use the APIs.
 
-* **Media Type:** `application/hal+json` ([HAL](https://tools.ietf.org/html/draft-kelly-json-hal-06))
-* **[Richardson](http://martinfowler.com/articles/richardsonMaturityModel.html) Maturity Level:** 3 (full Hypermedia)
+## Available APIs
 
+#### [Account Server API](./account_server)
 
-### Authentication
+The account server handles user accounts, registration, authentication and authorization.
+
+The **Entry Point** is [`https://accounts.entrecode.de/`](https://accounts.entrecode.de/), root relation: [ec:auth](./resources/auth/)
+
+#### [Data Manager API](./data_manager)
+
+A user can, in general, have any number of Data Manager “Spaces”. The exact number may be limited by the customers plan. A single Data Manager Space manages Assets (Files) and Models with Entries (RESTful Resources).
+
+The **Entry Point** is [`https://datamanager.entrecode.de/`](https://datamanager.entrecode.de/), root relation: [ec:datamanagers](./resources/datamanager/#list)
+
+#### [App Manager API](./app_manager)
+
+The App Manager is a technical tool for configuring, building and deploying Apps. An App can have multiple platforms to run on.
+
+The **Entry Point** is [`https://appserver.entrecode.de/`](https://appserver.entrecode.de/), root relation: [ec:apps](/resources/app/#list)
+
+## Editor
+
+The Front-End editor for Account Server, Data Manager and App Manager is live at 
+
+**[editor.entrecode.de](https://editor.entrecode.de)**
+
+## Authentication
 Most API Calls require Authorization. 
 The issued Authorization Token (`access_token`) has to be sent using the following HTTP Header:
 
-    Authorization: Bearer AbCdEf1234567890
+    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
     
-The Access Token has to be acquired using the [Accounts API](https://accounts.entrecode.de). 
+The Access Token has to be acquired using the [Accounts API](./account_server/#authentication). It is a [JWT](https://tools.ietf.org/html/rfc7519).
 
 
-### Relations
+## Relations
 Link Relation names are those registered with the [IANA](http://www.iana.org/assignments/link-relations/link-relations.xhtml). Additionally, custom link relations are used which are built in the form `https://entrecode.de/doc/rel/<relation>/<optional_subrelation>`. Those relations are also links to their own documentation. 
 For brevity, [CURIE Syntax](http://www.w3.org/TR/curie/) is used which results in relation names of the form `ec:<relation>/<optional_subrelation>`. 
 
 
-### Generic list resources
+## Generic list resources
 In general (i.e. unless stated otherwise), list resources support pagination, sorting and filtering.
 
 ##### Pagination:
@@ -78,7 +84,7 @@ To sort by a different than the default property, the following query string par
 
 All combinations are possible.
 
-### Cross-Origin Resource Sharing (CORS)
+## Cross-Origin Resource Sharing (CORS)
 
 The [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) usually prevents browsers from accessing remote APIs using XMLHTTPRequests (AJAX). This results in an error message like “No 'Access-Control-Allow-Origin' header is present on the requested resource.” and fails requests. To make our APIs accessable using Web Clients, we support [Cross-Origin Resource Sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (CORS). *And not the crude hack that is JSONP.* This means, we generally send the following HTTP Headers:
 

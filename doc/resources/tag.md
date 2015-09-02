@@ -1,39 +1,37 @@
-# tag 
-Tag in a Data Manager.
+# Single Tag 
+Tag in a Data Manager for Assets.
 
-* [GET](#get)   
-* [PUT](#put)
-* [DELETE](#delete)
+The JSON Schema is [https://entrecode.de/schema/tag](https://entrecode.de/schema/tag)
 
-## GET
-Get a single tag.
+# Properties
 
-### Request
+| Property | Type | Format | Description | Writable |
+|----------|------|--------|-------------|----------|
+|tag     | String | a-z 0-9 äüöß _- |The tag name.| Yes |
+|count	  |Number| positive Integer |Number of occurences of this tag in the data manager.|No
 
-#### Headers
-|Header|Value|
-|------|-----|
-|Authorization|`Bearer `token|
+# Relations
 
-### Response: 200 ok
+| Relation Name | Target Resource | Description |Possible Methods |
+|---------------|-----------------|-------------|-----------------|
+| self          | [Tag](#)| The resource itself | GET, PUT, DELETE |
+| collection    | [Tag List](#list)| List of all available Tags | GET|
 
-JSON Schema: [https://entrecode.de/schema/tag](https://entrecode.de/schema/tag)
+# List
 
-#### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |An entrecode tag|GET, PUT, DELETE  |No.            |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|collection    |Collection of tags. Includes this tag.|GET|No.|
+The Tag List Resource is a [Generic List Resource](/#generic-list-resources) with embedded Tag Resources.
 
+# Possible Actions
 
-#### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|tag       		|The tag name.|
-|count	   		|Number of occurences of this tag in the data manager.
+## Read
 
-#### Example
+To read a single Tag Resource, clients may perform GET on a `ec:tag` relation.
+
+To read the Tag List Resource, clients may perform GET on a `ec:tags` relation or on the `collection` relation of a single Tag resource.
+
+In both cases, the success status code is **200 OK.**
+
+Example:
 
 ```
 {
@@ -43,136 +41,18 @@ JSON Schema: [https://entrecode.de/schema/tag](https://entrecode.de/schema/tag)
 }
 ```
 
-### Error Response: 401 unauthorized
-If the authentication header is missing or invalid, the following error response is triggered:
+## Create
 
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
+Tags get created automatically once they get used in an [Asset](./asset/).
 
-#### Body
-An error object.
+## Edit
 
+To update an existing Tag Resource, clients may perform a PUT on `ec:tag` or `self` at a single Tag Resource. 
+Only `tag` can be set.
 
-## PUT
-Edit a tag. 
+The success status code is **200 OK** and the response body is the updated single Tag resource.
 
-### Request
+## Delete
+To delete a Tag, clients may perform a DELETE on `ec:tag` or `self` at a single Tag Resource. This also removes the tag from all assets.
 
-#### Headers
-|Header|Value|
-|------|-----|
-|Content-Type|`application/json`|
-|Authorization|`Bearer `token|
-
-#### Body
-
-JSON Schema: [https://entrecode.de/schema/model-template](https://entrecode.de/schema/tag)
-
-|Input field     |Description        |
-|----------------|-------------------|
-|tag             |The new tag name. Note that only lowercase characters, numbers and _ are allowed in tags.
-
-### Response: 200 ok
-
-The tag was changed successfully.
-
-### Error Response: 400 bad request
-
-If the sent body is no JSON or not valid, the following error response is triggered:
-
-#### Body
-An error object.
-
-
-### Error Response: 401 unauthorized
-
-If the authentication header is missing or invalid, the following error response is triggered:
-
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
-
-#### Body
-An error object.
-
-
-
-## DELETE
-Delete a tag. 
-
-### Request
-
-#### Headers
-|Header|Value|
-|------|-----|
-|Authorization|`Bearer `token|
-
-### Response: 204 ok
-
-The tag was deleted successfully.
-
-### Error Response: 401 unauthorized
-
-If the authentication header is missing or invalid, the following error response is triggered:
-
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
-
-#### Body
-An error object.
-
-
-# tags 
-Collection of tags in a Data Manager.
-
-* [GET](#get)
-
-## GET
-Get a list of all available tags of a specified Data Manager.
-
-### Request
-
-#### Headers
-|Header|Value|
-|------|-----|
-|Authorization|`Bearer <token>`|
-
-### Response: 200 ok
-
-JSON Schema: [https://entrecode.de/schema/models](https://entrecode.de/schema/tags)
-
-#### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |Collection of models.|GET, POST|No.          |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|next          |The next page of items in a collection. If there are no further pages of items, this link is not returned in the response.|GET|No.|
-|prev          |The previous page of items in a collection. If there are no previous pages of items, this link is not returned in the response.|GET|No.|
-|first|The first page of items in a collection. This link is returned only when on pages other than the first one.|GET|No.
-|ec:datamanager|The data manager these tags belong to.|GET,PUT|No.|
-
-#### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|count         |Number of items included in this page|
-|total         |Total number of items |
-
-#### Embedded
-
-[ec:tag](../tag) Resources
-
-### Error Response: 401 unauthorized
-If the authentication header is missing or invalid, the following error response is triggered:
-
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
-
-#### Body
-An error object.
+The success status code is **204 No Content** with an empty response body.

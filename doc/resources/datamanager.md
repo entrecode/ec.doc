@@ -1,150 +1,65 @@
-# datamanager
-A single Data Manager Space.
+# Single Data Manager
+The single Data Manager Resource represents an isolated “space”. A Data Manager can have any number models and assets.
 
-* [GET](#get)
-* [PUT](#put)
-* [DELETE](#delete)
+The JSON Schema is [https://entrecode.de/schema/datamanager](https://entrecode.de/schema/datamanager).
 
-## GET
-Show a single Data Manager.
+# Properties
 
-### Request
+| Property | Type | Format | Description | Writable |
+|----------|------|--------|-------------|----------|
+| dataManagerID | String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for this Data Manager | No. Gets generated on creation. |
+|created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of this Data Manager| No. Gets written on creation. |
+|title|String||Friendly name for the Data Manager|Yes|
+|description|String||A longer description for this Data Manager Space.|Yes|
+|hexColor|String|6-digit hex color `#rrggbb` `/^#[A-Fa-f0-9]{6}$/`|Color identifier for editor.|Yes|
+|config | JSON |  		|A JSON object for various configurations (for future use).| Yes|
+|rights  | Array | One of  `manageRights`, `editModel`, `editEntries`, `editAssets`, `manageAPIs`| *Deprecated* Array of available rights. Not included rights are not available. | No |
+|publicAssetRights| Array | One of `get`, `put`, `postPrivate`, `postPublic` | Array of available rights for public assets API. Not included rights are not available.| Yes |
+|locales | Array | [RFC4646](https://tools.ietf.org/html/rfc4646)|Available locales in this Data Manager Space.| Yes |
+|defaultLocale | String | [RFC4646](https://tools.ietf.org/html/rfc4646)| The default locale of this Data Manager Space. Included in `locales`.| Yes |
 
-#### Headers
-|Header|Value|
-|------|-----|
-|Authorization|`Bearer `token|
+# Relations
 
-### Response: 200 ok
+| Relation Name | Target Resource | Description |Possible Methods |
+|---------------|-----------------|-------------|-----------------|
+| self          | [Data Manager](#)| The resource itself | GET, PUT |
+| collection    | [Data Manager List](#list)| List of all available Data Managers | GET, POST|
+|ec:assets     | [Asset List](./asset/#list) | Collection of assets associated with this Data Manager Space. |GET, POST|
+|ec:assets/deleted| [Asset List](./asset/#list) | Collection of deleted assets associated with this Data Manager Space. |GET|
+|ec:models     |[Model List](./model/#list)|Collection of models associated with this Data Manager Space. |GET, POST|
 
-JSON Schema: [https://entrecode.de/schema/datamanager](https://entrecode.de/schema/datamanager)
+# List
 
-##### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |An entrecode Data Manager Space.|GET, PUT  |No.            |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|collection    |Collection of Data Managers. Includes this Data Manager. |GET, POST|No.|
-|ec:assets     |Collection of assets associated with this Data Manager Space. |GET, POST|No.|
-|ec:assets/deleted|Collection of deleted assets associated with this Data Manager Space. |GET|No.|
-|ec:models     |Collection of models associated with this Data Manager Space. |GET, POST|No.|
-|ec:customer   |The customer this Data Manager Space belongs to.| GET | No. |
+The Data Manager List Resource is a [Generic List Resource](/#generic-list-resources) with embedded Data Manager Resources.
 
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|dataManagerID |The unique identifier for this Data Manager Space as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).|
-|title         |A string title for this Data Manager Space.|
-|description   |A longer description for this Data Manager Space.|
-|config   		|A JSON object for various configurations (for future use).|
-|hexColor      |A color to quickly identify a Data Manager Space in the frontend. Defaults to `#d23738`|
-|rights        |Array of available rights (`manageRights`, `editModel`, `editEntries`, `editAssets`, `manageAPIs`). Not included rights are not available.
-|publicAssetRights|Array of available rights for public assets API (`get`, `put`, `postPrivate`, `postPublic`). Not included rights are not available.
-|created       |Timestamp of the creation of this Data Manager Space as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))|
-|locales       |Array of available locales ([RFC4646](https://tools.ietf.org/html/rfc4646)) in this Data Manager Space.|
-|defaultLocale |The default locale of this Data Manager Space. Included in `locales`.|
+Additionally, it is the entry point for the Data Manager Manager API. Because of that, it has an additional `msg` property with a greeting string (including the API Server version number). 
 
-### Error Response: 401 unauthorized
-If the authentication header is missing or invalid, the following error response is triggered:
+# Possible Actions
 
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
+## Read
 
-#### Body
-An error object.
+To read a single Data Manager Resource, clients may perform GET on a `ec:datamanager` relation.
 
+To read the Data Manager List Resource, clients may perform GET on a `ec:datamanagers` relation or on the `collection` relation of a single Data Manager resource.
 
-## PUT
-Title and description of the Data Manager can be changed. Locales can be added or deleted and a defaultLocale can be set.
+In both cases, the success status code is **200 OK.**
 
-#### Headers
-|Header|Value|
-|------|-----|
-|Content-Type|`application/json`|
-|Authorization|`Bearer `token|
+## Create
 
-#### Body
-| Name         | Description     |
-|--------------|-----------------|
-|title         |A string title for this Data Manager Space.|
-|description   |A longer description for this Data Manager Space.|
-|config   	   	|A JSON object for various configurations (for future use).|
-|locales       |Array of available locales ([RFC4646](https://tools.ietf.org/html/rfc4646)) in this Data Manager Space.|
-|publicAssetRights|Array of available rights for public assets API (`get`, `put`, `postPrivate`, `postPublic`). Not included rights are not available.
-|defaultLocale |The default locale of this Data Manager Space. Included in `locales`.|
+To create a new Data Manager Space, clients may perform a POST on `ec:datamanagers` (the list resource). The JSON Schema for creating a new Data Manager is [https://entrecode.de/schema/datamanager-template](https://entrecode.de/schema/datamanager-template). 
 
-### Response: 200 ok
-The datamanager was successfully changed. Response body contains the datamanager.
+The success status code is **201 Created** and the response body is the newly created single Data Manager resource.
 
-### Error Response: 400 bad request
+## Edit
 
-If the sent body is no JSON or not valid, the following error response is triggered:
+To update an existing Data Manager Resource, clients may perform a PUT on `ec:datamanager` or `self` at a single Data Manager Resource. The JSON Schema for editing a Data Manager is [https://entrecode.de/schema/datamanager-template](https://entrecode.de/schema/datamanager-template). Title and description of the Data Manager can be changed. Locales can be added or deleted and a defaultLocale can be set.
 
-#### Body
-An error object.
+The success status code is **200 OK** and the response body is the updated single Data Manager resource.
 
-### Error Response: 401 unauthorized
+## Delete
 
-If the authentication header is missing or invalid, the following error response is triggered:
+To delete a Data Manager including all its data, clients may perform a DELETE on `ec:datamanager` or `self` at a single Data Manager Resource. This deletes the Data Manager permanently, including all its models, assets, and generated API resources.
 
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
+*It is not possible to restore a deleted Data Manager in any way, so handle this method with care!*
 
-### Response: 405 method not allowed
-If the user has no right to edit this datamanager.
-
-#### Body
-An error object.
-
-## DELETE
-Delet a datamanager.
-
-#### Headers
-|Header|Value|
-|------|-----|
-|Content-Type|`application/json`|
-|Authorization|`Bearer `token|
-
-### Response: 204 no content
-The datamanager was deleted.
-
-### Entry Point: [ec:datamanagers](id:datamanagers)
-When accessing the Entry Point, the list of available data managers is returned.
-
-##### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |Collection of data managers.|GET, POST|No.          |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|next          |The next page of items in a collection. If there are no further pages of items, this link is not returned in the response.|GET|No.|
-|prev          |The previous page of items in a collection. If there are no previous pages of items, this link is not returned in the response.|GET|No.|
-|first|The first page of items in a collection. This link is returned only when on pages other than the first one.|GET|No.
-|ec:datamanager/by-id |Retrieves an individual data manager resource based on the specified identifier. |GET|Yes. Requires the dataManagerID.
-
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|count         |Number of items included in this page|
-|total         |Total number of items |
-
-##### Embedded
-`ec:datamanager` Resources.
-
-#### POST ec:datamanagers
-To create a new Data Manager Space, POST to the collection resource with the following template:
-
-##### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|title         |A string title for this Data Manager Space.|
-|description   |A longer description for this Data Manager Space.|
-
-Note that locales can not be set on creation, but are always set to the default (`en_US`).
-
-##### Output
-
-* **201 created** if everything went well. The response is the new `ec:datamanager` resource.
+The success status code is **204 No Content** with an empty response body.

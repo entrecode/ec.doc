@@ -1,7 +1,11 @@
-# [Entry Point Resource](id:entry-point)
+# The Auth “Resource”
+
+This resource has many faces, and is more of a accumulation of multiple auth-related resources.
+
+# Entry Point
 When accessing the Entry Point, the following resource is returned containing links to available sub resources.
 
-<h2>Links</h2>
+## Relations
 
 
 | Relation     | Description     | Methods     | Templated     |
@@ -20,12 +24,12 @@ When accessing the Entry Point, the following resource is returned containing li
 |ec:auth/public-key |Returns the Server public key as pem file for checking signed tokens.|GET|No.|
 
 
-## Authentication
+# Authentication
 
 The authentication relations (`ec:auth/register`, `ec:auth/login`, `ec:auth/facebook` and `ec:auth/google`) work different than the rest of the API. Because of OAuth authentication flow, they don't act RESTfully in the sense that they return a JSON document: instead they redirect the user agent back to the client after successful (or failing)  authentication. For that matter, a valid `clientID` has to be sent with each request. Only valid (registered) clients can send these requests, because the callback URL the user agent gets redirected back to has to be known on the server. An access token is appended to the callback URL on redirection, or optionally sent as cookie. These requests are not designed to be used via AJAX, but plain browser HTTP (links/forms).
 If errors occur, a readable error code gets appended to the callback URL.
 
-### [Relation: auth/register](id:auth-register)
+## Registration
 
 ##### Input
 To complete the registration process, the following has to be sent in a POST Request using `application/x-www-form-urlencoded` (default HTML form):
@@ -37,7 +41,7 @@ To complete the registration process, the following has to be sent in a POST Req
 |invite         |(optional) invite token. Registrations may be declined without an invite token.|
 
 
-### [Relation: auth/login](id:auth-login)
+## Login
 
 ##### Input
 To log in a user using user credentials, the following has to be sent in a POST Request using `application/x-www-form-urlencoded` (default HTML form):
@@ -49,13 +53,13 @@ To log in a user using user credentials, the following has to be sent in a POST 
 
 *For debugging (e.g. in Postman), this relation can also be sent in a JSON body. The result token is then also sent back directly, without redirects.*
 
-### [Relation: auth/google](id:auth-login) / [Relation: auth/facebook](id:auth-login)
+## Google/Facebook Login
 
 ##### Input
 To login and optionally register using a Google or Facebook account, follow this relation (simple GET). Note that the `clientID` query string parameter is still needed, as well as an `invite` (here also sent as query string parameter) if configured. The user will redirected to the auth provider for credentials.
 
 
-###  Authentication Response
+##  Authentication Response
 
 * **302 Found**
 
@@ -70,7 +74,7 @@ To get further account information, clients can authenticate with this token at 
 If an Error occured, an error code is appended to the callbackURL's query string as `error` value. 
 These errors are no full JSON errors as the rest of the API use, but plain strings:
 
-#### Auth Errors
+### Auth Errors
 |Error code                 |Description|
 |---------------------------|-----------|
 |`account_blocked`          | The account is blocked, the user cannot login |
@@ -96,7 +100,7 @@ These errors are no full JSON errors as the rest of the API use, but plain strin
 To connect an Facebook or Google account to an existing account (no matter how it got created), or to set a password to an existing account, the above relations for registration, google and facebook can be used. If a valid access token is sent (either via HTTP Authorization header as Bearer token, or as query parameter `token`) with those requests, the server will try to connect the new login method with the existing account.
 
 
-## Other resources (RESTful)
+# Other resources (RESTful)
 
 ### [Resource: auth/email-available](id:auth-email-available)
 

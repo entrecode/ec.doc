@@ -1,46 +1,85 @@
-# Data Manager Basics
+# The Data Manager
 
-This document describes the Hypermedia REST API of the entrecode Data Manager API.
+The Data Manager is a technical tool for dynamic generation of Hypermedia REST APIs – complete with documentation, JSON schemas, and goodies like static file management and external Hooks. 
+
+# Workflow
+
+A [Data Manager](resources/datamanager/) is a single, isolated entity. All other resources are dependent on a single Data Manager – they cannot be shared between Data Managers. 
+
+Resource Media Types (“Templates”) are called [Models](resources/model/). They define a structure for resources, consisting of different [fields](#field-data-types) – similar to Database tables. 
+
+[Assets](resources/asset/) are wrappers for static files. They can be organized using [Tags](resources/tag/) and can contain multiple variants of a file (e.g. multiple image sizes or different localizations). 
+
+After defining models for a Data Manager, a Hypermedia REST API is automatically generated and deployed to the cloud – including [user management](#user-management).
+
+External APIs can be connected using [Hooks](#hooks).
+
+# Data Manager API
 
 * **Entry Point:** [https://datamanager.entrecode.de/](https://datamanager.entrecode.de/)
+* **[Richardson](http://martinfowler.com/articles/richardsonMaturityModel.html) Maturity Level:** 3 (full Hypermedia)
 * **Media Type:** `application/hal+json` ([HAL](https://tools.ietf.org/html/draft-kelly-json-hal-06))
+* **Root Resource:** `ec:datamanagers` [(Data Manager List)](resources/datamanager/#list)
+* **Authentication:** Bearer Token aquired using the [Account Server API](account_server/#authentication)
 
-The root resource is [ec:datamanagers](https://entrecode.de/doc/rel/datamanagers).
+Make sure to read [entrecode API Basics](../) first.
 
-See the [API Documentation](https://entrecode.de/doc/apidoc) for details.
+# State Diagram
 
-# Model field type definitions
+[![State Diagram](img/statediagram-dm.svg)](img/statediagram-dm.svg)
+
+# Link Relations
+
+Link Relation names are those registered with the [IANA](http://www.iana.org/assignments/link-relations/link-relations.xhtml). Additionally, custom link relations are used which are built in the form `https://doc.entrecode.de/en/latest/App_Manager/#link-relations/<relation>`. Those relations are also links to their own documentation (on this page). 
+For brevity, [CURIE Syntax](http://www.w3.org/TR/curie/) is used which results in relation names of the form `ec:<relation>/<optional_subrelation>`. 
+
+Additional to the official link relations defined by [IANA](http://www.iana.org/assignments/link-relations/link-relations.xhtml) the Data Manager uses the following:
+
+
+| Link Relation             | Target Resource                               | Description |
+|---------------------------|-----------------------------------------------------------|-------------|
+| `ec:api`                  | Generated API     | Links to the generated API. |
+| `ec:asset`                  | [Asset](resources/asset/)                          | A single Asset|
+| `ec:asset/best-file`       | File Subresource  | The content-negotiated “best suited” file |
+| `ec:asset/by-id`        | [Asset](resources/asset/)           | A single Asset by `assetID`|
+| `ec:asset/deleted`     | [Deleted Asset](resources/asset/) | An Asset in the trash |
+| `ec:asset/deleted/by-id` | [Deleted Asset](resources/asset/) | An Asset in the trash by `assetID` |
+| `ec:asset/file`| File Subresource | A file of an Asset |
+| `ec:assets`                   | [Asset List](resources/asset/#list) | List of Assets|
+| `ec:assets/deleted`     | [Deleted Assets List](resources/asset/#list) | Assets in the trash |
+| `ec:assets/deleted/options`|[Deleted Assets List](resources/asset/#list) | Assets in the trash, filtered |
+| `ec:assets/options`          | [Asset List](resources/asset/#list) | List of Assets, filtered|
+| `ec:assets/with-tag`      | [Asset List](resources/asset/#list) | List of Assets with a specific `tag`|
+| `ec:datamanager`          | [Data Manager](resources/datamanager/) | A single Data Manager |
+| `ec:datamanager/by-id`|[Data Manager](resources/datamanager/) | A single Data Manager by `dataManagerID`|
+| `ec:datamanagers`         | [Data Managers](resources/datamanager/#list) | List of Data Managers |
+| `ec:datamanagers/options`|[Data Managers](resources/datamanager/#list)| List of Data Managers, filtered |
+| `ec:model`                | [Model](resources/model/)         | A single Model|
+| `ec:model/by-id`         | [Model](resources/model/)         | A single Model by `modelID`|
+| `ec:models`               | [Model List](resourcees/model/#list) | List of Models |
+| `ec:models/options`  | [Model List](resourcees/model/#list) | List of Models, filtered |
+| `ec:tag`                 | [Tag](resources/tag/) | A single Asset Tag |
+| `ec:tags`                | [Tag List](resources/tag/#list) | List of Asset Tags |
+| `ec:tags/options`     | [Tag List](resources/tag/#list) | List of Asset Tags, filtered |
+
+
+# Field data types
 
 A field definition consists of the following properties:
 
-| Key           | Value          | Examples
-|---------------|----------------|-----------
-|title          |Identifier of the field |`description`, `recipeIngredients`
-|description    |Additional information about the purpose of this field for documentation. | `Lists ingredients of the recipe.`
-|type           |The field type, a value as specified below  |`text`, `boolean`, `url`, `asset`
-|readOnly       |Specifies if the field can be written with updates (or only at creation) | `true`, `false`
-|required       |Specifies if the field always needs a value or can also be null | `true`, `false`
-|unique         |Specifies if the value needs to be unique | `true`, `false`
-|localizable    |Specifies if the field is localizable | `true`, `false`
-|mutable        |Specifies if the field is mutable by the Data manager user, or provided by the system. | `true`, `false`
-|validation     |Validation of field values. Can be a Regular Expression (`text` type), a JSON Schema (`object` type), a model or asset type, or an object with optional `min` and  `max` values (`number` and `decimal` types), depending on `type` (specified below) | `^\d{3}\w+$`, `{ "$ref": "#some-schema" }`, `{ "min": 0, "max": 100 }`
+| Key           | Value          | Examples     | Allowed change with entries  |
+|---------------|----------------|--------------|-----------------|
+|title          |Identifier of the field |`description`, `recipeIngredients`|This results in the removal of the old field and creates a new field with the given title (Only allowed if required is `false`).|
+|description    |Additional information about the purpose of this field for documentation. | `Lists ingredients of the recipe.` | Every change. |
+|type           |The field type, a value as specified below  |`text`, `boolean`, `url`, `asset`| only formattedText <> text|
+|readOnly       |Specifies if the field can be written with updates (or only at creation) | `true`, `false` |Every change.|
+|required       |Specifies if the field always needs a value or can also be null | `true`, `false` | Only change to `false`. |
+|unique         |Specifies if the value needs to be unique | `true`, `false` |Only change to `false`.|
+|localizable    |Specifies if the field is localizable | `true`, `false` | Every change. Existing entries will have localized/unlocalized values.|
+|mutable        |Specifies if the field is mutable by the Data manager user, or provided by the system. | `true`, `false` | None, since this value is set by the system.|
+|validation     |Validation of field values. Can be a Regular Expression (`text` type), a JSON Schema (`object` type), a model or asset type, or an object with optional `min` and  `max` values (`number` and `decimal` types), depending on `type` (specified below) | `^\d{3}\w+$`, `{ "$ref": "#some-schema" }`, `{ "min": 0, "max": 100 }`| Only removed.|
 
-## Change field definition
-If a model has no entries all properties can be changed if the field itself is marked `mutable`. But only some properties can be changed once a model has entries.
-
-In the following table is specified if and how a property can be changed once it has entries:
-
-| Key           | Allowed change          
-|---------------|----------------
-|title          | This results in the removal of the old field and creates a new field with the given title (Only allowed if required is `false`).
-|description    | Every change.
-|type           | only formattedText <> text
-|readOnly       | Every change.
-|required       | Only change to `false`.
-|unique         | Only change to `false`.
-|localizable    | Every change. Existing entries will have localized/unlocalized values.
-|mutable        | None, since this value is set by the system.
-|validation     | Only removed.
+If a model has no entries all properties can be changed if the field itself is marked `mutable`. But only some properties can be changed once a model has entries, as listed in the table above.
 
 ## Mandatory fields
 Those fields are mandatory and included in all models by default. They cannot be deleted or otherwise modified (mutable = `false`).
@@ -80,38 +119,38 @@ The following field names are reserved, since they are used internally by the sy
 ### Primitive Types
 These types are simple data types.
 
-|Type|Description|Entry Structure|Validation|Sortable|Filterable|Example|
+|Type|Description|Entry<br/>Structure|Validation|Sort-<br/>able|Filterable|Example|
 |----|-----------|---------------|----------|--------|----------|-------|
-|text|A simple string value of any length. For common formats, better use [Convenience Types](#convenience-types).|String|Regular Expression|yes|exact, search|`"foo"`|
-|formattedText|Same as `text` type, but for formatted text.|String|Regular Expression|yes|exact, search|`"foo"`|
-|number|A signed integer number. Keep integer limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range|`7`|
-|decimal|A floating point number. Keep precision limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range|`4.2`|
-|boolean|A simple true/false flag.|Boolean|—|no|exact|`true`|
+|`text`|A simple string value of any length. For common formats, better use [Convenience Types](#convenience-types).|String|Regular Expression|yes|exact, search|`"foo"`|
+|`formattedText`|Same as `text` type, but for formatted text.|String|Regular Expression|yes|exact, search|`"foo"`|
+|`number`|A signed integer number. Keep integer limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range|`7`|
+|`decimal`|A floating point number. Keep precision limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range|`4.2`|
+|`boolean`|A simple true/false flag.|Boolean|—|no|exact|`true`|
 
 ### Convenience Types
 These types are more complex types with a specific domain that abstract from primitive types.
 
-|Type|Description|Entry Structure|Validation|Sortable|Filterable|Example|
+|Type|Description|Entry<br/>Structure|Validation|Sort-<br/>able|Filterable|Example|
 |----|-----------|---------------|----------|--------|----------|-------|
-|id  |Unique identification for an entry. This is an own, non-resuable type.|String|—|no|exact|`"j4kd68fz"`|
-|datetime|A date and/or time data type in [RFC3339](https://tools.ietf.org/html/rfc3339) format (always including Time Zone).|Date|—|yes|exact, range|`"2015-01-14T13:33:43.168Z"`|
-|location|A latitude/longitude definition of a location. Uses the JSON schema [http://json-schema.org/geo](http://json-schema.org/geo)|JSON Object with keys `latitude` and `longitude`|—|no|exact, range <br/>(with values `lat,long`)|`{latitude: 48.774702, longitude: 9.1827263}`|
-|email|A valid eMail address. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search|`"info@domain.com"`|
-|url|A valid URL. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search|`"http://entrecode.de"`|
-|phone|A valid Phone number according to [E.164](http://www.itu.int/rec/T-REC-E.164/en). Will automatically formatted in international format according to the default locale of the current Data Manager with [libphonenumber](https://github.com/googlei18n/libphonenumber) |String|—|yes|exact, search|`"+49711832468234"`|
-|json|A generic JSON object. |JSON Object|A valid [JSON Schema](https://tools.ietf.org/html/draft-kelly-json-hal-06)|no|—|`{key: "value"}`|
+|`id`  |Unique identification for an entry. This is an own, non-resuable type.|String|—|no|exact|`"j4kd68fz"`|
+|`datetime`|A date and/or time data type in [RFC3339](https://tools.ietf.org/html/rfc3339) format (always including Time Zone).|Date|—|yes|exact, range|`"2015-01-14T13:33:43.168Z"`|
+|`location`|A latitude/longitude definition of a location. Uses the JSON schema [http://json-schema.org/geo](http://json-schema.org/geo)|JSON Object with keys `latitude` and `longitude`|—|no|exact, range <br/>(with values `lat,long`)|`{latitude: 48.774702,`<br/>`longitude: 9.1827263}`|
+|`email`|A valid eMail address. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search|`"info@domain.com"`|
+|`url`|A valid URL. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search|`"http://entrecode.de"`|
+|`phone`|A valid Phone number according to [E.164](http://www.itu.int/rec/T-REC-E.164/en). Will automatically formatted in international format according to the default locale of the current Data Manager with [libphonenumber](https://github.com/googlei18n/libphonenumber) |String|—|yes|exact, search|`"+49711832468234"`|
+|`json`|A generic JSON object. |JSON Object|A valid [JSON Schema](https://tools.ietf.org/html/draft-kelly-json-hal-06)|no|—|`{key: "value"}`|
 
 
 ### Linked Types
-|Type|Description|Entry Structure|Validation|Sortable|Filterable|Example|
+|Type|Description|Entry<br/>Structure|Validation|Sort-<br/>able|Filterable|Example|
 |----|-----------|---------------|----------|--------|----------|-------|
-|entry|Link to a single entry that is related to this one.|String (`entry.id`)|A model to enforce a specific entry type|—|exact|`"49a8f3b4"`|
-|entries|Link to entries that are related to this one.|Array<br/>(of `entry.id` Strings)|A model to enforce a specific entry type|—|search<br/>(single id that is included)|`["8fa398d2","49a8f3b4"]`|
-|asset|Link to a single asset that is related to this entry.|String (`asset.assetID`)|An asset type to enforce a specific type|—|exact|`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"`|
-|assets|Link to assets that are related to this one.|Array<br/>(of `asset.assetID` Strings)|An asset type to enforce a specific type|—|search<br/>(single id that is included)|`["371393a6-ab7f-4591-8d5d-54261a52d28b","a8c44bd8-d225-433b-94e4-20fd38ea2d8f"]`|
+|`entry`|Link to a single entry that is related to this one.|String (`entry.id`)|A model to enforce a specific entry type|—|exact|`"49a8f3b4"`|
+|`entries`|Link to entries that are related to this one.|Array<br/>(of `entry.id` Strings)|A model to enforce a specific entry type|—|search<br/>(single id that is included)|`["8fa398d2","49a8f3b4"]`|
+|`asset`|Link to a single asset that is related to this entry.|String (`asset.assetID`)|An asset type to enforce a specific type|—|exact|`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"`|
+|`assets`|Link to assets that are related to this one.|Array<br/>(of `asset.assetID` Strings)|An asset type to enforce a specific type|—|search<br/>(single id that is included)|`["371393a6-ab7f-4591-8d5d-54261a52d28b",`<br/>`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"]`|
 
 
-# Assets in the Public API (aka. getBestFile)
+# Assets in the Generated API (aka. getBestFile)
 Assets have a file-independent URL (consisting of the asset ID). Calling it returns the best fitting file, depending on the requested Locale (Accept-Language header).
 Image resources also support requesting a specific size: The query string parameter `size` can be used to specify the size in pixels the largest edge should have at least. Note that if the image is smaller than that, the largest possible image is returned (but possibly smaller than `size`). To request thumbnail sizes (thumbnails are square-cropped images of size 50, 100, 200, 400px), send the parameter `thumb` with the request. If you do not want the file directly you cann add `/url` to the request and you will get a JSON with a field `url` containing the url of the file you would have received.
 
@@ -135,14 +174,12 @@ https:/datamanager.entrecode.de/files/853a931b-2091-4f92-acad-cd0c0e6fedbc/url?s
 will get the `url` for the asset with `size` 100.
 
 
-Additionally there is a API for public assets similar to the `ec:asset[s]`. Please refere to the public documentation found in any data manager in editor.
+Additionally there is a API for public assets similar to the `ec:asset[s]`. Please refer to the public documentation found in any data manager in editor.
 
 # User Management in Data Managers
 In every Data Manager there is a predefined and mandatory model `user`. It holds only the mandatory fields stated above. The Data Manager user can add additional fields to the user model, e.g. for a user name, eMail address or billing information.
 
-Additionally the `user` model contains the following field:
-
-### temporaryToken (Type: `text`)
+Additionally the `user` model contains the field `temporaryToken` (Type: `text`).
 The `temporaryToken` field is a version 4 UUID and contains the temporary access token for the user.
 
 Client-side users of Data Manager APIs will need to POST a `user` entry before they can proceed. Refer to the automatically generated documentation for POST model `user`. This entry will be used for setting the `creator` field when creating an entry of any model. It is also used to authorize any change to an existing entry.
@@ -335,97 +372,3 @@ The `replaceBody` flag can be used to swap the actual request body with the resp
 
 It is also possible to map the server response, if it is not in a valid Data Manager Request format. This can be done by providing the `responseMapping` property with a template similar to the request template, using JSON-Mask and JSONPath. Properties can also get hardcoded values. Properties not written remain at the value provided by the original request. *coming soon!*
 
-
-
-
-
-# Data Manager Model Field Data Types
-
-This document describes the Data Types available for Model Fields.
-
-- **[Primitive Types](#primitive-types)**
-    - [Text](#text)
-    - [Number](#number)
-    - [Decimal](#decimal)
-    - [Boolean](#boolean)
-- **[Convenience Types](#convenience-types)**
-    - [ID](#id)
-    - [DateTime](#datetime)
-    - [Location](#location)
-    - [eMail](#email)
-    - [URL](#url)
-    - [Phone](#phone)
-    - [JSON](#json)
-- **[Linked Types](#linked-types)**
-    - [Entry](#entry)
-    - [Entries](#entries)
-    - [Asset](#asset)
-    - [Assets](#assets)
-
-# Primitive Types
-
-## Text
-A simple string value of any length. For common formats, better use [Convenience Types](#convenience-types]).
-
-## Number
-A signed integer number. Keep integer limits in mind.
-
-## Decimal
-A floating point number. Keep precision limits in mind.
-
-## Boolean
-A simple true/false flag.
-
-# Convenience Types
-These types are more complex types with a specific domain that abstract from primitive types.
-
-## ID
-Unique identification for an entry. This is an own, non-resuable type.
-
-## DateTime
-A date and/or time data type in [RFC3339](https://tools.ietf.org/html/rfc3339) format (always including Time Zone).
-
-## Location
-A latitude/longitude definition of a location. Uses the JSON schema [http://json-schema.org/geo](http://json-schema.org/geo).
-Is represented as a JSON Object with keys `latitude` and `longitude`.
-
-## eMail
-A valid eMail address.
-
-## URL
-A valid URL. 
-
-## Phone
-A valid Phone number according to [E.164](http://www.itu.int/rec/T-REC-E.164/en). Will automatically formatted in international format according to the default locale of the Data Manager.
-
-##JSON 
-A generic JSON object.
-
-
-# Linked Types
-
-## Entry
-Link to a single entry that is related to this one.
-
-## Entries
-Link to entries that are related to this one.
-
-## Asset
-Link to a single asset that is related to this entry.
-
-## Assets
-Link to assets that are related to this one.
-
-
-
-
-
-# Link Relations
-
-Additional to the official link relations defined by [IANA](http://www.iana.org/assignments/link-relations/link-relations.xhtml) and the relations documented in [API Documentation](../rel), entrecode uses the following:
-
-| Link Relation                 | Description                                    |
-|-------------------------------|------------------------------------------------|
-|[asset](./asset)           |A Data Manager Asset|
-|[asset/file](./asset/file) |File of a Data Manager Asset|
-|[assets](./assets)         |List of Data Manager Assets|

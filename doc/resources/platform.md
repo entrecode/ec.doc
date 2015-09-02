@@ -1,6 +1,6 @@
 # Single Platform
 
-The single Platform Resource represents a build configuration for a specific [App](resource/app). It has exactly one [CodeSource](resource/codesource) and [DataSource](resource/datasource), and at least one [Target](resource/target). It may have an arbitrary number of [Deployments](resource/deployment#list).
+The single Platform Resource represents a build configuration for a specific [App](./app). It has exactly one [CodeSource](./codesource) and [DataSource](./datasource), and at least one [Target](./target). It may have an arbitrary number of [Deployments](./deployment#list).
 It has a specific [PlatformType](#platform-types) that defines the behavior when deploying.
 
 The JSON Schema is [https://entrecode.de/schema/platform](https://entrecode.de/schema/platform).
@@ -20,12 +20,12 @@ The JSON Schema is [https://entrecode.de/schema/platform](https://entrecode.de/s
 |---------------|-----------------|-------------|-----------------|
 | self          | [Platform](#)| The resource itself | GET, DELETE |
 | collection    | [Platform List](#list)| List of all available Platforms | GET, POST|
-| ec:app | [App](resources/app) | The app this Platform is corresponding to. | GET, PUT, DELETE |
-| ec:app/codesource | [CodeSource](resources/codesource) | The Code Source of the Platform | GET, PUT |
-| ec:app/datasource | [DataSource](resources/datasource) | The Data Source of the Platform | GET, PUT |
-| ec:app/target | [Target](resources/target) | A Target of the Platform (may occur several times) | GET, PUT |
-| ec:app/deployment/latest | [Deployment](resources/deployment) | The latest deployment of this Platform | GET |
-| ec:app/deployments | [Deployment List](resources/deployment#list) | List of deployments that were executed for this platform. POST to this link relation to create a new deployment for the platform. | GET, POST |
+| ec:app | [App](./app) | The app this Platform is corresponding to. | GET, PUT, DELETE |
+| ec:app/codesource | [CodeSource](./codesource) | The Code Source of the Platform | GET, PUT |
+| ec:app/datasource | [DataSource](./datasource) | The Data Source of the Platform | GET, PUT |
+| ec:app/target | [Target](./target) | A Target of the Platform (may occur several times) | GET, PUT |
+| ec:app/deployment/latest | [Deployment](./deployment) | The latest deployment of this Platform | GET |
+| ec:app/deployments | [Deployment List](./deployment#list) | List of deployments that were executed for this platform. POST to this link relation to create a new deployment for the platform. | GET, POST |
 
 # List
 
@@ -45,7 +45,7 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create a new Platform Resource, clients may perform a POST on `ec:app/platforms` (the list resource). The JSON Schema for creating a new Platform is [https://entrecode.de/schema/platform-template](https://entrecode.de/schema/Platform-template). 
+To create a new Platform Resource, clients may perform a POST on `ec:app/platforms` (the list resource). The JSON Schema for creating a new Platform is [https://entrecode.de/schema/platform-template](https://entrecode.de/schema/platform-template). 
 
 The success status code is **201 Created** and the response body is the newly created single Platform resource.
 

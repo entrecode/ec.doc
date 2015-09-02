@@ -8,7 +8,7 @@ An [App](resources/app/) is a single, isolated entity. All other resources are d
 
 An App can have a arbitrary number of [Platforms](resources/platform/). A Platform is a special configuration for building the App. It consists of exactly one [CodeSource](resources/codesource/), exactly one [DataSource](resources/datasource/) and at least one (but possible more) [Targets](resources/target/). Dependent on its type, the platform will build a specialized product when a [Deployment](resources/deployment/) is created.
 
-Available CodeSource Types, DataSource Types, Target Types and Platform Types can be obtained by getting the [Types](resources/types/) resource. There may be dependencies: a type may require an explicit platform (e.g. the TargetType 'App Store' could only work with the PlatformType 'iOS').
+Available CodeSource Types, DataSource Types, Target Types and Platform Types can be obtained by getting the [Types](resources/apptypes/) resource. There may be dependencies: a type may require an explicit platform (e.g. the TargetType 'App Store' could only work with the PlatformType 'iOS').
 
 When creating a [Deployment](resources/deployment/) for a [Platforms](resources/platform/), the App Server will obtain Code from the [CodeSource](resources/codesource/), Data from the [DataSource](resources/datasource/), then build it according to the [Platforms](resources/platform/) and finally publish it to all configured [Targets](resources/target/) of the Platform.
 

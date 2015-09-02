@@ -56,8 +56,8 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | `ec:datamanagers/options`|[Data Managers](resources/datamanager/#list)| List of Data Managers, filtered |
 | `ec:model`                | [Model](resources/model/)         | A single Model|
 | `ec:model/by-id`         | [Model](resources/model/)         | A single Model by `modelID`|
-| `ec:models`               | [Model List](resourcees/model/#list) | List of Models |
-| `ec:models/options`  | [Model List](resourcees/model/#list) | List of Models, filtered |
+| `ec:models`               | [Model List](resources/model/#list) | List of Models |
+| `ec:models/options`  | [Model List](resources/model/#list) | List of Models, filtered |
 | `ec:tag`                 | [Tag](resources/tag/) | A single Asset Tag |
 | `ec:tags`                | [Tag List](resources/tag/#list) | List of Asset Tags |
 | `ec:tags/options`     | [Tag List](resources/tag/#list) | List of Asset Tags, filtered |
@@ -176,7 +176,7 @@ will get the `url` for the asset with `size` 100.
 
 Additionally there is a API for public assets similar to the `ec:asset[s]`. Please refer to the public documentation found in any data manager in editor.
 
-# User Management in Data Managers
+# User Management
 In every Data Manager there is a predefined and mandatory model `user`. It holds only the mandatory fields stated above. The Data Manager user can add additional fields to the user model, e.g. for a user name, eMail address or billing information.
 
 Additionally the `user` model contains the field `temporaryToken` (Type: `text`).

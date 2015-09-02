@@ -8,19 +8,19 @@ In short, data is partitioned in *resources* which manifest in *representations.
 
 ## Available APIs
 
-#### [Account Server API](./account_server)
+#### [Account Server API](./account_server/)
 
 The account server handles user accounts, registration, authentication and authorization.
 
 The **Entry Point** is [`https://accounts.entrecode.de/`](https://accounts.entrecode.de/), root relation: [ec:auth](./resources/auth/)
 
-#### [Data Manager API](./data_manager)
+#### [Data Manager API](./data_manager/)
 
 A user can, in general, have any number of Data Manager “Spaces”. The exact number may be limited by the customers plan. A single Data Manager Space manages Assets (Files) and Models with Entries (RESTful Resources).
 
 The **Entry Point** is [`https://datamanager.entrecode.de/`](https://datamanager.entrecode.de/), root relation: [ec:datamanagers](./resources/datamanager/#list)
 
-#### [App Manager API](./app_manager)
+#### [App Manager API](./app_manager/)
 
 The App Manager is a technical tool for configuring, building and deploying Apps. An App can have multiple platforms to run on.
 

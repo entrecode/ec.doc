@@ -1,6 +1,6 @@
 # Single Target
 
-The single Target Resource represents a deployment target that is needed for [Deployments](resource/deployment#list) of a [Platform](resource/platform). 
+The single Target Resource represents a deployment target that is needed for [Deployments](./deployment#list) of a [Platform](./platform). 
 It has a specific [TargetType](#target-types) that defines the behavior when deploying.
 
 The JSON Schema is [https://entrecode.de/schema/target](https://entrecode.de/schema/target).
@@ -19,8 +19,8 @@ The JSON Schema is [https://entrecode.de/schema/target](https://entrecode.de/sch
 |---------------|-----------------|-------------|-----------------|
 | self          | [Target](#)| The resource itself | GET, PUT, DELETE |
 | collection    | [Target List](#list)| List of all available Targets | GET, POST|
-| ec:app | [App](resources/app) | The app this target is corresponding to. | GET, PUT, DELETE |
-| ec:app/platform| [Platforms](resources/platform) | Platforms that use this codeSource. (optional) | GET, PUT, DELETE |
+| ec:app | [App](./app) | The app this target is corresponding to. | GET, PUT, DELETE |
+| ec:app/platform| [Platforms](./platform) | Platforms that use this codeSource. (optional) | GET, PUT, DELETE |
 
 *Note that a target cannot be deleted if it is used in at least one platform.*
 
@@ -66,7 +66,7 @@ Expected configuration: a JSON object with the key hexColor` with the desired co
 
 The build result is served directly by the App Server.
 
-This target can only be used with the [staticWebsite](resources/platform#staticwebsite) platform.
+This target can only be used with the [staticWebsite](./platform#staticwebsite) platform.
 
 
 ## entrecodeS3
@@ -75,7 +75,7 @@ Expected configuration: a JSON object with the key `hexColor` with the desired c
 
 The build result is served from Amazon S3.
 
-This target can only be used with the [staticWebsite](resources/platform#staticwebsite) platform.
+This target can only be used with the [staticWebsite](./platform#staticwebsite) platform.
 
 
 ## backupS3

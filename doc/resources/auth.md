@@ -29,7 +29,7 @@ When accessing the Entry Point, the following resource is returned containing li
 The authentication relations (`ec:auth/register`, `ec:auth/login`, `ec:auth/facebook` and `ec:auth/google`) work different than the rest of the API. Because of OAuth authentication flow, they don't act RESTfully in the sense that they return a JSON document: instead they redirect the user agent back to the client after successful (or failing)  authentication. For that matter, a valid `clientID` has to be sent with each request. Only valid (registered) clients can send these requests, because the callback URL the user agent gets redirected back to has to be known on the server. An access token is appended to the callback URL on redirection, or optionally sent as cookie. These requests are not designed to be used via AJAX, but plain browser HTTP (links/forms).
 If errors occur, a readable error code gets appended to the callback URL.
 
-## Registration
+## Signup
 
 ##### Input
 To complete the registration process, the following has to be sent in a POST Request using `application/x-www-form-urlencoded` (default HTML form):
@@ -99,10 +99,13 @@ These errors are no full JSON errors as the rest of the API use, but plain strin
 
 To connect an Facebook or Google account to an existing account (no matter how it got created), or to set a password to an existing account, the above relations for registration, google and facebook can be used. If a valid access token is sent (either via HTTP Authorization header as Bearer token, or as query parameter `token`) with those requests, the server will try to connect the new login method with the existing account.
 
+## Public Key
+
+The `ec:public-key` relation returns the Public RSA Key of the Server in PEM format for validation of the token signature.
 
 # Other resources (RESTful)
 
-### [Resource: auth/email-available](id:auth-email-available)
+### email-available
 
 ##### Input
 This Resource allows verification if an eMail address is still available for registration.
@@ -123,7 +126,7 @@ The following has to be sent in a GET **(!)** Request:
 |available      |true or false    |
 
 
-### [Resource: auth/logout](id:auth-logout)
+### logout
 ##### Input
 To log out a user, the following has to be sent in a POST Request:
 
@@ -144,7 +147,7 @@ Additionally to common HTTP Error requests (400 Bad Request, …), the following
 * **401 Unauthorized**  if the eMail address does not match the access token.
 
 
-### [Resource: auth/password-reset](id:auth-password-reset)
+### password-reset
 
 #### Request a password reset
 ##### Parameter
@@ -218,7 +221,7 @@ To abort a password reset, the following has to be sent as parameters in a DELET
 
 
 
-### [Resource: account/change-email-verification](id:account-change-email-verificaton)
+### change-email-verification
 When the user has requested to change her primary email, this resource is used to verify or abort the change.
 
 #### PUT account/change-email-verification

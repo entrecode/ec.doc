@@ -1,6 +1,6 @@
 # Single DataSource
 
-The single DataSource Resource represents a data source that is needed for [Deployments](resource/deployment#list) of a [Platform](resource/platform). 
+The single DataSource Resource represents a data source that is needed for [Deployments](./deployment/#list) of a [Platform](./platform). 
 It has a specific [DataSourceType](#datasource-types) that defines the behavior when deploying.
 
 The JSON Schema is [https://entrecode.de/schema/datasource](https://entrecode.de/schema/datasource).
@@ -19,8 +19,8 @@ The JSON Schema is [https://entrecode.de/schema/datasource](https://entrecode.de
 |---------------|-----------------|-------------|-----------------|
 | self          | [DataSource](#)| The resource itself | GET, PUT, DELETE |
 | collection    | [DataSource List](#list)| List of all available DataSources | GET, POST|
-| ec:app | [App](resources/app) | The app this dataSource is corresponding to. | GET, PUT, DELETE |
-| ec:app/platform| [Platforms](resources/platform) | Platforms that use this dataSource. (optional) | GET, PUT, DELETE |
+| ec:app | [App](./app) | The app this dataSource is corresponding to. | GET, PUT, DELETE |
+| ec:app/platform| [Platforms](./platform) | Platforms that use this dataSource. (optional) | GET, PUT, DELETE |
 
 *Note that a dataSource cannot be deleted if it is used in at least one platform.*
 

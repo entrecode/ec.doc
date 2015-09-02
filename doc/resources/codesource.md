@@ -1,6 +1,6 @@
 # Single CodeSource
 
-The single CodeSource Resource represents a file source that is needed for [Deployments](resource/deployment#list) of a [Platform](resource/platform). 
+The single CodeSource Resource represents a file source that is needed for [Deployments](./deployment/#list) of a [Platform](./platform). 
 It has a specific [CodeSourceType](#codesource-types) that defines the behavior when deploying.
 
 The JSON Schema is [https://entrecode.de/schema/codesource](https://entrecode.de/schema/codesource).
@@ -19,8 +19,8 @@ The JSON Schema is [https://entrecode.de/schema/codesource](https://entrecode.de
 |---------------|-----------------|-------------|-----------------|
 | self          | [CodeSource](#)| The resource itself | GET, PUT, DELETE |
 | collection    | [CodeSource List](#list)| List of all available CodeSources | GET, POST|
-| ec:app | [App](resources/app) | The app this codeSource is corresponding to. | GET, PUT, DELETE |
-| ec:app/platform| [Platforms](resources/platform) | Platforms that use this codeSource. (optional) | GET, PUT, DELETE |
+| ec:app | [App](./app) | The app this codeSource is corresponding to. | GET, PUT, DELETE |
+| ec:app/platform| [Platforms](./platform) | Platforms that use this codeSource. (optional) | GET, PUT, DELETE |
 
 *Note that a codeSource cannot be deleted if it is used in at least one platform.*
 

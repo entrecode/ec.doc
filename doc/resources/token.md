@@ -23,7 +23,7 @@ The JSON Schema is [https://entrecode.de/schema/account-token](https://entrecode
 |---------------|-----------------|-------------|-----------------|
 | self          | [Token](#)| The resource itself | GET, DELETE |
 | collection    | [Token List](#list)| List of all available Tokens | GET|
-| ec:account   | [Account](./account) |The account of this access token.|GET, PUT|
+| ec:account   | [Account](./account/) |The account of this access token.|GET, PUT|
 
 # List
 

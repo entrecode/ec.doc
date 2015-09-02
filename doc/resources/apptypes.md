@@ -8,7 +8,7 @@ The JSON Schema is [https://entrecode.de/schema/app-plugin-types](https://entrec
 
 | Property | Type | Format | Description | Writable |7
 |----------|------|--------|-------------|----------|
-|platformTypes | Array | | List of available [platformTypes](./platform#platform-types) | No. |
+|platformTypes | Array | | List of available [platformTypes](./platform/#platform-types) | No. |
 |codeSourceTypes | Array | | List of available [codeSourceTypes](./codesource/#codesource-types) | No. |
 |dataSourceTypes | Array | | List of available [dataSourceTypes](./datasource/#datasource-types) | No. |
 |targetTypes | Array | | List of available [targetTypes](./target/#target-types) | No. |

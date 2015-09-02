@@ -19,10 +19,10 @@ The JSON Schema is [https://entrecode.de/schema/app](https://entrecode.de/schema
 |---------------|-----------------|-------------|-----------------|
 | self          | [App](#)| The resource itself | GET, PUT, DELETE |
 | collection    | [App List](#list)| List of all available Apps | GET, POST|
-| ec:app/platforms | [Platform List](./platform#list) | List of this App´s platforms | GET, POST |
-| ec:app/codesources | [CodeSource List](./codesource#list) | List of CodeSources configured for this App | GET, POST |
-| ec:app/datasources | [DataSource List](./datasource#list) | List of DataSources configured for this App | GET, POST |
-| ec:app/targets | [Target List](./target#list) | List of Targets configured for this App | GET, POST |
+| ec:app/platforms | [Platform List](./platform/#list) | List of this App´s platforms | GET, POST |
+| ec:app/codesources | [CodeSource List](./codesource/#list) | List of CodeSources configured for this App | GET, POST |
+| ec:app/datasources | [DataSource List](./datasource/#list) | List of DataSources configured for this App | GET, POST |
+| ec:app/targets | [Target List](./target/#list) | List of Targets configured for this App | GET, POST |
 
 # List
 

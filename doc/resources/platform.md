@@ -1,6 +1,6 @@
 # Single Platform
 
-The single Platform Resource represents a build configuration for a specific [App](./app). It has exactly one [CodeSource](./codesource) and [DataSource](./datasource), and at least one [Target](./target). It may have an arbitrary number of [Deployments](./deployment#list).
+The single Platform Resource represents a build configuration for a specific [App](./app/). It has exactly one [CodeSource](./codesource/) and [DataSource](./datasource/), and at least one [Target](./target/). It may have an arbitrary number of [Deployments](./deployment/#list).
 It has a specific [PlatformType](#platform-types) that defines the behavior when deploying.
 
 The JSON Schema is [https://entrecode.de/schema/platform](https://entrecode.de/schema/platform).
@@ -21,11 +21,11 @@ The JSON Schema is [https://entrecode.de/schema/platform](https://entrecode.de/s
 | self          | [Platform](#)| The resource itself | GET, DELETE |
 | collection    | [Platform List](#list)| List of all available Platforms | GET, POST|
 | ec:app | [App](./app) | The app this Platform is corresponding to. | GET, PUT, DELETE |
-| ec:app/codesource | [CodeSource](./codesource) | The Code Source of the Platform | GET, PUT |
-| ec:app/datasource | [DataSource](./datasource) | The Data Source of the Platform | GET, PUT |
+| ec:app/codesource | [CodeSource](./codesource/) | The Code Source of the Platform | GET, PUT |
+| ec:app/datasource | [DataSource](./datasource/) | The Data Source of the Platform | GET, PUT |
 | ec:app/target | [Target](./target) | A Target of the Platform (may occur several times) | GET, PUT |
-| ec:app/deployment/latest | [Deployment](./deployment) | The latest deployment of this Platform | GET |
-| ec:app/deployments | [Deployment List](./deployment#list) | List of deployments that were executed for this platform. POST to this link relation to create a new deployment for the platform. | GET, POST |
+| ec:app/deployment/latest | [Deployment](./deployment/) | The latest deployment of this Platform | GET |
+| ec:app/deployments | [Deployment List](./deployment/#list) | List of deployments that were executed for this platform. POST to this link relation to create a new deployment for the platform. | GET, POST |
 
 # List
 

@@ -188,7 +188,7 @@ To reset a password, the following has to be sent in a PUT Request:
 
 * **201 created** if the password reset was successful.
 
-The user is automatically logged in after the reset, additionally the token will be invalidated. Output body is the same as with [auth/login](#auth-login).
+The user is automatically logged in after the reset, additionally the token will be invalidated. Output body is the same as with [auth/login](#login).
 
 |Field          |Description        |
 |---------------|-------------------|

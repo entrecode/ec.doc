@@ -14,7 +14,7 @@ The JSON Schema is [https://entrecode.de/schema/asset](https://entrecode.de/sche
 |type | String  | one of `image`, `video`, `audio`, `plain`, `document`, `spreadsheet` | Asset type | No|
 |created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of the Asset| No. Gets written on creation. |
 |deleted       | String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the deletion of the Asset. Only included when the asset is in the trash.|No|
-|tags  | Array[String]| [Tag](./tag) |Array of string tags for this asset| Yes |
+|tags  | Array[String]| [Tag](./tag/) |Array of string tags for this asset| Yes |
 |files |Array[JSON]| [File](#file-subresource)  |Array of actual files for this asset | Yes|
 |private	| Boolean|	| Whether or not the asset was created private.|Yes|
 

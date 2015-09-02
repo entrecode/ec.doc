@@ -20,7 +20,7 @@ The JSON Schema is [https://entrecode.de/schema/group](https://entrecode.de/sche
 |---------------|-----------------|-------------|-----------------|
 | self          | [Group](#)| The resource itself | GET, PUT |
 | collection    | [Group List](#list)| List of all available Groups | GET |
-| ec:account| [Account](./account) | Embedded partial Account resources (containing `self` link, `accountID` and `email`) | GET |
+| ec:account| [Account](./account/) | Embedded partial Account resources (containing `self` link, `accountID` and `email`) | GET |
 
 
 # List

@@ -29,8 +29,8 @@ The JSON Schema is [https://entrecode.de/schema/deployment](https://entrecode.de
 |---------------|-----------------|-------------|-----------------|
 | self          | [Deployment](#)| The resource itself | GET |
 | collection    | [Deployment List](#list)| List of all available Deployments | GET, POST|
-| ec:app | [App](./app) | The app this Deployment is corresponding to. | GET, PUT, DELETE |
-| ec:app/platform | [Platform](./platform) | The Platform that is deployed | GET, DELETE |
+| ec:app | [App](./app/) | The app this Deployment is corresponding to. | GET, PUT, DELETE |
+| ec:app/platform | [Platform](./platform/) | The Platform that is deployed | GET, DELETE |
 
 # List
 

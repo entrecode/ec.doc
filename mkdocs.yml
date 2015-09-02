@@ -26,5 +26,5 @@ pages:
     - 'Model': 'resources/model.md'
     - 'Tag': 'resources/tag.md'
 - SDKs:
-    - 'Data Manager Java SDK': 'sdk/datamanager.java.md'
-    - 'Data Manager JavaScript SDK': 'sdk/datamanager.js.md'
+    - 'Data Manager Java SDK': 'sdk/datamanager-java.md'
+    - 'Data Manager JavaScript SDK': 'sdk/datamanager-js.md'

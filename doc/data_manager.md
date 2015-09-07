@@ -38,29 +38,29 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 
 | Link Relation             | Target Resource                               | Description |
 |---------------------------|-----------------------------------------------------------|-------------|
-| `ec:api`                  | Generated API     | Links to the generated API. |
-| `ec:asset`                  | [Asset](resources/asset/)                          | A single Asset|
-| `ec:asset/best-file`       | File Subresource  | The content-negotiated “best suited” file |
-| `ec:asset/by-id`        | [Asset](resources/asset/)           | A single Asset by `assetID`|
-| `ec:asset/deleted`     | [Deleted Asset](resources/asset/) | An Asset in the trash |
-| `ec:asset/deleted/by-id` | [Deleted Asset](resources/asset/) | An Asset in the trash by `assetID` |
-| `ec:asset/file`| File Subresource | A file of an Asset |
-| `ec:assets`                   | [Asset List](resources/asset/#list) | List of Assets|
-| `ec:assets/deleted`     | [Deleted Assets List](resources/asset/#list) | Assets in the trash |
-| `ec:assets/deleted/options`|[Deleted Assets List](resources/asset/#list) | Assets in the trash, filtered |
-| `ec:assets/options`          | [Asset List](resources/asset/#list) | List of Assets, filtered|
-| `ec:assets/with-tag`      | [Asset List](resources/asset/#list) | List of Assets with a specific `tag`|
-| `ec:datamanager`          | [Data Manager](resources/datamanager/) | A single Data Manager |
-| `ec:datamanager/by-id`|[Data Manager](resources/datamanager/) | A single Data Manager by `dataManagerID`|
-| `ec:datamanagers`         | [Data Managers](resources/datamanager/#list) | List of Data Managers |
-| `ec:datamanagers/options`|[Data Managers](resources/datamanager/#list)| List of Data Managers, filtered |
-| `ec:model`                | [Model](resources/model/)         | A single Model|
-| `ec:model/by-id`         | [Model](resources/model/)         | A single Model by `modelID`|
-| `ec:models`               | [Model List](resources/model/#list) | List of Models |
-| `ec:models/options`  | [Model List](resources/model/#list) | List of Models, filtered |
-| `ec:tag`                 | [Tag](resources/tag/) | A single Asset Tag |
-| `ec:tags`                | [Tag List](resources/tag/#list) | List of Asset Tags |
-| `ec:tags/options`     | [Tag List](resources/tag/#list) | List of Asset Tags, filtered |
+| `ec:api`  <a name="relation-api"></a>                  | Generated API     | Links to the generated API. |
+| `ec:asset`  <a name="relation-asset"></a>                  | [Asset](resources/asset/)                          | A single Asset|
+| `ec:asset/best-file`  <a name="relation-asset/best-file"></a>       | File Subresource  | The content-negotiated “best suited” file |
+| `ec:asset/by-id`  <a name="relation-asset/by-id"></a>        | [Asset](resources/asset/)           | A single Asset by `assetID`|
+| `ec:asset/deleted`  <a name="relation-asset/deleted"></a>     | [Deleted Asset](resources/asset/) | An Asset in the trash |
+| `ec:asset/deleted/by-id`  <a name="relation-asset/deleted/by-id"></a> | [Deleted Asset](resources/asset/) | An Asset in the trash by `assetID` |
+| `ec:asset/file`  <a name="relation-asset/file"></a>| File Subresource | A file of an Asset |
+| `ec:assets`  <a name="relation-assets"></a>                   | [Asset List](resources/asset/#list) | List of Assets|
+| `ec:assets/deleted`  <a name="relation-assets/deleted"></a>     | [Deleted Assets List](resources/asset/#list) | Assets in the trash |
+| `ec:assets/deleted/options`  <a name="relation-assets/deleted/options"></a>|[Deleted Assets List](resources/asset/#list) | Assets in the trash, filtered |
+| `ec:assets/options`  <a name="relation-assets/options"></a>          | [Asset List](resources/asset/#list) | List of Assets, filtered|
+| `ec:assets/with-tag`  <a name="relation-assets/with-tag"></a>      | [Asset List](resources/asset/#list) | List of Assets with a specific `tag`|
+| `ec:datamanager`  <a name="relation-datamanager"></a>          | [Data Manager](resources/datamanager/) | A single Data Manager |
+| `ec:datamanager/by-id`  <a name="relation-datamanager/by-id"></a>|[Data Manager](resources/datamanager/) | A single Data Manager by `dataManagerID`|
+| `ec:datamanagers`  <a name="relation-datamanagers"></a>         | [Data Managers](resources/datamanager/#list) | List of Data Managers |
+| `ec:datamanagers/options`  <a name="relation-datamanagers/options"></a>|[Data Managers](resources/datamanager/#list)| List of Data Managers, filtered |
+| `ec:model`  <a name="relation-model"></a>                | [Model](resources/model/)         | A single Model|
+| `ec:model/by-id`  <a name="relation-model/by-id"></a>         | [Model](resources/model/)         | A single Model by `modelID`|
+| `ec:models`  <a name="relation-models"></a>               | [Model List](resources/model/#list) | List of Models |
+| `ec:models/options`  <a name="relation-models/options"></a>  | [Model List](resources/model/#list) | List of Models, filtered |
+| `ec:tag`  <a name="relation-tag"></a>                 | [Tag](resources/tag/) | A single Asset Tag |
+| `ec:tags`  <a name="relation-tags"></a>                | [Tag List](resources/tag/#list) | List of Asset Tags |
+| `ec:tags/options`  <a name="relation-tags/options"></a>     | [Tag List](resources/tag/#list) | List of Asset Tags, filtered |
 
 
 # Field data types

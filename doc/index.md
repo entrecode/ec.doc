@@ -184,67 +184,67 @@ The `verbose` field may be used for further information what is actually wrong w
 |--------|------|------|------|-----|
 | **000** | **Internal Error.** No further information disclosured to client. | | | 500 |
 | **1xx** | **Generic Error** | | | |
-| 100     | Resource not found |  |  | 404|
-| 101     | No resource entity matching body property filter found | the body property that did not produce a match |  | 404|
-| 102     | No resource entity matching query string filter found | the query string property that did not produce a match |  | 404|
-| 110     | Method not allowed | the request method that is not allowed | | 405 |
+| 100  <a name="error-100"></a>  | Resource not found |  |  | 404|
+| 101  <a name="error-101"></a>  | No resource entity matching body property filter found | the body property that did not produce a match |  | 404|
+| 102  <a name="error-102"></a>  | No resource entity matching query string filter found | the query string property that did not produce a match |  | 404|
+| 110  <a name="error-110"></a>  | Method not allowed | the request method that is not allowed | | 405 |
 | **2xx** | **Syntax Error** |  |  | |
-| 200     | Missing body |  |  | 400|
-| 201     | Missing property in JSON body | the property that is missing |  | 400|
-| 202     | Missing property in query string | the property that is missing |  | 400|
-| 203     | Missing file in upload | | | 400 |
-| 204	  | Missing HAL link or embed in JSON body | the relation that is missing |  | 400|
-| 211     | Invalid format for property in JSON body | the property with an invalid format |  | 400|
-| 212     | Invalid format for property in query string | the property with an invalid format |  | 400|
-| 213     | Invalid file format in upload | the recognized mime type that is not allowed | | 400|
-| 214	  | Invalid linked or embedded HAL resource in JSON body, or link not found | the relation that is invalid |  | 400|
-| 215     | Resource cannot be sorted after given property | the property that is not allowed for sorting |  | 400|
-| 216     | Resource cannot be filtered with given property | the property that is not allowed for filtering |  | 400|
-| 217     | Resource cannot be range-filtered with given property | the property that is not comparable |  | 400|
-| 251     | Password is too short (on registration, only 1251 is defined) |  |  | 400|
-| 252     | Unmatched validation error | TinyValidator4 Error Code with message |  | 400|
-| 253     | Invalid asset to merge |  |  | 400 |
+| 200  <a name="error-200"></a>  | Missing body |  |  | 400|
+| 201  <a name="error-201"></a>  | Missing property in JSON body | the property that is missing |  | 400|
+| 202  <a name="error-202"></a>  | Missing property in query string | the property that is missing |  | 400|
+| 203  <a name="error-203"></a>  | Missing file in upload | | | 400 |
+| 204  <a name="error-204"></a>| Missing HAL link or embed in JSON body | the relation that is missing |  | 400|
+| 211  <a name="error-211"></a>  | Invalid format for property in JSON body | the property with an invalid format |  | 400|
+| 212  <a name="error-212"></a>  | Invalid format for property in query string | the property with an invalid format |  | 400|
+| 213  <a name="error-213"></a>  | Invalid file format in upload | the recognized mime type that is not allowed | | 400|
+| 214  <a name="error-214"></a>| Invalid linked or embedded HAL resource in JSON body, or link not found | the relation that is invalid |  | 400|
+| 215  <a name="error-215"></a>  | Resource cannot be sorted after given property | the property that is not allowed for sorting |  | 400|
+| 216  <a name="error-216"></a>  | Resource cannot be filtered with given property | the property that is not allowed for filtering |  | 400|
+| 217  <a name="error-217"></a>  | Resource cannot be range-filtered with given property | the property that is not comparable |  | 400|
+| 251  <a name="error-251"></a>  | Password is too short (on registration, only 1251 is defined) |  |  | 400|
+| 252  <a name="error-252"></a>  | Unmatched validation error | TinyValidator4 Error Code with message |  | 400|
+| 253  <a name="error-253"></a>  | Invalid asset to merge |  |  | 400 |
 | **3xx** | **Semantics Error** |  |  | |
-| 311	  | Invalid value for property in JSON body | the property with an invalid value | | 400 |
-| 351     | eMail address is unavailable (on registration and email change, only 1351 is defined) |  |  | 403|
-| 352     | Cannot delete openID connection (only 1352 is defined) |  |  | 403|
-| 353     | Duplicate model name in same data manager (only 2352 is defined) |  |  | 403|
-| 354     | Cannot delete Model, has entries (only 2354 is defined)|  |  | 403|
-| 355     | Cannot delete Model, mandatory model (only 2355 is defined)|  |  | 403|
-| 356     | Cannot change Model, has Entries. (only 2356 is defined) | More detailed description of error | Affected Field | 403|
-| 357     | Model must support default locale (only 2357 is defined)| Affected modelID |  | 400|
-| 358     | Unsupported locale (only 2358 is defined)| Affected modelID |  | 400|
-| 359     | Violates unique constraint (only 2359 is defined)| title of violating field  |  | 400|
-| 360     | Cannot delete entry. Referenced as required. (only 2360 is defined)| entryID holding the reference |  | 400|
-| 361     | Cannot change entry. Read Only. (only 2361 is defined)| | | 403|
-| 362     | Cannot change entry. Reference not found. (only 2362 is defined) | | | 400|
-| 363     | Cannot change Model, edit of mandatory/unmutable field. (only 2363 is defined) | More detailed description of error | Affected field | 403|
-| 364     | Cannot change Model, reserved field title. (only 2364 is defined) | Field title | | 400|
-| 365     | Cannot change Model, duplicate model title. (only 2365 is defined) | Model title | | 400|
-| 366     | Duplicate field name in model. | Field title | | 400 |
-| 367     | Field cannot be unique and localizable. | Field title | | 400 |
-| 368	  | Field of type boolean must be required. | Field title | | 400 |
-| 369     | Title field not a field in the model. | Title field | | 400 |
-| 370     | Cannot delete Resource. Is used. | | | 403 |
+| 311  <a name="error-311"></a>| Invalid value for property in JSON body | the property with an invalid value | | 400 |
+| 351  <a name="error-351"></a>  | eMail address is unavailable (on registration and email change, only 1351 is defined) |  |  | 403|
+| 352  <a name="error-352"></a>  | Cannot delete openID connection (only 1352 is defined) |  |  | 403|
+| 353  <a name="error-353"></a>  | Duplicate model name in same data manager (only 2352 is defined) |  |  | 403|
+| 354  <a name="error-354"></a>  | Cannot delete Model, has entries (only 2354 is defined)|  |  | 403|
+| 355  <a name="error-355"></a>  | Cannot delete Model, mandatory model (only 2355 is defined)|  |  | 403|
+| 356  <a name="error-356"></a>  | Cannot change Model, has Entries. (only 2356 is defined) | More detailed description of error | Affected Field | 403|
+| 357  <a name="error-357"></a>  | Model must support default locale (only 2357 is defined)| Affected modelID |  | 400|
+| 358  <a name="error-358"></a>  | Unsupported locale (only 2358 is defined)| Affected modelID |  | 400|
+| 359  <a name="error-359"></a>  | Violates unique constraint (only 2359 is defined)| title of violating field  |  | 400|
+| 360  <a name="error-360"></a>  | Cannot delete entry. Referenced as required. (only 2360 is defined)| entryID holding the reference |  | 400|
+| 361  <a name="error-361"></a>  | Cannot change entry. Read Only. (only 2361 is defined)| | | 403|
+| 362  <a name="error-362"></a>  | Cannot change entry. Reference not found. (only 2362 is defined) | | | 400|
+| 363  <a name="error-363"></a>  | Cannot change Model, edit of mandatory/unmutable field. (only 2363 is defined) | More detailed description of error | Affected field | 403|
+| 364  <a name="error-364"></a>  | Cannot change Model, reserved field title. (only 2364 is defined) | Field title | | 400|
+| 365  <a name="error-365"></a>  | Cannot change Model, duplicate model title. (only 2365 is defined) | Model title | | 400|
+| 366  <a name="error-366"></a>  | Duplicate field name in model. | Field title | | 400 |
+| 367  <a name="error-367"></a>  | Field cannot be unique and localizable. | Field title | | 400 |
+| 368  <a name="error-368"></a>| Field of type boolean must be required. | Field title | | 400 |
+| 369  <a name="error-369"></a>  | Title field not a field in the model. | Title field | | 400 |
+| 370  <a name="error-370"></a>  | Cannot delete Resource. Is used. | | | 403 |
 | **4xx** | **Rights Management Error** |  |  | |
-| 400     | Missing Access Token |  |  | 401|
-| 401     | Invalid Access Token |  |  | 401|
-| 402     | Outdated Access Token |  |  | 401|
-| 403     | Invalid Password | the email address that attempted the login | Timestamp until login is locked for this email address | 401|
-| 404	  | Account not found (unknown email address) |  |  | 404|
-| 410     | Insufficient rights to access the requested resource |  |  | 401|
-| 411     | Insufficient rights to access the requested resource with this method |  |  | 405|
-| 444     | Denied because of stupidity |  |  | 403|
-| 451     | Too many wrong login attempts (on login, only 1451 is defined) |  |  | 429|
-| 452     | User blocked (on login and internal account API, only 1452 is defined) |  |  | 403|
-| 453     | Invalid invite (on registration, only 1453 is defined) |  |  | 403|
-| 460     |	Generic OAuth Error | | more information | 400 |
-| 461     | Facebook OAuth Request failed | Facebook Error Code | Facebook Error Message | 400|
-| 462     | Facebook API call failed to receive eMail address | | more verbose Error Message | 400|
+| 400  <a name="error-400"></a>  | Missing Access Token |  |  | 401|
+| 401  <a name="error-401"></a>  | Invalid Access Token |  |  | 401|
+| 402  <a name="error-402"></a>  | Outdated Access Token |  |  | 401|
+| 403  <a name="error-403"></a>  | Invalid Password | the email address that attempted the login | Timestamp until login is locked for this email address | 401|
+| 404  <a name="error-404"></a>| Account not found (unknown email address) |  |  | 404|
+| 410  <a name="error-410"></a>  | Insufficient rights to access the requested resource |  |  | 401|
+| 411  <a name="error-411"></a>  | Insufficient rights to access the requested resource with this method |  |  | 405|
+| 444  <a name="error-444"></a>  | Denied because of stupidity |  |  | 403|
+| 451  <a name="error-451"></a>  | Too many wrong login attempts (on login, only 1451 is defined) |  |  | 429|
+| 452  <a name="error-452"></a>  | User blocked (on login and internal account API, only 1452 is defined) |  |  | 403|
+| 453  <a name="error-453"></a>  | Invalid invite (on registration, only 1453 is defined) |  |  | 403|
+| 460  <a name="error-460"></a>  | Generic OAuth Error | | more information | 400 |
+| 461  <a name="error-461"></a>  | Facebook OAuth Request failed | Facebook Error Code | Facebook Error Message | 400|
+| 462  <a name="error-462"></a>  | Facebook API call failed to receive eMail address | | more verbose Error Message | 400|
 | **5xx** | Plan error (not in Accountserver, only 25xx and 35xx are defined) |  |  | |
-| 500     | Missing plan for this product | the product that is not included in the current plan |  | 403|
-| 510     | Insufficient plan for this product | the product whose limit is exceeded in the current plan |  | 403|
-| 511     | Insufficient plan for creation | the product whose limit is exceeded in the current plan |  | 403|
+| 500  <a name="error-500"></a>  | Missing plan for this product | the product that is not included in the current plan |  | 403|
+| 510  <a name="error-510"></a>  | Insufficient plan for this product | the product whose limit is exceeded in the current plan |  | 403|
+| 511  <a name="error-511"></a>  | Insufficient plan for creation | the product whose limit is exceeded in the current plan |  | 403|
 | **9xx** | **Other** |  |  | |
  
  

@@ -78,18 +78,18 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 
 | Link Relation             | Target Resource                               | Description |
 |---------------------------|-----------------------------------------------------------|-------------|
-| `ec:auth`                  | [Auth](resources/auth/)                          | Entry Point|
-|`ec:auth/public-key`| [Auth/PublicKey](resources/auth/#public-key)  | Public RSA key for validation of access token JWTs |
-|`ec:auth/register`| [Auth/Signup](resources/auth/#signup) | Registration with email/password |
-|`ec:auth/login`|  | Login with email/password |
-|`ec:auth/logout`|  | Invalidation of an access token |
-|`ec:auth/password-reset`|  | Changing a registered password |
-|`ec:auth/email-available`|  | Check if a given email is available for registration |
-|`ec:auth/email-verification`|  | Verification link for email address |
-|`ec:auth/facebook`|  | Login/Register using Facebook |
-|`ec:auth/google`|  | Login/Register using Google |
-|`ec:accounts`|  | Account List |
-|`ec:account`|  | Single Account |
-|`ec:account/tokens`|  | Access Tokens of an account |
-|`ec:account/token`|  | Single Access Token of an account |
-|`ec:account/change-email-verification`|  | Verification link for changing email address |
+| <a name="relation-auth"></a>`ec:auth`                  | [Auth](resources/auth/)                          | Entry Point|
+|<a name="relation-auth/public-key"></a>`ec:auth/public-key`| [Auth/PublicKey](resources/auth/#public-key)  | Public RSA key for validation of access token JWTs |
+|<a name="relation-auth/register"></a>`ec:auth/register`| [Auth/Signup](resources/auth/#signup) | Registration with email/password |
+|<a name="relation-auth/login"></a>`ec:auth/login`|  | Login with email/password |
+|<a name="relation-auth/logout"></a>`ec:auth/logout`|  | Invalidation of an access token |
+|<a name="relation-auth/password-reset"></a>`ec:auth/password-reset`|  | Changing a registered password |
+|<a name="relation-auth/email-available"></a>`ec:auth/email-available`|  | Check if a given email is available for registration |
+|<a name="relation-auth/email-verification"></a>`ec:auth/email-verification`|  | Verification link for email address |
+|<a name="relation-auth/facebook"></a>`ec:auth/facebook`|  | Login/Register using Facebook |
+|<a name="relation-auth/google"></a>`ec:auth/google`|  | Login/Register using Google |
+|<a name="relation-accounts"></a>`ec:accounts`|  | Account List |
+|<a name="relation-account"></a>`ec:account`|  | Single Account |
+|<a name="relation-account/tokens"></a>`ec:account/tokens`|  | Access Tokens of an account |
+|<a name="relation-account/token"></a>`ec:account/token`|  | Single Access Token of an account |
+|<a name="relation-account/change-email-verification"></a>`ec:account/change-email-verification`|  | Verification link for changing email address |

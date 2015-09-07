@@ -6,7 +6,7 @@ All entrecode APIs are *REST APIs,* or rather *Hypermedia APIs.* This means that
 
 In short, data is partitioned in *resources* which manifest in *representations.* Those are transferred using a *standardized format* ([JSON HAL](https://tools.ietf.org/html/draft-kelly-json-hal-06)) with *standardized methods* (HTTP/1.1, [RFC 7230](http://tools.ietf.org/html/rfc7230)). Application flow between resources is defined by link relations. URLs are subject to change and must not be hard coded. Instead, link relations can be used to explore and use the APIs.
 
-## Available APIs
+# Available APIs
 
 #### [Account Server API](./account_server/)
 
@@ -32,7 +32,7 @@ The Front-End editor for Account Server, Data Manager and App Manager is live at
 
 **[editor.entrecode.de](https://editor.entrecode.de)**
 
-## Authentication
+# Authentication
 Most API Calls require Authorization. 
 The issued Authorization Token (`access_token`) has to be sent using the following HTTP Header:
 
@@ -41,12 +41,12 @@ The issued Authorization Token (`access_token`) has to be sent using the followi
 The Access Token has to be acquired using the [Accounts API](./account_server/#authentication). It is a [JWT](https://tools.ietf.org/html/rfc7519).
 
 
-## Relations
+# Relations
 Link Relation names are those registered with the [IANA](http://www.iana.org/assignments/link-relations/link-relations.xhtml). Additionally, custom link relations are used which are built in the form `https://entrecode.de/doc/rel/<relation>/<optional_subrelation>`. Those relations are also links to their own documentation. 
 For brevity, [CURIE Syntax](http://www.w3.org/TR/curie/) is used which results in relation names of the form `ec:<relation>/<optional_subrelation>`. 
 
 
-## Generic list resources
+# Generic list resources
 In general (i.e. unless stated otherwise), list resources support pagination, sorting and filtering.
 
 ##### Pagination:
@@ -84,7 +84,7 @@ To sort by a different than the default property, the following query string par
 
 All combinations are possible.
 
-## Cross-Origin Resource Sharing (CORS)
+# Cross-Origin Resource Sharing (CORS)
 
 The [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) usually prevents browsers from accessing remote APIs using XMLHTTPRequests (AJAX). This results in an error message like “No 'Access-Control-Allow-Origin' header is present on the requested resource.” and fails requests. To make our APIs accessable using Web Clients, we support [Cross-Origin Resource Sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (CORS). *And not the crude hack that is JSONP.* This means, we generally send the following HTTP Headers:
 
@@ -97,3 +97,161 @@ Access-Control-Expose-Headers: Allow
 Additionally, we send `Access-Control-Allow-Headers` with whatever is requested via `Access-Control-Request-Headers`.
 
 *Preflight Requests* (HTTP OPTIONS calls) are responded to with an HTTP 200.
+
+# Errors
+
+Error responses across all APIs are always returned with an HTTP status code ≥ 400, i.e. 400, 401, 403, 404, 429, 500.
+The media type is `application/problem+json`. Error responses comply to the [Problem Details IETF Draft](http://tools.ietf.org/html/draft-nottingham-http-problem-07) *and* to [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-06).
+ 
+JSON Schema: [https://entrecode.de/schema/error](https://entrecode.de/schema/error)
+
+The following properties are REQUIRED:
+ 
+* `status` is the HTTP status code of the error and the same status code as the actual HTTP response
+* `code` is a four digit error code as defined below
+* `title` is the generic, short description of the error code
+* `type` is the URL to the description of the error code
+* `_links` is a HAL link object that includes `up` and `describedby` link relations; `describedby` is the same URL as `type`.
+ 
+The following properties are OPTIONAL:
+ 
+* `detail` is the name of the object the error occurred on (e.g. the invalid property)
+* `verbose` any additional information about the error
+* `_embedded` is a HAL embed object that MAY include `error` sub-resources.
+ 
+Error sub-resources can be used to indicate more errors that occurred or would have occurred, if the enclosing *main* error would not have occurred.
+Error sub-resources have a subset of the properties described above: `code`, `title`, `type` and `detail`.
+
+### Example
+
+    {
+        "status": 400,
+        "code": 2202,        
+        "title": "Missing property in query string",
+        "type": "https://entrecode.de/doc/errors/2202",
+        "detail": "count",
+        "_links": {
+            "up": {
+                "title": "Data Manager Home Page",
+                "href": "https://datamanager.entrecode.de" 
+            },
+            "describedby": {
+                "title": "Error Description",
+                "href": "https://entrecode.de/doc/errors/2202"
+            }
+        }
+        "_embedded": {
+            "error": {
+                "code": 2201,
+                "title": "Missing property in JSON Body",
+                "type": "https://entrecode.de/doc/errors/2201",
+                "detail": "property"
+            }
+        }
+    }
+    
+    
+
+## Error Codes
+Error codes are 4 digit decimal codes.
+They consist of two parts. The first number identifies the system the error occurred in, the last three numbers identify the error, they are the actual error codes.
+Examples:
+
+**2100:** A requested resource in the Datamanager does not exist.
+
+**2202:** A request to a resource in the Datamanager misses a required property in its query string. The detail field of the error response will indicate which property.
+
+**3000:** An internal error occurred in the Appserver, probably a server-side bug.
+ 
+ 
+### First Number: System
+ 
+|Code|System|
+|---|---|
+| 1xxx | Account Server |
+| 2xxx | Data Manager |
+| 3xxx | App Manager |
+ 
+More Codes may be added in the future.
+ 
+### Second Number: Error Code
+
+The actual error code (`code`) is partitioned in error types (bold in the table below).
+The `detail` field includes further information about the subject of the error.
+The `verbose` field may be used for further information what is actually wrong with the subject in `detail`.
+ 
+| Code | Description | Detail | Verbose | HTTP Status Code |
+|--------|------|------|------|-----|
+| **000** | **Internal Error.** No further information disclosured to client. | | | 500 |
+| **1xx** | **Generic Error** | | | |
+| 100     | Resource not found |  |  | 404|
+| 101     | No resource entity matching body property filter found | the body property that did not produce a match |  | 404|
+| 102     | No resource entity matching query string filter found | the query string property that did not produce a match |  | 404|
+| 110     | Method not allowed | the request method that is not allowed | | 405 |
+| **2xx** | **Syntax Error** |  |  | |
+| 200     | Missing body |  |  | 400|
+| 201     | Missing property in JSON body | the property that is missing |  | 400|
+| 202     | Missing property in query string | the property that is missing |  | 400|
+| 203     | Missing file in upload | | | 400 |
+| 204	  | Missing HAL link or embed in JSON body | the relation that is missing |  | 400|
+| 211     | Invalid format for property in JSON body | the property with an invalid format |  | 400|
+| 212     | Invalid format for property in query string | the property with an invalid format |  | 400|
+| 213     | Invalid file format in upload | the recognized mime type that is not allowed | | 400|
+| 214	  | Invalid linked or embedded HAL resource in JSON body, or link not found | the relation that is invalid |  | 400|
+| 215     | Resource cannot be sorted after given property | the property that is not allowed for sorting |  | 400|
+| 216     | Resource cannot be filtered with given property | the property that is not allowed for filtering |  | 400|
+| 217     | Resource cannot be range-filtered with given property | the property that is not comparable |  | 400|
+| 251     | Password is too short (on registration, only 1251 is defined) |  |  | 400|
+| 252     | Unmatched validation error | TinyValidator4 Error Code with message |  | 400|
+| 253     | Invalid asset to merge |  |  | 400 |
+| **3xx** | **Semantics Error** |  |  | |
+| 311	  | Invalid value for property in JSON body | the property with an invalid value | | 400 |
+| 351     | eMail address is unavailable (on registration and email change, only 1351 is defined) |  |  | 403|
+| 352     | Cannot delete openID connection (only 1352 is defined) |  |  | 403|
+| 353     | Duplicate model name in same data manager (only 2352 is defined) |  |  | 403|
+| 354     | Cannot delete Model, has entries (only 2354 is defined)|  |  | 403|
+| 355     | Cannot delete Model, mandatory model (only 2355 is defined)|  |  | 403|
+| 356     | Cannot change Model, has Entries. (only 2356 is defined) | More detailed description of error | Affected Field | 403|
+| 357     | Model must support default locale (only 2357 is defined)| Affected modelID |  | 400|
+| 358     | Unsupported locale (only 2358 is defined)| Affected modelID |  | 400|
+| 359     | Violates unique constraint (only 2359 is defined)| title of violating field  |  | 400|
+| 360     | Cannot delete entry. Referenced as required. (only 2360 is defined)| entryID holding the reference |  | 400|
+| 361     | Cannot change entry. Read Only. (only 2361 is defined)| | | 403|
+| 362     | Cannot change entry. Reference not found. (only 2362 is defined) | | | 400|
+| 363     | Cannot change Model, edit of mandatory/unmutable field. (only 2363 is defined) | More detailed description of error | Affected field | 403|
+| 364     | Cannot change Model, reserved field title. (only 2364 is defined) | Field title | | 400|
+| 365     | Cannot change Model, duplicate model title. (only 2365 is defined) | Model title | | 400|
+| 366     | Duplicate field name in model. | Field title | | 400 |
+| 367     | Field cannot be unique and localizable. | Field title | | 400 |
+| 368	  | Field of type boolean must be required. | Field title | | 400 |
+| 369     | Title field not a field in the model. | Title field | | 400 |
+| 370     | Cannot delete Resource. Is used. | | | 403 |
+| **4xx** | **Rights Management Error** |  |  | |
+| 400     | Missing Access Token |  |  | 401|
+| 401     | Invalid Access Token |  |  | 401|
+| 402     | Outdated Access Token |  |  | 401|
+| 403     | Invalid Password | the email address that attempted the login | Timestamp until login is locked for this email address | 401|
+| 404	  | Account not found (unknown email address) |  |  | 404|
+| 410     | Insufficient rights to access the requested resource |  |  | 401|
+| 411     | Insufficient rights to access the requested resource with this method |  |  | 405|
+| 444     | Denied because of stupidity |  |  | 403|
+| 451     | Too many wrong login attempts (on login, only 1451 is defined) |  |  | 429|
+| 452     | User blocked (on login and internal account API, only 1452 is defined) |  |  | 403|
+| 453     | Invalid invite (on registration, only 1453 is defined) |  |  | 403|
+| 460     |	Generic OAuth Error | | more information | 400 |
+| 461     | Facebook OAuth Request failed | Facebook Error Code | Facebook Error Message | 400|
+| 462     | Facebook API call failed to receive eMail address | | more verbose Error Message | 400|
+| **5xx** | Plan error (not in Accountserver, only 25xx and 35xx are defined) |  |  | |
+| 500     | Missing plan for this product | the product that is not included in the current plan |  | 403|
+| 510     | Insufficient plan for this product | the product whose limit is exceeded in the current plan |  | 403|
+| 511     | Insufficient plan for creation | the product whose limit is exceeded in the current plan |  | 403|
+| **9xx** | **Other** |  |  | |
+ 
+ 
+---
+###*Guidelines for definition of new error codes*##
+* *a suitable HTTP error code should still be used*
+* *codes should be added to the defined error types (1xx-5xx)*
+* *codes are logically sub-partitioned in groups of ten*
+* *codes above x5x should be used for very (resource- or system-)specific errors*
+

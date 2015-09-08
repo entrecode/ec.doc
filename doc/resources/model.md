@@ -1,47 +1,50 @@
-# model 
-Model in a Data Manager. A model describes a resource available in Data Manager APIs.
+# Single Model 
 
-* [GET](#get)   
-* [PUT](#put)
+Model in a Data Manager. A model describes a resource available in the generated Data Manager API.
 
-## GET
-Get a single model specification.
+The JSON Schema is [https://entrecode.de/schema/model](https://entrecode.de/schema/model).
 
-### Request
+# Properties
 
-#### Headers
-|Header|Value|
-|------|-----|
-|Authorization|`Bearer `token|
+| Property | Type | Format | Description | Writable |
+|----------|------|--------|-------------|----------|
+|modelID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for a model | No. Gets generated on creation. |
+|title  | String | a-z A-Z 0-9 _ - Maximum length 256 |The title of a model, unique in this data manager. Should be singular and lower case. |Yes|
+|description	|String||Optional. A detailed description of this model.|Yes|
+|titleField	| String|One of the fields|The field which should be used as title in editor frontend. Default: `id`|Yes|
+|rights| JSON | Object with boolean keys: get, put, postPublic, postPrivate, delete |JSON object of available rights on this model | Yes |
+|fields | Array[JSON]  |[Field Definition](/data_manager/#field-data-types)|The fields for resources of this model.|Yes|
+|locales	|Array[String] | [RFC4646](https://tools.ietf.org/html/rfc4646) |JSON array with supported locales by this model. Like `de-DE` or `en-US`.| Yes |
 
-### Response: 200 ok
+# Relations
 
-JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/model)
+| Relation Name | Target Resource | Description |Possible Methods |
+|---------------|-----------------|-------------|-----------------|
+| self          | [Model](#)| The resource itself | GET, PUT |
+| collection    | [Model List](#list)| List of all available Models | GET, POST|
 
-#### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |An entrecode model|GET, PUT  |No.            |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|collection    |Collection of models. Includes this model.|GET, POST|No.|
+# List
+
+The Model List Resource is a [Generic List Resource](/#generic-list-resources) with embedded Model Resources.
 
 
-#### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|modelID       |The unique identifier for a model as Version 4  UUID ([RFC4122](http://tools.ietf.org/html/rfc4122)).|
-|title         |The title of a model, unique in this data manager. Should be singular and lower case. Must only use a-z, A-Z, 0-9, _, -. Maximum length 256.
-|description	|Optional. A detailed description of this model.
-|rights        |JSON object of available rights on this model (Object with boolean keys: get, put, postPublic, postPrivate, delete)
-|fields        |JSON array with field definition objects
-|locales	   |JSON array with supportet locales by this model. Like `de-DE` or `en-US`.
+# Possible Actions
 
-#### Example
+## Read
+
+To read a single Model Resource, clients may perform GET on a `ec:model` relation.
+
+To read the Modle List Resource, clients may perform GET on a `ec:models` relation or on the `collection` relation of a single Model resource.
+
+In both cases, the success status code is **200 OK.**
+
+Example:
 
 ```
 {
     "modelID": "886aa7bb-a8f5-4164-8123-ae0e35bb9b35",
     "title": "recipe",
+    "titleField": "name",
     "rights": {
         "get": true,
         "put": true,
@@ -125,185 +128,23 @@ JSON Schema: [https://entrecode.de/schema/model](https://entrecode.de/schema/mod
 }
 ```
 
-### Error Response: 401 unauthorized
-If the authentication header is missing or invalid, the following error response is triggered:
+## Create
 
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
+To create a new Model, clients may perform a POST on `ec:models` (the list resource). The JSON Schema for creating a new Model is [https://entrecode.de/schema/model-template](https://entrecode.de/schema/model-template). 
 
-#### Body
-An error object.
+The success status code is **201 Created** and the response body is the newly created single Model resource.
 
+## Edit
 
+To update an existing Model Resource, clients may perform a PUT on `ec:model` or `self` at a single Model Resource. The JSON Schema for editing a Model is [https://entrecode.de/schema/model-template](https://entrecode.de/schema/model-template). 
+All fields are optional. Some changes cannot be done when there are already entries (generated API resources).
 
-## PUT
-Edit a model. 
+The success status code is **200 OK** and the response body is the updated single Model resource.
 
-### Request
+## Delete
 
-#### Headers
-|Header|Value|
-|------|-----|
-|Content-Type|`application/json`|
-|Authorization|`Bearer `token|
+To delete a Model including all its data, clients may perform a DELETE on `ec:model` or `self` at a single Model Resource.
 
-#### Body
+If the model is “mandatory” or still has entries, it cannot be deleted – delete the entries in the generated API first.
 
-JSON Schema: [https://entrecode.de/schema/model-template](https://entrecode.de/schema/model-template)
-
-|Input field     |Description        |
-|----------------|-------------------|
-|title           |Optional. Can be used to change the model title.
-|description		|Optional. Can be used to change the model description.
-|rights          |Optional. Can be used to change the model rights by setting the rights flags. Always include the full object.
-|fields          |Optional. Can be used to change the fields. Always include the full object.
-|locales		| Optional. Can be uesed to change the supported locales of this model.
-
-### Response: 200 ok
-
-The model was created successfully.
-
-### Error Response: 400 bad request
-
-If the sent body is no JSON or not valid, the following error response is triggered:
-
-#### Body
-An error object.
-
-
-### Error Response: 401 unauthorized
-
-If the authentication header is missing or invalid, the following error response is triggered:
-
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
-
-#### Body
-An error object.
-
-## DELETE
-Delete a model.
-
-### Request
-
-#### Headers
-|Header|Value|
-|------|-----|
-|Content-Type|`application/json`|
-|Authorization|`Bearer `token|
-
-### Response: 204 ok
-The model was successfully deleted.
-
-### Error Response: 403 forbidden
-
-If the model could not be deleted. Either has entries or is mandatory model.
-
-#### Body
-An error object.
-
-
-# models 
-Collection of models in a Data Manager.
-
-* [GET](#get)   
-* [POST](#post)
-
-## GET
-Get a list of all available models of a specified Data Manager.
-
-### Request
-
-#### Headers
-|Header|Value|
-|------|-----|
-|Authorization|`Bearer `token|
-
-### Response: 200 ok
-
-JSON Schema: [https://entrecode.de/schema/models](https://entrecode.de/schema/models)
-
-#### Links
-| Relation     | Description     | Methods     | Templated     |
-|--------------|-----------------|-------------|---------------|
-|self          |Collection of models.|GET, POST|No.          |
-|curies        |[CURIE](http://www.w3.org/TR/curie/) links. | GET | Yes.|
-|next          |The next page of items in a collection. If there are no further pages of items, this link is not returned in the response.|GET|No.|
-|prev          |The previous page of items in a collection. If there are no previous pages of items, this link is not returned in the response.|GET|No.|
-|first|The first page of items in a collection. This link is returned only when on pages other than the first one.|GET|No.
-|ec:datamanager|The data manager these models belong to.|GET,PUT|No.|
-|ec:model/by-id |Retrieves an individual model resource based on the specified identifier. |GET|Yes. Requires the modelID.
-
-
-#### Properties
-| Name         | Description     |
-|--------------|-----------------|
-|count         |Number of items included in this page|
-|total         |Total number of items |
-
-#### Embedded
-
-[ec:model](../model) Resources
-
-### Error Response: 401 unauthorized
-If the authentication header is missing or invalid, the following error response is triggered:
-
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
-
-#### Body
-An error object.
-
-
-
-## POST
-Create a new model. 
-
-### Request
-
-#### Headers
-|Header|Value|
-|------|-----|
-|Content-Type|`application/json`|
-|Authorization|`Bearer `token|
-
-#### Body
-
-JSON Schema: [https://entrecode.de/schema/model-template](https://entrecode.de/schema/model-template)
-
-|Input field     |Description        |
-|----------------|-------------------|
-|title           |The Model title.
-|rights          |Model rights.
-|fields          |Model fields. Mandatory fields (with reserved titles) should not be included here
-
-
-### Response: 201 created
-
-The model was created successfully.
-
-### Error Response: 400 bad request
-
-If the sent body is no JSON or not valid, the following error response is triggered:
-
-#### Body
-An error object.
-
-
-### Error Response: 401 unauthorized
-
-If the authentication header is missing or invalid, the following error response is triggered:
-
-#### Headers
-|Header|Value|
-|------|-----|
-|WWW-Authenticate|`Bearer`|
-
-#### Body
-An error object.
+The success status code is **204 No Content** with an empty response body.

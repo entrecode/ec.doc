@@ -1,6 +1,6 @@
 # ec.datamanager.js
 
-JavaScript SDK for [ec.datamanager](https://entrecode.de/datamanager). By entrecode.
+JavaScript SDK for [ec.datamanager](https://doc.entrecode.de/en/latest/data_manager/). By entrecode.
 
 Simply use the generated APIs of the ec.datamanager with JavaScript. Supports usage in frontend (web) and backend (Node.js).
 
@@ -72,6 +72,20 @@ var dataManager = new DataManager({
     id: 'abcdef12'
 });
 ```
+### Get EntryList
+
+```js
+dataManager.model('myModel').entryList({size: 100, sort: ['property' , '-date'])
+.then(function(res) {
+   console.log(res.entries); // success! array of Entries
+   console.log(res.count);
+   console.log(res.total);
+})
+.catch(function(error) {
+   console.error(error); // error getting entries
+});
+```
+
 
 ### Get Entries
 
@@ -90,7 +104,7 @@ You can also use `entry(entryID)` for a single Entry, identified by its id.
 
 ```js
 dataManager.model('myModel').createEntry({})
-.fail(function(error) {
+.catch(function(error) {
    console.error(error); // error creating entry
 });
 ```
@@ -121,7 +135,7 @@ dataManager.model('myModel').entry('f328af3')
    entry.key2 = 2;
    return entry.save();
 })
-.fail(function(error) {
+.catch(function(error) {
    console.error(error); // error updating entry
 });
 ```
@@ -181,7 +195,7 @@ dataManager.user('a78fb8') // dataManager.user(id) is shorthand for dataManager.
    user.email = 'new@adress.com';
    return user.save();
 })
-.fail(function(error) {
+.catch(function(error) {
    console.error(error); // error updating entry
 });
 ```
@@ -223,6 +237,20 @@ dataManager.getImageThumbURL('46092f02-7441-4759-b6ff-8f3831d3da4b', 100)
 ```
 The returned image will be a square-cropped variant with (in this example) at least 100 pixels (pixel value can be set as with `getImageURL`). Available sizes are 50, 100, 200 and 400 px.
 
+### Get AssetList
+
+```js
+dataManager.assetList()
+.then(function(res) {
+  console.log(res.assets); // array with assets
+  console.log(res.count);
+  console.log(res.total);
+})
+.catch(function(error){
+  console.error(error); // error getting asset list
+});
+```
+
 ### Get Assets
 
 ```js
@@ -230,8 +258,20 @@ dataManager.assets()
 .then(function(assets) {
   console.log(assets); // array with assets
 })
-.fail(function(error){
+.catch(function(error){
   console.error(error); // error getting asset list
+});
+```
+
+### Get Asset
+
+```js
+dataManager.asset('46092f02-7441-4759-b6ff-8f3831d3da4b')
+.then(function(asset) {
+  console.log(assets); // the Asset
+})
+.catch(function(error){
+  console.error(error); // error getting Asset list
 });
 ```
 
@@ -240,10 +280,14 @@ dataManager.assets()
 ```js
 dataManager.createAsset(formData)
 .then(function(assets){
-  console.log(assets); // object with asset id properties
+  console.log(assets); // array with Get Asset promises
+  return assets[0];
 })
-.fail(function(error){
-  console.error(error); // error creating asset
+.then(function(asset){
+  console.log(asset); // the created Asset.
+})
+.catch(function(error){
+  console.error(error); // error creating Asset
 });
 ```
 
@@ -254,7 +298,7 @@ For node.js acceptable inputs are:
 
 For browsers acceptable inputs are:
 
-* [FormData](https://developer.mozilla.org/de/docs/Web/API/FormData)
+* [FormData](https://developer.mozilla.org/docs/web/api/formdata)
 
 	Example: 
 
@@ -278,14 +322,73 @@ For browsers acceptable inputs are:
 	});
 	```
 
+### Edit Asset
+```js
+dataManager.asset('46092f02-7441-4759-b6ff-8f3831d3da4b')
+.then(function(asset){
+  asset.value.title = 'new title';
+  return asset.save();
+}).then(function(savedAsset){
+  console.log('success!'); // successfully saved asset
+}).catch(function(error){
+  console.log(error); // error modifying asset
+});
+```
+
 ### Delete Asset
 ```js
-dataManager.asset('46092f02-7441-4759-b6ff-8f3831d3da4b').delete()
-.then(function(){
+dataManager.asset('46092f02-7441-4759-b6ff-8f3831d3da4b')
+.then(function(asset){
+  return asset.delete();
+}).then(function(){
   console.log('success!'); // successfully deleted asset
-});
-.fail(function(error){
+}).catch(function(error){
   console.log(error); // error deleting asset
+});
+```
+
+### Get Tags
+```js
+dataManager.tags()
+.then(function(tags){
+  console.log(tags); // array of tags
+}).catch(function(error){
+  console.log(error); // error getting tags
+});
+```
+
+### Get Tag 
+```js
+dataManager.tag('tag1')
+.then(function(tag){
+  console.log(tag); // tag
+}).catch(function(error){
+  console.log(error); // error getting tag
+});
+```
+
+### Edit Tag
+```js
+dataManager.tag('tag1')
+.then(function(tag){
+  tag.value.tag = 'newTag';
+  return tag.save();
+}).then(function(savedTag){
+  console.log('success!'); // successfully saved tag
+}).catch(function(error){
+  console.log(error); // error modifying tag
+});
+```
+
+### Delete Tag
+```js
+dataManager.tag('tag1')
+.then(function(tag){
+  return tag.delete();
+}).then(function(){
+  console.log('success!'); // successfully deleted tag
+}).catch(function(error){
+  console.log(error); // error deleted tag
 });
 ```
 
@@ -460,7 +563,7 @@ returns Model Object which is a promise.
 
 ### Model Instance Methods
 
-#### entries(options)
+#### entries(options)/entryList(options)
 
 returns JSON Array of Entries (async).
 The request can be configured using `options`.
@@ -488,7 +591,18 @@ dataManager.model('myModel').entries({size: 100, sort: ['property' , '-date'])
 .catch(function(error) {
    console.error(error); // error getting entries
 });
+```
 
+ `entries()` will return an array of entries. `entryList()` will return an object with the following structure:
+
+```js
+{
+  entries: [
+    /* array of entries */
+  ],
+  total: 10,
+  count: 5
+}
 ```
 
 #### entry(id)
@@ -583,6 +697,23 @@ grunt build
 
 
 # Changelog
+
+### 0.3.4
+- add error parser for response middlewares CMS-1187
+
+### 0.3.3
+- use new file url for asset helpers
+
+### 0.3.2
+- adds `entryList` and `assetList` with count and total properties.
+
+### 0.3.1
+- empty lists responde with empty array instead of plain body
+- documentation improved
+
+### 0.3.0
+- added public tag api
+- fix bug: entry save will return entry, not string
 
 ### 0.2.9
 - rebuild

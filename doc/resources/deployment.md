@@ -1,6 +1,6 @@
 # Single Deployment
 
-The single Deployment Resource represents Deployment of an [App](resource/app) using a specific [Platform](resource/platform) configuration. It consists of a status (successful, failed or still running / undefined) and events that occurred during deployment.
+The single Deployment Resource represents Deployment of an [App](./app/) using a specific [Platform](./platform/) configuration. It consists of a status (successful, failed or still running / undefined) and events that occurred during deployment.
 
 The JSON Schema is [https://entrecode.de/schema/deployment](https://entrecode.de/schema/deployment).
 
@@ -29,8 +29,8 @@ The JSON Schema is [https://entrecode.de/schema/deployment](https://entrecode.de
 |---------------|-----------------|-------------|-----------------|
 | self          | [Deployment](#)| The resource itself | GET |
 | collection    | [Deployment List](#list)| List of all available Deployments | GET, POST|
-| ec:app | [App](resources/app) | The app this Deployment is corresponding to. | GET, PUT, DELETE |
-| ec:app/platform | [Platform](resources/platform) | The Platform that is deployed | GET, DELETE |
+| ec:app | [App](./app/) | The app this Deployment is corresponding to. | GET, PUT, DELETE |
+| ec:app/platform | [Platform](./platform/) | The Platform that is deployed | GET, DELETE |
 
 # List
 

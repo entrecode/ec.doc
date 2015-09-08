@@ -1,70 +1,95 @@
+# The Account Server
 
-## Account Server Basics
+The Account Server handles authentication, authorization and account management.
 
-This document describes the Hypermedia REST API of the entrecode Accounts API.
+# Authentication
+Most API calls require authentication using an access token.
+
+Access tokens are only issued to valid accounts on registered clients. 
+
+To get an access token, a user has three options:
+
+- login using a registered email address and password
+- [Facebook Login](https://developers.facebook.com/docs/facebook-login/v2.4)
+- [Google OpenID Connect](https://developers.google.com/identity/protocols/OpenIDConnect)
+
+In all cases, the user gets redirected back to the client with an access token. Depending on client configuration, the access token is appended to the URL query string or set as cookie.
+
+The access token is a [JSON Web Token](http://jwt.io/) [[RFC 7519](https://tools.ietf.org/html/rfc7519)] signed with RS512. The public RSA key can be obtained from the account server using the `ec:auth/public-key` relation for validation. The decrypted JWT contains the following information:
+
+- `jti`: Token identifier (UUID)
+- `sub`: Account ID (UUID)
+- `email`: primary eMail address of the account
+- `iss`: issuer ("entrecode")
+- `iat`: timestamp (in seconds) the token was issued
+- `exp`: expiration timestamp of the token (in seconds)
+
+See [JWT libraries](http://jwt.io/#libraries) for JWT decoding and validating.
+
+The issued access token has to be sent using the following HTTP Header:
+
+    Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJlbWFpbCI6InRlc3RAZW50cmVjb2RlLmRlIiwianRpIjoiYjQ0MDE5ODAtODkwOC00OWIyLWE4YjQtYTBjOGI4OWQ2Nzk2IiwiaWF0IjoxNDQwNDk0MTI0LCJleHAiOjE0NDA0OTc3MjQsImlzcyI6ImVudHJlY29kZSIsInN1YiI6IjA3MDBkYWNlLTA1YTgtNDk2Zi05YTFhLTIwYTdmODQ4ODQ5NiJ9.O3HPjePx1uHsA4QyOAer3za0JrxpH_WiKV__9eTTD_2CwlGp2Mjv03wG49mdg_NQUIPFAISqJZMZTiTI0S3hPVYQ1N5_zhqSyWE29OJlCD0yFbcZIEglyydYydBhtj9yPgNhhjCKSSKjrTWqXlBV-KMrVJOqqmjVn55DEdATppqOWWQgI18_FXcL7zXZR5qGuZ8JTUBhCxQ9p1bu7ydRmJQHzxvoqfb_IN6sc6QycsOMs6pSrdatGK0GTFjyjvR1EWBaPgyTQo90Q0o9l7dLTQoueqdkzNH7A0BiRgGiqB775DeEBpGoO5oJYjVQGo7IcdKwIBKNV8WRvgecwT-w3w
+    
+To acquire an access token, auth/login for user credentials or auth/facebook or auth/google has to be called. See the Link Relation table of the Entry Point Resource for details.
+
+## Client registration
+Client registration is needed to obtain access tokens. Due to the authentication flow of OAuth, the end user is sent to the OAuth Provider in the browser, and afterwards redirected back to the client application. The access token can only be sent to the client using a valid redirect URL that gets the token appended as query string parameter or cookie.
+
+Currently, clients can only be registered manually.
+The following information is needed:
+
+- `clientID`: Unique string identifier for the client. Has to be appended to requests.
+- `callbackURL`: URL to send the user agent back to after success
+- `config` (JSON):
+    - `tokenMethod`: Specifies how the token is sent back to the client. Values: `query`, `cookie` or `body`. Can also be an array with multiple values. `body` only works with local Authentication (email/password). Default: `query`
+    - `disableStrategies`: Disallow one or more login strategies for this client. Array containing any of `facebook`, `google`, `password`. Default: `null` (all strategies enabled)
+
+`config` can contain a parameter `"tokenMethod": "cookie"` for the token to be sent as cookie. Default is `query`, so the token gets sent in the query string as `token` parameter.
+
+Clients are expected to look for the token in that parameter and save it locally. Note that they should be stored into cookies instead of HTML 5 Local Storage due to security issues (XSRF attacks): [Where to Store Your JWTs](https://stormpath.com/blog/where-to-store-your-jwts-cookies-vs-html5-web-storage/)
+
+# Authorization
+entrecode uses a permission based authorization and permission system. Basically:
+
+- accounts can be in any number of groups
+- accounts as well as groups can have permissions
+- account permissions are the sum of all permissions assigned directly to an account, as well as permissions assigned to any group the account is member of
+- permissions are hierarchically organized in a [Shiro](http://shiro.apache.org/permissions.html)-like manner using [node shiro trie](https://github.com/entrecode/node-shiro-trie)
+
+# Account Server API
 
 * **Entry Point:** [https://accounts.entrecode.de/](https://accounts.entrecode.de/)
+* **[Richardson](http://martinfowler.com/articles/richardsonMaturityModel.html) Maturity Level:** 3 (full Hypermedia)
 * **Media Type:** `application/hal+json` ([HAL](https://tools.ietf.org/html/draft-kelly-json-hal-06))
+* **Root Resource:** `ec:auth` [(Auth Entry Point)](resources/auth/)
+* **Authentication:** Bearer Token aquired using the [Account Server API](#authentication)
 
-### Authentication
-Most API Calls require Authorization. 
-The issued Authorization Token (`access_token`) has to be sent using the following HTTP Header:
+# State Diagram
 
-    Authorization: Bearer AbCdEf1234567890
-    
-To acquire an access token, auth/register, auth/login for user credentials or auth/oauth for OAuth registration/login has to be called. See the Link Relation table of the Entry Point Resource for details.
+[![State Diagram](img/statediagram-acc.svg)](img/statediagram-acc.svg)
 
-### Relations
-Link Relation names are those registered with the [IANA](http://www.iana.org/assignments/link-relations/link-relations.xhtml). Additionally, custom link relations are used which are built in the form `https://entrecode.de/spec/rels/<relation>/<optional_subrelation>`. Those relations are also links to their own documentation. 
+# Relations
+
+Link Relation names are those registered with the [IANA](http://www.iana.org/assignments/link-relations/link-relations.xhtml). Additionally, custom link relations are used which are built in the form `https://doc.entrecode.de/en/latest/App_Manager/#link-relations/<relation>`. Those relations are also links to their own documentation (on this page). 
 For brevity, [CURIE Syntax](http://www.w3.org/TR/curie/) is used which results in relation names of the form `ec:<relation>/<optional_subrelation>`. 
 
-### Resources
-* [Entry Point](#entry-point)
-* [ec:accounts](#accounts) (Account Management)
-    * [ec:account](#account)
-        * [ec:account/tokens](#account-tokens)
-            * [ec:account/token](#account-token)
-        * [ec:account/change-email-verification](#account-change-email-verificaton)
-* Authentication
-    * [ec:auth/register](#auth-register)
-    * [ec:auth/login](#auth-login)
-    * [ec:auth/logout](#auth-logout)
-    * [ec:auth/password-reset](#auth-password-reset)
-    * [ec:auth/email-available](#auth-email-available)
-    * [ec:auth/email-verification](#auth-email-verification)
-    * [ec:auth/oauth](#auth-oauth)
+Additional to the official link relations defined by [IANA](http://www.iana.org/assignments/link-relations/link-relations.xhtml) the App Manager uses the following:
 
 
-### Generic list resources
-In general (i.e. unless stated otherwise), list resources support pagination, sorting and filtering.
-
-##### Pagination:
-Link relations `prev`, `next` and `first` SHOULD be used for pagination.
-Internally, pagination is realized with the query string parameters `page` and `size`. 
-`page` defaults to `1` and `size` defaults to `10`. 
-
-##### Sorting:
-To sort by a different than the default property, the following query string parameter can be used: `sort={direction}{property}` where `direction` defaults to `+` (ascending order) and can be set to `-` (descending order).
-
-##### Filtering:
-**Exact Match:** A query string parameter of the form `{property}={value}` can be used for an exact-match filter. If used with an ID parameter, only one item will be returned and no list resource.
-
-**Search:** A query string parameter of the form `{property}~={value}` can be used for searching (non-exact-match filter).
-
-**Ranges:** A query string parameter of the form `{property}From={value}` and `{property}To={value}` can be used for specifying ranges. If only one of the two is given, the other is minimum resp. maximum.
-
-###### Examples:
-
-* `resource?page=2` items 11 to 20
-* `resource?page=2&size=50`items 51 to 100
-* `resource?sort=price` ordered by price in ascending order (lowest first)
-* `resource?sort=+price` same as above
-* `resource?sort=-price` ordered by price in descending order (highest first)
-* `resource?id=38fa21` item with id 38fa21
-* `resource?name=Doe` all items with the value Doe as name
-* `resource?email~=gmail` all items that contain gmail in the email property
-* `resource?priceFrom=100` all items with a price >= 100
-* `resource?priceTo=100` all items with a price <=100
-* `resource?priceFrom=50&priceTo=100` all items with a price between 50 and 100
-
-All combinations are possible.
+| Link Relation             | Target Resource                               | Description |
+|---------------------------|-----------------------------------------------------------|-------------|
+| <a name="relation-auth"></a>`ec:auth`                  | [Auth](resources/auth/)                          | Entry Point|
+|<a name="relation-auth/public-key"></a>`ec:auth/public-key`| [Auth/PublicKey](resources/auth/#public-key)  | Public RSA key for validation of access token JWTs |
+|<a name="relation-auth/register"></a>`ec:auth/register`| [Auth/Signup](resources/auth/#signup) | Registration with email/password |
+|<a name="relation-auth/login"></a>`ec:auth/login`|  | Login with email/password |
+|<a name="relation-auth/logout"></a>`ec:auth/logout`|  | Invalidation of an access token |
+|<a name="relation-auth/password-reset"></a>`ec:auth/password-reset`|  | Changing a registered password |
+|<a name="relation-auth/email-available"></a>`ec:auth/email-available`|  | Check if a given email is available for registration |
+|<a name="relation-auth/email-verification"></a>`ec:auth/email-verification`|  | Verification link for email address |
+|<a name="relation-auth/facebook"></a>`ec:auth/facebook`|  | Login/Register using Facebook |
+|<a name="relation-auth/google"></a>`ec:auth/google`|  | Login/Register using Google |
+|<a name="relation-accounts"></a>`ec:accounts`|  | Account List |
+|<a name="relation-account"></a>`ec:account`|  | Single Account |
+|<a name="relation-account/tokens"></a>`ec:account/tokens`|  | Access Tokens of an account |
+|<a name="relation-account/token"></a>`ec:account/token`|  | Single Access Token of an account |
+|<a name="relation-account/change-email-verification"></a>`ec:account/change-email-verification`|  | Verification link for changing email address |

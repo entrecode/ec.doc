@@ -11,6 +11,7 @@ The JSON Schema is [https://entrecode.de/schema/app](https://entrecode.de/schema
 |appID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for an App | No. Gets generated on creation. |
 |created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of the App| No. Gets written on creation. |
 |title|String||Friendly name for the App|Yes|
+|hexColor|String|6-digit hex color `#rrggbb` `/^#[A-Fa-f0-9]{6}$/`|Color identifier for editor.|Yes|
 
 # Relations
 
@@ -18,10 +19,10 @@ The JSON Schema is [https://entrecode.de/schema/app](https://entrecode.de/schema
 |---------------|-----------------|-------------|-----------------|
 | self          | [App](#)| The resource itself | GET, PUT, DELETE |
 | collection    | [App List](#list)| List of all available Apps | GET, POST|
-| ec:app/platforms | [Platform List](resources/platform#list) | List of this App´s platforms | GET, POST |
-| ec:app/codesources | [CodeSource List](resources/codesource#list) | List of CodeSources configured for this App | GET, POST |
-| ec:app/datasources | [DataSource List](resources/datasource#list) | List of DataSources configured for this App | GET, POST |
-| ec:app/targets | [Target List](resources/target#list) | List of Targets configured for this App | GET, POST |
+| ec:app/platforms | [Platform List](./platform/#list) | List of this App´s platforms | GET, POST |
+| ec:app/codesources | [CodeSource List](./codesource/#list) | List of CodeSources configured for this App | GET, POST |
+| ec:app/datasources | [DataSource List](./datasource/#list) | List of DataSources configured for this App | GET, POST |
+| ec:app/targets | [Target List](./target/#list) | List of Targets configured for this App | GET, POST |
 
 # List
 

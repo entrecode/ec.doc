@@ -16,7 +16,7 @@ When accessing the Entry Point, the following resource is returned containing li
 |ec:account       |The single account of the logged in user.|GET|No.|
 |ec:auth/register |Used to register a new account using credentials.|POST|Yes. Requires `clientID` and `invite` (if activated).|
 |ec:auth/login    |Used to login using credentials|POST|Yes. Requires `clientID`.|
-|ec:auth/logout   |Used to logout a logged in user|POST|No.|
+|ec:auth/logout   |Used to logout a logged in user|GET, POST|Yes. Optionally, the token can be sent as Query String.|
 |ec:auth/password-reset|Used to send an email in case a user forgot her credentials|POST, PUT, DELETE|Yes. Requires the eMail and optional token.|
 |ec:auth/email-available|Used to determine if an email address is still available for registration.|GET |Yes. Requires the eMail address to check.|
 |ec:auth/facebook |Used to login and/or register using Facebook|POST|Yes. Requires `clientID` and `invite` (if activated and not registered yet).|
@@ -58,6 +58,19 @@ To log in a user using user credentials, the following has to be sent in a POST 
 ##### Input
 To login and optionally register using a Google or Facebook account, follow this relation (simple GET). Note that the `clientID` query string parameter is still needed, as well as an `invite` (here also sent as query string parameter) if configured. The user will redirected to the auth provider for credentials.
 
+## Logout
+
+Log out a user. The used access token's `validUntil` timestamp will be altered to now, which makes it unusable for further actions. This only affects this one access token – if the account is still logged in at another device, this is unaffected by the logout operation.
+
+**Variant A: GET** 
+
+A plain GET request, usable for Hyperlinking, with the access token to invalidate attached as query string value for `token`.
+
+**Variant B: POST**
+
+POST request with Bearer authentication. The used token will be invalidated.
+
+Both requests also require a valid `clientID`. The user agent will get redirected back to the registered callback URL.
 
 ##  Authentication Response
 
@@ -103,6 +116,7 @@ To connect an Facebook or Google account to an existing account (no matter how i
 
 The `ec:public-key` relation returns the Public RSA Key of the Server in PEM format for validation of the token signature.
 
+
 # Other resources (RESTful)
 
 ### email-available
@@ -124,27 +138,6 @@ The following has to be sent in a GET **(!)** Request:
 |---------------|-------------------|
 |email          |eMail address that was checked|
 |available      |true or false    |
-
-
-### logout
-##### Input
-To log out a user, the following has to be sent in a POST Request:
-
-This request has to include a valid access token. If the access tokens lifespan is expired but other than that valid the logout will result in a **204 no content** response.
-
-|Input field    |Description        |
-|---------------|-------------------|
-|email          |eMail address of the logged in account|
-
-
-##### Output
-
-* **204 no content** if the logout succeeded.
-
-##### Error Output
-Additionally to common HTTP Error requests (400 Bad Request, …), the following error output is defined/
-
-* **401 Unauthorized**  if the eMail address does not match the access token.
 
 
 ### password-reset

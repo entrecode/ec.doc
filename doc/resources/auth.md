@@ -16,8 +16,8 @@ When accessing the Entry Point, the following resource is returned containing li
 |ec:account       |The single account of the logged in user.|GET|No.|
 |ec:auth/register |Used to register a new account using credentials.|POST|Yes. Requires `clientID` and `invite` (if activated).|
 |ec:auth/login    |Used to login using credentials|POST|Yes. Requires `clientID`.|
-|ec:auth/logout   |Used to logout a logged in user|POST|No.|
-|ec:auth/password-reset|Used to send an email in case a user forgot her credentials|POST, PUT, DELETE|Yes. Requires the eMail and optional token.|
+|ec:auth/logout   |Used to logout a logged in user|GET, POST|Yes. Optionally, the token can be sent as Query String.|
+|ec:auth/password-reset|Used to send an email in case a user forgot her credentials|GET|Yes. Requires `eMail` and `clientID`|
 |ec:auth/email-available|Used to determine if an email address is still available for registration.|GET |Yes. Requires the eMail address to check.|
 |ec:auth/facebook |Used to login and/or register using Facebook|POST|Yes. Requires `clientID` and `invite` (if activated and not registered yet).|
 |ec:auth/google |Used to login and/or register using Google|POST|Yes. Requires `clientID` and `invite` (if activated and not registered yet).|
@@ -58,6 +58,25 @@ To log in a user using user credentials, the following has to be sent in a POST 
 ##### Input
 To login and optionally register using a Google or Facebook account, follow this relation (simple GET). Note that the `clientID` query string parameter is still needed, as well as an `invite` (here also sent as query string parameter) if configured. The user will redirected to the auth provider for credentials.
 
+## Logout
+
+Log out a user. The used access token's `validUntil` timestamp will be altered to now, which makes it unusable for further actions. This only affects this one access token – if the account is still logged in at another device, this is unaffected by the logout operation.
+
+**Variant A: GET** 
+
+A plain GET request, usable for Hyperlinking, with the access token to invalidate attached as query string value for `token`.
+
+**Variant B: POST**
+
+POST request with Bearer authentication. The used token will be invalidated.
+
+Both requests also require a valid `clientID`. The user agent will get redirected back to the registered callback URL.
+
+## Password Reset
+
+Send the user an email with links to reset the password.
+GET the `ec:auth/password-reset` with `email` and `clientID` template parameters to trigger the password reset. The user agent will get an HTML rendered message for confirmation. 
+The account owner will get an email with two links: for aborting and for setting the new password. Both render an HTML site. After successful resetting the password, the user will be taken back to the origin client with an login response (just as if he successfully authenticated in the first place). 
 
 ##  Authentication Response
 
@@ -103,6 +122,7 @@ To connect an Facebook or Google account to an existing account (no matter how i
 
 The `ec:public-key` relation returns the Public RSA Key of the Server in PEM format for validation of the token signature.
 
+
 # Other resources (RESTful)
 
 ### email-available
@@ -124,101 +144,6 @@ The following has to be sent in a GET **(!)** Request:
 |---------------|-------------------|
 |email          |eMail address that was checked|
 |available      |true or false    |
-
-
-### logout
-##### Input
-To log out a user, the following has to be sent in a POST Request:
-
-This request has to include a valid access token. If the access tokens lifespan is expired but other than that valid the logout will result in a **204 no content** response.
-
-|Input field    |Description        |
-|---------------|-------------------|
-|email          |eMail address of the logged in account|
-
-
-##### Output
-
-* **204 no content** if the logout succeeded.
-
-##### Error Output
-Additionally to common HTTP Error requests (400 Bad Request, …), the following error output is defined/
-
-* **401 Unauthorized**  if the eMail address does not match the access token.
-
-
-### password-reset
-
-#### Request a password reset
-##### Parameter
-To send an eMail to a user providing the possibility to reset the password, the following has to be sent as parameters in a POST Request:
-
-|Input field    |Description        |
-|---------------|-------------------|
-|email          |eMail address of the account|
-
-
-##### Output
-
-* **202 accepted** if the server is sending the email.
-
-##### Error Output
-Additionally to common HTTP Error requests (400 Bad Request, …), the following error output is defined:
-
-* **404 not found** if the eMail is not linked to any account.
-
-#### Perform a password reset
-##### Parameter
-To reset a password, the following has to be sent as parameters in a PUT Request:
-
-|Input field    |Description        |
-|---------------|-------------------|
-|email          |eMail address of the account|
-|password       |new password|
-
-##### Input
-To reset a password, the following has to be sent in a PUT Request:
-
-|Input field    |Description        |
-|---------------|-------------------|
-|token          |password reset token|
-
-
-##### Output
-
-* **201 created** if the password reset was successful.
-
-The user is automatically logged in after the reset, additionally the token will be invalidated. Output body is the same as with [auth/login](#login).
-
-|Field          |Description        |
-|---------------|-------------------|
-|accessToken    |access token to be used for API calls for this user|
-|email          |eMail address of the logged in account|
-|language       |The primary UI language for this account in shortened [RFC5646](http://tools.ietf.org/html/rfc5646) Syntax (`en`, `de`, …)
-|state          |The account state, one of `active`, `inactive`, `blocked`
-|userRole       |The user role of the now logged in user, one of `user` or `princess`
-|validUntil     |Timestamp of the current end of the validity lifetime of this token as ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339)). Will change over time when the access token is used.
-
-*If the account state is `blocked`, no accessToken is included. The client should display an error message.*
-
-##### Error Output
-Additionally to common HTTP Error requests (400 Bad Request, …), the following error output is defined:
-
-* **404 not found** if the eMail or token is not linked to any account.
-
-#### Abort a passwort reset.
-##### Parameter
-To abort a password reset, the following has to be sent as parameters in a DELETE Request:
-
-|Input field    |Description        |
-|---------------|-------------------|
-|email          |eMail address of the account|
-|token          |password reset token|
-
-##### Output
-
-* **204 no content** if the password reset token was successfully invalidated or does not exist.
-
 
 
 ### change-email-verification

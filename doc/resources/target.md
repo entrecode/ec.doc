@@ -62,7 +62,7 @@ All Target types SHOULD contain a required property `hexColor` in the config_sch
 
 ## localWebServer
 
-Expected configuration: a JSON object with the key hexColor` with the desired color shown in the editor frontend (format: `#d23738`).
+Expected configuration: a JSON object with the key `hexColor` with the desired color shown in the editor frontend (format: `#d23738`).
 
 The build result is served directly by the App Server.
 

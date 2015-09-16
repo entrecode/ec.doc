@@ -15,6 +15,7 @@ When accessing the Entry Point, the following resource is returned containing li
 |ec:accounts      |Collection of accounts. Only included for privileged users.|GET|No.|
 |ec:account       |The single account of the logged in user.|GET|No.|
 |ec:auth/register |Used to register a new account using credentials.|POST|Yes. Requires `clientID` and `invite` (if activated).|
+|ec:invites     | List of available invites | GET, POST | No. |
 |ec:auth/login    |Used to login using credentials|POST|Yes. Requires `clientID`.|
 |ec:auth/logout   |Used to logout a logged in user|GET, POST|Yes. Optionally, the token can be sent as Query String.|
 |ec:auth/password-reset|Used to send an email in case a user forgot her credentials|GET|Yes. Requires `eMail` and `clientID`|

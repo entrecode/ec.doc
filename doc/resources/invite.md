@@ -15,7 +15,7 @@ The JSON Schema is [https://entrecode.de/schema/invites](https://entrecode.de/sc
 
 | Relation Name | Target Resource | Description |Possible Methods |
 |---------------|-----------------|-------------|-----------------|
-| self          | [Group](#)| The resource itself | GET, POST |
+| self          | [Invites](#)| The resource itself | GET, POST |
 | ec:auth       | [Entry Point](./auth/#entry-point)| Account Server Entry Point | GET |
 
 # Possible Actions

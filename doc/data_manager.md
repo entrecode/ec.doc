@@ -81,6 +81,44 @@ A field definition consists of the following properties:
 
 If a model has no entries all properties can be changed if the field itself is marked `mutable`. But only some properties can be changed once a model has entries, as listed in the table above.
 
+## Change model/field definition
+If a model has no entries **all** properties and fields can be changed if the field itself is marked `mutable`. But only some properties and fields can be changed once a model has entries.
+
+#### Properties
+In the following table is specified if and how a property can be changed once it has entries:
+
+| property    | change          |
+|-------------|-----------------|
+| title       | no change       |
+| description | always          |
+| titleField  | always          |
+| rights      | always          |
+| fields      | see table below |
+| locales     | always          |
+
+#### Fields
+
+In the following table is specified if and how a field can be changed once it has entries:
+
+|               | text | formattedText | decimal | number | boolean | datetime | location | email | url | phone | json | entry | entries | asset | assets |
+|---------------|------|---------------|---------|--------|---------|----------|----------|-------|-----|-------|------|-------|---------|-------|--------|
+| text          |      | x             | *       | *      | *       | *        | *        | *     | *   | *     | *    | *     | *       | *     | *      |
+| formattedText | x    |               | *       | *      | *       | *        | *        | *     | *   | *     | *    | *     | *       | *     | *      |
+| decimal       | x    | x             |         | o      | *       | o        | -        | -     | -   | -     | -    | -     | -       | -     | -      |
+| number        | x    | x             | x       |        | *       | x        | -        | -     | -   | -     | -    | -     | -       | -     | -      |
+| boolean       | x    | x             | *       | *      |         | -        | -        | -     | -   | -     | -    | -     | -       | -     | -      |
+| datetime      | x    | x             | o       | o      | -       |          | -        | -     | -   | -     | -    | -     | -       | -     | -      |
+| location      | x    | x             | -       | -      | -       | -        |          | -     | -   | -     | x    | -     | -       | -     | -      |
+| email         | x    | x             | -       | -      | -       | -        | -        |       | -   | -     | -    | -     | -       | -     | -      |
+| url           | x    | x             | -       | -      | -       | -        | -        | -     |     | -     | -    | -     | -       | -     | -      |
+| phone         | x    | x             | -       | -      | -       | -        | -        | -     | -   |       | -    | -     | -       | -     | -      |
+| json          | x    | x             | -       | -      | -       | -        | *        | -     | -   | -     |      | -     | *       | -     | *      |
+| entry         | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    |       | x       | -     | -      |
+| entries       | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    | o     |         | -     | -      |
+| asset         | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    | -     | -       |       | x      |
+| assets        | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    | -     | -       | o     |        |
+**Icon Description:** x = OK, o = with data loss, * = with migration, - = not possible, rows are source fields, columns are target fields
+
 ## Mandatory fields
 Those fields are mandatory and included in all models by default. They cannot be deleted or otherwise modified (mutable = `false`).
 

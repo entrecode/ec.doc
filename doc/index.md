@@ -204,6 +204,8 @@ The `verbose` field may be used for further information what is actually wrong w
 | 251  <a name="error-251"></a>  | Password is too short (on registration, only 1251 is defined) |  |  | 400|
 | 252  <a name="error-252"></a>  | Unmatched validation error | TinyValidator4 Error Code with message |  | 400|
 | 253  <a name="error-253"></a>  | Invalid asset to merge |  |  | 400 |
+| 254  <a name="error-254"></a>  | Exceeded maximum levels for nested request. | Number of maximum levels |  | 400 |
+| 255  <a name="error-255"></a>  | Could not get nested resources. | entryID which produced the error |  | 400 |
 | **3xx** | **Semantics Error** |  |  | |
 | 311  <a name="error-311"></a>| Invalid value for property in JSON body | the property with an invalid value | | 400 |
 | 351  <a name="error-351"></a>  | eMail address is unavailable (on registration and email change, only 1351 is defined) |  |  | 403|

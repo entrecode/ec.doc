@@ -151,6 +151,7 @@ The following field names are reserved, since they are used internally by the sy
 * ending with "from"
 * ending with "to"
 * ending with "~"
+* starting with "_"
 
 ## Types
 

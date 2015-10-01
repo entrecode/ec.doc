@@ -49,6 +49,7 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | `ec:assets/deleted`  <a name="relation-assets/deleted"></a>     | [Deleted Assets List](resources/asset/#list) | Assets in the trash |
 | `ec:assets/deleted/options`  <a name="relation-assets/deleted/options"></a>|[Deleted Assets List](resources/asset/#list) | Assets in the trash, filtered |
 | `ec:assets/options`  <a name="relation-assets/options"></a>          | [Asset List](resources/asset/#list) | List of Assets, filtered|
+| `ec:assets/download` <a name="relation-assets/download"></a> | [Asset List](resources/asset/#list) | Downloads all Assets of the list in a single Zip-File
 | `ec:assets/with-tag`  <a name="relation-assets/with-tag"></a>      | [Asset List](resources/asset/#list) | List of Assets with a specific `tag`|
 | `ec:datamanager`  <a name="relation-datamanager"></a>          | [Data Manager](resources/datamanager/) | A single Data Manager |
 | `ec:datamanager/by-id`  <a name="relation-datamanager/by-id"></a>|[Data Manager](resources/datamanager/) | A single Data Manager by `dataManagerID`|

@@ -56,6 +56,9 @@ entrecode uses a permission based authorization and permission system. Basically
 - account permissions are the sum of all permissions assigned directly to an account, as well as permissions assigned to any group the account is member of
 - permissions are hierarchically organized in a [Shiro](http://shiro.apache.org/permissions.html)-like manner using [node shiro trie](https://github.com/entrecode/node-shiro-trie)
 
+# API Keys
+API keys are [Account Resources](resources/account/) without an email address and with no possibility to sign in. Instead, they have one very long-lived access token. They may be used in special cases were a piece of software has to be able to use entrecode APIs just like a user account, without actually involving a user login. To create them, simply POST to `ec:account/create-anonymous` (included in the [Account List Resource](resources/account/#list)). The result is a JSON containing `jwt`, an almost indefinitely valid access token (~ 100 Years) as well as the corresponding `accountID`. After creation, this `accountID` has absolutely no permissions. You can, however, assign permissions to it or put it in a permission group. The access token is currently only visible after creation and cannot be accessed later, so it should be saved immediately.
+
 # Account Server API
 
 * **Entry Point:** [https://accounts.entrecode.de/](https://accounts.entrecode.de/)
@@ -93,3 +96,4 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 |<a name="relation-account/tokens"></a>`ec:account/tokens`|  | Access Tokens of an account |
 |<a name="relation-account/token"></a>`ec:account/token`|  | Single Access Token of an account |
 |<a name="relation-account/change-email-verification"></a>`ec:account/change-email-verification`|  | Verification link for changing email address |
+|<a name="relation-account/create-anonymous"></a>`ec:account/create-anonymous`|  | POST to this resource to create a new anonymous account with an access token. (API key) |

@@ -56,7 +56,9 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | `ec:datamanagers`  <a name="relation-datamanagers"></a>         | [Data Managers](resources/datamanager/#list) | List of Data Managers |
 | `ec:datamanagers/options`  <a name="relation-datamanagers/options"></a>|[Data Managers](resources/datamanager/#list)| List of Data Managers, filtered |
 | `ec:model`  <a name="relation-model"></a>                | [Model](resources/model/)         | A single Model|
+| `ec:model/purge`  <a name="relation-model/purge"></a>                | [Model](resources/model/)         | Deletes all entries of the Model|
 | `ec:model/by-id`  <a name="relation-model/by-id"></a>         | [Model](resources/model/)         | A single Model by `modelID`|
+| `ec:model/purge/by-id`  <a name="relation-model/purge"></a>                | [Model](resources/model/)         | Deletes all entries of the single Model by `modelID`|
 | `ec:models`  <a name="relation-models"></a>               | [Model List](resources/model/#list) | List of Models |
 | `ec:models/options`  <a name="relation-models/options"></a>  | [Model List](resources/model/#list) | List of Models, filtered |
 | `ec:tag`  <a name="relation-tag"></a>                 | [Tag](resources/tag/) | A single Asset Tag |

@@ -148,3 +148,9 @@ To delete a Model including all its data, clients may perform a DELETE on `ec:mo
 If the model is “mandatory” or still has entries, it cannot be deleted – delete the entries in the generated API first.
 
 The success status code is **204 No Content** with an empty response body.
+
+## Purge
+
+To delete all entries of a Model, clients may perform a DELETE on `ec:model/purge` at a single Model Resource.
+
+The success status code is **204 No Content** with an empty response body.

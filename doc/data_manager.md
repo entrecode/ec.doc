@@ -219,19 +219,121 @@ will get the `url` for the asset with `size` 100.
 Additionally there is a API for public assets similar to the `ec:asset[s]`. Please refer to the public documentation found in any data manager in editor.
 
 # User Management
-In every Data Manager there is a predefined and mandatory model `user`. It holds only the mandatory fields stated above. The Data Manager user can add additional fields to the user model, e.g. for a user name, eMail address or billing information.
 
-Additionally the `user` model contains the field `temporaryToken` (Type: `text`).
-The `temporaryToken` field is a version 4 UUID and contains the temporary access token for the user.
+While Data Manager owners (users with an entrecode Account) can generally do anything, the generated APIs have their own User Management. It knows three types of users: *Public*, which is everybody without any authentication (Web Users). *Anonymous* which are users that are created by software, but that never actively registered – useful to have users store their own data in an app without requiring an registration. And finally *Registered* which are users that have actively signed up, providing an email address and at least one login method.
 
-Client-side users of Data Manager APIs will need to POST a `user` entry before they can proceed. Refer to the automatically generated documentation for POST model `user`. This entry will be used for setting the `creator` field when creating an entry of any model. It is also used to authorize any change to an existing entry.
+Anonymous users have one access token that is valid indefinitely or until the sign up and become a registered user.
 
-For users without credentials the `temporaryToken` of the user entry is used as access token with 99 years validity. This token will be deleted and replaced by an actual one once user management (see below) is activated and the user provides credentials.
+Which user levels are available can be configured for a data manager. 
 
-*__The following is functionality of the future. Until now only the anonymous users are implemented.__*
+While Anonymous and Registered users automatically get added to default user roles, one can also create additional roles and assign users to those roles.
 
-Additionally to the `user` model, a Data Manager user can activate user management for a Data Manager (if the booked plans allows that). This means that the model `user` will be extended with `eMail` and `password` (read: passwordHash and salt; wow. such secure. much awesome.). Then client-side users can register with eMail and password. Login/Logout, basic session management and password reset are available. More detailed documentation will follow when implemented.
+Roles can be used in Permission Policies.
 
+> ### *DEPRECATED (< v0.5.0):*
+> *In every Data Manager there is a predefined and mandatory model `user`. It holds only the mandatory fields stated above. The Data Manager user can add additional fields to the user model, e.g. for a user name, eMail address or billing information.*
+> 
+> *Additionally the `user` model contains the field `temporaryToken` (Type: `text`).
+The `temporaryToken` field is a version 4 UUID and contains the temporary access token for the user.*
+> 
+> *Client-side users of Data Manager APIs will need to POST a `user` entry before they can proceed. Refer to the automatically generated documentation for POST model `user`. This entry will be used for setting the `creator` field when creating an entry of any model. It is also used to authorize any change to an existing entry.*
+> 
+> *For users without credentials the `temporaryToken` of the user entry is used as access token with 99 years validity. This token will be deleted and replaced by an actual one once user management (see below) is activated and the user provides credentials.*
+> 
+> *__The following is functionality of the future. Until now only the anonymous users are implemented.__*
+> 
+> *Additionally to the `user` model, a Data Manager user can activate user management for a Data Manager (if the booked plans allows that). This means that the model `user` will be extended with `eMail` and `password` (read: passwordHash and salt; wow. such secure. much awesome.). Then client-side users can register with eMail and password. Login/Logout, basic session management and password reset are available. More detailed documentation will follow when implemented.*
+
+# Permission Policies
+
+There are four possible methods to interact with entries of a model: create (POST), read (GET), update (PUT) and delete (DELETE). By default, none of those methods is permitted (the data manager user can still do everything, however).
+
+Interaction can be permitted using Policies that are specified on the model level. Every model can have any number of policies.
+
+A **Policy** consists of the following properties:
+
+- **Which Method** does the policy allow? (one of `get`, `put`, `post`, `delete`) 
+- does it consider the whole entry or is it **restricted to some fields?** E.g. only allow reading of two specific entry fields.
+- **Who** is getting the permission? Can be either `public`, or one or multiple `roles`
+- Additional **Conditions** the entry has to fulfill
+
+Example:
+
+    {
+        "method": "get",
+        "restrictToFields": [ "title", "description"],
+        "public": false,
+        "roles": ["registered"]
+    }
+    
+*Only registered users can read entries of this model, and only the `title` and `description` property.*
+
+**Conditions** restrict the policy to a subset of entries that fulfill the conditions. They can be nested and are pretty much logical boolean expressions.
+
+A **Condition** can either be
+
+- an Array containing three elements: a condition, `and` or `or`, and another condition
+
+or 
+
+- an Object with the properties `field`, `operator` and either `constant` or `variable`.
+
+The property `field` must be the field name of a field of the model. May also be a system-generated field like `_creator`.
+
+The property `operator` can be `=`, `!=`, `<`, `<=`, `>`, `>=`, `in`, `notIn`, `hasRole` and `hasNotRole`.
+
+The property `constant` can be a JavaScript literal, like a string, a number or `null`. When used with the `in` operator, it can also be an Array containing literals.
+
+The property `variable` can either be `accountID` or `roles` for fields of type `account`, or `now` for fields of type `datetime`.
+
+Some combinations are not valid. E.g. `<`/`>` only makes sense on numerical fields. The `hasRole` operator only works on `account` type fields and either expects one or more roles as `constant` or the variable `roles` (containing all roles the current user has).
+It is not possible to have conditions on policies for the `post` method, and it is also not possible to have `restrictToFields` populated on policies for the `delete` method.
+
+Note that when someone has policies for `put` or `post`, they probably also should have a `get` policy. Otherwise created or modified entries will not be returned, instead a HTTP 204 will be returned without a body. And yes, it is possible to model policies that allow editing of a field that cannot be seen.
+
+Example 1:
+
+    {
+        "method": "put",
+        "restrictToFields": ["editableField"],
+        "public": false,
+        "roles": ["anonymous"],
+        "conditions": [
+            {
+                "field": "_creator",
+                "operator": "=",
+                "variable": "accountID"
+            },
+            "or",
+            {
+                "field": "public",
+                "operator": "="
+                "constant": true
+            }
+        ]
+    }
+
+*Only anonymous users can update the field `editableField` on entries they created or that have the value `true` in the field `public`. Note that the `public` field has to be created manually, if needed.*
+
+Example 2:
+
+    {
+        "method": "post",
+        "restrictToFields": ["data"],
+        "public": false,
+        "roles": ["freeUsers"]
+    },
+    {
+        "method": "post",
+        "restrictRuleToFields": ["data", "hideAds"],
+        "public": false,
+        "roles": ["paidUsers"]
+    }
+    
+*Accounts with the role `freeUsers` can only create entries with the `data` field, whereas accounts with the role `paidUsers` can also set `hideAds`. Unallowed fields get their default value (probably `null` or `false`)*
+
+> ### *DEPRECATED (< v0.5.0):*
+> There are five flags that can be set per model: get, put, postPublic, postPrivate and delete. An entry has a `private` flag that indicates if the entry is accessible by anyone or just the creator.
 
 # Hooks
 Hooks can be used to add additional functionality to models. E.g. they enable you to alter values before saving or to pass data on to another server.

@@ -55,6 +55,10 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | `ec:datamanager/by-id`  <a name="relation-datamanager/by-id"></a>|[Data Manager](resources/datamanager/) | A single Data Manager by `dataManagerID`|
 | `ec:datamanagers`  <a name="relation-datamanagers"></a>         | [Data Managers](resources/datamanager/#list) | List of Data Managers |
 | `ec:datamanagers/options`  <a name="relation-datamanagers/options"></a>|[Data Managers](resources/datamanager/#list)| List of Data Managers, filtered |
+| `ec:dm-client`  <a name="relation-dm-client"></a>          | [Data Manager Client](resources/dm-client/) | A single Data Manager Client|
+| `ec:dm-client/by-id`  <a name="relation-dm-client/by-id"></a>|[Data Manager Client](resources/dm-client/) | A single Data Manager Client by `clientID`|
+| `ec:dm-clients`  <a name="relation-dm-clients"></a>         | [Data Manager Clients](resources/dm-client/#list) | List of Data Manager Clients |
+| `ec:dm-clients/options`  <a name="relation-dm-clients/options"></a>|[Data Manager Clients](resources/dm-client/#list)| List of Data Manager Clients, filtered |
 | `ec:model`  <a name="relation-model"></a>                | [Model](resources/model/)         | A single Model|
 | `ec:model/purge`  <a name="relation-model/purge"></a>                | [Model](resources/model/)         | Deletes all entries of the Model|
 | `ec:model/by-id`  <a name="relation-model/by-id"></a>         | [Model](resources/model/)         | A single Model by `modelID`|
@@ -222,7 +226,7 @@ Additionally there is a API for public assets similar to the `ec:asset[s]`. Plea
 
 While Data Manager owners (users with an entrecode Account) can generally do anything, the generated APIs have their own User Management. It knows three types of users: *Public*, which is everybody without any authentication (Web Users). *Anonymous* which are users that are created by software, but that never actively registered – useful to have users store their own data in an app without requiring an registration. And finally *Registered* which are users that have actively signed up, providing an email address and at least one login method.
 
-Anonymous users have one access token that is valid indefinitely or until the sign up and become a registered user.
+Anonymous users have one access token that is valid indefinitely or until the sign up and become a registered user. Login and Signup can be done using a registered [Data Manager Client](resources/dm-client/).
 
 Which user levels are available can be configured for a data manager. 
 

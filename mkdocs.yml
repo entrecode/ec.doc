@@ -23,6 +23,7 @@ pages:
     - 'Types': 'resources/apptypes.md'
 - Data Manager Resources:
     - 'Asset': 'resources/asset.md'
+    - 'Client': 'resources/dm-client.md'
     - 'DataManager': 'resources/datamanager.md'
     - 'Model': 'resources/model.md'
     - 'Tag': 'resources/tag.md'

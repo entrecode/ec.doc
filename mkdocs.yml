@@ -24,7 +24,9 @@ pages:
 - Data Manager Resources:
     - 'Asset': 'resources/asset.md'
     - 'Client': 'resources/dm-client.md'
-    - 'DataManager': 'resources/datamanager.md'
+    - 'Data Manager': 'resources/datamanager.md'
+    - 'Data Manager Account': 'resources/dm-account.md'
+    - 'Data Manager Role': 'resources/dm-role.md'
     - 'Model': 'resources/model.md'
     - 'Tag': 'resources/tag.md'
 - SDKs:

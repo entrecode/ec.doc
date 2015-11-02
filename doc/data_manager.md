@@ -107,31 +107,33 @@ In the following table is specified if and how a property can be changed once it
 | title       | no change       |
 | description | always          |
 | titleField  | always          |
-| rights      | always          |
+| policies    | always          |
 | fields      | see table below |
 | locales     | always          |
+
 
 #### Fields
 
 In the following table is specified if and how a field can be changed once it has entries:
 
-|               | text | formattedText | decimal | number | boolean | datetime | location | email | url | phone | json | entry | entries | asset | assets |
-|---------------|------|---------------|---------|--------|---------|----------|----------|-------|-----|-------|------|-------|---------|-------|--------|
-| text          |      | x             | *       | *      | *       | *        | *        | *     | *   | *     | *    | *     | *       | *     | *      |
-| formattedText | x    |               | *       | *      | *       | *        | *        | *     | *   | *     | *    | *     | *       | *     | *      |
-| decimal       | x    | x             |         | o      | *       | o        | -        | -     | -   | -     | -    | -     | -       | -     | -      |
-| number        | x    | x             | x       |        | *       | x        | -        | -     | -   | -     | -    | -     | -       | -     | -      |
-| boolean       | x    | x             | *       | *      |         | -        | -        | -     | -   | -     | -    | -     | -       | -     | -      |
-| datetime      | x    | x             | o       | o      | -       |          | -        | -     | -   | -     | -    | -     | -       | -     | -      |
-| location      | x    | x             | -       | -      | -       | -        |          | -     | -   | -     | x    | -     | -       | -     | -      |
-| email         | x    | x             | -       | -      | -       | -        | -        |       | -   | -     | -    | -     | -       | -     | -      |
-| url           | x    | x             | -       | -      | -       | -        | -        | -     |     | -     | -    | -     | -       | -     | -      |
-| phone         | x    | x             | -       | -      | -       | -        | -        | -     | -   |       | -    | -     | -       | -     | -      |
-| json          | x    | x             | -       | -      | -       | -        | *        | -     | -   | -     |      | -     | *       | -     | *      |
-| entry         | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    |       | x       | -     | -      |
-| entries       | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    | o     |         | -     | -      |
-| asset         | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    | -     | -       |       | x      |
-| assets        | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    | -     | -       | o     |        |
+|               | text | formattedText | decimal | number | boolean | datetime | location | email | url | phone | json | entry | entries | asset | assets | account |
+|---------------|------|---------------|---------|--------|---------|----------|----------|-------|-----|-------|------|-------|---------|-------|--------|---------|
+| text          |      | x             | *       | *      | *       | *        | *        | *     | *   | *     | *    | *     | *       | *     | *      | -       |
+| formattedText | x    |               | *       | *      | *       | *        | *        | *     | *   | *     | *    | *     | *       | *     | *      | -       |
+| decimal       | x    | x             |         | o      | *       | o        | -        | -     | -   | -     | -    | -     | -       | -     | -      | -       |
+| number        | x    | x             | x       |        | *       | x        | -        | -     | -   | -     | -    | -     | -       | -     | -      | -       |
+| boolean       | x    | x             | *       | *      |         | -        | -        | -     | -   | -     | -    | -     | -       | -     | -      | -       |
+| datetime      | x    | x             | o       | o      | -       |          | -        | -     | -   | -     | -    | -     | -       | -     | -      | -       |
+| location      | x    | x             | -       | -      | -       | -        |          | -     | -   | -     | x    | -     | -       | -     | -      | -       |
+| email         | x    | x             | -       | -      | -       | -        | -        |       | -   | -     | -    | -     | -       | -     | -      | -       |
+| url           | x    | x             | -       | -      | -       | -        | -        | -     |     | -     | -    | -     | -       | -     | -      | -       |
+| phone         | x    | x             | -       | -      | -       | -        | -        | -     | -   |       | -    | -     | -       | -     | -      | -       |
+| json          | x    | x             | -       | -      | -       | -        | *        | -     | -   | -     |      | -     | *       | -     | *      | -       |
+| entry         | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    |       | x       | -     | -      | -       |
+| entries       | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    | o     |         | -     | -      | -       |
+| asset         | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    | -     | -       |       | x      | -       |
+| assets        | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    | -     | -       | o     |        | -       |
+| account       | -    | -             | -       | -      | -       | -        | -        | -     | -   | -     | -    | -     | -       | -     | -      |         |
 **Icon Description:** x = OK, o = with data loss, * = with migration, - = not possible, rows are source fields, columns are target fields
 
 ## Mandatory fields
@@ -147,7 +149,7 @@ The timestamp of the creation of an entry. All date and time values are UTC in [
 The timestamp of the last modification of an entry. All date and time values are UTC in [RFC3339](https://tools.ietf.org/html/rfc3339) format.
 
 ### creator (Type: `entry`)
-The user account that created this entry. If no account management is active (e.g. no visible account model exists), this field is not included.s
+The user account that created this entry. If no account management is active (e.g. no visible account model exists), this field is not included.
 
 ## Allowed field names
 
@@ -202,6 +204,7 @@ These types are more complex types with a specific domain that abstract from pri
 |`entries`|Link to entries that are related to this one.|Array<br/>(of `entry.id` Strings)|A model to enforce a specific entry type|—|search<br/>(single id that is included)|`["8fa398d2","49a8f3b4"]`|
 |`asset`|Link to a single asset that is related to this entry.|String (`asset.assetID`)|An asset type to enforce a specific type|—|exact|`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"`|
 |`assets`|Link to assets that are related to this one.|Array<br/>(of `asset.assetID` Strings)|An asset type to enforce a specific type|—|search<br/>(single id that is included)|`["371393a6-ab7f-4591-8d5d-54261a52d28b",`<br/>`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"]`|
+|`account`|Link to an account.|UUID (v4)|–|—|exact|`"371393a6-ab7f-4591-8d5d-54261a52d28b"`|
 
 
 # Assets in the Generated API (aka. getBestFile)
@@ -235,6 +238,8 @@ Additionally there is a API for public assets similar to the `ec:asset[s]`. Plea
 While Data Manager owners (users with an entrecode Account) can generally do anything, the generated APIs have their own User Management. It knows three types of users: *Public*, which is everybody without any authentication (Web Users). *Anonymous* which are users that are created by software, but that never actively registered – useful to have users store their own data in an app without requiring an registration. And finally *Registered* which are users that have actively signed up, providing an email address and at least one login method.
 
 Anonymous users have one access token that is valid indefinitely or until the sign up and become a registered user. Login and Signup can be done using a registered [Data Manager Client](resources/dm-client/).
+
+To get an anonymous user, POST to the `<dataManagerShortID>:_auth/anonymous` relation. Optional query parameter can be set to adjust the token validity time. It returns an object containing the long-lived `jwt`, as well as an `accountID` and information about the token validity time.
 
 Which user levels are available can be configured for a data manager. 
 
@@ -298,7 +303,7 @@ The property `constant` can be a JavaScript literal, like a string, a number or 
 
 The property `variable` can either be `accountID` or `roles` for fields of type `account`, or `now` for fields of type `datetime`.
 
-Some combinations are not valid. E.g. `<`/`>` only makes sense on numerical fields. The `hasRole` operator only works on `account` type fields and either expects one or more roles as `constant` or the variable `roles` (containing all roles the current user has).
+Some combinations are not valid. E.g. `<`/`>` only makes sense on numerical fields. The `hasRole` operator only works on `account` type fields and either expects one or more roles as `constant` or the variable `roles` (containing all roles the current user has). `null notIn [Array]` is always false, even if `null` is in the Array – only Arrays with actual values are considered.
 It is not possible to have conditions on policies for the `post` method, and it is also not possible to have `restrictToFields` populated on policies for the `delete` method.
 
 Note that when someone has policies for `put` or `post`, they probably also should have a `get` policy. Otherwise created or modified entries will not be returned, instead a HTTP 204 will be returned without a body. And yes, it is possible to model policies that allow editing of a field that cannot be seen.

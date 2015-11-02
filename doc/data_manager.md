@@ -44,6 +44,7 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | `ec:asset/by-id`  <a name="relation-asset/by-id"></a>        | [Asset](resources/asset/)           | A single Asset by `assetID`|
 | `ec:asset/deleted`  <a name="relation-asset/deleted"></a>     | [Deleted Asset](resources/asset/) | An Asset in the trash |
 | `ec:asset/deleted/by-id`  <a name="relation-asset/deleted/by-id"></a> | [Deleted Asset](resources/asset/) | An Asset in the trash by `assetID` |
+| `ec:asset/deleted/best-file`  <a name="relation-asset/best-file"></a>       | File Subresource  | The content-negotiated “best suited” file for a deleted asset|
 | `ec:asset/file`  <a name="relation-asset/file"></a>| File Subresource | A file of an Asset |
 | `ec:assets`  <a name="relation-assets"></a>                   | [Asset List](resources/asset/#list) | List of Assets|
 | `ec:assets/deleted`  <a name="relation-assets/deleted"></a>     | [Deleted Assets List](resources/asset/#list) | Assets in the trash |

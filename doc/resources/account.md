@@ -7,7 +7,7 @@ The JSON Schema is [https://entrecode.de/schema/account](https://entrecode.de/sc
 # Properties
 | Property | Type | Format | Description | Writable |
 |----------|------|--------|-------------|----------|
-|accountID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for an App | No. Gets generated on creation. |
+|accountID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for an Account | No. Gets generated on creation. |
 |created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of the Account| No. Gets written on creation. |
 |email         |String|valid eMail Address|The primary eMail address of the account| Yes|
 |language      |String|Shortened [RFC5646](http://tools.ietf.org/html/rfc5646) Syntax (`en`, `de`, …)|The primary UI language for this account|Yes|
@@ -38,7 +38,7 @@ The Account List Resource is a [Generic List Resource](/#generic-list-resources)
 
 To read a single Account Resource, clients may perform GET on a `ec:account` relation.
 
-To read the Account List Resource, clients may perform GET on a `ec:accounts` relation or on the `collection` relation of a single App resource.
+To read the Account List Resource, clients may perform GET on a `ec:accounts` relation or on the `collection` relation of a single Account resource.
 
 In both cases, the success status code is **200 OK.**
 
@@ -98,7 +98,7 @@ To create a new Account Resource, the Signup process has to be executed. See `ec
 
 ## Edit
 
-To update an existing App Resource, clients may perform a PUT on `ec:app` or `self` at a single App Resource. The JSON Schema for editing an App is [https://entrecode.de/schema/account-template](https://entrecode.de/schema/account-template). 
+To update an existing Account Resource, clients may perform a PUT on `ec:account` or `self` at a single Account Resource. The JSON Schema for editing an Account is [https://entrecode.de/schema/account-template](https://entrecode.de/schema/account-template). 
 
 All fields are optional and need their own permission. Fields where no permission is available will be ignored.
 
@@ -121,7 +121,7 @@ Editing the groups array is not possible using the Account Resource. Sending the
 
 *Note to deprecated `isPrincess` field: This field is not included anymore. Just add account to the `Princesses` group.*
 
-The success status code is **200 OK** and the response body is the updated single App resource.
+The success status code is **200 OK** and the response body is the updated single Account resource.
 
 ## Delete
 

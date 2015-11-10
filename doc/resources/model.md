@@ -8,13 +8,22 @@ The JSON Schema is [https://entrecode.de/schema/model](https://entrecode.de/sche
 
 | Property | Type | Format | Description | Writable |
 |----------|------|--------|-------------|----------|
-|modelID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for a model | No. Gets generated on creation. |
-|title  | String | a-z A-Z 0-9 _ - Maximum length 256 |The title of a model, unique in this data manager. Should be singular and lower case. |Yes|
-|description	|String||Optional. A detailed description of this model.|Yes|
-|titleField	| String|One of the fields|The field which should be used as title in editor frontend. Default: `id`|Yes|
-|rights| JSON | Object with boolean keys: get, put, postPublic, postPrivate, delete |JSON object of available rights on this model | Yes |
+|created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of this Model| No. Gets written on creation. |
+|description    |String||Optional. A detailed description of this model.|Yes|
 |fields | Array[JSON]  |[Field Definition](/data_manager/#field-data-types)|The fields for resources of this model.|Yes|
-|locales	|Array[String] | [RFC4646](https://tools.ietf.org/html/rfc4646) |JSON array with supported locales by this model. Like `de-DE` or `en-US`.| Yes |
+|hasEntries|Boolean||Indicates if entries exist.|No|
+|hexColor|String|6-digit hex color `#rrggbb` `/^#[A-Fa-f0-9]{6}$/`|Color identifier for editor.|Yes|
+|hooks|Array[JSON] |[Hook Definition](/data_manager/#hooks) | Hooks to perform when using the API | Yes|
+|locales    |Array[String] | [RFC4646](https://tools.ietf.org/html/rfc4646) |JSON array with supported locales by this model. Like `de-DE` or `en-US`.| Yes |
+|modelID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for a model | No. Gets generated on creation. |
+|modified| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the last modification of this Model| No. Gets written on modification. |
+|policies|Array[JSON] |[Policy Definition](/data_manager/#permission-policies) | Permission Policies for the API | Yes|
+|title  | String | a-z A-Z 0-9 _ - Maximum length 256 |The title of a model, unique in this data manager. Should be singular and lower case. |Yes|
+|titleField | String|One of the fields|The field which should be used as title in editor frontend. Default: `id`|Yes|
+||
+|*deprecated:*|
+||
+|rights| JSON | Object with boolean keys: get, put, postPublic, postPrivate, delete |JSON object of available rights on this model | Yes |
 
 # Relations
 
@@ -45,13 +54,6 @@ Example:
     "modelID": "886aa7bb-a8f5-4164-8123-ae0e35bb9b35",
     "title": "recipe",
     "titleField": "name",
-    "rights": {
-        "get": true,
-        "put": true,
-        "postPublic": true,
-        "postPrivate": false,
-        "delete": false
-    },
     "locales": [
     	"en-US",
     	"de-DE"
@@ -124,6 +126,20 @@ Example:
             "validation": null
         },
         ...
+    ],
+    "policies": [
+        {
+            "method": "get",
+            "restrictToFields": [],
+            "public": true,
+            "roles": []
+        },
+        {
+            "method": "post",
+            "restrictRuleToFields": [],
+            "public": false,
+            "roles": ["14i1ord"]
+        }
     ]
 }
 ```
@@ -146,5 +162,11 @@ The success status code is **200 OK** and the response body is the updated singl
 To delete a Model including all its data, clients may perform a DELETE on `ec:model` or `self` at a single Model Resource.
 
 If the model is “mandatory” or still has entries, it cannot be deleted – delete the entries in the generated API first.
+
+The success status code is **204 No Content** with an empty response body.
+
+## Purge
+
+To delete all entries of a Model, clients may perform a DELETE on `ec:model/purge` at a single Model Resource.
 
 The success status code is **204 No Content** with an empty response body.

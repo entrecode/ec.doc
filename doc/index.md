@@ -204,6 +204,9 @@ The `verbose` field may be used for further information what is actually wrong w
 | 251  <a name="error-251"></a>  | Password is too short (on registration, only 1251 is defined) |  |  | 400|
 | 252  <a name="error-252"></a>  | Unmatched validation error | TinyValidator4 Error Code with message |  | 400|
 | 253  <a name="error-253"></a>  | Invalid asset to merge |  |  | 400 |
+| 254  <a name="error-254"></a>  | Exceeded maximum levels for nested request. | Number of maximum levels |  | 400 |
+| 255  <a name="error-255"></a>  | Could not get nested resources. | entryID which produced the error |  | 400 |
+| 256  <a name="error-256"></a>  | Could not create download file. | detailed error response |  | 400 |
 | **3xx** | **Semantics Error** |  |  | |
 | 311  <a name="error-311"></a>| Invalid value for property in JSON body | the property with an invalid value | | 400 |
 | 351  <a name="error-351"></a>  | eMail address is unavailable (on registration and email change, only 1351 is defined) |  |  | 403|
@@ -231,7 +234,7 @@ The `verbose` field may be used for further information what is actually wrong w
 | 401  <a name="error-401"></a>  | Invalid Access Token |  |  | 401|
 | 402  <a name="error-402"></a>  | Outdated Access Token |  |  | 401|
 | 403  <a name="error-403"></a>  | Invalid Password | the email address that attempted the login | Timestamp until login is locked for this email address | 401|
-| 404  <a name="error-404"></a>| Account not found (unknown email address) |  |  | 404|
+| 404  <a name="error-404"></a>  | Account not found (unknown email address) |  |  | 404|
 | 410  <a name="error-410"></a>  | Insufficient rights to access the requested resource |  |  | 401|
 | 411  <a name="error-411"></a>  | Insufficient rights to access the requested resource with this method |  |  | 405|
 | 444  <a name="error-444"></a>  | Denied because of stupidity |  |  | 403|
@@ -241,6 +244,8 @@ The `verbose` field may be used for further information what is actually wrong w
 | 460  <a name="error-460"></a>  | Generic OAuth Error | | more information | 400 |
 | 461  <a name="error-461"></a>  | Facebook OAuth Request failed | Facebook Error Code | Facebook Error Message | 400|
 | 462  <a name="error-462"></a>  | Facebook API call failed to receive eMail address | | more verbose Error Message | 400|
+| 470  <a name="error-470"></a>  | Target resource does not fulfill permission policy conditions | | | 403 |
+| 471  <a name="error-471"></a>  | Property cannot be written due to permission policy restrictions | the property that is not allowed | | 403 |
 | **5xx** | Plan error (not in Accountserver, only 25xx and 35xx are defined) |  |  | |
 | 500  <a name="error-500"></a>  | Missing plan for this product | the product that is not included in the current plan |  | 403|
 | 510  <a name="error-510"></a>  | Insufficient plan for this product | the product whose limit is exceeded in the current plan |  | 403|

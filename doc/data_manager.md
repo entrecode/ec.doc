@@ -44,18 +44,34 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | `ec:asset/by-id`  <a name="relation-asset/by-id"></a>        | [Asset](resources/asset/)           | A single Asset by `assetID`|
 | `ec:asset/deleted`  <a name="relation-asset/deleted"></a>     | [Deleted Asset](resources/asset/) | An Asset in the trash |
 | `ec:asset/deleted/by-id`  <a name="relation-asset/deleted/by-id"></a> | [Deleted Asset](resources/asset/) | An Asset in the trash by `assetID` |
+| `ec:asset/deleted/best-file`  <a name="relation-asset/best-file"></a>       | File Subresource  | The content-negotiated “best suited” file for a deleted asset|
 | `ec:asset/file`  <a name="relation-asset/file"></a>| File Subresource | A file of an Asset |
 | `ec:assets`  <a name="relation-assets"></a>                   | [Asset List](resources/asset/#list) | List of Assets|
 | `ec:assets/deleted`  <a name="relation-assets/deleted"></a>     | [Deleted Assets List](resources/asset/#list) | Assets in the trash |
 | `ec:assets/deleted/options`  <a name="relation-assets/deleted/options"></a>|[Deleted Assets List](resources/asset/#list) | Assets in the trash, filtered |
 | `ec:assets/options`  <a name="relation-assets/options"></a>          | [Asset List](resources/asset/#list) | List of Assets, filtered|
+| `ec:assets/download` <a name="relation-assets/download"></a> | [Asset List](resources/asset/#list) | Downloads all Assets of the list in a single Zip-File
 | `ec:assets/with-tag`  <a name="relation-assets/with-tag"></a>      | [Asset List](resources/asset/#list) | List of Assets with a specific `tag`|
 | `ec:datamanager`  <a name="relation-datamanager"></a>          | [Data Manager](resources/datamanager/) | A single Data Manager |
 | `ec:datamanager/by-id`  <a name="relation-datamanager/by-id"></a>|[Data Manager](resources/datamanager/) | A single Data Manager by `dataManagerID`|
 | `ec:datamanagers`  <a name="relation-datamanagers"></a>         | [Data Managers](resources/datamanager/#list) | List of Data Managers |
 | `ec:datamanagers/options`  <a name="relation-datamanagers/options"></a>|[Data Managers](resources/datamanager/#list)| List of Data Managers, filtered |
+| `ec:dm-account`  <a name="relation-dm-account"></a>          | [Data Manager Account](resources/dm-account/) | A single Data Manager Account|
+| `ec:dm-account/by-id`  <a name="relation-dm-account/by-id"></a>|[Data Manager Account](resources/dm-account/) | A single Data Manager Account by `accountID`|
+| `ec:dm-accounts`  <a name="relation-dm-accounts"></a>         | [Data Manager Accounts](resources/dm-account/#list) | List of Data Manager Accounts |
+| `ec:dm-accounts/options`  <a name="relation-dm-accounts/options"></a>|[Data Manager Accounts](resources/dm-account/#list)| List of Data Manager Accounts, filtered |
+| `ec:dm-client`  <a name="relation-dm-client"></a>          | [Data Manager Client](resources/dm-client/) | A single Data Manager Client|
+| `ec:dm-client/by-id`  <a name="relation-dm-client/by-id"></a>|[Data Manager Client](resources/dm-client/) | A single Data Manager Client by `clientID`|
+| `ec:dm-clients`  <a name="relation-dm-clients"></a>         | [Data Manager Clients](resources/dm-client/#list) | List of Data Manager Clients |
+| `ec:dm-clients/options`  <a name="relation-dm-clients/options"></a>|[Data Manager Clients](resources/dm-client/#list)| List of Data Manager Clients, filtered |
+| `ec:dm-role`  <a name="relation-dm-role"></a>          | [Data Manager Role](resources/dm-role/) | A single Data Manager Role|
+| `ec:dm-role/by-id`  <a name="relation-dm-role/by-id"></a>|[Data Manager Role](resources/dm-role/) | A single Data Manager Role by `roleID`|
+| `ec:dm-roles`  <a name="relation-dm-roles"></a>         | [Data Manager Roles](resources/dm-role/#list) | List of Data Manager Roles |
+| `ec:dm-roles/options`  <a name="relation-dm-roles/options"></a>|[Data Manager Roles](resources/dm-role/#list)| List of Data Manager Roles, filtered |
 | `ec:model`  <a name="relation-model"></a>                | [Model](resources/model/)         | A single Model|
+| `ec:model/purge`  <a name="relation-model/purge"></a>                | [Model](resources/model/)         | Deletes all entries of the Model|
 | `ec:model/by-id`  <a name="relation-model/by-id"></a>         | [Model](resources/model/)         | A single Model by `modelID`|
+| `ec:model/purge/by-id`  <a name="relation-model/purge"></a>                | [Model](resources/model/)         | Deletes all entries of the single Model by `modelID`|
 | `ec:models`  <a name="relation-models"></a>               | [Model List](resources/model/#list) | List of Models |
 | `ec:models/options`  <a name="relation-models/options"></a>  | [Model List](resources/model/#list) | List of Models, filtered |
 | `ec:tag`  <a name="relation-tag"></a>                 | [Tag](resources/tag/) | A single Asset Tag |
@@ -81,6 +97,46 @@ A field definition consists of the following properties:
 
 If a model has no entries all properties can be changed if the field itself is marked `mutable`. But only some properties can be changed once a model has entries, as listed in the table above.
 
+## Change model/field definition
+If a model has no entries **all** properties and fields can be changed if the field itself is marked `mutable`. But only some properties and fields can be changed once a model has entries.
+
+#### Properties
+In the following table is specified if and how a property can be changed once it has entries:
+
+| property    | change          |
+|-------------|-----------------|
+| title       | no change       |
+| description | always          |
+| titleField  | always          |
+| policies    | always          |
+| fields      | see table below |
+| locales     | always          |
+
+
+#### Fields
+
+In the following table is specified if and how a field can be changed once it has entries:
+
+|               | text | formattedText | decimal | number | boolean | datetime | location | email | url | phone | json | entry | entries | asset | assets | account |
+|---------------|------|---------------|---------|--------|---------|----------|----------|-------|-----|-------|------|-------|---------|-------|--------|---------|
+| text          |      | x             | *       | *      | *       | *        | *        | *     | *   | *     | *    | *     | *       | *     | *      | -       |
+| formattedText | x    |               | *       | *      | *       | *        | *        | *     | *   | *     | *    | *     | *       | *     | *      | -       |
+| decimal       | x    | x             |         | o      | *       | o        | -        | -     | -   | -     | -    | -     | -       | -     | -      | -       |
+| number        | x    | x             | x       |        | *       | x        | -        | -     | -   | -     | -    | -     | -       | -     | -      | -       |
+| boolean       | x    | x             | *       | *      |         | -        | -        | -     | -   | -     | -    | -     | -       | -     | -      | -       |
+| datetime      | x    | x             | o       | o      | -       |          | -        | -     | -   | -     | -    | -     | -       | -     | -      | -       |
+| location      | x    | x             | -       | -      | -       | -        |          | -     | -   | -     | x    | -     | -       | -     | -      | -       |
+| email         | x    | x             | -       | -      | -       | -        | -        |       | -   | -     | -    | -     | -       | -     | -      | -       |
+| url           | x    | x             | -       | -      | -       | -        | -        | -     |     | -     | -    | -     | -       | -     | -      | -       |
+| phone         | x    | x             | -       | -      | -       | -        | -        | -     | -   |       | -    | -     | -       | -     | -      | -       |
+| json          | x    | x             | -       | -      | -       | -        | *        | -     | -   | -     |      | -     | *       | -     | *      | -       |
+| entry         | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    |       | x       | -     | -      | -       |
+| entries       | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    | o     |         | -     | -      | -       |
+| asset         | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    | -     | -       |       | x      | -       |
+| assets        | x    | x             | -       | -      | -       | -        | -        | -     | -   | -     | -    | -     | -       | o     |        | -       |
+| account       | -    | -             | -       | -      | -       | -        | -        | -     | -   | -     | -    | -     | -       | -     | -      |         |
+**Icon Description:** x = OK, o = with data loss, * = with migration, - = not possible, rows are source fields, columns are target fields
+
 ## Mandatory fields
 Those fields are mandatory and included in all models by default. They cannot be deleted or otherwise modified (mutable = `false`).
 
@@ -94,7 +150,7 @@ The timestamp of the creation of an entry. All date and time values are UTC in [
 The timestamp of the last modification of an entry. All date and time values are UTC in [RFC3339](https://tools.ietf.org/html/rfc3339) format.
 
 ### creator (Type: `entry`)
-The user account that created this entry. If no account management is active (e.g. no visible account model exists), this field is not included.s
+The user account that created this entry. If no account management is active (e.g. no visible account model exists), this field is not included.
 
 ## Allowed field names
 
@@ -113,6 +169,7 @@ The following field names are reserved, since they are used internally by the sy
 * ending with "from"
 * ending with "to"
 * ending with "~"
+* starting with "_"
 
 ## Types
 
@@ -148,6 +205,7 @@ These types are more complex types with a specific domain that abstract from pri
 |`entries`|Link to entries that are related to this one.|Array<br/>(of `entry.id` Strings)|A model to enforce a specific entry type|—|search<br/>(single id that is included)|`["8fa398d2","49a8f3b4"]`|
 |`asset`|Link to a single asset that is related to this entry.|String (`asset.assetID`)|An asset type to enforce a specific type|—|exact|`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"`|
 |`assets`|Link to assets that are related to this one.|Array<br/>(of `asset.assetID` Strings)|An asset type to enforce a specific type|—|search<br/>(single id that is included)|`["371393a6-ab7f-4591-8d5d-54261a52d28b",`<br/>`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"]`|
+|`account`|Link to an account.|UUID (v4)|–|—|exact|`"371393a6-ab7f-4591-8d5d-54261a52d28b"`|
 
 
 # Assets in the Generated API (aka. getBestFile)
@@ -177,19 +235,123 @@ will get the `url` for the asset with `size` 100.
 Additionally there is a API for public assets similar to the `ec:asset[s]`. Please refer to the public documentation found in any data manager in editor.
 
 # User Management
-In every Data Manager there is a predefined and mandatory model `user`. It holds only the mandatory fields stated above. The Data Manager user can add additional fields to the user model, e.g. for a user name, eMail address or billing information.
 
-Additionally the `user` model contains the field `temporaryToken` (Type: `text`).
-The `temporaryToken` field is a version 4 UUID and contains the temporary access token for the user.
+While Data Manager owners (users with an entrecode Account) can generally do anything, the generated APIs have their own User Management. It knows three types of users: *Public*, which is everybody without any authentication (Web Users). *Anonymous* which are users that are created by software, but that never actively registered – useful to have users store their own data in an app without requiring an registration. And finally *Registered* which are users that have actively signed up, providing an email address and at least one login method.
 
-Client-side users of Data Manager APIs will need to POST a `user` entry before they can proceed. Refer to the automatically generated documentation for POST model `user`. This entry will be used for setting the `creator` field when creating an entry of any model. It is also used to authorize any change to an existing entry.
+Anonymous users have one access token that is valid indefinitely or until the sign up and become a registered user. Login and Signup can be done using a registered [Data Manager Client](resources/dm-client/).
 
-For users without credentials the `temporaryToken` of the user entry is used as access token with 99 years validity. This token will be deleted and replaced by an actual one once user management (see below) is activated and the user provides credentials.
+To get an anonymous user, POST to the `<dataManagerShortID>:_auth/anonymous` relation. Optional query parameter can be set to adjust the token validity time. It returns an object containing the long-lived `jwt`, as well as an `accountID` and information about the token validity time.
 
-*__The following is functionality of the future. Until now only the anonymous users are implemented.__*
+Which user levels are available can be configured for a data manager. 
 
-Additionally to the `user` model, a Data Manager user can activate user management for a Data Manager (if the booked plans allows that). This means that the model `user` will be extended with `eMail` and `password` (read: passwordHash and salt; wow. such secure. much awesome.). Then client-side users can register with eMail and password. Login/Logout, basic session management and password reset are available. More detailed documentation will follow when implemented.
+While Anonymous and Registered users automatically get added to default user roles, one can also create additional roles and assign users to those roles.
 
+Roles can be used in Permission Policies.
+
+> ### *DEPRECATED (< v0.5.0):*
+> *In every Data Manager there is a predefined and mandatory model `user`. It holds only the mandatory fields stated above. The Data Manager user can add additional fields to the user model, e.g. for a user name, eMail address or billing information.*
+> 
+> *Additionally the `user` model contains the field `temporaryToken` (Type: `text`).
+The `temporaryToken` field is a version 4 UUID and contains the temporary access token for the user.*
+> 
+> *Client-side users of Data Manager APIs will need to POST a `user` entry before they can proceed. Refer to the automatically generated documentation for POST model `user`. This entry will be used for setting the `creator` field when creating an entry of any model. It is also used to authorize any change to an existing entry.*
+> 
+> *For users without credentials the `temporaryToken` of the user entry is used as access token with 99 years validity. This token will be deleted and replaced by an actual one once user management (see below) is activated and the user provides credentials.*
+> 
+> *__The following is functionality of the future. Until now only the anonymous users are implemented.__*
+> 
+> *Additionally to the `user` model, a Data Manager user can activate user management for a Data Manager (if the booked plans allows that). This means that the model `user` will be extended with `eMail` and `password` (read: passwordHash and salt; wow. such secure. much awesome.). Then client-side users can register with eMail and password. Login/Logout, basic session management and password reset are available. More detailed documentation will follow when implemented.*
+
+# Permission Policies
+
+There are four possible methods to interact with entries of a model: create (POST), read (GET), update (PUT) and delete (DELETE). By default, none of those methods is permitted (the data manager user can still do everything, however).
+
+Interaction can be permitted using Policies that are specified on the model level. Every model can have any number of policies.
+
+A **Policy** consists of the following properties:
+
+- **Which Method** does the policy allow? (one of `get`, `put`, `post`, `delete`) 
+- does it consider the whole entry or is it **restricted to some fields?** E.g. only allow reading of two specific entry fields.
+- **Who** is getting the permission? Can be either `public`, or one or multiple `roles`
+- Additional **Conditions** the entry has to fulfill
+
+Example:
+
+    {
+        "method": "get",
+        "restrictToFields": [ "title", "description"],
+        "public": false,
+        "roles": ["registered"]
+    }
+    
+*Only registered users can read entries of this model, and only the `title` and `description` property.*
+
+**Conditions** restrict the policy to a subset of entries that fulfill the conditions. They can be nested and are pretty much logical boolean expressions.
+
+A **Condition** can either be
+
+- an Array containing three elements: a condition, `and` or `or`, and another condition
+
+or 
+
+- an Object with the properties `field`, `operator` and either `constant` or `variable`.
+
+The property `field` must be the field name of a field of the model. May also be a system-generated field like `_creator`.
+
+The property `operator` can be `=`, `!=`, `<`, `<=`, `>`, `>=`, `in`, `notIn`, `hasRole` and `hasNotRole`.
+
+The property `constant` can be a JavaScript literal, like a string, a number or `null`. When used with the `in` operator, it can also be an Array containing literals.
+
+The property `variable` can either be `accountID` or `roles` for fields of type `account`, or `now` for fields of type `datetime`.
+
+Some combinations are not valid. E.g. `<`/`>` only makes sense on numerical fields. The `hasRole` operator only works on `account` type fields and either expects one or more roles as `constant` or the variable `roles` (containing all roles the current user has). `null notIn [Array]` is always false, even if `null` is in the Array – only Arrays with actual values are considered.
+It is not possible to have conditions on policies for the `post` method, and it is also not possible to have `restrictToFields` populated on policies for the `delete` method.
+
+Note that when someone has policies for `put` or `post`, they probably also should have a `get` policy. Otherwise created or modified entries will not be returned, instead a HTTP 204 will be returned without a body. And yes, it is possible to model policies that allow editing of a field that cannot be seen.
+
+Example 1:
+
+    {
+        "method": "put",
+        "restrictToFields": ["editableField"],
+        "public": false,
+        "roles": ["anonymous"],
+        "conditions": [
+            {
+                "field": "_creator",
+                "operator": "=",
+                "variable": "accountID"
+            },
+            "or",
+            {
+                "field": "public",
+                "operator": "="
+                "constant": true
+            }
+        ]
+    }
+
+*Only anonymous users can update the field `editableField` on entries they created or that have the value `true` in the field `public`. Note that the `public` field has to be created manually, if needed.*
+
+Example 2:
+
+    {
+        "method": "post",
+        "restrictToFields": ["data"],
+        "public": false,
+        "roles": ["freeUsers"]
+    },
+    {
+        "method": "post",
+        "restrictRuleToFields": ["data", "hideAds"],
+        "public": false,
+        "roles": ["paidUsers"]
+    }
+    
+*Accounts with the role `freeUsers` can only create entries with the `data` field, whereas accounts with the role `paidUsers` can also set `hideAds`. Unallowed fields get their default value (probably `null` or `false`)*
+
+> ### *DEPRECATED (< v0.5.0):*
+> There are five flags that can be set per model: get, put, postPublic, postPrivate and delete. An entry has a `private` flag that indicates if the entry is accessible by anyone or just the creator.
 
 # Hooks
 Hooks can be used to add additional functionality to models. E.g. they enable you to alter values before saving or to pass data on to another server.

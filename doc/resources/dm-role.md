@@ -13,6 +13,7 @@ The JSON Schema is [https://entrecode.de/schema/dm-role](https://entrecode.de/sc
 |----------|------|--------|-------------|----------|
 |roleID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for a role | No. Gets generated on creation. |
 |name| String | | Friendly name for the role | Yes |
+|label| String | | A label for the role (filterable, for categorizing roles) | Yes |
 |addUnregistered| Boolean | | Whether or not new anonymous accounts should be added to this role | Yes |
 |addRegistered | Boolean | | Whether or not new registered accounts should be added to this role | Yes |
 | accounts | Array[String] | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122)) | List of accountIDs in this role | Yes |
@@ -47,6 +48,7 @@ In both cases, the success status code is **200 OK.**
  {
         "roleID": "53361701-09a9-4401-a438-73e1a767c45b",
         "name": "Anonymous Users",
+        "label": "",
         "addUnregistered": true,
         "addRegistered": false,
         "accounts": [],

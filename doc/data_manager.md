@@ -97,6 +97,8 @@ A field definition consists of the following properties:
 
 If a model has no entries all properties can be changed if the field itself is marked `mutable`. But only some properties can be changed once a model has entries, as listed in the table above.
 
+Note that the Data Manager Field data type is published in the generated API as part of the generated JSON schema: the `title` property, which has only descriptive semantics, holds the type (useful for generating forms).
+
 ## Change model/field definition
 If a model has no entries **all** properties and fields can be changed if the field itself is marked `mutable`. But only some properties and fields can be changed once a model has entries.
 

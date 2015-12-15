@@ -59,6 +59,10 @@ To log in a user using user credentials, the following has to be sent in a POST 
 ##### Input
 To login and optionally register using a Google or Facebook account, follow this relation (simple GET). Note that the `clientID` query string parameter is still needed, as well as an `invite` (here also sent as query string parameter) if configured. The user will redirected to the auth provider for credentials.
 
+## API Token (anonymous user)
+
+An API Token (=Anonymous user) can only login once, on registration, and gets a JWT that is valid almost indefinitely long (about 100 Years). To obtain it, simple send an empty POST to the `ec:account/create-anonymous` resource. The response is the default authentication response, similar to after a regular signup.
+
 ## Logout
 
 Log out a user. The used access token's `validUntil` timestamp will be altered to now, which makes it unusable for further actions. This only affects this one access token – if the account is still logged in at another device, this is unaffected by the logout operation.
@@ -78,6 +82,27 @@ Both requests also require a valid `clientID`. The user agent will get redirecte
 Send the user an email with links to reset the password.
 GET the `ec:auth/password-reset` with `email` and `clientID` template parameters to trigger the password reset. The user agent will get an HTML rendered message for confirmation. 
 The account owner will get an email with two links: for aborting and for setting the new password. Both render an HTML site. After successful resetting the password, the user will be taken back to the origin client with an login response (just as if he successfully authenticated in the first place). 
+
+## Change eMail address
+
+An eMail address change is only possible through validation (i.e. opening a link sent to the address).
+
+##### Input
+The following has to be sent in a POST Request:
+
+|Input field    |Description        |
+|---------------|-------------------|
+|email          |new eMail address of the account|
+
+
+##### Output
+
+* **200 ok** 
+
+The response is a HTML page telling the user that an email to the new address has been sent. 
+The change will only be permanent after the link has been opened.
+There will also be a link sent to the old email address. By clicking that link, the link for the new address becomes invalid. If the change has already been approved, it will be changed back to the old address.
+
 
 ##  Authentication Response
 
@@ -113,7 +138,7 @@ These errors are no full JSON errors as the rest of the API use, but plain strin
 |`too_many_login_attempts`  | Too many login attempts, please wait. |
 |`wrong_password`           | Wrong password entered on login. Additionally, a `lockUntil` parameter is appended to the callback URL, containing a timestamp until the login is blocked. |
 
-*`missing_clientID` and `clientID_not_found` are not appended to a registered callback URL but instead the user is redirected back to the HTTP Referer with those codes appended. If no Referer field is set, it triggers HTTP 400 (missing) or HTTP 404 (not found).*
+*`missing_clientID` and `clientID_not_found` are not appended to a registered callback URL but instead the user is redirected back to the HTTP Referer with those codes appended. If no Referer field is set, it triggers HTTP 400 (when `missing_clientID`) or HTTP 404 (when `clientID_not_found`).*
 
 ### Connecting accounts / login methods
 
@@ -123,10 +148,7 @@ To connect an Facebook or Google account to an existing account (no matter how i
 
 The `ec:public-key` relation returns the Public RSA Key of the Server in PEM format for validation of the token signature.
 
-
-# Other resources (RESTful)
-
-### email-available
+## email-available
 
 ##### Input
 This Resource allows verification if an eMail address is still available for registration.
@@ -146,38 +168,3 @@ The following has to be sent in a GET **(!)** Request:
 |email          |eMail address that was checked|
 |available      |true or false    |
 
-
-### change-email-verification
-When the user has requested to change her primary email, this resource is used to verify or abort the change.
-
-#### PUT account/change-email-verification
-##### Parameter
-To complete the eMail change the following has to be sent as parameters in a PUT request.
-
-|Input field    |Description        |
-|---------------|-------------------|
-|token          |verification token for this change|
-
-##### Output
-* **204 no content** if the change was successfully verified.
-
-##### Error Output
-Additionally to common HTTP Error requests (400 Bad Request, …), the following error output is defined:
-
-* **404 not found** – if the token did not produce a match
-
-#### DELETE account/change-email-verification 
-##### Parameter
-To abort the eMail change the following has to be sent as parameters in a DELETE request.
-
-|Input field    |Description        |
-|---------------|-------------------|
-|token          |verification token for this change|
-
-##### Output
-* **204 no content** if the token was successfully revoked.
-
-##### Error Output
-Additionally to common HTTP Error requests (400 Bad Request, …), the following error output is defined:
-
-* **404 not found** – if the token did not produce a match.

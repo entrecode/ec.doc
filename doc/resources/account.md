@@ -105,7 +105,7 @@ All fields are optional and need their own permission. Fields where no permissio
 Permissions:
 
 ```
-acc:edit:<uuid>:language,email,openid,password
+acc:edit:<uuid>:language,openid,password
 acc:change-state:<uuid>
 acc:set-permissions:acc:<uuid>
 ```
@@ -115,7 +115,7 @@ The permission `acc:set-password:<uuid>` enables changing the password without t
 
 Deleting an OAuth / OpenID Connect connection is only allowed if `hasPassword` is true or an other connection which is not pending exists. Adding a connection is not possible via PUT, instead a signup has to be done with an authenticated access token.
 
-Updating the password requires the two fields `oldPassword` and `newPassword`.
+For changing email address or password, the according auth relations have to be used: [Change eMail](resources/auth/#change-email-address), [Password reset](resources/auth/#password-reset). Both require validation over email. 
 
 Editing the groups array is not possible using the Account Resource. Sending the property with a PUT request has no effect. To add accounts to a group, the group resource has to be edited.
 

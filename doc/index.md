@@ -39,6 +39,8 @@ The issued Authorization Token (`access_token`) has to be sent using the followi
 
     Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
     
+The token can also be sent via query string property `_token`.
+    
 The Access Token has to be acquired using the [Accounts API](./account_server/#authentication). It is a [JWT](https://tools.ietf.org/html/rfc7519).
 
 

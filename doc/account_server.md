@@ -31,6 +31,8 @@ The issued access token has to be sent using the following HTTP Header:
 
     Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJlbWFpbCI6InRlc3RAZW50cmVjb2RlLmRlIiwianRpIjoiYjQ0MDE5ODAtODkwOC00OWIyLWE4YjQtYTBjOGI4OWQ2Nzk2IiwiaWF0IjoxNDQwNDk0MTI0LCJleHAiOjE0NDA0OTc3MjQsImlzcyI6ImVudHJlY29kZSIsInN1YiI6IjA3MDBkYWNlLTA1YTgtNDk2Zi05YTFhLTIwYTdmODQ4ODQ5NiJ9.O3HPjePx1uHsA4QyOAer3za0JrxpH_WiKV__9eTTD_2CwlGp2Mjv03wG49mdg_NQUIPFAISqJZMZTiTI0S3hPVYQ1N5_zhqSyWE29OJlCD0yFbcZIEglyydYydBhtj9yPgNhhjCKSSKjrTWqXlBV-KMrVJOqqmjVn55DEdATppqOWWQgI18_FXcL7zXZR5qGuZ8JTUBhCxQ9p1bu7ydRmJQHzxvoqfb_IN6sc6QycsOMs6pSrdatGK0GTFjyjvR1EWBaPgyTQo90Q0o9l7dLTQoueqdkzNH7A0BiRgGiqB775DeEBpGoO5oJYjVQGo7IcdKwIBKNV8WRvgecwT-w3w
     
+The token can also be sent via query string property `_token`.
+    
 To acquire an access token, ec:auth/login for user credentials or ec:auth/facebook or ec:auth/google has to be called. See the Link Relation table of the [Entry Point Resource](resources/auth/#entry-point) for details.
 
 ## Client registration

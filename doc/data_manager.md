@@ -242,7 +242,7 @@ Additionally there is a API for public assets similar to the `ec:asset[s]`. Plea
 
 While Data Manager owners (users with an entrecode Account) can generally do anything, the generated APIs have their own User Management. It knows three types of users: *Public*, which is everybody without any authentication (Web Users). *Anonymous* which are users that are created by software, but that never actively registered – useful to have users store their own data in an app without requiring an registration. And finally *Registered* which are users that have actively signed up, providing an email address and at least one login method.
 
-Anonymous users have one access token that is valid indefinitely or until the sign up and become a registered user. Login and Signup can be done using a registered [Data Manager Client](resources/dm-client/).
+Anonymous users have one access token that is valid indefinitely or until they sign up and become a registered user. Login and Signup can be done using a registered [Data Manager Client](resources/dm-client/).
 
 To get an anonymous user, POST to the `<dataManagerShortID>:_auth/anonymous` relation. Optional query parameter can be set to adjust the token validity time. It returns an object containing the long-lived `jwt`, as well as an `accountID` and information about the token validity time.
 

@@ -16,13 +16,14 @@ The **Entry Point** is [`https://accounts.entrecode.de/`](https://accounts.entre
 
 #### [Data Manager API](./data_manager/)
 
+A Data Manager is a generated REST API with completely dynamic, configurable resources.
 A user can, in general, have any number of Data Manager “Spaces”. The exact number may be limited by the customers plan. A single Data Manager Space manages Assets (Files) and Models with Entries (RESTful Resources).
 
 The **Entry Point** is [`https://datamanager.entrecode.de/`](https://datamanager.entrecode.de/), root relation: [ec:datamanagers](./resources/datamanager/#list)
 
 #### [App Manager API](./app_manager/)
 
-The App Manager is a technical tool for configuring, building and deploying Apps. An App can have multiple platforms to run on.
+The App Manager is a tool for configuring, building and deploying Apps. An App can have multiple platforms to run on.
 
 The **Entry Point** is [`https://appserver.entrecode.de/`](https://appserver.entrecode.de/), root relation: [ec:apps](/resources/app/#list)
 
@@ -52,7 +53,7 @@ In general (i.e. unless stated otherwise), list resources support pagination, so
 ##### Pagination:
 Link relations `prev`, `next` and `first` SHOULD be used for pagination.
 Internally, pagination is realized with the query string parameters `page` and `size`. 
-`page` defaults to `1` and `size` defaults to `10`. 
+`page` defaults to `1` and `size` defaults to `10`. To get *all* items of a list, you may specify `size=0`. Note that this may take considerable time on large resources, so us this function with care.
 
 ##### Sorting:
 To sort by a different than the default property, the following query string parameter can be used: `sort={direction}{property}` where `direction` defaults to `+` (ascending order) and can be set to `-` (descending order).

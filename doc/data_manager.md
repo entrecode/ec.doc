@@ -181,10 +181,10 @@ These types are simple data types.
 
 |Type|Description|Entry<br/>Structure|Validation|Sort-<br/>able|Filterable|Example|
 |----|-----------|---------------|----------|--------|----------|-------|
-|`text`|A simple string value of any length. For common formats, better use [Convenience Types](#convenience-types).|String|Regular Expression|yes|exact, search|`"foo"`|
-|`formattedText`|Same as `text` type, but for formatted text.|String|Regular Expression|yes|exact, search|`"foo"`|
-|`number`|A signed integer number. Keep integer limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range|`7`|
-|`decimal`|A floating point number. Keep precision limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range|`4.2`|
+|`text`|A simple string value of any length. For common formats, better use [Convenience Types](#convenience-types).|String|Regular Expression|yes|exact, search, multiple|`"foo"`|
+|`formattedText`|Same as `text` type, but for formatted text.|String|Regular Expression|yes|exact, search, multiple|`"foo"`|
+|`number`|A signed integer number. Keep integer limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range, multiple|`7`|
+|`decimal`|A floating point number. Keep precision limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range, multiple|`4.2`|
 |`boolean`|A simple true/false flag.|Boolean|—|no|exact|`true`|
 
 ### Convenience Types
@@ -192,24 +192,24 @@ These types are more complex types with a specific domain that abstract from pri
 
 |Type|Description|Entry<br/>Structure|Validation|Sort-<br/>able|Filterable|Example|
 |----|-----------|---------------|----------|--------|----------|-------|
-|`id`  |Unique identification for an entry. This is an own, non-resuable type.|String|—|no|exact|`"j4kd68fz"`|
-|`datetime`|A date and/or time data type in [RFC3339](https://tools.ietf.org/html/rfc3339) format (always including Time Zone).|Date|—|yes|exact, range|`"2015-01-14T13:33:43.168Z"`|
+|`id`  |Unique identification for an entry. This is an own, non-resuable type.|String|—|no|exact, multiple|`"j4kd68fz"`|
+|`datetime`|A date and/or time data type in [RFC3339](https://tools.ietf.org/html/rfc3339) format (always including Time Zone).|Date|—|yes|exact, range, multiple|`"2015-01-14T13:33:43.168Z"`|
 |`location`|A latitude/longitude definition of a location. Uses the JSON schema [http://json-schema.org/geo](http://json-schema.org/geo)|JSON Object with keys `latitude` and `longitude`|—|no|exact, range <br/>(with values `lat,long`)|`{latitude: 48.774702,`<br/>`longitude: 9.1827263}`|
-|`email`|A valid eMail address. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search|`"info@domain.com"`|
-|`url`|A valid URL. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search|`"http://entrecode.de"`|
-|`phone`|A valid Phone number according to [E.164](http://www.itu.int/rec/T-REC-E.164/en). Will automatically formatted in international format according to the default locale of the current Data Manager with [libphonenumber](https://github.com/googlei18n/libphonenumber) |String|—|yes|exact, search|`"+49711832468234"`|
+|`email`|A valid eMail address. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search, multiple|`"info@domain.com"`|
+|`url`|A valid URL. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search, multiple|`"http://entrecode.de"`|
+|`phone`|A valid Phone number according to [E.164](http://www.itu.int/rec/T-REC-E.164/en). Will automatically formatted in international format according to the default locale of the current Data Manager with [libphonenumber](https://github.com/googlei18n/libphonenumber) |String|—|yes|exact, search, multiple|`"+49711832468234"`|
 |`json`|A generic JSON object. |JSON Object|A valid [JSON Schema](https://tools.ietf.org/html/draft-kelly-json-hal-06)|no|—|`{key: "value"}`|
 
 
 ### Linked Types
 |Type|Description|Entry<br/>Structure|Validation|Sort-<br/>able|Filterable|Example|
 |----|-----------|---------------|----------|--------|----------|-------|
-|`entry`|Link to a single entry that is related to this one.|String (`entry.id`)|A model to enforce a specific entry type|—|exact|`"49a8f3b4"`|
-|`entries`|Link to entries that are related to this one.|Array<br/>(of `entry.id` Strings)|A model to enforce a specific entry type|—|search<br/>(single id that is included)|`["8fa398d2","49a8f3b4"]`|
-|`asset`|Link to a single asset that is related to this entry.|String (`asset.assetID`)|An asset type to enforce a specific type|—|exact|`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"`|
-|`assets`|Link to assets that are related to this one.|Array<br/>(of `asset.assetID` Strings)|An asset type to enforce a specific type|—|search<br/>(single id that is included)|`["371393a6-ab7f-4591-8d5d-54261a52d28b",`<br/>`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"]`|
-|`account`|Link to an account.|UUID (v4)|–|—|exact|`"371393a6-ab7f-4591-8d5d-54261a52d28b"`|
-|`role`|Link to a role.|UUID (v4)|String (role label)|—|exact|`"a118f6a0-0d74-463d-b1d7-afcf3eb6da3a"`|
+|`entry`|Link to a single entry that is related to this one.|String (`entry.id`)|A model to enforce a specific entry type|—|exact, multiple|`"49a8f3b4"`|
+|`entries`|Link to entries that are related to this one.|Array<br/>(of `entry.id` Strings)|A model to enforce a specific entry type|—|search<br/>(single id that is included), multiple|`["8fa398d2","49a8f3b4"]`|
+|`asset`|Link to a single asset that is related to this entry.|String (`asset.assetID`)|An asset type to enforce a specific type|—|exact, multiple|`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"`|
+|`assets`|Link to assets that are related to this one.|Array<br/>(of `asset.assetID` Strings)|An asset type to enforce a specific type|—|search<br/>(single id that is included), multiple|`["371393a6-ab7f-4591-8d5d-54261a52d28b",`<br/>`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"]`|
+|`account`|Link to an account.|UUID (v4)|–|—|exact, multiple|`"371393a6-ab7f-4591-8d5d-54261a52d28b"`|
+|`role`|Link to a role.|UUID (v4)|String (role label)|—|exact, multiple|`"a118f6a0-0d74-463d-b1d7-afcf3eb6da3a"`|
 
 
 # Assets in the Generated API (aka. getBestFile)

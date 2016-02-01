@@ -54,6 +54,7 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | `ec:assets/with-tag`  <a name="relation-assets/with-tag"></a>      | [Asset List](resources/asset/#list) | List of Assets with a specific `tag`|
 | `ec:datamanager`  <a name="relation-datamanager"></a>          | [Data Manager](resources/datamanager/) | A single Data Manager |
 | `ec:datamanager/by-id`  <a name="relation-datamanager/by-id"></a>|[Data Manager](resources/datamanager/) | A single Data Manager by `dataManagerID`|
+| `ec:datamanager/export`  <a name="relation-datamanager/export"></a>|[Data Manager](resources/datamanager/) | Postman Collection export of a single Data Manager |
 | `ec:datamanagers`  <a name="relation-datamanagers"></a>         | [Data Managers](resources/datamanager/#list) | List of Data Managers |
 | `ec:datamanagers/options`  <a name="relation-datamanagers/options"></a>|[Data Managers](resources/datamanager/#list)| List of Data Managers, filtered |
 | `ec:dm-account`  <a name="relation-dm-account"></a>          | [Data Manager Account](resources/dm-account/) | A single Data Manager Account|

@@ -24,9 +24,10 @@ The JSON Schema is [https://entrecode.de/schema/datamanager](https://entrecode.d
 |---------------|-----------------|-------------|-----------------|
 | self          | [Data Manager](#)| The resource itself | GET, PUT |
 | collection    | [Data Manager List](#list)| List of all available Data Managers | GET, POST|
-|ec:assets     | [Asset List](./asset/#list) | Collection of assets associated with this Data Manager Space. |GET, POST|
-|ec:assets/deleted| [Asset List](./asset/#list) | Collection of deleted assets associated with this Data Manager Space. |GET|
-|ec:models     |[Model List](./model/#list)|Collection of models associated with this Data Manager Space. |GET, POST|
+| ec:assets     | [Asset List](./asset/#list) | Collection of assets associated with this Data Manager Space. |GET, POST|
+| ec:assets/deleted| [Asset List](./asset/#list) | Collection of deleted assets associated with this Data Manager Space. |GET|
+| ec:models     |[Model List](./model/#list)|Collection of models associated with this Data Manager Space. |GET, POST|
+| ec:datamanager/export |[Export Data Manager](#export)|Postman Collection export of a Data Manager. |POST|
 
 # List
 
@@ -63,3 +64,11 @@ To delete a Data Manager including all its data, clients may perform a DELETE on
 *It is not possible to restore a deleted Data Manager in any way, so handle this method with care!*
 
 The success status code is **204 No Content** with an empty response body.
+
+## Export
+
+To export the structure of a Data Manager Resource, clients can follow the relation `ec:datamananger/export` and perform a POST request. This will create a [Postman Collection](https://www.getpostman.com/docs/collections) which in turn can be used in [Postman](https://www.getpostman.com/) (or [Newman Runner](https://www.getpostman.com/docs/newman_intro); or [ec.service-newman](https://stash.entrecode.de/projects/MICRO/repos/ec.service-newman/browse)) in order to create a copy of the Data Manager. Note that only the Data Manager config itself, clients, roles, models, and policies are exported. Entries and Assets will be left behind.
+
+The success status code is **200 OK.** and the response body will be a object containing `collection` and `dataScheme`. `collection` is the Postman Collection and `dataScheme` is a [JSON Schema](http://json-schema.org/) of the required variables for the collection.
+
+The exported collection can also be used for creating a template for Data Managers. But this won't be part of this documentation.

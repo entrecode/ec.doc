@@ -69,6 +69,10 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | `ec:dm-role/by-id`  <a name="relation-dm-role/by-id"></a>|[Data Manager Role](resources/dm-role/) | A single Data Manager Role by `roleID`|
 | `ec:dm-roles`  <a name="relation-dm-roles"></a>         | [Data Manager Roles](resources/dm-role/#list) | List of Data Manager Roles |
 | `ec:dm-roles/options`  <a name="relation-dm-roles/options"></a>|[Data Manager Roles](resources/dm-role/#list)| List of Data Manager Roles, filtered |
+| `ec:dm-template`  <a name="relation-dm-template"></a>          | [Data Manager Template](resources/dm-template/) | A single Data Manager template|
+| `ec:dm-template/by-id`  <a name="relation-dm-template/by-id"></a>|[Data Manager Template](resources/dm-template/) | A single Data Manager template by `templateID`|
+| `ec:dm-templates`  <a name="relation-dm-templates"></a>         | [Data Manager Templates](resources/dm-template/#list) | List of Data Manager templates |
+| `ec:dm-templates/options`  <a name="relation-dm-templates/options"></a>|[Data Manager Templates](resources/dm-template/#list)| List of Data Manager templates, filtered |
 | `ec:model`  <a name="relation-model"></a>                | [Model](resources/model/)         | A single Model|
 | `ec:model/purge`  <a name="relation-model/purge"></a>                | [Model](resources/model/)         | Deletes all entries of the Model|
 | `ec:model/by-id`  <a name="relation-model/by-id"></a>         | [Model](resources/model/)         | A single Model by `modelID`|
@@ -340,7 +344,6 @@ Example 2:
     }
     
 *Accounts with the role `freeUsers` can only create entries with the `data` field, whereas accounts with the role `paidUsers` can also set `hideAds`. Unallowed fields get their default value (probably `null` or `false`)*
-
 
 # Hooks
 Hooks can be used to add additional functionality to models. E.g. they enable you to alter values before saving or to pass data on to another server.

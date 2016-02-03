@@ -9,8 +9,8 @@ The JSON Schema is [https://entrecode.de/schema/datamanager](https://entrecode.d
 |----------|------|--------|-------------|----------|
 | dataManagerID | String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for this Data Manager | No. Gets generated on creation. |
 |created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of this Data Manager| No. Gets written on creation. |
-|title|String||Friendly name for the Data Manager|Yes|
-|description|String||A longer description for this Data Manager Space.|Yes|
+|title|String| | Friendly name for the Data Manager|Yes|
+|description|String| | A longer description for this Data Manager Space.|Yes|
 |hexColor|String|6-digit hex color `#rrggbb` `/^#[A-Fa-f0-9]{6}$/`|Color identifier for editor.|Yes|
 |config | JSON |  		|A JSON object for various configurations. See Schema for details.| Yes|
 |rights  | Array | One of  `manageRights`, `editModel`, `editEntries`, `editAssets`, `manageAPIs`| *Deprecated* Array of available rights. Not included rights are not available. | No |

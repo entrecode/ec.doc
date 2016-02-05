@@ -55,8 +55,10 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | `ec:datamanager`  <a name="relation-datamanager"></a>          | [Data Manager](resources/datamanager/) | A single Data Manager |
 | `ec:datamanager/by-id`  <a name="relation-datamanager/by-id"></a>|[Data Manager](resources/datamanager/) | A single Data Manager by `dataManagerID`|
 | `ec:datamanager/export`  <a name="relation-datamanager/export"></a>|[Data Manager](resources/datamanager/) | Postman Collection export of a single Data Manager |
+| `ec:datamanager/update-from-template`  <a name="relation-datamanager/update-from-template"></a>|[Data Manager](resources/datamanager/) | (only PUT) Try to update Data Manager to template |
 | `ec:datamanagers`  <a name="relation-datamanagers"></a>         | [Data Managers](resources/datamanager/#list) | List of Data Managers |
 | `ec:datamanagers/options`  <a name="relation-datamanagers/options"></a>|[Data Managers](resources/datamanager/#list)| List of Data Managers, filtered |
+| `ec:datamanagers/new-from-template` <a name="relation-datamanagers/new-from-template"></a>| [Data Managers](resources/datamanager/#list) | (only POST) Create a new Data Manager from Template |
 | `ec:dm-account`  <a name="relation-dm-account"></a>          | [Data Manager Account](resources/dm-account/) | A single Data Manager Account|
 | `ec:dm-account/by-id`  <a name="relation-dm-account/by-id"></a>|[Data Manager Account](resources/dm-account/) | A single Data Manager Account by `accountID`|
 | `ec:dm-accounts`  <a name="relation-dm-accounts"></a>         | [Data Manager Accounts](resources/dm-account/#list) | List of Data Manager Accounts |

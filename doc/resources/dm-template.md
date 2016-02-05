@@ -25,6 +25,8 @@ The JSON Schema is [https://entrecode.de/schema/dm-template](https://entrecode.d
 | collection    | [DM Template List](#list)| List of all available Data Manager Templates | GET, POST |
 | ec:datamanagers| [Data Manager List](./datamanager/#list) | Data Manager entry point | GET, POST |
 | ec:dm-template/parent | [DM Template](#) | Parent Template (previous version of this template) | GET |
+| ec:datamanagers/new-from-template | [Data Managers](resources/datamanager/#list) | Create a new Data Manager from this template | POST |
+| ec:datamanager/update-from-template |[Data Manager](resources/datamanager/) | Try to update Data Manager to template (templated Link)| PUT |
 
 
 # List

@@ -27,6 +27,7 @@ The JSON Schema is [https://entrecode.de/schema/datamanager](https://entrecode.d
 | ec:assets     | [Asset List](./asset/#list) | Collection of assets associated with this Data Manager Space. |GET, POST|
 | ec:assets/deleted| [Asset List](./asset/#list) | Collection of deleted assets associated with this Data Manager Space. |GET|
 | ec:models     |[Model List](./model/#list)|Collection of models associated with this Data Manager Space. |GET, POST|
+| ec:dm-template| [Data Manager Template](./template) | Template that was used when generating this Data Manager (optional) | GET |
 | ec:datamanager/export |[Export Data Manager](#export)|Postman Collection export of a Data Manager. |GET|
 
 # List

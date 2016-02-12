@@ -368,7 +368,8 @@ Example JSON:
         "description": "my test hook" // optional. Makes the hook identifiable in logs etc.
         "config": {
             // type specific
-        }
+        },
+        "hookID": "a0603b90-ee1e-49ce-8201-aa6e06124e2f" // identifier for simpler sorting of multiple hooks. May change.
     },
     {
     // another hook. If it has the same signature ('after' 'post'), it will be executed after the first one.

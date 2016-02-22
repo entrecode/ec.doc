@@ -54,8 +54,11 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | `ec:assets/with-tag`  <a name="relation-assets/with-tag"></a>      | [Asset List](resources/asset/#list) | List of Assets with a specific `tag`|
 | `ec:datamanager`  <a name="relation-datamanager"></a>          | [Data Manager](resources/datamanager/) | A single Data Manager |
 | `ec:datamanager/by-id`  <a name="relation-datamanager/by-id"></a>|[Data Manager](resources/datamanager/) | A single Data Manager by `dataManagerID`|
+| `ec:datamanager/export`  <a name="relation-datamanager/export"></a>|[Data Manager](resources/datamanager/) | Postman Collection export of a single Data Manager |
+| `ec:datamanager/update-from-template`  <a name="relation-datamanager/update-from-template"></a>|[Data Manager](resources/datamanager/) | (only PUT) Try to update Data Manager to template |
 | `ec:datamanagers`  <a name="relation-datamanagers"></a>         | [Data Managers](resources/datamanager/#list) | List of Data Managers |
 | `ec:datamanagers/options`  <a name="relation-datamanagers/options"></a>|[Data Managers](resources/datamanager/#list)| List of Data Managers, filtered |
+| `ec:datamanagers/new-from-template` <a name="relation-datamanagers/new-from-template"></a>| [Data Managers](resources/datamanager/#list) | (only POST) Create a new Data Manager from Template |
 | `ec:dm-account`  <a name="relation-dm-account"></a>          | [Data Manager Account](resources/dm-account/) | A single Data Manager Account|
 | `ec:dm-account/by-id`  <a name="relation-dm-account/by-id"></a>|[Data Manager Account](resources/dm-account/) | A single Data Manager Account by `accountID`|
 | `ec:dm-accounts`  <a name="relation-dm-accounts"></a>         | [Data Manager Accounts](resources/dm-account/#list) | List of Data Manager Accounts |
@@ -68,6 +71,10 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | `ec:dm-role/by-id`  <a name="relation-dm-role/by-id"></a>|[Data Manager Role](resources/dm-role/) | A single Data Manager Role by `roleID`|
 | `ec:dm-roles`  <a name="relation-dm-roles"></a>         | [Data Manager Roles](resources/dm-role/#list) | List of Data Manager Roles |
 | `ec:dm-roles/options`  <a name="relation-dm-roles/options"></a>|[Data Manager Roles](resources/dm-role/#list)| List of Data Manager Roles, filtered |
+| `ec:dm-template`  <a name="relation-dm-template"></a>          | [Data Manager Template](resources/dm-template/) | A single Data Manager template|
+| `ec:dm-template/by-id`  <a name="relation-dm-template/by-id"></a>|[Data Manager Template](resources/dm-template/) | A single Data Manager template by `templateID`|
+| `ec:dm-templates`  <a name="relation-dm-templates"></a>         | [Data Manager Templates](resources/dm-template/#list) | List of Data Manager templates |
+| `ec:dm-templates/options`  <a name="relation-dm-templates/options"></a>|[Data Manager Templates](resources/dm-template/#list)| List of Data Manager templates, filtered |
 | `ec:model`  <a name="relation-model"></a>                | [Model](resources/model/)         | A single Model|
 | `ec:model/purge`  <a name="relation-model/purge"></a>                | [Model](resources/model/)         | Deletes all entries of the Model|
 | `ec:model/by-id`  <a name="relation-model/by-id"></a>         | [Model](resources/model/)         | A single Model by `modelID`|
@@ -181,10 +188,10 @@ These types are simple data types.
 
 |Type|Description|Entry<br/>Structure|Validation|Sort-<br/>able|Filterable|Example|
 |----|-----------|---------------|----------|--------|----------|-------|
-|`text`|A simple string value of any length. For common formats, better use [Convenience Types](#convenience-types).|String|Regular Expression|yes|exact, search|`"foo"`|
-|`formattedText`|Same as `text` type, but for formatted text.|String|Regular Expression|yes|exact, search|`"foo"`|
-|`number`|A signed integer number. Keep integer limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range|`7`|
-|`decimal`|A floating point number. Keep precision limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range|`4.2`|
+|`text`|A simple string value of any length. For common formats, better use [Convenience Types](#convenience-types).|String|Regular Expression|yes|exact, search, multiple|`"foo"`|
+|`formattedText`|Same as `text` type, but for formatted text.|String|Regular Expression|yes|exact, search, multiple|`"foo"`|
+|`number`|A signed integer number. Keep integer limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range, multiple|`7`|
+|`decimal`|A floating point number. Keep precision limits in mind.|Number|Object with `min` and/or `max` values|yes|exact, range, multiple|`4.2`|
 |`boolean`|A simple true/false flag.|Boolean|—|no|exact|`true`|
 
 ### Convenience Types
@@ -192,24 +199,24 @@ These types are more complex types with a specific domain that abstract from pri
 
 |Type|Description|Entry<br/>Structure|Validation|Sort-<br/>able|Filterable|Example|
 |----|-----------|---------------|----------|--------|----------|-------|
-|`id`  |Unique identification for an entry. This is an own, non-resuable type.|String|—|no|exact|`"j4kd68fz"`|
-|`datetime`|A date and/or time data type in [RFC3339](https://tools.ietf.org/html/rfc3339) format (always including Time Zone).|Date|—|yes|exact, range|`"2015-01-14T13:33:43.168Z"`|
+|`id`  |Unique identification for an entry. This is an own, non-resuable type.|String|—|no|exact, multiple|`"j4kd68fz"`|
+|`datetime`|A date and/or time data type in [RFC3339](https://tools.ietf.org/html/rfc3339) format (always including Time Zone).|Date|—|yes|exact, range, multiple|`"2015-01-14T13:33:43.168Z"`|
 |`location`|A latitude/longitude definition of a location. Uses the JSON schema [http://json-schema.org/geo](http://json-schema.org/geo)|JSON Object with keys `latitude` and `longitude`|—|no|exact, range <br/>(with values `lat,long`)|`{latitude: 48.774702,`<br/>`longitude: 9.1827263}`|
-|`email`|A valid eMail address. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search|`"info@domain.com"`|
-|`url`|A valid URL. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search|`"http://entrecode.de"`|
-|`phone`|A valid Phone number according to [E.164](http://www.itu.int/rec/T-REC-E.164/en). Will automatically formatted in international format according to the default locale of the current Data Manager with [libphonenumber](https://github.com/googlei18n/libphonenumber) |String|—|yes|exact, search|`"+49711832468234"`|
+|`email`|A valid eMail address. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search, multiple|`"info@domain.com"`|
+|`url`|A valid URL. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search, multiple|`"http://entrecode.de"`|
+|`phone`|A valid Phone number according to [E.164](http://www.itu.int/rec/T-REC-E.164/en). Will automatically formatted in international format according to the default locale of the current Data Manager with [libphonenumber](https://github.com/googlei18n/libphonenumber) |String|—|yes|exact, search, multiple|`"+49711832468234"`|
 |`json`|A generic JSON object. |JSON Object|A valid [JSON Schema](https://tools.ietf.org/html/draft-kelly-json-hal-06)|no|—|`{key: "value"}`|
 
 
 ### Linked Types
 |Type|Description|Entry<br/>Structure|Validation|Sort-<br/>able|Filterable|Example|
 |----|-----------|---------------|----------|--------|----------|-------|
-|`entry`|Link to a single entry that is related to this one.|String (`entry.id`)|A model to enforce a specific entry type|—|exact|`"49a8f3b4"`|
-|`entries`|Link to entries that are related to this one.|Array<br/>(of `entry.id` Strings)|A model to enforce a specific entry type|—|search<br/>(single id that is included)|`["8fa398d2","49a8f3b4"]`|
-|`asset`|Link to a single asset that is related to this entry.|String (`asset.assetID`)|An asset type to enforce a specific type|—|exact|`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"`|
-|`assets`|Link to assets that are related to this one.|Array<br/>(of `asset.assetID` Strings)|An asset type to enforce a specific type|—|search<br/>(single id that is included)|`["371393a6-ab7f-4591-8d5d-54261a52d28b",`<br/>`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"]`|
-|`account`|Link to an account.|UUID (v4)|–|—|exact|`"371393a6-ab7f-4591-8d5d-54261a52d28b"`|
-|`role`|Link to a role.|UUID (v4)|String (role label)|—|exact|`"a118f6a0-0d74-463d-b1d7-afcf3eb6da3a"`|
+|`entry`|Link to a single entry that is related to this one.|String (`entry.id`)|A model to enforce a specific entry type|—|exact, multiple|`"49a8f3b4"`|
+|`entries`|Link to entries that are related to this one.|Array<br/>(of `entry.id` Strings)|A model to enforce a specific entry type|—|search<br/>(single id that is included), multiple|`["8fa398d2","49a8f3b4"]`|
+|`asset`|Link to a single asset that is related to this entry.|String (`asset.assetID`)|An asset type to enforce a specific type|—|exact, multiple|`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"`|
+|`assets`|Link to assets that are related to this one.|Array<br/>(of `asset.assetID` Strings)|An asset type to enforce a specific type|—|search<br/>(single id that is included), multiple|`["371393a6-ab7f-4591-8d5d-54261a52d28b",`<br/>`"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"]`|
+|`account`|Link to an account.|UUID (v4)|–|—|exact, multiple|`"371393a6-ab7f-4591-8d5d-54261a52d28b"`|
+|`role`|Link to a role.|UUID (v4)|String (role label)|—|exact, multiple|`"a118f6a0-0d74-463d-b1d7-afcf3eb6da3a"`|
 
 
 # Assets in the Generated API (aka. getBestFile)
@@ -340,7 +347,6 @@ Example 2:
     
 *Accounts with the role `freeUsers` can only create entries with the `data` field, whereas accounts with the role `paidUsers` can also set `hideAds`. Unallowed fields get their default value (probably `null` or `false`)*
 
-
 # Hooks
 Hooks can be used to add additional functionality to models. E.g. they enable you to alter values before saving or to pass data on to another server.
 
@@ -362,7 +368,8 @@ Example JSON:
         "description": "my test hook" // optional. Makes the hook identifiable in logs etc.
         "config": {
             // type specific
-        }
+        },
+        "hookID": "a0603b90-ee1e-49ce-8201-aa6e06124e2f" // identifier for simpler sorting of multiple hooks. May change.
     },
     {
     // another hook. If it has the same signature ('after' 'post'), it will be executed after the first one.

@@ -11,7 +11,7 @@ The JSON Schema is [https://entrecode.de/schema/dm-client](https://entrecode.de/
 
 | Property | Type | Format | Description | Writable |
 |----------|------|--------|-------------|----------|
-|clientID  | String | `^[0-9a-f\-_]+$` | Unique Identifier for a client | Only on creation |
+|clientID  | String | `^[0-9a-z\-_]+$` | Unique Identifier for a client | Only on creation |
 |callbackURL| String | Valid URL ([RFC 1738](http://www.rfc-base.org/txt/rfc-1738.txt)) | URL to send the user back to after authentication | Yes |
 |tokenMethod| Array[String] | `query`, `cookie` or `body` | Indicates how the client expects the token to receive. Default: `query` | Yes |
 |disableStrategies| Array[String] | valid login strategy (i.e. `password`, `google`, `facebook`) | Disable one or more login strategies for this client | Yes |

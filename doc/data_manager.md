@@ -416,33 +416,7 @@ The payload is by default a JSON object containing all available information abo
 }
 ```
 However, this result object can be transformed to only send the required information.
-There are two transformation methods available:
-
-#### [JSON-Mask](https://github.com/nemtsov/json-mask) 
-A language to mask specific parts of a JSON object, hiding the rest. For example, to only pass on the request body, the following JSON mask would be used: 
-
-`request/body`
-
-To only pass on the request method/uri and the response status, the following JSON mask would be used:
-
-`request(method,uri),response/status`
-
-JSON-Mask does not alter the structure of the JSON, it just hides specific parts of it. This means, that the data will always have the `request`/`response` root level properties. To get rid of those, you can additionally use the second transformation method:
-
-#### [JSONPath](https://github.com/dchester/jsonpath)
-
-JSONPath can be used to query JSON objects similar to XPath for XML. It returns an array of “matches” and works similar to CSS and JQuery selectors. To only return the actual request body, the following JSONPath expression would be used:
-
-`$.request.body`
-
-It also lets you get a response body without the HAL container:
-
-`$.response.body._embedded['beef1337:mymodel']`
-
-Arrays may even be filtered with [JSONPath syntax](https://github.com/dchester/jsonpath#jsonpath-syntax).
-
-Note that JSONPath always returns an array of “matched” objects. With an optional flag you can instead return the first array element (note that this will always return a single object, even if the JSONPath result array contains more than one).
-
+See [Transformations](./#transformations) below for details.
 
 
 ### Web hook configuration
@@ -529,3 +503,130 @@ The `replaceBody` flag can be used to swap the actual request body with the resp
 
 It is also possible to map the server response, if it is not in a valid Data Manager Request format. This can be done by providing the `responseMapping` property with a template similar to the request template, using JSON-Mask and JSONPath. Properties can also get hardcoded values. Properties not written remain at the value provided by the original request. *coming soon!*
 
+# JSON Transformations
+
+Hooks and Sync configurations on models allow for JSON transformations.
+
+Basically, a source object gets transformed into a new JSON object using various functions.
+To transform a JSON object, a transformation definition is needed which holds the basic desired JSON structure and some magic properties that trigger insertion of data from the source object.
+
+#### Static values
+
+Values can get fixed, static values (without anything from the source object).
+
+Example:
+
+```js
+{
+  "property": "value"
+}
+```
+
+just stays the same.
+ 
+
+#### [JSON-Mask](https://github.com/nemtsov/json-mask) 
+JSON-Mask is a notation to mask specific parts of a JSON object, hiding the rest. For example, to only pass on the request body of the [Web Hook object](./#web-hook), the following JSON mask would be used: 
+
+`request/body`
+
+To only pass on the request method/uri and the response status, the following JSON mask would be used:
+
+`request(method,uri),response/status`
+
+Full Example:
+
+```js
+{
+  "__jsonmask": "request(method,uri),response/status"
+}
+```
+This would return an object containing request with method and uri properties, as well as response with status property.
+
+JSON-Mask does not alter the structure of the JSON, it just hides specific parts of it. This means, that the data will always have the `request`/`response` root level properties. To get rid of those, you can additionally use JSONPath:
+
+#### [JSONPath](https://github.com/dchester/jsonpath)
+
+JSONPath can be used to query JSON objects similar to XPath for XML. It returns an array of “matches” and works similar to CSS and JQuery selectors. To only return the actual request body, the following JSONPath expression would be used:
+
+`$.request.body`
+
+It also lets you get a response body without the HAL container:
+
+`$.response.body._embedded['beef1337:mymodel']`
+
+Arrays may even be filtered with [JSONPath syntax](https://github.com/dchester/jsonpath#jsonpath-syntax).
+
+Full Example:
+
+```js
+{
+  "__jsonpath": "$.request.body",
+  "__array": false
+}
+```
+
+This would return only the request body.
+
+Note that by default JSONPath always returns an array of “matched” objects. With the optional `__array` flag you can instead return the first array element (note that this will always return a single object, even if the JSONPath result array contains more than one).
+
+#### Modifier functions
+
+Values (typically provided using a `__jsonpath` property) can be modified using a predefined set of functions. To use this functionality, an additional `__modifier` property with the desired function name is required. Valid function names are:
+
+##### parseInt
+Parses an Integer value out of a string (using radix 10).
+
+##### parseFloat
+Parses a Float value out of a string. Keep in mind that the `.` is used as decimal point, not comma.
+
+##### stringify
+Calls [JSON.stringify()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) on the value, returning a string value.
+
+##### replace
+Calls [String.replace()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on the value. 
+It is required to provide an additional property `__arguments` containing a two-element array with the search string or regular expression as first element, and the replacement as second element.
+
+#### Multiple modifiers
+Blocks with modifiers can be nested using `__value`. 
+
+Example: take property and replace `,` with `.`, then call parseFloat:
+
+```js
+{
+  "__value": {
+    "__jsonpath": "$.path.to.value",
+    "__array": false,
+    "__modifier": "replace",
+    "__arguments": [",", "."]
+  },
+  "__modifier": "parseFloat",
+}
+```
+
+#### Concatenation
+It is also possible to build new values out of multiple values of the source object. 
+It is done using an array of values (or value definitions) as `__composite` property, as well as a `__modifier` function to concatenate.
+
+##### String concatenation
+Example: concatenating street name and house number into one value
+
+```js
+{
+  "street": {
+    "__composite": [
+      {
+        "__jsonpath": "$.path.to.streetname",
+        "__array": false
+      },
+      " ",
+      {
+        "__jsonpath": "$.path.to.housenumber",
+        "__array": false
+      },
+    ],
+    "__modifier": "stringConcat"
+  }
+}
+```
+Note the fixed value `" "` for the space between the two values.

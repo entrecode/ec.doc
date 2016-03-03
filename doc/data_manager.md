@@ -499,9 +499,129 @@ A “before” web hook can also be synchronous:
 
 The `validate` property (which is only effective in “before” hooks) can be configured to expect a certain HTTP status of the remote server, in this case the request is only executed if the remote server answers with HTTP status 200. If the target server(s) respond with another status code, the data manager request is rejected with an error. An optional error response of the validating server is sent back to the data manager client. 
 
-The `replaceBody` flag can be used to swap the actual request body with the response body of the remote server, making it possible to transform the request. It is also validated afterwards, so the remote server is forced to send valid data. *coming soon!*
+The `replaceBody` flag can be used to swap the actual request body with the response body of the remote server, making it possible to transform the request. It is also validated afterwards, so the remote server is forced to send valid data.
 
-It is also possible to map the server response, if it is not in a valid Data Manager Request format. This can be done by providing the `responseMapping` property with a template similar to the request template, using JSON-Mask and JSONPath. Properties can also get hardcoded values. Properties not written remain at the value provided by the original request. *coming soon!*
+It is also possible to map the server response, if it is not in a valid Data Manager Request format. This can be done by providing the `responseMapping` property with a template similar to the request template, using JSON-Mask and JSONPath. Properties can also get hardcoded values. Properties not written remain at the value provided by the original request.
+
+# Synchronization
+
+A Sync configuration can be added to models to synchronize the entries with another API. The Sync is read-only – writing to remote servers is possible using Hooks. 
+The remote API is required to support JSON over HTTP. It is not required to be RESTful. Remote API Resources need to have a unique ID.
+
+Multiple subsequent HTTP requests can be done to get the required data.
+
+Sync is defined in the `sync` property of a model. It is always a JSON Object. Only one sync setting is available for each model.
+
+Synchronization is triggered using a special request on the generated API. It requires Authentication of an authorized ec user.
+
+## Sync Types
+
+There are different types of synchronization with slightly different necessary configuration:
+
+* **Type 1: Full list sync**
+
+    This kind of synchronization syncs with a remote API that provides a complete list of resources that map 1:1 on entries. Example: we have a model `person`, and the remote server provides a resource returning a list of all persons. A sync will create an entry for each person in the remote entry. Subsequent syncs will update changed entries (overwriting changes to the local entries) and also delete entries whose related resources on the remote API are no longer existing.
+
+* **Type 2: Subresource sync**
+
+    This kind of synchronization is also a full list sync, but it is done multiple times: for each entry of a parent model. The returned resources are merged into a full list of all resources. The relation to the parent model is set using an `entry` type field to the parent entry. Example: we have the above model `person` and also a model `task` with tasks for each person. The remote API only provides a list of tasks for a single person. The subresource sync is then set to obtain the task list for each entry in the `person` model (that model does not necessarily need to have a own sync configuration). The synced task entries all have an `entry` type field pointing to the related `person` entry.
+
+* **Type 3: Single Resource sync**
+
+    This kind of synchronization does not add new entries or delete entries of the model, but merely updates them using data from a remote API. Therefor it does a request for each entry in the model. Properties set to assume a value from the remote server will be overwritten on sync. Example: we have a local model holding user data, `users`. It is filled when a new user registers for our app. For each user we want to save the profile picture of a social network providing a REST API. Therefor we ask the user to enter his username of the social network. The sync is configured to obtain the profile picture URI for each user from the remote API.
+    
+## The Request sequence
+
+As mentioned above, multiple successive HTTP requests can be done to get the remote data. It is possible to pass data from request to request. The available data is called the *context*. By default, the context will contain the old entry (for Single Resource sync) or a property `parentID` (for subresource sync). The full list sync initially has an empty context.Each request can have a `responseMapping` property containing a [JSON Transformation](#json-transformations). The returned object's properties will be added to the context and be accessible for subsequent requests. Subsequent requests may overwrite those properties.
+The context is also available when building the response mapping for the next request, in the JSONPath `$.__context`. 
+
+## Supplying a JSON Web Token (JWT)
+
+For authentication of the Data Manager Server against a remote API it is possible to create and sign a JSON Web Token. It can be signed using HMAC with a supplied secret or using RSA with public/private key signing.
+The public key for validating generated JWTs is:
+
+```
+-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFFGDQFysjXTmiA1vjWTRB9bSy
+2SGOPpxMLzetgj1TlWwdzX5GdpooqAjZgJOd4fkXDFUlKKIHukiow1EqYNpxZ60w
+7chYF4s40fRGx62G8Qcx7kzrtDBQfC8mVjNUHXTsaYV/AiNb2FhRd3vniYyVqD7X
+pKyyITayPNKNHme3SQIDAQAB
+-----END PUBLIC KEY-----
+```
+
+The jti is always a newly generated UUIDv4 for each request. Subject, issuer and expiration can optionally be set. The generated JWT is assigned to a context variable and can be used in the requests.
+
+## Sync object JSON Structure
+
+It is included in the Model JSON Schema. 
+Explanation using an Example:
+
+```js
+{
+  "locale": "", // locale of all generated entries. MUST be set, but can be empty.
+  "createJWT": { // optional. Will create a JWT before syncing
+    "variableToSet": "jwt", // required. The context variable that will hold the generated JWT
+    "algorithm": "HS256", // required. The algorithm to use: HS256, HS384, HS512 (HMAC) or RS256, RS384, RS512 (RSA)
+    "issuer": "entrecode", // optional, can be any string and can use context variables
+    "secret": "GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk", // only needed if the algorithm is HMAC (HS***)
+    "subject": "{{username}}", // optional. Can use context variables
+    "expiresIn": "5min" // optional. Expiration time in seconds or a timespan according to https://github.com/rauchg/ms.js
+  },
+  "requests": [ // array of requests to perform. Needs at least one entry. 
+    {
+      "uri": "https://myapi/myroute", // required: the URI. Can use context variables.
+      "method": "post", // HTTP method. Currently supported: get, put, post, delete. Default is get.
+      "body": { // available for post and put method. Can use context variables.
+        "key": "{{value}}"
+      },
+      "headers": { // Object to set additional headers. Can use context variables.
+        "My-API-Key": "{{jwt}}"
+      },
+      "responseMapping": { // maps the response to new context variables (optional)
+        "accessToken": { // the value of $.accesstoken will be available in the next request as {{accessToken}}
+          "__array": false,
+          "__jsonpath": "$.accesstoken"
+        }
+      }
+    }
+  ],
+  "pathToArray": "$.values", // required: path to the resource list to sync (single object in Single Resource Sync)
+  "remoteIDJsonpath": "$.id", // required: path to the unique ID of the remote resource
+  "itemMapping": { // Mapping of the final result to properties of the entry
+    "name": [ 
+          {
+            "__array": false,
+            "__jsonpath": "$.renewal", // by default, only the value of "pathToArray" of the last request is accessable. 
+            "__modifier": "stringify"
+          },
+          {
+            "__modifier": "replace",
+            "__arguments": [
+              "^(\\d+)$", // remember to escape Regular Expressions
+              "P$1M"
+            ]
+          } 
+    ],
+    "title": { // in this example, `name` and `title` of the entries will be set.
+      "__array": false,
+      "__jsonpath": "$.__context.accessToken" // Previous responses can be accessed by setting a context variable and accessing $.__context.
+    }
+  },
+  "subResource": { // if this property is set, a sub resource sync (sync Type 2) is done
+    "parentModelID": "461bc760-5fb1-47c9-9a81-449f7ae99afd", // required: model ID of the parent model
+    "parentIDForRequests": "$.username", // required: this value of the parent entry will be {{parentID}} in the request context
+    "entryFieldForParentRelation": "parentEntry" // required: the entry field that will hold the relation to the parent resource
+  },
+  "singleResource": { // if this property is set (and not "subResource"), a single resource sync (sync Type 3) is done
+    "resourceMapping": { // each of the here defined properties will be available in the request context
+      "username": {
+        "__array": false,
+        "__jsonpath": "$.remoteData.username"
+      }
+    }
+  }
+}
+```
 
 # JSON Transformations
 
@@ -509,6 +629,14 @@ Hooks and Sync configurations on models allow for JSON transformations.
 
 Basically, a source object gets transformed into a new JSON object using various functions.
 To transform a JSON object, a transformation definition is needed which holds the basic desired JSON structure and some magic properties that trigger insertion of data from the source object.
+
+Supported transformations are:
+
+* static values
+* a subset of the whole source JSON structure, using JSON-Mask
+* certain values of the source JSON, using JSONPath
+* modification of values using standard JavaScript functions
+* Concatenation of multiple values
 
 #### Static values
 
@@ -581,11 +709,18 @@ Parses an Integer value out of a string (using radix 10).
 Parses a Float value out of a string. Keep in mind that the `.` is used as decimal point, not comma.
 
 ##### stringify
-Calls [JSON.stringify()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) on the value, returning a string value.
+Calls [JSON.stringify()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) on the value, returning a string value. Note that calling JSON.stringify on Strings double-escapes the string.
 
 ##### replace
 Calls [String.replace()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on the value. 
 It is required to provide an additional property `__arguments` containing a two-element array with the search string or regular expression as first element, and the replacement as second element.
+Important: because of the JSON structure, Regular Expressions have to be supplied as strings. This means that special JSON characters (like `\`) inside Regular Expressions need to be escaped. Basically, things like `\d` have to be sent as `\\d` to work.
+
+##### uppercase
+Make all characters uppercase characters
+
+##### lowercase
+Make all characters lowercase characters
 
 #### Multiple modifiers
 Blocks with modifiers can be nested using `__value`. 
@@ -602,6 +737,25 @@ Example: take property and replace `,` with `.`, then call parseFloat:
   },
   "__modifier": "parseFloat",
 }
+```
+
+For more modifiers this recursive structure becomes confusing. Because of that, you can also define an array of JSON Transformation objects that will be called in sequence.
+The example from above in array notation:
+
+```js
+[
+  {
+    "__jsonpath": "$.path.to.value",
+    "__array": false
+  },
+  {
+    "__modifier": "replace",
+    "__arguments": [",", "."]
+  },
+  {
+    "__modifier": "parseFloat"
+  }
+]
 ```
 
 #### Concatenation
@@ -630,3 +784,5 @@ Example: concatenating street name and house number into one value
 }
 ```
 Note the fixed value `" "` for the space between the two values.
+
+Currently only string concatenation is supported, more may come in the future (numerical calculations, array concatenation, …)

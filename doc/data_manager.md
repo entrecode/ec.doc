@@ -586,7 +586,10 @@ Explanation using an Example:
     }
   ],
   "pathToArray": "$.values", // required: path to the resource list to sync (single object in Single Resource Sync)
-  "remoteIDJsonpath": "$.id", // required: path to the unique ID of the remote resource
+  "remoteID": {
+    "__array": false,
+    "__jsonpath": "$.id", // required: path to the unique ID of the remote resource. All JSON Transformations are possible, so you may also build ids out of multiple properties
+  },
   "itemMapping": { // Mapping of the final result to properties of the entry
     "name": [ 
           {
@@ -609,7 +612,7 @@ Explanation using an Example:
   },
   "subResource": { // if this property is set, a sub resource sync (sync Type 2) is done
     "parentModelID": "461bc760-5fb1-47c9-9a81-449f7ae99afd", // required: model ID of the parent model
-    "parentIDForRequests": "$.username", // required: this value of the parent entry will be {{parentID}} in the request context
+    "parentIDForRequests": "$.username", // required: this value of the parent entry will be {{parentID}} in the request context. Either "syncID" (the generated ID of a remote resource), a jsonpath, or a JSON Transformation object.
     "entryFieldForParentRelation": "parentEntry" // required: the entry field that will hold the relation to the parent resource
   },
   "singleResource": { // if this property is set (and not "subResource"), a single resource sync (sync Type 3) is done

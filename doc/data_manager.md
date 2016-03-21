@@ -551,6 +551,10 @@ pKyyITayPNKNHme3SQIDAQAB
 
 The jti is always a newly generated UUIDv4 for each request. Subject, issuer and expiration can optionally be set. The generated JWT is assigned to a context variable and can be used in the requests.
 
+## Mapping `entry` fields
+Fields of the type `entry` can be mapped to entries of another model that is also synced. This means, when the value of the property supplied by the sync remote is the same as the `syncID` value of an entry in another model, a link to that entry will be inserted in the entry field. 
+To configure that, supply the modelID of the target model to look in. See example below.
+
 ## Sync object JSON Structure
 
 It is included in the Model JSON Schema. 
@@ -610,6 +614,9 @@ Explanation using an Example:
       "__jsonpath": "$.__context.accessToken" // Previous responses can be accessed by setting a context variable and accessing $.__context.
     }
   },
+  "entryRelationTargetModelIDs": {
+    "country": "17d6e37f-5ab8-46d7-a2f1-a3de1832104c" // country field links to synced entry in other model
+  }
   "subResource": { // if this property is set, a sub resource sync (sync Type 2) is done
     "parentModelID": "461bc760-5fb1-47c9-9a81-449f7ae99afd", // required: model ID of the parent model
     "parentIDForRequests": "$.username", // required: this value of the parent entry will be {{parentID}} in the request context. Either "syncID" (the generated ID of a remote resource), a jsonpath, or a JSON Transformation object.

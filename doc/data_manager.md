@@ -382,7 +382,10 @@ The web hook sends data to another server via HTTP/HTTPS.
 
 Multiple targets can be set, so it is possible to notify multiple servers. Each target can be configured with an URI, the HTTP method to use and optional custom header fields.
 
-The payload is by default a JSON object containing all available information about the request:
+
+### Web hook configuration
+
+The available data to use in Web hooks is the following JSON object containing all available information about the request:
 
 ```js
 {
@@ -415,51 +418,58 @@ The payload is by default a JSON object containing all available information abo
     }
 }
 ```
-However, this result object can be transformed to only send the required information.
+This object can be transformed to only send the required information.
 See [Transformations](./#transformations) below for details.
-
-
-### Web hook configuration
 
 The following example is a complete web hook configuration:
 
 ```js
 [
-    {
-        "hook": "after",
-        "type": "web",
-        "methods": ["put"],
-        "description": "send updated entry",
-        "config": {
-            "targets": [
-                {
-                    "uri": "https://my-other-server/endpoint",
-                    "headers": {
-                        "Authorization": "Bearer 1o32iru1oi3rj",
-                    },
-                    "method": "post"
-                }
-            ],
-            "request": {
-                "__jsonmask": "response/body/_embedded/*(id,property1,property2)", 
-                "__jsonpath": "$.response.body._embedded['beef1337:mymodel']",
-                "__array": false
-            },
-            "querystring": {
-                "remoteID": {
-                    "__jsonpath": "$.response.body._embedded['beef1337:mymodel'].id"
-                    "__array": false
-                }
+  {
+    "hook": "after", // 'before' or 'after' – when should the hook be fired?
+    "type": "web", // indicates that this is a web hook
+    "methods": ["put"], // which methods should this hook watch
+    "description": "send updated entry", // describe what the hook does
+    "config": { // this config object is web-hook-specific
+      "createJWT": { // optional. Will create a JWT before syncing
+        "variableToSet": "jwt", // required. The context variable that will hold the generated JWT
+        "algorithm": "HS256", // required. The algorithm to use: HS256, HS384, HS512 (HMAC) or RS256, RS384, RS512 (RSA)
+        "issuer": "entrecode", // optional, can be any string and can use context variables
+        "secret": "GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk", // only needed if the algorithm is HMAC (HS***)
+        "subject": "{{username}}", // optional. Can use context variables
+        "expiresIn": "5min" // optional. Expiration time in seconds or a timespan according to https://github.com/rauchg/ms.js
+      },
+      "requests": [ // you can list any number of requests here, they get executed sequentially.
+        {
+          "uri": "https://my-other-server/endpoint?remoteID={{response.body._embedded['beef1337:mymodel'].id}}", // you may access variables from the context here
+          "headers": {
+            "Authorization": "Bearer 1o32iru1oi3rj",
+          },
+          "method": "post"
+          "body": {
+            "__jsonmask": "response/body/_embedded/*(id,property1,property2)", 
+            "__jsonpath": "$.response.body._embedded['beef1337:mymodel']",
+            "__array": false
+          },
+          "responseMapping": { // maps the response to new context variables (optional)
+            "accessToken": { // the value of $.body.accesstoken will be available in the next request as {{accessToken}}
+              "__array": false,
+              "__jsonpath": "$.body.accesstoken" // $ is the full response object, so you may also access headers
             }
+          }
+        },
+        {
+          uri": "https://my-other-server/endpoint?remoteID={{response.body._embedded['beef1337:mymodel'].id}}",
+          "headers": {
+            "Authorization": "Bearer {{accessToken}}", // the variable set in the previous request
+          },
         }
+      ]
     }
+  }
 ]
 ```
 It sends the `id`, `property1` and `property2` values of the edited entry to `https://my-other-server/endpoint?remoteID=l231ij4`.
-
-The request body for the hook is fully configurable JSON. The three “magic” properties `__jsonmask`, `__jsonpath` and `__array` can be used to insert the actual content of the response, even at multiple sections in the json. The `request` property is to be understood as a request body template for the remote call.
-The `querystring` property works the same way. Note that only root level properties can be converted to a query string.
-
 A “before” web hook can also be synchronous:
 
 ```js
@@ -469,29 +479,24 @@ A “before” web hook can also be synchronous:
     "methods": ["put"],
     "description": "external validation",
     "config": {
-        "targets": [
+        "requests": [
             {
                 "uri": "https://my-other-server/endpoint",
                 "headers": {
                     "Authorization": "Bearer 1o32iru1oi3rj",
                 },
-                "method": "post"
+                "method": "get"
+                "validate": {
+                  "status": 200 // you may enforce a specific http status code from the remote (only in before hooks)
+                }
             }
         ],
-        "request": {
-            "__jsonmask": "response/body/_embedded/*(id,property1,property2)", 
-            "__jsonpath": "$.response.body._embedded['beef1337:mymodel']",
-            "__array": false,
-        "validate": {
-            "status": 200,
-            "replaceBody": true
-            "responseMapping": {
-                "property1": {
-                    "__jsonpath": "$.resultobject.property1"
-                    "__array": false
-                },
-                "property2": "hard coded" 
-            }
+        "responseMapping": { // the original request body will get those properties assigned additionally
+            "property1": {
+                "__jsonpath": "$.body.property1" // this is a property of the last request's response body
+                "__array": false
+            },
+            "property2": "hard coded" 
         }
     }
 }
@@ -499,9 +504,7 @@ A “before” web hook can also be synchronous:
 
 The `validate` property (which is only effective in “before” hooks) can be configured to expect a certain HTTP status of the remote server, in this case the request is only executed if the remote server answers with HTTP status 200. If the target server(s) respond with another status code, the data manager request is rejected with an error. An optional error response of the validating server is sent back to the data manager client. 
 
-The `replaceBody` flag can be used to swap the actual request body with the response body of the remote server, making it possible to transform the request. It is also validated afterwards, so the remote server is forced to send valid data.
-
-It is also possible to map the server response, if it is not in a valid Data Manager Request format. This can be done by providing the `responseMapping` property with a template similar to the request template, using JSON-Mask and JSONPath. Properties can also get hardcoded values. Properties not written remain at the value provided by the original request.
+The `responseMapping` property in the root level (not the individual requests) can be used to amend the request body with data from a foreign server. Properties can also get hardcoded values. Properties not written remain at the value provided by the original request.
 
 # Synchronization
 

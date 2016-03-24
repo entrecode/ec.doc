@@ -585,14 +585,14 @@ Explanation using an Example:
         "My-API-Key": "{{jwt}}"
       },
       "responseMapping": { // maps the response to new context variables (optional)
-        "accessToken": { // the value of $.accesstoken will be available in the next request as {{accessToken}}
+        "accessToken": { // the value of $.body.accesstoken will be available in the next request as {{accessToken}}
           "__array": false,
-          "__jsonpath": "$.accesstoken"
+          "__jsonpath": "$.body.accesstoken"
         }
       }
     }
   ],
-  "pathToArray": "$.values", // required: path to the resource list to sync (single object in Single Resource Sync)
+  "pathToArray": "$.body.values", // required: path to the resource list to sync (single object in Single Resource Sync)
   "remoteID": {
     "__array": false,
     "__jsonpath": "$.id", // required: path to the unique ID of the remote resource. All JSON Transformations are possible, so you may also build ids out of multiple properties
@@ -703,13 +703,15 @@ Full Example:
 ```js
 {
   "__jsonpath": "$.request.body",
-  "__array": false
+  "__array": true
 }
 ```
 
-This would return only the request body.
+This would return only the request body, put in an array.
 
-Note that by default JSONPath always returns an array of “matched” objects. With the optional `__array` flag you can instead return the first array element (note that this will always return a single object, even if the JSONPath result array contains more than one).
+Note that by default JSONPath a single object or an array. With the optional `__array` flag you can instead enforce returning always an array, even if only one object was matched.
+
+*This was a change introduced in version 0.7.9. In previous versions, the default value for `__array` was `true`.* 
 
 #### Modifier functions
 

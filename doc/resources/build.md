@@ -28,8 +28,8 @@ The JSON Schema is [https://entrecode.de/schema/build](https://entrecode.de/sche
 <h3>buildLocation Properties</h3>
 | Property | Type | Format | Description | Writable |
 |----------|------|--------|-------------|----------|
-|type|String|`backupS3`|The type with which the build was saved. Was saved with a [Target](./target/).|No.|
-|config|JSON||Object containing info needed for retrieval of the saved build. With `backupS3` it is the `Key` of the file on S3.|No.|
+|type|String|`zipFile`|The type with which the build was saved. Was saved with a [Target](./target/).|No.|
+|config|JSON||Object containing info needed for retrieval of the saved build. With `zipFile` it is the `url` of the file.|No.|
 # Relations
 
 | Relation Name | Target Resource | Description |Possible Methods |

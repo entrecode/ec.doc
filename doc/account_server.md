@@ -92,6 +92,7 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 |<a name="relation-auth/login"></a>`ec:auth/login`| [Auth/Login](resources/auth/#login) | Login with email/password |
 |<a name="relation-auth/logout"></a>`ec:auth/logout`| [Auth/Logout](resources/auth/#logout) | Invalidation of an access token |
 |<a name="relation-auth/password-reset"></a>`ec:auth/password-reset`| [Auth/Password-Reset](resources/auth/#password-reset) | Changing a registered password |
+|<a name="relation-auth/change-email"></a>`ec:auth/change-email`| [Auth/Change-Email](resources/auth/#change-email-address) | Changing the given email address with validation |
 |<a name="relation-auth/email-available"></a>`ec:auth/email-available`| [Auth/Email-Available](resources/auth/#email-available) | Check if a given email is available for registration |
 |<a name="relation-auth/facebook"></a>`ec:auth/facebook`| [Auth/Facebook](resources/auth/#googlefacebook-login) | Login/Register using Facebook |
 |<a name="relation-auth/google"></a>`ec:auth/google`| [Auth/Google](resources/auth/#googlefacebook-login) | Login/Register using Google |

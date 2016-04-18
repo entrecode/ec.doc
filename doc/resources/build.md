@@ -36,7 +36,8 @@ The JSON Schema is [https://entrecode.de/schema/build](https://entrecode.de/sche
 |---------------|-----------------|-------------|-----------------|
 | self          | [Build](#)| The resource itself | GET |
 | collection    | [Build List](#list)| List of all available Builds | GET, POST|
-| ec:app | [App](./app/) | The app this Deployment is corresponding to. | GET, PUT, DELETE |
+| ec:app        | [App](./app/) | The app this Deployment is corresponding to. | GET, PUT, DELETE |
+| ec:app/deployment/latest | [Deployment](./deployment/) | The last deployment of this build. | GET |
 | ec:app/platform | [Platform](./platform/) | The Platform that is deployed | GET, DELETE |
 
 # List

@@ -6,13 +6,13 @@ The App Manager is a technical tool for configuring, building and deploying Apps
 
 An [App](resources/app/) is a single, isolated entity. All other resources are dependent on a single App – they cannot be shared between Apps. 
 
-An App can have a arbitrary number of [Platforms](resources/platform/). A Platform is a special configuration for building the App. It consists of exactly one [CodeSource](resources/codesource/), exactly one [DataSource](resources/datasource/) and at least one (but possible more) [Targets](resources/target/). Dependent on its type, the platform will build a specialized product when a [Deployment](resources/deployment/) is created.
+An App can have a arbitrary number of [Platforms](resources/platform/). A Platform is a special configuration for building the App. It consists of exactly one [CodeSource](resources/codesource/), exactly one [DataSource](resources/datasource/) and at least one (but possible more) [Targets](resources/target/). Dependent on its type, the platform will build a specialized product when a [Build](resources/build/) is created.
 
 Available CodeSource Types, DataSource Types, Target Types and Platform Types can be obtained by getting the [Types](resources/apptypes/) resource. There may be dependencies: a type may require an explicit platform (e.g. the TargetType 'App Store' could only work with the PlatformType 'iOS').
 
-When creating a [Deployment](resources/deployment/) for a [Platforms](resources/platform/), the App Server will obtain Code from the [CodeSource](resources/codesource/), Data from the [DataSource](resources/datasource/), then build it according to the [Platforms](resources/platform/) and finally publish it to all configured [Targets](resources/target/) of the Platform.
+When creating a [Build](resources/build/) for a [Platforms](resources/platform/), the App Server will obtain Code from the [CodeSource](resources/codesource/), Data from the [DataSource](resources/datasource/), then build it according to the [Platform](resources/platform/) and save it for later use. A successful Build can then be deployed to one or many selected [Targets](resources/target/) of all configured Targets of the Platform by creating a [Deployment](resources/deployment/).
 
-A [Deployment](resources/deployment/) is either running, failed or successfully finished.
+A Build or a Deployment is either running, failed or successfully finished.
 
 # App Manager API 
 

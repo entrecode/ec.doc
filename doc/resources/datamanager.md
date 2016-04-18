@@ -63,6 +63,8 @@ To update an existing Data Manager Resource, clients may perform a PUT on `ec:da
 
 The success status code is **200 OK** and the response body is the updated single Data Manager resource.
 
+    The Data Manager configuration is heavily cached. For changes to take effect, wait for at most 10 seconds.
+
 ### Update from Template
 
 When following the [datamanager/update-from-template](../datamanager#relation-datamanager/update-from-template) relation, a query parameter `templateID` is appended to the URI. If the templateID is given, instead of a single Data Manager a new Data Manager is created using the [template](./dm-template) – including models and other configuration defined in the template.

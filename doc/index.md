@@ -191,6 +191,7 @@ The `verbose` field may be used for further information what is actually wrong w
 | 101  <a name="error-101"></a>  | No resource entity matching body property filter found | the body property that did not produce a match |  | 404|
 | 102  <a name="error-102"></a>  | No resource entity matching query string filter found | the query string property that did not produce a match |  | 404|
 | 110  <a name="error-110"></a>  | Method not allowed | the request method that is not allowed | | 405 |
+| 150  <a name="error-150"></a>  | Error in remote API | description of the error | the Error returned from the remote API | 400 |
 | **2xx** | **Syntax Error** |  |  | |
 | 200  <a name="error-200"></a>  | Missing body |  |  | 400|
 | 201  <a name="error-201"></a>  | Missing property in JSON body | the property that is missing |  | 400|

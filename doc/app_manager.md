@@ -38,23 +38,36 @@ For brevity, [CURIE Syntax](http://www.w3.org/TR/curie/) is used which results i
 Additional to the official link relations defined by [IANA](http://www.iana.org/assignments/link-relations/link-relations.xhtml) the App Manager uses the following:
 
 
-| Link Relation             | Target Resource                               | Description |
-|---------------------------|-----------------------------------------------------------|-------------|
-| `ec:app`  <a name="relation-app"></a>                  | [App](resources/app/)                          | A single App|
-| `ec:app/by-id`  <a name="relation-app/by-id"></a>            | [App](resources/app/)                          | Templated Link Relation to a specific App by `appID` |
-| `ec:app/codesource`  <a name="relation-app/codesource"></a>       | [CodeSource](resources/codesource/)            | The configured CodeSource of a Platform |
-| `ec:app/codesources`  <a name="relation-app/codesources"></a>      | [CodeSource List](resources/codesource/#list)  | CodeSources configured in an App |
-| `ec:app/datasource`  <a name="relation-app/datasource"></a>       | [DataSource](resources/datasource/)            | The configured DataSource of a Platform |
-| `ec:app/datasources`  <a name="relation-app/datasources"></a>      | [DataSource List](resources/datasource/#list)  | DataSources configured in an App |
-| `ec:app/deployment`  <a name="relation-app/deployment"></a>       | [Deployment](resources/deployment/)            | A single Deployment of a Platform |
-| `ec:app/deployment/latest`  <a name="relation-app/deployment/latest"></a>| [Deployment](resources/deployment/)            | The latest Deployment of a Platform |
-| `ec:app/deployments`  <a name="relation-app/deployments"></a>      | [Deployment List](resources/deployment/#list)  | All Deployments of a Platform. Also used to create a new Deployment |
-| `ec:app/platform`  <a name="relation-app/platform"></a>         | [Platform](resources/platform/)                | A single Platform |
-| `ec:app/platform/by-id`  <a name="relation-app/platform/by-id"></a>   | [Platform](resources/platform/)                | Templated Link Relation to a specific Platform by `platformID` |
-| `ec:app/platforms/options`  <a name="relation-app/platforms/options"></a>| [Platform List](resources/platform/#list)      | Filter Options of the Platform List |
-| `ec:app/platforms`  <a name="relation-app/platforms"></a>        | [Platform List](resources/platform/#list)      | A list of Platforms of an App |
-| `ec:app/target`  <a name="relation-app/target"></a>           | [Target](resources/target/)                    | A configured Target of a Platform |
-| `ec:app/targets`  <a name="relation-app/targets"></a>          | [Target List](resources/target/#list)          | Targets configured in an App |
-| `ec:apps`  <a name="relation-apps"></a>                 | [App List](resources/app/#list)                | List of Apps |
-| `ec:apps/options`  <a name="relation-apps/options"></a>         | [App List](resources/app/#list)                | Filter Options of the App List |
-| `ec:apps/types`  <a name="relation-apps/types"></a>           | [App Manager Type Info](resources/apptypes/)      | Information about available CodeSource-, DataSource-, Target- and Platform-Types |
+| Link Relation                                                                    | Target Resource                                | Description |
+|----------------------------------------------------------------------------------|------------------------------------------------|-------------|
+| `ec:app`							<a name="relation-app"></a>                     | [App](resources/app/)                          | A single App |
+| `ec:app/build`					<a name="relation-app/build"></a>               | [Build](resources/build/)                      | A single Build | 
+| `ec:app/build/by-id`				<a name="relation-app/build/by-id"></a>         | [Build](resources/build)                       | Templated Link Relation to a specific Build by `buildID` |
+| `ec:app/build/latest`				<a name="relation-app/build/by-id"></a>         | [Build](resources/build)                       | The last build of a Platform |
+| `ec:app/builds` 					<a name="relation-app/builds"></a>              | [Build List](resources/build/#list)            | List of Builds |
+| `ec:app/builds/options` 			<a name="relation-app/builds"></a>              | [Build List](resources/build/#list)            | Filter Options of the Build List |
+| `ec:app/by-id`					<a name="relation-app/by-id"></a>               | [App](resources/app/)                          | Templated Link Relation to a specific App by `appID` |
+| `ec:app/codesource`				<a name="relation-app/codesource"></a>          | [CodeSource](resources/codesource/)            | The configured CodeSource of a Platform |
+| `ec:app/codesource/by-id`			<a name="relation-app/codesource/by-id"></a>    | [CodeSource](resources/codesource/)            | Templated Link Relation to a specific CodeSouce by `codeSourceID` |
+| `ec:app/codesources`				<a name="relation-app/codesources"></a>         | [CodeSource List](resources/codesource/#list)  | CodeSources configured in an App |
+| `ec:app/codesources/options`     <a name="relation-app/codesources/options"></a> | [CodeSource List](resources/codesource/#list)  | Filter Options of the CodeSource List |
+| `ec:app/datasource`				<a name="relation-app/datasource"></a>          | [DataSource](resources/datasource/)            | The configured DataSource of a Platform |
+| `ec:app/datasource/by-id`        <a name="relation-app/datasource/by-id"></a>    | [DataSource](resource/datasource/)             | Templated Link Relation to a specific DataSource by `dataSourceID` |
+| `ec:app/datasources`				<a name="relation-app/datasources"></a>         | [DataSource List](resources/datasource/#list)  | DataSources configured in an App |
+| `ec:app/datasources/options`     <a name="relation-app/datasources/options"></a> | [DataSource List](resources/datasource/#list)  | Filter Options of the DataSource List |
+| `ec:app/deployment`				<a name="relation-app/deployment"></a>          | [Deployment](resources/deployment/)            | A single Deployment of a Platform |
+| `ec:app/deployment/by-id`        <a name="relation-app/deployment/by-id"></a>    | [Deployment](resources/deployment/)            | Templated Link Relation to a specific Deployment by `deploymentID` |
+| `ec:app/deployment/latest`		<a name="relation-app/deployment/latest"></a>   | [Deployment](resources/deployment/)            | The latest Deployment of a Platform |
+| `ec:app/deployments`				<a name="relation-app/deployments"></a>         | [Deployment List](resources/deployment/#list)  | All Deployments of a Platform. Also used to create a new Deployment |
+| `ec:app/deployments/options`     <a name="relation-app/deployments/options"></a> | [Deyploment List](resources/deployment/#list)  | Filter Options of the Deployment List |
+| `ec:app/platform`					<a name="relation-app/platform"></a>            | [Platform](resources/platform/)                | A single Platform |
+| `ec:app/platform/by-id`			<a name="relation-app/platform/by-id"></a>      | [Platform](resources/platform/)                | Templated Link Relation to a specific Platform by `platformID` |
+| `ec:app/platforms`				<a name="relation-app/platforms"></a>           | [Platform List](resources/platform/#list)      | A list of Platforms of an App |
+| `ec:app/platforms/options`		<a name="relation-app/platforms/options"></a>   | [Platform List](resources/platform/#list)      | Filter Options of the Platform List |
+| `ec:app/target`					<a name="relation-app/target"></a>              | [Target](resources/target/)                    | A configured Target of a Platform |
+| `ec:app/target/by-id`            <a name="relation-app/target/by-id"></a>        | [Target](resources/target/)                    | Templated Link Relation to a specific Target by `targetID`|
+| `ec:app/targets`					<a name="relation-app/targets"></a>             | [Target List](resources/target/#list)          | Targets configured in an App |
+| `ec:app/targets/options`         <a name="relation-app/targets/options"></a>     | [Target List](resources/target/#list)          | Filter Options of Targets List |
+| `ec:apps`							<a name="relation-apps"></a>                    | [App List](resources/app/#list)                | List of Apps |
+| `ec:apps/options`					<a name="relation-apps/options"></a>            | [App List](resources/app/#list)                | Filter Options of the App List |
+| `ec:apps/types`					<a name="relation-apps/types"></a>              | [App Manager Type Info](resources/apptypes/)   | Information about available CodeSource-, DataSource-, Target- and Platform-Types |

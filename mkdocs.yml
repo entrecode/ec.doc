@@ -15,6 +15,7 @@ pages:
     - 'Token': 'resources/token.md'
 - App Manager Resources:
     - 'App': 'resources/app.md'
+    - 'App Stats': 'resources/app-stats.md'
     - 'Build': 'resources/build.md'
     - 'CodeSource': 'resources/codesource.md'
     - 'DataSource': 'resources/datasource.md'

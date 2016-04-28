@@ -41,6 +41,7 @@ Additional to the official link relations defined by [IANA](http://www.iana.org/
 | Link Relation                                                                    | Target Resource                                | Description |
 |----------------------------------------------------------------------------------|------------------------------------------------|-------------|
 | `ec:app`							<a name="relation-app"></a>                     | [App](resources/app/)                          | A single App |
+| `ec:app-stats`					<a name="relation-app-stats"></a>               | [App Stats](resources/app-stats/)              | App Statistics |
 | `ec:app/build`					<a name="relation-app/build"></a>               | [Build](resources/build/)                      | A single Build | 
 | `ec:app/build/by-id`				<a name="relation-app/build/by-id"></a>         | [Build](resources/build)                       | Templated Link Relation to a specific Build by `buildID` |
 | `ec:app/build/latest`				<a name="relation-app/build/by-id"></a>         | [Build](resources/build)                       | The last build of a Platform |

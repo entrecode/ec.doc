@@ -1,6 +1,6 @@
 # Single Deployment
 
-The single Deployment Resource represents Deployment of an [App](./app/) using a specific [Platform](./platform/) configuration. It consists of a status (successful, failed or still running / undefined) and events that occurred during deployment.
+The single Deployment Resource represents Deployment of an [App](./app/) using a specific [Platform](./platform/) configuration. It consists of a status (successful, failed or still running) and events that occurred during deployment.
 
 The JSON Schema is [https://entrecode.de/schema/deployment](https://entrecode.de/schema/deployment).
 
@@ -10,7 +10,8 @@ The JSON Schema is [https://entrecode.de/schema/deployment](https://entrecode.de
 |----------|------|--------|-------------|----------|
 |deploymentID| Integer | 32 Bit signed (max. 2147483647) | The unique identifier for a Deployment | No. Gets generated on creation. |
 |started| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the beginning of the deployment.| No. Gets written on creation. |
-|successful| Boolean | may be boolean or null | Indicates if the deployment is still running (null value) or finished successfully (true) or with an error (false). | No. |
+|finished| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the end of the deployment.| No. Gets written on success/failure. |
+|successful| Enum | success, error, running | Indicates if the deployment is still running or finished successfully or with an error. | No. |
 |events | Array | | List of deployment Events. | No. |
 
 <h3>Events Array Item Properties</h3>
@@ -30,6 +31,7 @@ The JSON Schema is [https://entrecode.de/schema/deployment](https://entrecode.de
 | self          | [Deployment](#)| The resource itself | GET |
 | collection    | [Deployment List](#list)| List of all available Deployments | GET, POST|
 | ec:app | [App](./app/) | The app this Deployment is corresponding to. | GET, PUT, DELETE |
+| ec:app/build | [Build](./build/) | The build used in this deployment. | GET |
 | ec:app/platform | [Platform](./platform/) | The Platform that is deployed | GET, DELETE |
 
 # List
@@ -50,8 +52,8 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create a new Deployment Resource, clients may perform a POST on `ec:app/deployments` (the list resource) with an empty Body but a query string parameter `platformID`.
+To create a new Deployment Resource, clients may perform a POST on `ec:app/deployments` (the list resource) with an empty Body but a query string parameter `platformID`, `buildID` of the Build Resource to deploy and, one or multiple `targetID`s where to deploy to.
 
-This will start a new Deployment for the referenced platform.
+This will start a new Deployment for the referenced Build to all Targets.
 
 The success status code is **201 Created** and the response body is the newly created single Deployment resource. Note that the resource is created and returned instantly, and not after the Deployment has finished. Clients may follow the `self` relation of the returned resource to obtain the Deployment Status at a later time.

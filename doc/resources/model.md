@@ -167,6 +167,6 @@ The success status code is **204 No Content** with an empty response body.
 
 ## Purge
 
-To delete all entries of a Model, clients may perform a DELETE on `ec:model/purge` at a single Model Resource.
+To delete all entries of a Model, clients may perform a DELETE on `ec:model/purge` at a single Model Resource. Note that entries which are referenced as required somewhere else will not be deleted. Until now you need to find the referencing entry manually. This is subject to change.
 
-The success status code is **204 No Content** with an empty response body.
+The success status code is **204 No Content** or **202 Accepted** with an empty response body.

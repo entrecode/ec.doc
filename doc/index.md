@@ -191,6 +191,7 @@ The `verbose` field may be used for further information what is actually wrong w
 | 101  <a name="error-101"></a>  | No resource entity matching body property filter found | the body property that did not produce a match |  | 404|
 | 102  <a name="error-102"></a>  | No resource entity matching query string filter found | the query string property that did not produce a match |  | 404|
 | 110  <a name="error-110"></a>  | Method not allowed | the request method that is not allowed | | 405 |
+| 150  <a name="error-150"></a>  | Error in remote API | description of the error | the Error returned from the remote API | 400 |
 | **2xx** | **Syntax Error** |  |  | |
 | 200  <a name="error-200"></a>  | Missing body |  |  | 400|
 | 201  <a name="error-201"></a>  | Missing property in JSON body | the property that is missing |  | 400|
@@ -223,7 +224,7 @@ The `verbose` field may be used for further information what is actually wrong w
 | 359  <a name="error-359"></a>  | Violates unique constraint (only 2359 is defined)| title of violating field  |  | 400|
 | 360  <a name="error-360"></a>  | Cannot delete entry. Referenced as required. (only 2360 is defined)| entryID holding the reference |  | 400|
 | 361  <a name="error-361"></a>  | Cannot change entry. Read Only. (only 2361 is defined)| | | 403|
-| 362  <a name="error-362"></a>  | Cannot change entry. Reference not found. (only 2362 is defined) | | | 400|
+| 362  <a name="error-362"></a>  | Cannot change entry. Reference not allowed due to type validation. (only 2362 is defined) | | | 400|
 | 363  <a name="error-363"></a>  | Cannot change Model, edit of mandatory/unmutable field. (only 2363 is defined) | More detailed description of error | Affected field | 403|
 | 364  <a name="error-364"></a>  | Cannot change Model, reserved field title. (only 2364 is defined) | Field title | | 400|
 | 365  <a name="error-365"></a>  | Cannot change Model, duplicate model title. (only 2365 is defined) | Model title | | 400|
@@ -232,6 +233,8 @@ The `verbose` field may be used for further information what is actually wrong w
 | 368  <a name="error-368"></a>| Field of type boolean must be required. | Field title | | 400 |
 | 369  <a name="error-369"></a>  | Title field not a field in the model. | Title field | | 400 |
 | 370  <a name="error-370"></a>  | Cannot delete Resource. Is used. | | | 403 |
+| 371  <a name="error-371"></a>  | Cannot change entry. Reference not found. (only 2371 is defined) | | | 400|
+| 372  <a name="error-372"></a>  | Required field must have a default value set. | Field title | | 400 |
 | **4xx** | **Rights Management Error** |  |  | |
 | 400  <a name="error-400"></a>  | Missing Access Token |  |  | 401|
 | 401  <a name="error-401"></a>  | Invalid Access Token |  |  | 401|

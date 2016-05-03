@@ -205,7 +205,7 @@ These types are more complex types with a specific domain that abstract from pri
 |`email`|A valid eMail address. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search, multiple|`"info@domain.com"`|
 |`url`|A valid URL. Internally, [validator.js](https://github.com/chriso/validator.js) is used.|String|—|yes|exact, search, multiple|`"http://entrecode.de"`|
 |`phone`|A valid Phone number according to [E.164](http://www.itu.int/rec/T-REC-E.164/en). Will automatically formatted in international format according to the default locale of the current Data Manager with [libphonenumber](https://github.com/googlei18n/libphonenumber) |String|—|yes|exact, search, multiple|`"+49711832468234"`|
-|`json`|A generic JSON object. |JSON Object|A valid [JSON Schema](https://tools.ietf.org/html/draft-kelly-json-hal-06)|no|—|`{key: "value"}`|
+|`json`|A generic JSON object. |JSON Object or Array|A valid [JSON Schema](https://tools.ietf.org/html/draft-kelly-json-hal-06)|no|—|`{key: "value"}`|
 
 
 ### Linked Types
@@ -382,7 +382,10 @@ The web hook sends data to another server via HTTP/HTTPS.
 
 Multiple targets can be set, so it is possible to notify multiple servers. Each target can be configured with an URI, the HTTP method to use and optional custom header fields.
 
-The payload is by default a JSON object containing all available information about the request:
+
+### Web hook configuration
+
+The available data to use in Web hooks is the following JSON object containing all available information about the request:
 
 ```js
 {
@@ -415,11 +418,256 @@ The payload is by default a JSON object containing all available information abo
     }
 }
 ```
-However, this result object can be transformed to only send the required information.
-There are two transformation methods available:
+This object can be transformed to only send the required information.
+See [Transformations](./#transformations) below for details.
+
+The following example is a complete web hook configuration:
+
+```js
+[
+  {
+    "hook": "after", // 'before' or 'after' – when should the hook be fired?
+    "type": "web", // indicates that this is a web hook
+    "methods": ["put"], // which methods should this hook watch
+    "description": "send updated entry", // describe what the hook does
+    "config": { // this config object is web-hook-specific
+      "createJWT": { // optional. Will create a JWT before syncing
+        "variableToSet": "jwt", // required. The context variable that will hold the generated JWT
+        "algorithm": "HS256", // required. The algorithm to use: HS256, HS384, HS512 (HMAC) or RS256, RS384, RS512 (RSA)
+        "issuer": "entrecode", // optional, can be any string and can use context variables
+        "secret": "GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk", // only needed if the algorithm is HMAC (HS***)
+        "subject": "{{username}}", // optional. Can use context variables
+        "expiresIn": "5min" // optional. Expiration time in seconds or a timespan according to https://github.com/rauchg/ms.js
+      },
+      "requests": [ // you can list any number of requests here, they get executed sequentially.
+        {
+          "uri": "https://my-other-server/endpoint?remoteID={{response.body._embedded['beef1337:mymodel'].id}}", // you may access variables from the context here
+          "headers": {
+            "Authorization": "Bearer 1o32iru1oi3rj",
+          },
+          "method": "post"
+          "body": {
+            "__jsonmask": "response/body/_embedded/*(id,property1,property2)", 
+            "__jsonpath": "$.response.body._embedded['beef1337:mymodel']",
+            "__array": false
+          },
+          "responseMapping": { // maps the response to new context variables (optional)
+            "accessToken": { // the value of $.body.accesstoken will be available in the next request as {{accessToken}}
+              "__array": false,
+              "__jsonpath": "$.body.accesstoken" // $ is the full response object, so you may also access headers
+            }
+          }
+        },
+        {
+          uri": "https://my-other-server/endpoint?remoteID={{response.body._embedded['beef1337:mymodel'].id}}",
+          "headers": {
+            "Authorization": "Bearer {{accessToken}}", // the variable set in the previous request
+          },
+        }
+      ]
+    }
+  }
+]
+```
+It sends the `id`, `property1` and `property2` values of the edited entry to `https://my-other-server/endpoint?remoteID=l231ij4`.
+A “before” web hook can also be synchronous:
+
+```js
+{
+    "hook": "before",
+    "type": "web",
+    "methods": ["put"],
+    "description": "external validation",
+    "config": {
+        "requests": [
+            {
+                "uri": "https://my-other-server/endpoint",
+                "headers": {
+                    "Authorization": "Bearer 1o32iru1oi3rj",
+                },
+                "method": "get"
+                "validate": {
+                  "status": 200 // you may enforce a specific http status code from the remote (only in before hooks)
+                }
+            }
+        ],
+        "responseMapping": { // the original request body will get those properties assigned additionally
+            "property1": {
+                "__jsonpath": "$.body.property1" // this is a property of the last request's response body
+                "__array": false
+            },
+            "property2": "hard coded" 
+        }
+    }
+}
+```
+
+The `validate` property (which is only effective in “before” hooks) can be configured to expect a certain HTTP status of the remote server, in this case the request is only executed if the remote server answers with HTTP status 200. If the target server(s) respond with another status code, the data manager request is rejected with an error. An optional error response of the validating server is sent back to the data manager client. 
+
+The `responseMapping` property in the root level (not the individual requests) can be used to amend the request body with data from a foreign server. Properties can also get hardcoded values. Properties not written remain at the value provided by the original request.
+
+# Synchronization
+
+A Sync configuration can be added to models to synchronize the entries with another API. The Sync is read-only – writing to remote servers is possible using Hooks. 
+The remote API is required to support JSON over HTTP. It is not required to be RESTful. Remote API Resources need to have a unique ID.
+
+Multiple subsequent HTTP requests can be done to get the required data.
+
+Sync is defined in the `sync` property of a model. It is always a JSON Object. Only one sync setting is available for each model.
+
+Synchronization is triggered using a special request on the generated API. It requires Authentication of an authorized ec user.
+
+## Sync Types
+
+There are different types of synchronization with slightly different necessary configuration:
+
+* **Type 1: Full list sync**
+
+    This kind of synchronization syncs with a remote API that provides a complete list of resources that map 1:1 on entries. Example: we have a model `person`, and the remote server provides a resource returning a list of all persons. A sync will create an entry for each person in the remote entry. Subsequent syncs will update changed entries (overwriting changes to the local entries) and also delete entries whose related resources on the remote API are no longer existing.
+
+* **Type 2: Subresource sync**
+
+    This kind of synchronization is also a full list sync, but it is done multiple times: for each entry of a parent model. The returned resources are merged into a full list of all resources. The relation to the parent model is set using an `entry` type field to the parent entry. Example: we have the above model `person` and also a model `task` with tasks for each person. The remote API only provides a list of tasks for a single person. The subresource sync is then set to obtain the task list for each entry in the `person` model (that model does not necessarily need to have a own sync configuration). The synced task entries all have an `entry` type field pointing to the related `person` entry.
+
+* **Type 3: Single Resource sync**
+
+    This kind of synchronization does not add new entries or delete entries of the model, but merely updates them using data from a remote API. Therefor it does a request for each entry in the model. Properties set to assume a value from the remote server will be overwritten on sync. Example: we have a local model holding user data, `users`. It is filled when a new user registers for our app. For each user we want to save the profile picture of a social network providing a REST API. Therefor we ask the user to enter his username of the social network. The sync is configured to obtain the profile picture URI for each user from the remote API.
+    
+## The Request sequence
+
+As mentioned above, multiple successive HTTP requests can be done to get the remote data. It is possible to pass data from request to request. The available data is called the *context*. By default, the context will contain the old entry (for Single Resource sync) or a property `parentID` (for subresource sync). The full list sync initially has an empty context.Each request can have a `responseMapping` property containing a [JSON Transformation](#json-transformations). The returned object's properties will be added to the context and be accessible for subsequent requests. Subsequent requests may overwrite those properties.
+The context is also available when building the response mapping for the next request, in the JSONPath `$.__context`. 
+
+## Supplying a JSON Web Token (JWT)
+
+For authentication of the Data Manager Server against a remote API it is possible to create and sign a JSON Web Token. It can be signed using HMAC with a supplied secret or using RSA with public/private key signing.
+The public key for validating generated JWTs is:
+
+```
+-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFFGDQFysjXTmiA1vjWTRB9bSy
+2SGOPpxMLzetgj1TlWwdzX5GdpooqAjZgJOd4fkXDFUlKKIHukiow1EqYNpxZ60w
+7chYF4s40fRGx62G8Qcx7kzrtDBQfC8mVjNUHXTsaYV/AiNb2FhRd3vniYyVqD7X
+pKyyITayPNKNHme3SQIDAQAB
+-----END PUBLIC KEY-----
+```
+
+The jti is always a newly generated UUIDv4 for each request. Subject, issuer and expiration can optionally be set. The generated JWT is assigned to a context variable and can be used in the requests.
+
+## Mapping `entry` fields
+Fields of the type `entry` can be mapped to entries of another model that is also synced. This means, when the value of the property supplied by the sync remote is the same as the `syncID` value of an entry in another model, a link to that entry will be inserted in the entry field. 
+To configure that, supply the modelID of the target model to look in. See example below.
+
+## Sync object JSON Structure
+
+It is included in the Model JSON Schema. 
+Explanation using an Example:
+
+```js
+{
+  "locale": "", // locale of all generated entries. MUST be set, but can be empty.
+  "createJWT": { // optional. Will create a JWT before syncing
+    "variableToSet": "jwt", // required. The context variable that will hold the generated JWT
+    "algorithm": "HS256", // required. The algorithm to use: HS256, HS384, HS512 (HMAC) or RS256, RS384, RS512 (RSA)
+    "issuer": "entrecode", // optional, can be any string and can use context variables
+    "secret": "GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk", // only needed if the algorithm is HMAC (HS***)
+    "subject": "{{username}}", // optional. Can use context variables
+    "expiresIn": "5min" // optional. Expiration time in seconds or a timespan according to https://github.com/rauchg/ms.js
+  },
+  "requests": [ // array of requests to perform. Needs at least one entry. 
+    {
+      "uri": "https://myapi/myroute", // required: the URI. Can use context variables.
+      "method": "post", // HTTP method. Currently supported: get, put, post, delete. Default is get.
+      "body": { // available for post and put method. Can use context variables.
+        "key": "{{value}}"
+      },
+      "headers": { // Object to set additional headers. Can use context variables.
+        "My-API-Key": "{{jwt}}"
+      },
+      "responseMapping": { // maps the response to new context variables (optional)
+        "accessToken": { // the value of $.body.accesstoken will be available in the next request as {{accessToken}}
+          "__array": false,
+          "__jsonpath": "$.body.accesstoken"
+        }
+      }
+    }
+  ],
+  "pathToArray": "$.body.values", // required: path to the resource list to sync (single object in Single Resource Sync)
+  "remoteID": {
+    "__array": false,
+    "__jsonpath": "$.id", // required: path to the unique ID of the remote resource. All JSON Transformations are possible, so you may also build ids out of multiple properties
+  },
+  "itemMapping": { // Mapping of the final result to properties of the entry
+    "name": [ 
+          {
+            "__array": false,
+            "__jsonpath": "$.renewal", // by default, only the value of "pathToArray" of the last request is accessable. 
+            "__modifier": "stringify"
+          },
+          {
+            "__modifier": "replace",
+            "__arguments": [
+              "^(\\d+)$", // remember to escape Regular Expressions
+              "P$1M"
+            ]
+          } 
+    ],
+    "title": { // in this example, `name` and `title` of the entries will be set.
+      "__array": false,
+      "__jsonpath": "$.__context.accessToken" // Previous responses can be accessed by setting a context variable and accessing $.__context.
+    }
+  },
+  "entryRelationTargetModelIDs": {
+    "country": "17d6e37f-5ab8-46d7-a2f1-a3de1832104c" // country field links to synced entry in other model
+  }
+  "subResource": { // if this property is set, a sub resource sync (sync Type 2) is done
+    "parentModelID": "461bc760-5fb1-47c9-9a81-449f7ae99afd", // required: model ID of the parent model
+    "parentIDForRequests": "$.username", // required: this value of the parent entry will be {{parentID}} in the request context. Either "syncID" (the generated ID of a remote resource), a jsonpath, or a JSON Transformation object.
+    "entryFieldForParentRelation": "parentEntry" // required: the entry field that will hold the relation to the parent resource
+  },
+  "singleResource": { // if this property is set (and not "subResource"), a single resource sync (sync Type 3) is done
+    "resourceMapping": { // each of the here defined properties will be available in the request context
+      "username": {
+        "__array": false,
+        "__jsonpath": "$.remoteData.username"
+      }
+    }
+  }
+}
+```
+
+# JSON Transformations
+
+Hooks and Sync configurations on models allow for JSON transformations.
+
+Basically, a source object gets transformed into a new JSON object using various functions.
+To transform a JSON object, a transformation definition is needed which holds the basic desired JSON structure and some magic properties that trigger insertion of data from the source object.
+
+Supported transformations are:
+
+* static values
+* a subset of the whole source JSON structure, using JSON-Mask
+* certain values of the source JSON, using JSONPath
+* modification of values using standard JavaScript functions
+* Concatenation of multiple values
+
+#### Static values
+
+Values can get fixed, static values (without anything from the source object).
+
+Example:
+
+```js
+{
+  "property": "value"
+}
+```
+
+just stays the same.
+ 
 
 #### [JSON-Mask](https://github.com/nemtsov/json-mask) 
-A language to mask specific parts of a JSON object, hiding the rest. For example, to only pass on the request body, the following JSON mask would be used: 
+JSON-Mask is a notation to mask specific parts of a JSON object, hiding the rest. For example, to only pass on the request body of the [Web Hook object](./#web-hook), the following JSON mask would be used: 
 
 `request/body`
 
@@ -427,7 +675,16 @@ To only pass on the request method/uri and the response status, the following JS
 
 `request(method,uri),response/status`
 
-JSON-Mask does not alter the structure of the JSON, it just hides specific parts of it. This means, that the data will always have the `request`/`response` root level properties. To get rid of those, you can additionally use the second transformation method:
+Full Example:
+
+```js
+{
+  "__jsonmask": "request(method,uri),response/status"
+}
+```
+This would return an object containing request with method and uri properties, as well as response with status property.
+
+JSON-Mask does not alter the structure of the JSON, it just hides specific parts of it. This means, that the data will always have the `request`/`response` root level properties. To get rid of those, you can additionally use JSONPath:
 
 #### [JSONPath](https://github.com/dchester/jsonpath)
 
@@ -441,91 +698,106 @@ It also lets you get a response body without the HAL container:
 
 Arrays may even be filtered with [JSONPath syntax](https://github.com/dchester/jsonpath#jsonpath-syntax).
 
-Note that JSONPath always returns an array of “matched” objects. With an optional flag you can instead return the first array element (note that this will always return a single object, even if the JSONPath result array contains more than one).
-
-
-
-### Web hook configuration
-
-The following example is a complete web hook configuration:
-
-```js
-[
-    {
-        "hook": "after",
-        "type": "web",
-        "methods": ["put"],
-        "description": "send updated entry",
-        "config": {
-            "targets": [
-                {
-                    "uri": "https://my-other-server/endpoint",
-                    "headers": {
-                        "Authorization": "Bearer 1o32iru1oi3rj",
-                    },
-                    "method": "post"
-                }
-            ],
-            "request": {
-                "__jsonmask": "response/body/_embedded/*(id,property1,property2)", 
-                "__jsonpath": "$.response.body._embedded['beef1337:mymodel']",
-                "__array": false
-            },
-            "querystring": {
-                "remoteID": {
-                    "__jsonpath": "$.response.body._embedded['beef1337:mymodel'].id"
-                    "__array": false
-                }
-            }
-        }
-    }
-]
-```
-It sends the `id`, `property1` and `property2` values of the edited entry to `https://my-other-server/endpoint?remoteID=l231ij4`.
-
-The request body for the hook is fully configurable JSON. The three “magic” properties `__jsonmask`, `__jsonpath` and `__array` can be used to insert the actual content of the response, even at multiple sections in the json. The `request` property is to be understood as a request body template for the remote call.
-The `querystring` property works the same way. Note that only root level properties can be converted to a query string.
-
-A “before” web hook can also be synchronous:
+Full Example:
 
 ```js
 {
-    "hook": "before",
-    "type": "web",
-    "methods": ["put"],
-    "description": "external validation",
-    "config": {
-        "targets": [
-            {
-                "uri": "https://my-other-server/endpoint",
-                "headers": {
-                    "Authorization": "Bearer 1o32iru1oi3rj",
-                },
-                "method": "post"
-            }
-        ],
-        "request": {
-            "__jsonmask": "response/body/_embedded/*(id,property1,property2)", 
-            "__jsonpath": "$.response.body._embedded['beef1337:mymodel']",
-            "__array": false,
-        "validate": {
-            "status": 200,
-            "replaceBody": true
-            "responseMapping": {
-                "property1": {
-                    "__jsonpath": "$.resultobject.property1"
-                    "__array": false
-                },
-                "property2": "hard coded" 
-            }
-        }
-    }
+  "__jsonpath": "$.request.body",
+  "__array": true
 }
 ```
 
-The `validate` property (which is only effective in “before” hooks) can be configured to expect a certain HTTP status of the remote server, in this case the request is only executed if the remote server answers with HTTP status 200. If the target server(s) respond with another status code, the data manager request is rejected with an error. An optional error response of the validating server is sent back to the data manager client. 
+This would return only the request body, put in an array.
 
-The `replaceBody` flag can be used to swap the actual request body with the response body of the remote server, making it possible to transform the request. It is also validated afterwards, so the remote server is forced to send valid data. *coming soon!*
+Note that by default JSONPath a single object or an array. With the optional `__array` flag you can instead enforce returning always an array, even if only one object was matched.
 
-It is also possible to map the server response, if it is not in a valid Data Manager Request format. This can be done by providing the `responseMapping` property with a template similar to the request template, using JSON-Mask and JSONPath. Properties can also get hardcoded values. Properties not written remain at the value provided by the original request. *coming soon!*
+*This was a change introduced in version 0.7.9. In previous versions, the default value for `__array` was `true`.* 
 
+#### Modifier functions
+
+Values (typically provided using a `__jsonpath` property) can be modified using a predefined set of functions. To use this functionality, an additional `__modifier` property with the desired function name is required. Valid function names are:
+
+##### parseInt
+Parses an Integer value out of a string (using radix 10).
+
+##### parseFloat
+Parses a Float value out of a string. Keep in mind that the `.` is used as decimal point, not comma.
+
+##### stringify
+Calls [JSON.stringify()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) on the value, returning a string value. Note that calling JSON.stringify on Strings double-escapes the string.
+
+##### replace
+Calls [String.replace()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) on the value. 
+It is required to provide an additional property `__arguments` containing a two-element array with the search string or regular expression as first element, and the replacement as second element.
+Important: because of the JSON structure, Regular Expressions have to be supplied as strings. This means that special JSON characters (like `\`) inside Regular Expressions need to be escaped. Basically, things like `\d` have to be sent as `\\d` to work.
+
+##### uppercase
+Make all characters uppercase characters
+
+##### lowercase
+Make all characters lowercase characters
+
+#### Multiple modifiers
+Blocks with modifiers can be nested using `__value`. 
+
+Example: take property and replace `,` with `.`, then call parseFloat:
+
+```js
+{
+  "__value": {
+    "__jsonpath": "$.path.to.value",
+    "__array": false,
+    "__modifier": "replace",
+    "__arguments": [",", "."]
+  },
+  "__modifier": "parseFloat",
+}
+```
+
+For more modifiers this recursive structure becomes confusing. Because of that, you can also define an array of JSON Transformation objects that will be called in sequence.
+The example from above in array notation:
+
+```js
+[
+  {
+    "__jsonpath": "$.path.to.value",
+    "__array": false
+  },
+  {
+    "__modifier": "replace",
+    "__arguments": [",", "."]
+  },
+  {
+    "__modifier": "parseFloat"
+  }
+]
+```
+
+#### Concatenation
+It is also possible to build new values out of multiple values of the source object. 
+It is done using an array of values (or value definitions) as `__composite` property, as well as a `__modifier` function to concatenate.
+
+##### String concatenation
+Example: concatenating street name and house number into one value
+
+```js
+{
+  "street": {
+    "__composite": [
+      {
+        "__jsonpath": "$.path.to.streetname",
+        "__array": false
+      },
+      " ",
+      {
+        "__jsonpath": "$.path.to.housenumber",
+        "__array": false
+      },
+    ],
+    "__modifier": "stringConcat"
+  }
+}
+```
+Note the fixed value `" "` for the space between the two values.
+
+Currently only string concatenation is supported, more may come in the future (numerical calculations, array concatenation, …)

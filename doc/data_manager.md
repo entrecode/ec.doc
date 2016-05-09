@@ -737,6 +737,40 @@ Make all characters uppercase characters
 ##### lowercase
 Make all characters lowercase characters
 
+##### date
+Converts a value into a Date. If no value is given (e.g. using `__jsonpath`), the current timestamp is the value. String values are transformed into a date using [Moment.js String parsing](http://momentjs.com/docs/#/parsing/string/). The output value is by default an ISO 8601 String (including time zone).
+Optionally, formats can be given for parsing and output formatting. 
+The property `__arguments` can contain a two-element array (both values optional). Optional means that the value may be `null` or `false` to be ignored (which falls back to the default). The **first** argument is the optional string parsing format (see [Moment.js doc](http://momentjs.com/docs/#/parsing/string-format/). Default is String parsing without a specific format, which supports a wide range of formats that are detected automatically. The **second** argument is output formatting (see [Moment.js doc](http://momentjs.com/docs/#/displaying/format/)). By default (value `null` or `false`) an ISO 8601 Date String is output.
+
+##### date\_add and date\_subtract
+Allows for manipulation of date values by adding or subtracting values. Other than that, the functions do exactly the same as the *date* modifier function. However, there are two additional (and required) arguments. Therefor, the `__arguments` array is always required for these two functions. The **first** argument is the same as for the *date* function: a string parsing format or null. The **second** argument is a number value. The **third** argument is the unit for the value in the second argument. The **fourth** argument is the same as for the *date* function: a string output format or null.
+
+**Example 1:**
+
+```js
+{
+  "__modifier": "date_add",
+  "__arguments": [null, 7, "days", "YY-MM-DD"]
+}
+```
+
+Output: 7 days from now in YY-MM-DD.
+
+**Example 2:**
+
+```js
+{
+  "__jsonpath": "$.dateValue",
+  "__modifier": "date_subtract",
+  "__arguments": ["DD.MM.YYYY", 3, "years", "YY-MM-DD"]
+}
+```
+
+Input of the JSONPath function: '19.05.2016'
+
+Output: 13-05-19
+
+
 #### Multiple modifiers
 Blocks with modifiers can be nested using `__value`. 
 

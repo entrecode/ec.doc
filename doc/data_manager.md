@@ -618,7 +618,7 @@ Explanation using an Example:
     }
   },
   "entryRelationTargetModelIDs": {
-    "country": "17d6e37f-5ab8-46d7-a2f1-a3de1832104c" // country field links to synced entry in other model
+    "country": "17d6e37f-5ab8-46d7-a2f1-a3de1832104c" // country field links to synced entry in other model. Can also be the model title instead of modelID.
   }
   "subResource": { // if this property is set, a sub resource sync (sync Type 2) is done
     "parentModelID": "461bc760-5fb1-47c9-9a81-449f7ae99afd", // required: model ID of the parent model

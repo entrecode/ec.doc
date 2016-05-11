@@ -535,7 +535,7 @@ There are different types of synchronization with slightly different necessary c
     
 ## The Request sequence
 
-As mentioned above, multiple successive HTTP requests can be done to get the remote data. It is possible to pass data from request to request. The available data is called the *context*. By default, the context will contain the old entry (for Single Resource sync) or the properties `parentID` and `parentResource` (for subresource sync). The full list sync initially has an empty context. Each request can have a `responseMapping` property containing a [JSON Transformation](#json-transformations). The returned object's properties will be added to the context and be accessible for subsequent requests. Subsequent requests may overwrite those properties.
+As mentioned above, multiple successive HTTP requests can be done to get the remote data. It is possible to pass data from request to request. The available data is called the *context*. By default, the context will contain the old entry (for Single Resource sync) or the properties `parentID` and `parentResource` (for subresource sync); as well as the public Data Manager Config (config.publicConfig as `config`). The full list sync initially has an empty context. Each request can have a `responseMapping` property containing a [JSON Transformation](#json-transformations). The returned object's properties will be added to the context and be accessible for subsequent requests. Subsequent requests may overwrite those properties.
 The context is also available when building the response mapping for the next request, in the JSONPath `$.__context`. 
 
 ## Supplying a JSON Web Token (JWT)

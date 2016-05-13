@@ -621,7 +621,7 @@ Explanation using an Example:
     "country": "17d6e37f-5ab8-46d7-a2f1-a3de1832104c" // country field links to synced entry in other model. Can also be the model title instead of modelID.
   }
   "subResource": { // if this property is set, a sub resource sync (sync Type 2) is done
-    "parentModelID": "461bc760-5fb1-47c9-9a81-449f7ae99afd", // required: model ID of the parent model
+    "parentModelID": "461bc760-5fb1-47c9-9a81-449f7ae99afd", // required: model ID of the parent model. You can also use the modelTitle instead. However, you should then use the modelTitle everywhere, and not mix the ID notation with the title notation.
     "parentIDForRequests": "$.username", // required: this value of the parent entry will be {{parentID}} in the request context. Either "syncID" (the generated ID of a remote resource), a jsonpath, or a JSON Transformation object.
     "entryFieldForParentRelation": "parentEntry" // required: the entry field that will hold the relation to the parent resource
   },

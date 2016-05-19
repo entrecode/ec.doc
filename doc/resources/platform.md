@@ -26,6 +26,10 @@ The JSON Schema is [https://entrecode.de/schema/platform](https://entrecode.de/s
 | ec:app/target | [Target](./target/) | A Target of the Platform (may occur several times) | GET, PUT |
 | ec:app/deployment/latest | [Deployment](./deployment/) | The latest deployment of this Platform | GET |
 | ec:app/deployments | [Deployment List](./deployment/#list) | List of deployments that were executed for this platform. POST to this link relation to create a new deployment for the platform. | GET, POST |
+| ec:app/deployments/options | [Deployment List](./deployment/#list) | List of deployments with filter options | GET |
+| ec:app/build/latest | [Build](./build/) | The latest build of this Platform | GET |
+| ec:app/builds | [Build List](./build/#list) | List of builds that were executed for this platform. POST to this link relation to create a new build for the platform. | GET, POST |
+| ec:app/builds/options | [Build List](./build/#list) | List of builds with filter options. | GET |
 
 # List
 

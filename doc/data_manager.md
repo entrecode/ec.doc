@@ -418,6 +418,8 @@ The available data to use in Web hooks is the following JSON object containing a
     }
 }
 ```
+*The `response` property is currently not available in hooks!*
+
 This object can be transformed to only send the required information.
 See [Transformations](./#transformations) below for details.
 

@@ -1,14 +1,9 @@
-# App Stats
+# App Stat
 
 The App Stats Resources represents statistics for all available [Apps](./app/) in App Manager. It shows all App regardless of an available permission for the specific app.
 
 # Properties
 
-| Property | Type  | Format         | Description                                     | Writable |
-|----------|-------|----------------|-------------------------------------------------|----------|
-| apps     | Array | App Statistics | Array of App Statistics for all available Apps. | No.      |
-
-<h3>App Statistics Array Item Properties</h3>
 | Property           | Type    | Format                                                          | Description                                     | Writable |
 |--------------------|---------|-----------------------------------------------------------------|-------------------------------------------------|----------|
 | appID              | String  | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122)) | The unique identifier for an App                | No.      |
@@ -23,7 +18,7 @@ The App Stats Resources represents statistics for all available [Apps](./app/) i
 | usedPlatforms      | Array   | String                                                          | List of all used Platform Plugins.              | No.      |
 | usedTargets        | Array   | String                                                          | List of all used Target Plugins.                | No.      |
 
-<h3>Monthly Object</h3>
+### Monthly Object
 | Property | Type    | Format    | Description                                         | Writable |
 |----------|---------|-----------|-----------------------------------------------------|----------|
 | key      | String  | `YYYY-MM` | The Month in a year eg. `2016-05`.                  | No.      |
@@ -34,7 +29,12 @@ The App Stats Resources represents statistics for all available [Apps](./app/) i
 | Relation Name  | Target Resource         | Description           | Possible Methods |
 |----------------|-------------------------|-----------------------|------------------|
 | self           | [App Stats](#)          | The resource itself   | GET              |
-| ec:apps        | [App List](./app/#list) | The list of all Apps. | GET, PUT, POST   |
+| collection     | [App Stats](#list)      | The resource itself   | GET              |
+| ec:app         | [App List](./app/#list) | The list of all Apps. | GET, PUT, POST   |
+
+# List
+
+The App Stat List Resource is a [Generic List Resource](/#generic-list-resources) with embedded App Stats Resources.
 
 # Possible Actions
 

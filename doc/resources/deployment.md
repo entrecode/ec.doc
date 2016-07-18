@@ -13,6 +13,7 @@ The JSON Schema is [https://entrecode.de/schema/deployment](https://entrecode.de
 |finished| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the end of the deployment.| No. Gets written on success/failure. |
 |successful| Enum | success, error, running | Indicates if the deployment is still running or finished successfully or with an error. | No. |
 |events | Array | | List of deployment Events. | No. |
+|results| Array | Array of anything. | Contains the results each target plugin reports on a successful deployment. | No. |
 
 <h3>Events Array Item Properties</h3>
 | Property | Type | Format | Description | Writable |

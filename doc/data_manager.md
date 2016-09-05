@@ -508,6 +508,42 @@ The `validate` property (which is only effective in “before” hooks) can be c
 
 The `responseMapping` property in the root level (not the individual requests) can be used to amend the request body with data from a foreign server. Properties can also get hardcoded values. Properties not written remain at the value provided by the original request.
 
+## Mail Hook
+
+*Note: there are currently two implementations available. The deprecated one sends mails directly. The favored one is event-based and supports custom Domains. The deprecated mail hook is hook type `mailgun` and should not be used anymore.*
+
+The `mail` hook is neither a `before` nor an `after` hook, but an `event` hook instead. This means that the main data manager process does not execute this hook, but ec.event-hook service does after the desired action produced an event (same behaviour as an `after` hook). It is not possible to have a mail hook on the `get` method, because reads do not trigger an event.
+
+```js
+{
+	"hook": "event",
+	"type": "mail",
+	"config": {
+		"to": "{{data.recipient}}",
+		"from": "{{data.sender}}",
+		"text": {
+			"__jsonpath": "$.data.content"
+		},
+		"subject": "{{data.subject}} ",
+		"domain": "entrecode.de",
+		// ... more properties, see https://documentation.mailgun.com/api-sending.html#sending
+	},
+	"methods": [
+		"post"
+	],
+	"description": "Simple Mail Hook",
+	"hookID": "dd53b7c2-a494-44e6-883a-4269a89022c2"
+}
+```
+
+This example builds a simple mail from an entry. Note the use of [transjson](#json-transformations) functionality to build the mail dynamically.
+The available properties inside `config` map 1:1 to the properties described in the [Mailgun API Documentation](https://documentation.mailgun.com/api-sending.html#sending). Multiple recipients / multiple values for the same properties can be set as array. The `domain` property can be used to send via a specific domain; if it is omitted, the default will be taken. Note that the domain has to be registered with mailgun, which is a manual process for now.
+
+It is recommended to always include a `text` property, even when a `html` property is present.
+
+*This is an event hook. If the hooks seems not to trigger, the issue is usually fixed by saving the model once again. (Event Hook configuration is stored in etcd, not in PostgreSQL).*
+
+
 # Synchronization
 
 A Sync configuration can be added to models to synchronize the entries with another API. The Sync is read-only – writing to remote servers is possible using Hooks. 

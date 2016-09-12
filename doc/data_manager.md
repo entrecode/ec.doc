@@ -347,6 +347,59 @@ Example 2:
     
 *Accounts with the role `freeUsers` can only create entries with the `data` field, whereas accounts with the role `paidUsers` can also set `hideAds`. Unallowed fields get their default value (probably `null` or `false`)*
 
+# Customization of User Authentication
+
+By default, "Auth" (meaning: Signup, Login, eMail-Change, Password-Reset) is done using ec.passport with dynamically generated, but generic looking templates. This means that the eMails your users receive and the rendered HTML Forms they'll see in the process are labeled with the name of your Data Manager, but have a very generic look. If you're building a Web App, you probably want to style those forms yourself and maybe even want to send mails in a custom format.
+
+## Custom eMails
+
+You are required to register a (sub-)domain for sending custom eMails. You can still use the domain in your own eMail provider, but it is needed to be registered with entrecode in a manual process including adding some DNS entries for validation of domain ownership. If you do that, not only will auth-related mails be sent from your-data-manager-name-noreply@your-domain.com, but you will also able to use that domain for Mail Hooks! Domains are not restricted to a single Data Manager.
+
+When a domain is registered for your Data Manager, you are eligible to provide mail templates. They are required to support [Handlebars.js](http://handlebarsjs.com) as template engine and should include certain variables (e.g. for the links the user can click). To make the templates available for your domain, a manual process at entrecode is necessary. Mail templates may also be delivered in multiple languages. We recommend [Mailgun Transactional Mail Templates](http://blog.mailgun.com/transactional-html-email-templates/) as a starting point for your own mail templates.
+
+The domain has to be set in your Data Manager configuration as `config.customAuthDomain`.
+
+| template name      | purpose | data variables |
+|--------------------|---------|-----------|
+| email-verification | Sent after signup to verify a user's mail address             | `link`, `email`, `title` (the Data Manager Title) |
+| change-email       | Sent to a new mail address after a change for verification    | `link`, `email`, `title` (the Data Manager Title) |
+| change-email-abort | Sent to the old mail address after a change for resetting it  | `link`, `email`, `newMail`, `title` (the Data Manager Title) |
+| password-reset     | Sent to the user if a new password is requested               | `resetLink`, `abortLink`, `email`, `newMail`, `title` (the Data Manager Title) |
+
+All templates receive the variables `to`, `from`, `subject`, `template` and `language`, as well as `data` which has custom properties listed in the table above.
+
+## Custom Auth HTML pages
+
+When clicking on a link in one of the auth mails, or after requesting an email change, by default a HTML page is rendered.
+You can customize those pages inside your Web App and make the calls to your Data Manager API manually using XHR. For that to work, you have to send your calls to Data Manager with the query string `?rest=true` appended, which results in JSON responses instead of finished HTML pages.
+Your also need to configure your own endpoints to use in the links sent in the eMails. Add the following to your Data Manager config as `config.customAuthLinks`:
+
+```js
+"customAuthLinks": {
+  "email-verify": "https://your-domain/email-verification{?jwt}",
+  "password-reset-abort": "https://your-domain/password-reset/abort{?jwt}",
+  "password-reset": "https://your-domain/password-reset{?jwt}",
+  "change-email-abort": "https://your-domain/change-email/abort{?jwt}",
+  "change-email-verify": "https://your-domain/change-email{?jwt}"
+}
+```
+
+You are free to define those URLs as you like, but they need to be valid [Template URIs according to RFC 6570](https://tools.ietf.org/html/rfc6570) expecting a variable `jwt`. This token you'll need to make the actual auth requests to your Data Manager API.
+
+They map like this (all relative to your API root):
+
+* `email-verify`: `/_auth/email-verification/{jwt}?rest=true`
+* `password-reset-abort`: `/_auth/password-reset/abort/{jwt}?rest=true`
+* `password-reset`: `/_auth/password-reset/{jwt}?rest=true`
+* `change-email-abort`: `/_auth/email-verification/abort/{jwt}?rest=true`
+* `change-email-verify`: `/_auth/email-verification/{jwt}?rest=true`
+
+Note: the `password-reset` route is only for validating the JWT, that it is still valid to set a new password. If you don't customize it, it will render a form to change the password. It is recommended to use the route after the user opened the link in the password reset mail to check if the request is valid. Then render a form requesting a new password. The new password has then to be sent in a POST request to `/_auth/password-reset/callback/{jwt}?rest=true` as JSON key `password`.
+
+To request an email change, POST a JSON with key `email` to `/_auth/change-email?rest=true` to receive JSON response instead of a rendered HTML.
+
+The JSON responses triggered using `?rest=true` contain an object with all necessary data for rendering an HTML page, or an error. 
+
 # Hooks
 Hooks can be used to add additional functionality to models. E.g. they enable you to alter values before saving or to pass data on to another server.
 

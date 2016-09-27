@@ -38,7 +38,6 @@ To acquire an access token, ec:auth/login for user credentials or ec:auth/facebo
 ## Client registration
 Client registration is needed to obtain access tokens. Due to the authentication flow of OAuth, the end user is sent to the OAuth Provider in the browser, and afterwards redirected back to the client application. The access token can only be sent to the client using a valid redirect URL that gets the token appended as query string parameter or cookie.
 
-Currently, clients can only be registered manually.
 The following information is needed:
 
 - `clientID`: Unique string identifier for the client. Has to be appended to requests.

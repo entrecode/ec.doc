@@ -252,6 +252,7 @@ The `verbose` field may be used for further information what is actually wrong w
 | 462  <a name="error-462"></a>  | Facebook API call failed to receive eMail address | | more verbose Error Message | 400|
 | 470  <a name="error-470"></a>  | Target resource does not fulfill permission policy conditions | | | 403 |
 | 471  <a name="error-471"></a>  | Property cannot be written due to permission policy restrictions | the property that is not allowed | | 403 |
+| 472  <a name="error-472"></a>  | Error while processing asset file.| The original error message | | 400 |
 | **5xx** | Plan error (not in Accountserver, only 25xx and 35xx are defined) |  |  | |
 | 500  <a name="error-500"></a>  | Missing plan for this product | the product that is not included in the current plan |  | 403|
 | 510  <a name="error-510"></a>  | Insufficient plan for this product | the product whose limit is exceeded in the current plan |  | 403|

@@ -241,7 +241,7 @@ The `verbose` field may be used for further information what is actually wrong w
 | 402  <a name="error-402"></a>  | Outdated Access Token |  |  | 401|
 | 403  <a name="error-403"></a>  | Invalid Password | the email address that attempted the login | Timestamp until login is locked for this email address | 401|
 | 404  <a name="error-404"></a>  | Account not found (unknown email address) |  |  | 404|
-| 410  <a name="error-410"></a>  | Insufficient rights to access the requested resource |  |  | 401|
+| 410  <a name="error-410"></a>  | Insufficient rights to access the requested resource | The rejected permission |  | 401|
 | 411  <a name="error-411"></a>  | Insufficient rights to access the requested resource with this method |  |  | 405|
 | 444  <a name="error-444"></a>  | Denied because of stupidity |  |  | 403|
 | 451  <a name="error-451"></a>  | Too many wrong login attempts (on login, only 1451 is defined) |  |  | 429|

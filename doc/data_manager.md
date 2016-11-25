@@ -245,6 +245,22 @@ will get the `url` for the asset with `size` 100.
 
 Additionally there is a API for public assets similar to the `ec:asset[s]`. Please refer to the public documentation found in any data manager in editor.
 
+#### Custom Asset Domain
+It is possible to use a custom asset domain. In order to geht this working simply edit the `config` of a Data Manager to include the property `customAssetDomain`. Set the value to the custom domain. After configuring the Data Manager you'll need to set up your Domain to proxy the requests to the original url of the file (original links will always work).
+
+###### Example:
+
+```
+Original URL:
+https://cdn2.entrecode.de/beefbeef/QwB6QDJ5V9jrLkEd6OdBvXqh.jpg
+
+Custom Domain:
+https://www.example.com/static/QwB6QDJ5V9jrLkEd6OdBvXqh.jpg
+```
+
+Your proxy should redirect all `https://www.example.com/static/(.*)` requests to `https://cdn2.entrecode.de/beefbeef/$1`. We do this by configuring a AWS CloudFront to serve `/static/` requests from the same origin as our `cnd2.entrecode.de` does but with `beefbeef` as root path.
+
+
 # User Management
 
 While Data Manager owners (users with an entrecode Account) can generally do anything, the generated APIs have their own User Management. It knows three types of users: *Public*, which is everybody without any authentication (Web Users). *Anonymous* which are users that are created by software, but that never actively registered – useful to have users store their own data in an app without requiring an registration. And finally *Registered* which are users that have actively signed up, providing an email address and at least one login method.

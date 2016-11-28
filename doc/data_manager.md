@@ -246,7 +246,7 @@ will get the `url` for the asset with `size` 100.
 Additionally there is a API for public assets similar to the `ec:asset[s]`. Please refer to the public documentation found in any data manager in editor.
 
 #### Custom Asset Domain
-It is possible to use a custom asset domain. In order to geht this working simply edit the `config` of a Data Manager to include the property `customAssetDomain`. Set the value to the custom domain. After configuring the Data Manager you'll need to set up your Domain to proxy the requests to the original url of the file (original links will always work).
+It is possible to use a custom asset domain. In order to get this working simply edit the `config` of a Data Manager to include the property `customAssetDomain`. Set the value to the custom domain. After configuring the Data Manager you'll need to set up your Domain to proxy the requests to the original url of the file (original links will always work).
 
 ###### Example:
 
@@ -258,7 +258,7 @@ Custom Domain:
 https://www.example.com/static/QwB6QDJ5V9jrLkEd6OdBvXqh.jpg
 ```
 
-Your proxy should redirect all `https://www.example.com/static/(.*)` requests to `https://cdn2.entrecode.de/beefbeef/$1`. We do this by configuring a AWS CloudFront to serve `/static/` requests from the same origin as our `cnd2.entrecode.de` does but with `beefbeef` as root path.
+Your proxy should redirect all `https://www.example.com/beefbeef/(.*)` requests to `https://cdn2.entrecode.de/beefbeef/$1`. We do this by configuring a AWS CloudFront to serve `/beefbeef/*` requests from the same origin as our `cnd2.entrecode.de` does.
 
 
 # User Management

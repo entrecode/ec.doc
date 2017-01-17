@@ -10,5 +10,8 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-md2html": "^0.2.1"
+  },
+  "scripts": {
+    "start": "grunt"
   }
 }

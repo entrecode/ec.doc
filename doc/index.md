@@ -241,7 +241,7 @@ The `verbose` field may be used for further information what is actually wrong w
 | 402  <a name="error-402"></a>  | Outdated Access Token |  |  | 401|
 | 403  <a name="error-403"></a>  | Invalid Password | the email address that attempted the login | Timestamp until login is locked for this email address | 401|
 | 404  <a name="error-404"></a>  | Account not found (unknown email address) |  |  | 404|
-| 410  <a name="error-410"></a>  | Insufficient rights to access the requested resource |  |  | 401|
+| 410  <a name="error-410"></a>  | Insufficient rights to access the requested resource | The rejected permission |  | 401|
 | 411  <a name="error-411"></a>  | Insufficient rights to access the requested resource with this method |  |  | 405|
 | 444  <a name="error-444"></a>  | Denied because of stupidity |  |  | 403|
 | 451  <a name="error-451"></a>  | Too many wrong login attempts (on login, only 1451 is defined) |  |  | 429|
@@ -252,6 +252,7 @@ The `verbose` field may be used for further information what is actually wrong w
 | 462  <a name="error-462"></a>  | Facebook API call failed to receive eMail address | | more verbose Error Message | 400|
 | 470  <a name="error-470"></a>  | Target resource does not fulfill permission policy conditions | | | 403 |
 | 471  <a name="error-471"></a>  | Property cannot be written due to permission policy restrictions | the property that is not allowed | | 403 |
+| 472  <a name="error-472"></a>  | Error while processing asset file.| The original error message | | 400 |
 | **5xx** | Plan error (not in Accountserver, only 25xx and 35xx are defined) |  |  | |
 | 500  <a name="error-500"></a>  | Missing plan for this product | the product that is not included in the current plan |  | 403|
 | 510  <a name="error-510"></a>  | Insufficient plan for this product | the product whose limit is exceeded in the current plan |  | 403|

@@ -10,6 +10,8 @@ pages:
 - Account Server Resources:
     - 'Account': 'resources/account.md'
     - 'Auth': 'resources/auth.md'
+    - 'Client': 'resources/client.md'
+    - 'Invalid Permissions': 'resources/invalid-permissions.md'
     - 'Invites': 'resources/invite.md'
     - 'Group': 'resources/group.md'
     - 'Token': 'resources/token.md'

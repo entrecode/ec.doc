@@ -245,6 +245,22 @@ will get the `url` for the asset with `size` 100.
 
 Additionally there is a API for public assets similar to the `ec:asset[s]`. Please refer to the public documentation found in any data manager in editor.
 
+#### Custom Asset Domain
+It is possible to use a custom asset domain. In order to get this working simply edit the `config` of a Data Manager to include the property `customAssetDomain`. Set the value to the custom domain. After configuring the Data Manager you'll need to set up your Domain to proxy the requests to the original url of the file (original links will always work).
+
+###### Example:
+
+```
+Original URL:
+https://cdn2.entrecode.de/beefbeef/QwB6QDJ5V9jrLkEd6OdBvXqh.jpg
+
+Custom Domain:
+https://www.example.com/static/QwB6QDJ5V9jrLkEd6OdBvXqh.jpg
+```
+
+Your proxy should redirect all `https://www.example.com/beefbeef/(.*)` requests to `https://cdn2.entrecode.de/beefbeef/$1`. We do this by configuring a AWS CloudFront to serve `/beefbeef/*` requests from the same origin as our `cnd2.entrecode.de` does.
+
+
 # User Management
 
 While Data Manager owners (users with an entrecode Account) can generally do anything, the generated APIs have their own User Management. It knows three types of users: *Public*, which is everybody without any authentication (Web Users). *Anonymous* which are users that are created by software, but that never actively registered – useful to have users store their own data in an app without requiring an registration. And finally *Registered* which are users that have actively signed up, providing an email address and at least one login method.
@@ -347,6 +363,59 @@ Example 2:
     
 *Accounts with the role `freeUsers` can only create entries with the `data` field, whereas accounts with the role `paidUsers` can also set `hideAds`. Unallowed fields get their default value (probably `null` or `false`)*
 
+# Customization of User Authentication
+
+By default, "Auth" (meaning: Signup, Login, eMail-Change, Password-Reset) is done using ec.passport with dynamically generated, but generic looking templates. This means that the eMails your users receive and the rendered HTML Forms they'll see in the process are labeled with the name of your Data Manager, but have a very generic look. If you're building a Web App, you probably want to style those forms yourself and maybe even want to send mails in a custom format.
+
+## Custom eMails
+
+You are required to register a (sub-)domain for sending custom eMails. You can still use the domain in your own eMail provider, but it is needed to be registered with entrecode in a manual process including adding some DNS entries for validation of domain ownership. If you do that, not only will auth-related mails be sent from your-data-manager-name-noreply@your-domain.com, but you will also able to use that domain for Mail Hooks! Domains are not restricted to a single Data Manager.
+
+When a domain is registered for your Data Manager, you are eligible to provide mail templates. They are required to support [Handlebars.js](http://handlebarsjs.com) as template engine and should include certain variables (e.g. for the links the user can click). To make the templates available for your domain, a manual process at entrecode is necessary. Mail templates may also be delivered in multiple languages. We recommend [Mailgun Transactional Mail Templates](http://blog.mailgun.com/transactional-html-email-templates/) as a starting point for your own mail templates.
+
+The domain has to be set in your Data Manager configuration as `config.customAuthDomain`.
+
+| template name      | purpose | data variables |
+|--------------------|---------|-----------|
+| email-verification | Sent after signup to verify a user's mail address             | `link`, `email`, `title` (the Data Manager Title) |
+| change-email       | Sent to a new mail address after a change for verification    | `link`, `email`, `title` (the Data Manager Title) |
+| change-email-abort | Sent to the old mail address after a change for resetting it  | `link`, `email`, `newMail`, `title` (the Data Manager Title) |
+| password-reset     | Sent to the user if a new password is requested               | `resetLink`, `abortLink`, `email`, `newMail`, `title` (the Data Manager Title) |
+
+All templates receive the variables `to`, `from`, `subject`, `template` and `language`, as well as `data` which has custom properties listed in the table above.
+
+## Custom Auth HTML pages
+
+When clicking on a link in one of the auth mails, or after requesting an email change, by default a HTML page is rendered.
+You can customize those pages inside your Web App and make the calls to your Data Manager API manually using XHR. For that to work, you have to send your calls to Data Manager with the query string `?rest=true` appended, which results in JSON responses instead of finished HTML pages.
+Your also need to configure your own endpoints to use in the links sent in the eMails. Add the following to your Data Manager config as `config.customAuthLinks`:
+
+```js
+"customAuthLinks": {
+  "email-verify": "https://your-domain/email-verification{?jwt}",
+  "password-reset-abort": "https://your-domain/password-reset/abort{?jwt}",
+  "password-reset": "https://your-domain/password-reset{?jwt}",
+  "change-email-abort": "https://your-domain/change-email/abort{?jwt}",
+  "change-email-verify": "https://your-domain/change-email{?jwt}"
+}
+```
+
+You are free to define those URLs as you like, but they need to be valid [Template URIs according to RFC 6570](https://tools.ietf.org/html/rfc6570) expecting a variable `jwt`. This token you'll need to make the actual auth requests to your Data Manager API.
+
+They map like this (all relative to your API root):
+
+* `email-verify`: `/_auth/email-verification/{jwt}?rest=true`
+* `password-reset-abort`: `/_auth/password-reset/abort/{jwt}?rest=true`
+* `password-reset`: `/_auth/password-reset/{jwt}?rest=true`
+* `change-email-abort`: `/_auth/email-verification/abort/{jwt}?rest=true`
+* `change-email-verify`: `/_auth/email-verification/{jwt}?rest=true`
+
+Note: the `password-reset` route is only for validating the JWT, that it is still valid to set a new password. If you don't customize it, it will render a form to change the password. It is recommended to use the route after the user opened the link in the password reset mail to check if the request is valid. Then render a form requesting a new password. The new password has then to be sent in a POST request to `/_auth/password-reset/callback/{jwt}?rest=true` as JSON key `password`.
+
+To request an email change, POST a JSON with key `email` to `/_auth/change-email?rest=true` to receive JSON response instead of a rendered HTML.
+
+The JSON responses triggered using `?rest=true` contain an object with all necessary data for rendering an HTML page, or an error. 
+
 # Hooks
 Hooks can be used to add additional functionality to models. E.g. they enable you to alter values before saving or to pass data on to another server.
 
@@ -418,6 +487,8 @@ The available data to use in Web hooks is the following JSON object containing a
     }
 }
 ```
+*The `response` property is currently not available in hooks!*
+
 This object can be transformed to only send the required information.
 See [Transformations](./#transformations) below for details.
 
@@ -506,6 +577,42 @@ The `validate` property (which is only effective in “before” hooks) can be c
 
 The `responseMapping` property in the root level (not the individual requests) can be used to amend the request body with data from a foreign server. Properties can also get hardcoded values. Properties not written remain at the value provided by the original request.
 
+## Mail Hook
+
+*Note: there are currently two implementations available. The deprecated one sends mails directly. The favored one is event-based and supports custom Domains. The deprecated mail hook is hook type `mailgun` and should not be used anymore.*
+
+The `mail` hook is neither a `before` nor an `after` hook, but an `event` hook instead. This means that the main data manager process does not execute this hook, but ec.event-hook service does after the desired action produced an event (same behaviour as an `after` hook). It is not possible to have a mail hook on the `get` method, because reads do not trigger an event.
+
+```js
+{
+	"hook": "event",
+	"type": "mail",
+	"config": {
+		"to": "{{data.recipient}}",
+		"from": "{{data.sender}}",
+		"text": {
+			"__jsonpath": "$.data.content"
+		},
+		"subject": "{{data.subject}} ",
+		"domain": "entrecode.de",
+		// ... more properties, see https://documentation.mailgun.com/api-sending.html#sending
+	},
+	"methods": [
+		"post"
+	],
+	"description": "Simple Mail Hook",
+	"hookID": "dd53b7c2-a494-44e6-883a-4269a89022c2"
+}
+```
+
+This example builds a simple mail from an entry. Note the use of [transjson](#json-transformations) functionality to build the mail dynamically.
+The available properties inside `config` map 1:1 to the properties described in the [Mailgun API Documentation](https://documentation.mailgun.com/api-sending.html#sending). Multiple recipients / multiple values for the same properties can be set as array. The `domain` property can be used to send via a specific domain; if it is omitted, the default will be taken. Note that the domain has to be registered with mailgun, which is a manual process for now.
+
+It is recommended to always include a `text` property, even when a `html` property is present.
+
+*This is an event hook. If the hooks seems not to trigger, the issue is usually fixed by saving the model once again. (Event Hook configuration is stored in etcd, not in PostgreSQL).*
+
+
 # Synchronization
 
 A Sync configuration can be added to models to synchronize the entries with another API. The Sync is read-only – writing to remote servers is possible using Hooks. 
@@ -535,7 +642,7 @@ There are different types of synchronization with slightly different necessary c
     
 ## The Request sequence
 
-As mentioned above, multiple successive HTTP requests can be done to get the remote data. It is possible to pass data from request to request. The available data is called the *context*. By default, the context will contain the old entry (for Single Resource sync) or a property `parentID` (for subresource sync). The full list sync initially has an empty context.Each request can have a `responseMapping` property containing a [JSON Transformation](#json-transformations). The returned object's properties will be added to the context and be accessible for subsequent requests. Subsequent requests may overwrite those properties.
+As mentioned above, multiple successive HTTP requests can be done to get the remote data. It is possible to pass data from request to request. The available data is called the *context*. By default, the context will contain the old entry (for Single Resource sync) or the properties `parentID` and `parentResource` (for subresource sync); as well as the public Data Manager Config (config.publicConfig as `config`). The full list sync initially has an empty context. Each request can have a `responseMapping` property containing a [JSON Transformation](#json-transformations). The returned object's properties will be added to the context and be accessible for subsequent requests. Subsequent requests may overwrite those properties.
 The context is also available when building the response mapping for the next request, in the JSONPath `$.__context`. 
 
 ## Supplying a JSON Web Token (JWT)
@@ -618,10 +725,10 @@ Explanation using an Example:
     }
   },
   "entryRelationTargetModelIDs": {
-    "country": "17d6e37f-5ab8-46d7-a2f1-a3de1832104c" // country field links to synced entry in other model
+    "country": "17d6e37f-5ab8-46d7-a2f1-a3de1832104c" // country field links to synced entry in other model. Can also be the model title instead of modelID.
   }
   "subResource": { // if this property is set, a sub resource sync (sync Type 2) is done
-    "parentModelID": "461bc760-5fb1-47c9-9a81-449f7ae99afd", // required: model ID of the parent model
+    "parentModelID": "461bc760-5fb1-47c9-9a81-449f7ae99afd", // required: model ID of the parent model. You can also use the modelTitle instead. However, you should then use the modelTitle everywhere, and not mix the ID notation with the title notation.
     "parentIDForRequests": "$.username", // required: this value of the parent entry will be {{parentID}} in the request context. Either "syncID" (the generated ID of a remote resource), a jsonpath, or a JSON Transformation object.
     "entryFieldForParentRelation": "parentEntry" // required: the entry field that will hold the relation to the parent resource
   },
@@ -736,6 +843,40 @@ Make all characters uppercase characters
 
 ##### lowercase
 Make all characters lowercase characters
+
+##### date
+Converts a value into a Date. If no value is given (e.g. using `__jsonpath`), the current timestamp is the value. String values are transformed into a date using [Moment.js String parsing](http://momentjs.com/docs/#/parsing/string/). The output value is by default an ISO 8601 String (including time zone).
+Optionally, formats can be given for parsing and output formatting. 
+The property `__arguments` can contain a two-element array (both values optional). Optional means that the value may be `null` or `false` to be ignored (which falls back to the default). The **first** argument is the optional string parsing format (see [Moment.js doc](http://momentjs.com/docs/#/parsing/string-format/). Default is String parsing without a specific format, which supports a wide range of formats that are detected automatically. The **second** argument is output formatting (see [Moment.js doc](http://momentjs.com/docs/#/displaying/format/)). By default (value `null` or `false`) an ISO 8601 Date String is output.
+
+##### date\_add and date\_subtract
+Allows for manipulation of date values by adding or subtracting values. Other than that, the functions do exactly the same as the *date* modifier function. However, there are two additional (and required) arguments. Therefor, the `__arguments` array is always required for these two functions. The **first** argument is the same as for the *date* function: a string parsing format or null. The **second** argument is a number value. The **third** argument is the unit for the value in the second argument. The **fourth** argument is the same as for the *date* function: a string output format or null.
+
+**Example 1:**
+
+```js
+{
+  "__modifier": "date_add",
+  "__arguments": [null, 7, "days", "YY-MM-DD"]
+}
+```
+
+Output: 7 days from now in YY-MM-DD.
+
+**Example 2:**
+
+```js
+{
+  "__jsonpath": "$.dateValue",
+  "__modifier": "date_subtract",
+  "__arguments": ["DD.MM.YYYY", 3, "years", "YY-MM-DD"]
+}
+```
+
+Input of the JSONPath function: '19.05.2016'
+
+Output: 13-05-19
+
 
 #### Multiple modifiers
 Blocks with modifiers can be nested using `__value`. 

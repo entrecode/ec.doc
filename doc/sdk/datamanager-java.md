@@ -1,3 +1,6 @@
+# DEPRECATED
+> This Module is deprecated. Don't use it anymore! There won't be any bugfixes or improvements.
+
 # ec.datamanager-java-sdk
 
 Java SDK for [ec.datamanager](https://editor.entrecode.de). By entrecode.
@@ -14,14 +17,14 @@ Get via Maven:
 <dependency>
   <groupId>de.entrecode</groupId>
   <artifactId>datamanager_java_sdk</artifactId>
-  <version>0.2.3</version>
+  <version>0.4.0</version>
 </dependency>
 ```
 
 or with Gradle:
 
 ```java
-compile 'de.entrecode:datamanager_java_sdk:0.2.3'
+compile 'de.entrecode:datamanager_java_sdk:0.4.0'
 ```
 
 ## Usage
@@ -103,6 +106,7 @@ DataManager dm2 = new DataManager(
 
 ```java
 dm.model("myModel").entries()
+	.levels(2)
     .onResponse(new ECResponseListener<List<ECEntry>>{
 		@Override
 		public void onResponse(List<ECEntry> entries){
@@ -127,6 +131,7 @@ dm.model("myModel").entries()
 ### Get Entry
 ```java
 dm.model("myModel").entry("alwoigei")
+	.levels(2)
 	.onResponse(new ECResponseListener<ECEntry>{
 		@Override
 		public void onResponse(ECEntry entry){
@@ -381,6 +386,65 @@ asset.delete()
 	}).go();
 ```
 
+### Get Tags
+
+```java
+dm.tags()
+	.onResponse(new ECResponseListener<List<ECTag>>{
+		@Override
+		public void onResponse(List<ECTag> tags){
+			// TODO something
+		}
+	}).go();
+```
+
+### Get Tag
+```java
+dm.tag("tagname")… // is shorthand for
+dm.tag().filter(new HashMap<String, String>(){{
+		put("tag", "tagname");
+	}})
+	.onResponse(new ECResponseListener<ECTag>{
+		@Override
+		public void onResponse(ECTag tag){
+			// TODO something
+		}
+	}).go();
+```
+
+
+### Edit Tag
+```java
+ECTag tag = …
+…
+tag.save()
+	.onResponse(new ECResponseListener<ECTag>{
+		@Override
+		public void onResponse(ECTag tag){
+			// TODO something
+		}
+	}).go();
+```
+
+### Delete Tag
+```java
+ECTag tag;
+…
+tag.delete()
+	.onResponse(new ECResponseListener{
+		@Override
+		public void onResponse(){
+			// TODO something
+		}
+	}
+	.onError(new ECErrorListener{
+		@Override
+		public void onError(ECError error){
+			// TODO something
+		}
+	}).go();
+```
+
 # Documentation
 
 see JavaDoc.
@@ -400,6 +464,16 @@ Running tests with coverage:
 ```
 
 # Changelog
+
+### 0.4.2
+- support for nested entries with `level(int)`
+
+### 0.4.1
+- added tag api doc
+
+### 0.4.0
+- use updated single resource responses in Public API.
+- added tag api.
 
 ### 0.2.3
 - SDK will use new thumbnail api for image assets

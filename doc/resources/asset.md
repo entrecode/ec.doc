@@ -34,7 +34,7 @@ This subresource is included in the [Asset](#) resource.
 | Property | Type | Format | Description | Writable |
 |----------|------|--------|-------------|----------|
 |mimetype | String | [RFC 2046](http://tools.ietf.org/html/rfc2046)    |The MIME Media type for this file| No |
-|url | String |[RFC 3986](https://tools.ietf.org/html/rfc3986) | The URL of the file for retrieval | No |
+|url | String |[RFC 3986](https://tools.ietf.org/html/rfc3986) | The URL of the file for retrieval. Can be overwritten with custom asset url (datamanager config `customAssetDomain` | No |
 |size   | Number | Integer  |Size of the file in Bytes| No |
 |resolution   | JSON  | | JSON object with additional metadata for this file. For image assets, it will contain properties like `width` and `height` to indicate the image resolution. | No |
 |locale | String  | [RFC5646](http://tools.ietf.org/html/rfc5646) Syntax (`en-US`, `de-DE`, …)      |Locale of the asset file | Yes |

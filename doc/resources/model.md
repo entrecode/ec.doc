@@ -31,6 +31,8 @@ The JSON Schema is [https://entrecode.de/schema/model](https://entrecode.de/sche
 |---------------|-----------------|-------------|-----------------|
 | self          | [Model](#)| The resource itself | GET, PUT |
 | collection    | [Model List](#list)| List of all available Models | GET, POST|
+| ec:model/purge| - | Attempts to delete all entries of the model, see [Purge](#puge) | DELETE |
+| ec:model/entryHistory | [Entry Event List](#entry-event-list) | returns a list of events that happened to entries of this model. | GET |
 
 # List
 
@@ -170,3 +172,17 @@ The success status code is **204 No Content** with an empty response body.
 To delete all entries of a Model, clients may perform a DELETE on `ec:model/purge` at a single Model Resource. Note that entries which are referenced as required somewhere else will not be deleted. Until now you need to find the referencing entry manually. This is subject to change.
 
 The success status code is **204 No Content** or **202 Accepted** with an empty response body.
+
+# Entry Event List
+
+If the `ec:model/entryHistory` relation is output, the event history of this model's entries is available (otherwise the Data Manager History Service is not configured or currently offline). 
+
+Following the link relation using GET returns an array of events (can be empty). To specify the number of events, you may set the `_size` property in the templated link. There are no more filter options available. The result JSON format is not fixed yet and may be subject to change.
+
+> Note that the size of events can be quite big. It is **not** recommended to request more than 10-20 events! 
+
+The permission `dm:<dataManagerID>:model:entries:<modelID>:history` is required to access entry events.
+
+By default, the output media type is `application/json`. 
+To support live updating, server-sent events are also supported. Clients may consume the event stream using the [EventSource API](https://developer.mozilla.org/en/docs/Web/API/EventSource) built into browsers. The URI is the same (sending an `Accept: text/event-stream` header triggers output of the stream instead of the JSON entry list).
+Note that while some EventSource Client libraries support additional HTTP headers, the default API does not. Because of that, it is required to send the authentication token via query string parameter `_token` [as described](../#authentication) in those clients.

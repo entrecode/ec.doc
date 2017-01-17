@@ -21,6 +21,7 @@ The JSON Schema is [https://entrecode.de/schema/target](https://entrecode.de/sch
 | collection    | [Target List](#list)| List of all available Targets | GET, POST|
 | ec:app | [App](./app/) | The app this target is corresponding to. | GET, PUT, DELETE |
 | ec:app/platform| [Platforms](./platform/) | Platforms that use this codeSource. (optional) | GET, PUT, DELETE |
+| ec:app/deployments| [Deployments](./deployment/) | Deyployments that had this Target. | GET |
 
 *Note that a target cannot be deleted if it is used in at least one platform.*
 

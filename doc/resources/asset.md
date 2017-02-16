@@ -56,7 +56,7 @@ In both cases, the success status code is **200 OK.**
 ## Create
 
 To create a new asset, upload a file with content type multipart/form-data ([RFC 2388](http://tools.ietf.org/html/rfc2388)). MIME Type and basic properties are inferred from the uploaded file(s). The field name has to be `file`. 
-Multiple files can be uploaded at once to create multiple assets with one call.
+Multiple files can be uploaded at once to create multiple assets with one call. You can also send a field `tags` or `title` to overwrite the default title and tags. `tags` must be a JSON.stringified array of strings.
 
 Additionally a boolean field `private` can be sent to specify if the created asset should be private (read: only accessible by the creating user) or public (read: accessible by everyone in the data manager).
 

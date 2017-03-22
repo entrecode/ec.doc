@@ -14,7 +14,7 @@ The JSON Schema is [https://entrecode.de/schema/datamanager](https://entrecode.d
 |hexColor|String|6-digit hex color `#rrggbb` `/^#[A-Fa-f0-9]{6}$/`|Color identifier for editor.|Yes|
 |config | JSON |  		|A JSON object for various configurations. See Schema for details. config.publicConfig (if set) will be available to the public API root entry point as `config`.| Yes|
 |rights  | Array | One of  `manageRights`, `editModel`, `editEntries`, `editAssets`, `manageAPIs`| *Deprecated* Array of available rights. Not included rights are not available. | No |
-|publicAssetRights| Array | One of `get`, `put`, `postPrivate`, `postPublic` | Array of available rights for public assets API. Not included rights are not available.| Yes |
+|publicAssetRights| Array | One of `get`, `put`, `postPrivate`, `postPublic`, `delete`, `getTags`, `editTags` | Array of available rights for public assets API. Not included rights are not available.| Yes |
 |locales | Array | [RFC4646](https://tools.ietf.org/html/rfc4646)|Available locales in this Data Manager Space.| Yes |
 |defaultLocale | String | [RFC4646](https://tools.ietf.org/html/rfc4646)| The default locale of this Data Manager Space. Included in `locales`.| Yes |
 

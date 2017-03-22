@@ -235,6 +235,8 @@ The `verbose` field may be used for further information what is actually wrong w
 | 370  <a name="error-370"></a>  | Cannot delete Resource. Is used. | | | 403 |
 | 371  <a name="error-371"></a>  | Cannot change entry. Reference not found. (only 2371 is defined) | | | 400|
 | 372  <a name="error-372"></a>  | Required field must have a default value set. | Field title | | 400 |
+| 373  <a name="error-373"></a>  | Other parallel request already added tag(s) | | | 400 |
+| 374  <a name="error-374"></a>  | Cannot export datamanager. Required field has no default value. | model title | field title | 400 |
 | **4xx** | **Rights Management Error** |  |  | |
 | 400  <a name="error-400"></a>  | Missing Access Token |  |  | 401|
 | 401  <a name="error-401"></a>  | Invalid Access Token |  |  | 401|

@@ -218,6 +218,8 @@ These types are more complex types with a specific domain that abstract from pri
 |`account`|Link to an account.|UUID (v4)|–|—|exact, multiple|`"371393a6-ab7f-4591-8d5d-54261a52d28b"`|
 |`role`|Link to a role.|UUID (v4)|String (role label)|—|exact, multiple|`"a118f6a0-0d74-463d-b1d7-afcf3eb6da3a"`|
 
+For every `asset` and `assets` type a part of the linked resource is embedded into the entry resource. This will allow users to get file urls for linked assets directly without making an extra request to the api. For example this can be used in list view to show thumbnails of logos directly.
+
 
 # Assets in the Generated API (aka. getBestFile)
 Assets have a file-independent URL (consisting of the asset ID). Calling it returns the best fitting file, depending on the requested Locale (Accept-Language header).

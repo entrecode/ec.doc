@@ -1,11 +1,100 @@
+# Assets
+
+Assets are abstract representations of files. Usually, they also contain one or more thumbnails in different sizes. Image assets also support different image dimensions. 
+
+*Note on legacy assets: the [former implementation](#single-asset-legacy-assets) is still available but deprecated.*
+
 # Single Asset
 A single asset.
+
+The JSON Schema is [https://entrecode.de/schema/dm-asset](https://entrecode.de/schema/dm-asset)
+
+## Properties
+
+| Property | Type | Format | Description | Writable |
+|----------|------|--------|-------------|----------|
+| assetID  | String | base64url-encoded UUIDv4 (`^[a-zA-Z0-9\\-_]{22}$`) | The unique identifier for an Asset | No. Gets generated on creation. |
+| title    | String |      | A string title for this Asset. Inferred from the original file name of the uploaded file.| Yes |
+| caption  | String |	   | A string caption for this Asset. | Yes |
+| type 	   | String | one of `image`, `video`, `audio`, `plain`, `document`, `spreadsheet`, `other` | Asset type | No |
+| mimetype | String | `^(image|video|audio|text|application)\/[a-z0-9\\.+-]+$` | MIME-Type of the Asset file | No |
+| created  | String | ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of the Asset| No. Gets written on creation. |
+| modified | String, `null` | ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the last modification of the Asset | No. Gets written on updates. |
+| creator  | String, `null` | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122)) | The accountID of the creator, if available. | No. Gets written on creation. |
+| creatorType | String | `ecUser`, `dmUser`, or `public` | The type of user that created the asset. | No. Gets written on creation. |
+| tags     | Array[String] | [Tag](./tag/) | Array of string tags for this asset | Yes |
+| file     | JSON |        | Main Asset file | No. Gets written on creation. |
+| file.url | String | URL  | The generated URL to retrieve the asset file. | No |
+| file.size | Integer |    | Bytesize of the uploaded File | No |
+| file.resolution | JSON, `null` | Properties `width` and `height` | Resolution of the image file variant in pixels. | No |
+| fileVariants | Array[JSON] | | List of File Variants, if this is an image. | No. Missing image resolutions can created by requesting them. |
+| fileVariants[].url | String | URL | The generated URL to retrieve the asset file variant. | No |
+| fileVariants[].size | Integer | | Bytesize of the uploaded File | No |
+| fileVariants[].resolution | JSON, `null` | Properties `width` and `height` | No |
+| thumbnails | Array[JSON] | | List of Thumbnails. | No. Missing thumbnail resolutions can created by requesting them. |
+| thumbnails[].url | String | URL | The generated URL to retrieve the asset thumbnail. | No |
+| thumbnails[].dimension | Integer | | Resolution of the square thumbnail image in pixel. | No |
+| isUsed   | Boolean |     | Indicates if this Asset is used in an Asset/Assets field of an Entry in this Data Manager. | No, dynamically changes its value. |
+| duplicates | Integer |   | Number of duplicate Assets of this Asset in the same Asset Group. | No, dynamically changes its value. |
+
+## Relations
+
+| Relation Name | Target Resource | Description |Possible Methods |
+|---------------|-----------------|-------------|-----------------|
+| self          | [Asset](#)| The resource itself | GET, PUT, DELETE |
+| collection    | [Asset List](#list)| List of all available Assets in this Asset Group| GET, POST |
+| ec:dm-asset/file | File 		  | The main file URL. | GET      |
+| ec:dm-asset/file-variant | File | File variant URL(s) | GET     |
+| ec:dm-asset/thumbnail | File    | Thumbnail URL(s) | GET        |
+| ec:dm-asset/duplicates | [Asset List](#list) | List of Assets that are duplicates, if applicable | GET |
+
+## Updating Assets
+
+To update an existing Asset Resource, clients may perform a PUT on `ec:dm-asset` or `self` at a single Asset Resource.
+
+Partial updates are possible.
+Changeable properties are `title`, `tags` and `caption`. 
+It is not possible to change the file itself.
+
+# List
+
+The Asset List Resource is a [Generic List Resource](/#generic-list-resources) with embedded Asset Resources.
+
+## Relations
+
+(additionally to the default relations)
+
+| Relation Name | Target Resource | Description |Possible Methods |
+|---------------|-----------------|-------------|-----------------|
+| self          | [Asset List](#list)| The Assets List| GET, POST |
+| ec:dm-asset/by-id | [Asset](#)  | Templated Link to Assets | GET, PUT, DELETE |
+| ec:dm-assets/options | [Asset List](#list) | Templated Link to Assets list | GET |
+| ec:dm-assetgroup | [Asset Group](../dm-assetgroup.md/) | Asset Group of this Asset List | GET, PUT |
+| ec:api | Generated API Entry point | Root page of the generated API | GET |
+
+## Creating Assets
+
+To create a new asset, upload a file with content type multipart/form-data ([RFC 2388](http://tools.ietf.org/html/rfc2388)) . MIME Type and basic properties are inferred from the uploaded file(s). The field name has to be `file`. 
+Multiple files can be uploaded at once to create multiple assets with one call. 
+Assets always have to be uploaded to exactly one Asset Group.
+
+Response: **201 created** if everything went well. Response will contain the created Asset resource(s).
+
+### De-duplication
+
+By default, a de-duplication check is performed. Assets that already exist in this Asset Group are rejected with Error 2375.
+If you want to disable this check and enforce uploading the file, you may send the field `ignoreDuplicates` with value `true` in the multipart/form-data request.
+*Sending other properties in the fields was a feature of legacy assets and is deprecated.*
+
+
+# Single Asset (Legacy Assets)
+A single (legacy) asset.
 
 Assets are abstract representations of a file, that can be available in multiple variants (e.g. different image sizes or localizations).
 
 The JSON Schema is [https://entrecode.de/schema/asset](https://entrecode.de/schema/asset)
 
-# Properties
+# Properties (Legacy Assets)
 
 | Property | Type | Format | Description | Writable |
 |----------|------|--------|-------------|----------|
@@ -18,7 +107,7 @@ The JSON Schema is [https://entrecode.de/schema/asset](https://entrecode.de/sche
 |files |Array[JSON]| [File](#file-subresource)  |Array of actual files for this asset | Yes|
 |private	| Boolean|	| Whether or not the asset was created private.|Yes|
 
-# Relations
+# Relations (Legacy Assets)
 
 | Relation Name | Target Resource | Description |Possible Methods |
 |---------------|-----------------|-------------|-----------------|
@@ -28,7 +117,7 @@ The JSON Schema is [https://entrecode.de/schema/asset](https://entrecode.de/sche
 | ec:datamanager| [Data Manager](./datamanager/) | Data Manager this resource belongs to | GET, PUT |
 | ec:tag| [Tag](./tag/) | Tag of this asset | GET, PUT, DELETE |
 
-# File Subresource
+# File Subresource (Legacy Assets)
 This subresource is included in the [Asset](#) resource.
 
 | Property | Type | Format | Description | Writable |
@@ -41,7 +130,7 @@ This subresource is included in the [Asset](#) resource.
 |created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation of the file| No |
 |modified| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the last modification of this file| No |
 
-# List
+# List (Legacy Assets)
 
 The Asset List Resource is a [Generic List Resource](/#generic-list-resources) with embedded Asset Resources.
 

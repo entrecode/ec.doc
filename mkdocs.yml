@@ -27,6 +27,7 @@ pages:
     - 'Types': 'resources/apptypes.md'
 - Data Manager Resources:
     - 'Asset': 'resources/asset.md'
+    - 'Asset Group': 'resources/dm-assetgroup.md'
     - 'Client': 'resources/dm-client.md'
     - 'Data Manager': 'resources/datamanager.md'
     - 'Data Manager Account': 'resources/dm-account.md'

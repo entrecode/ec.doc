@@ -4,7 +4,7 @@ Asset Group in a Data Manager. Asset Groups are used to organize Assets. Every (
 Asset Groups can have settings that overwrite the global or Data Manager settings for its assets. 
 Also, an Asset Group defines if the file URLs of its Asset are signed URLs or just plain URLs. This can never change in an Asset Group.
 
-The JSON Schema is [https://entrecode.de/schema/model](https://entrecode.de/schema/dm-assetgroup).
+The JSON Schema is [https://entrecode.de/schema/dm-assetgroup](https://entrecode.de/schema/dm-assetgroup).
 
 # Properties
 
@@ -17,7 +17,10 @@ The JSON Schema is [https://entrecode.de/schema/model](https://entrecode.de/sche
 |settings.disabledTypes | Array[String] | Array of either types ("image", "video", "audio", "plain", "document", "spreadsheet", "other") or mime-types. | List of asset types and mime types that may not be used in this group. | Yes, but values can only be removed. |
 |settings.imageSizes | Array[Integer] | | List of available image sizes. | Yes, but values can only be added. |
 |settings.thumbSizes | Array[Integer] | | List of available thumbnail sizes. | Yes, but values can only be added. |
-|policies|Array[JSON] |[Policy Definition](/data_manager/#permission-policies) | Permission Policies for Assets in this Asset Group | Yes|
+|policies|Array[JSON] |Policy Definition | Permission Policies for Assets in this Asset Group | Yes|
+|policies[].method| String | `get`, `put`, `post`, `delete`| The method the policy should apply to. | Yes |
+|policies[].user| String | `public`, `dmUser`| The user type the policy should apply to. | Yes |
+|policies[].condition | JSON or `null` | See [https://entrecode.de/schema/dm-assetgroup#definitions/condition](https://entrecode.de/schema/dm-assetgroup#definitions/condition) | Additional conditions the assets need to fulfill. | Yes |
 
 # Relations
 

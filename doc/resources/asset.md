@@ -48,6 +48,10 @@ The JSON Schema is [https://entrecode.de/schema/dm-asset](https://entrecode.de/s
 | ec:dm-asset/thumbnail | File    | Thumbnail URL(s) | GET        |
 | ec:dm-asset/duplicates | [Asset List](#list) | List of Assets that are duplicates, if applicable | GET |
 
+Using the `ec:dm-asset/file-variant` and `ec:dm-asset/thumbnail` relations (both are templated URLs) you can get different sizes of images and thumbnails. 
+The size property is a minimum-size the target image should have. The next bigger configured size is returned. There are global default sizes, that can be overwritten in Data Manager settings and Asset Group Settings. 
+In the `fileVariants`/`thumbnails` JSON properties only files that were requested before are included. Use the relations to trigger rendering of new sizes; they get returned immediately. 
+
 ## Updating Assets
 
 To update an existing Asset Resource, clients may perform a PUT on `ec:dm-asset` or `self` at a single Asset Resource.
@@ -69,7 +73,7 @@ The Asset List Resource is a [Generic List Resource](/#generic-list-resources) w
 | self          | [Asset List](#list)| The Assets List| GET, POST |
 | ec:dm-asset/by-id | [Asset](#)  | Templated Link to Assets | GET, PUT, DELETE |
 | ec:dm-assets/options | [Asset List](#list) | Templated Link to Assets list | GET |
-| ec:dm-assetgroup | [Asset Group](../dm-assetgroup.md/) | Asset Group of this Asset List | GET, PUT |
+| ec:dm-assetgroup | [Asset Group](./dm-assetgroup/) | Asset Group of this Asset List | GET, PUT |
 | ec:api | Generated API Entry point | Root page of the generated API | GET |
 
 ## Creating Assets

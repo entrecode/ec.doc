@@ -21,6 +21,8 @@ $ mkdocs serve
 Running at: http://127.0.0.1:8000/
 ```
 
+(If needed, install pip first: https://pip.readthedocs.io/en/stable/installing/ )
+
 After comitting, we can render it in the live deployment at [ReadTheDocs.org](https://readthedocs.org/projects/entrecode/) (they clone the public Git Repository) where it gets rendered with MkDocs again, but gets extra Versioning and Internationalization. 
 
 The MkDocs configuration is in `mkdocs.yml`.

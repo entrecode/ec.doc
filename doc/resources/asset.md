@@ -78,16 +78,23 @@ The Asset List Resource is a [Generic List Resource](/#generic-list-resources) w
 
 ## Creating Assets
 
-To create a new asset, upload a file with content type multipart/form-data ([RFC 2388](http://tools.ietf.org/html/rfc2388)) . MIME Type and basic properties are inferred from the uploaded file(s). The field name has to be `file`. 
+To create a new asset, upload a file with content type multipart/form-data ([RFC 2388](http://tools.ietf.org/html/rfc2388)) . MIME Type and basic properties are inferred from the uploaded file(s). The field name should be `file`. 
 Multiple files can be uploaded at once to create multiple assets with one call. 
 Assets always have to be uploaded to exactly one Asset Group.
 
 Response: **201 created** if everything went well. Response will contain the created Asset resource(s).
 
+### Filenames
+
+By default, a filename is generated using the original file's filename. You can also set the field name to something else than `file` to overwrite the filename – even sub-paths are possible this way. Note that if you want a file extension, you still have to deliver the file extension in the field name. On the other hand, it is possible this way to have files online without an extension.
+As an option, a random filename can be generated. This may be better for user-uploaded stuff. For that, send the field `preserveFilenames` with value `false`. The file extension is inferred from the uploaded file.
+The default (`preserveFilenames=true` and `includeAssetIDInPath=true`) may be different for single Data Managers or Asset Groups.
+
 ### De-duplication
 
 By default, a de-duplication check is performed. Assets that already exist in this Asset Group are rejected with Error 2375.
 If you want to disable this check and enforce uploading the file, you may send the field `ignoreDuplicates` with value `true` in the multipart/form-data request.
+
 *Sending other properties in the fields was a feature of legacy assets and is deprecated.*
 
 

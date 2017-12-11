@@ -215,7 +215,7 @@ The `verbose` field may be used for further information what is actually wrong w
 | 311  <a name="error-311"></a>| Invalid value for property in JSON body | the property with an invalid value | | 400 |
 | 351  <a name="error-351"></a>  | eMail address is unavailable (on registration and email change, only 1351 is defined) |  |  | 403|
 | 352  <a name="error-352"></a>  | Cannot delete openID connection (only 1352 is defined) |  |  | 403|
-| 353  <a name="error-353"></a>  | Duplicate model name in same data manager (only 2352 is defined) |  |  | 403|
+| 353  <a name="error-353"></a>  | Duplicate model/assetgroup in same data manager (only 2352 is defined) |  |  | 403|
 | 354  <a name="error-354"></a>  | Cannot delete Model, has entries (only 2354 is defined)|  |  | 403|
 | 355  <a name="error-355"></a>  | Cannot delete Model, mandatory model (only 2355 is defined)|  |  | 403|
 | 356  <a name="error-356"></a>  | Cannot change Model, has Entries. (only 2356 is defined) | More detailed description of error | Affected Field | 403|

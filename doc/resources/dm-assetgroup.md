@@ -20,7 +20,7 @@ The JSON Schema is [https://entrecode.de/schema/dm-assetgroup](https://entrecode
 |policies|Array[JSON] |Policy Definition | Permission Policies for Assets in this Asset Group | Yes|
 |policies[].method| String | `get`, `put`, `post`, `delete`| The method the policy should apply to. | Yes |
 |policies[].user| String | `public`, `dmUser`| The user type the policy should apply to. | Yes |
-|policies[].condition | JSON or `null` | See [https://entrecode.de/schema/dm-assetgroup#definitions/condition](https://entrecode.de/schema/dm-assetgroup#definitions/condition) | Additional conditions the assets need to fulfill. | Yes |
+|policies[].conditions | JSON or `null` | See [https://entrecode.de/schema/dm-assetgroup#definitions/conditions](https://entrecode.de/schema/dm-assetgroup#definitions/conditions) | Additional conditions the assets need to fulfill. | Yes |
 
 # Relations
 

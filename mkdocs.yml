@@ -38,3 +38,4 @@ pages:
 - SDKs:
     - 'Data Manager Java SDK': 'sdk/datamanager-java.md'
     - 'Data Manager JavaScript SDK': 'sdk/datamanager-js.md'
+- Impressum / Datenschutz / Privacy: 'privacy.md'

@@ -458,7 +458,7 @@ Example JSON:
 ]
 ```
 
-## Web Hook
+## Web Hook 
 The web hook sends data to another server via HTTP/HTTPS.
 
 Multiple targets can be set, so it is possible to notify multiple servers. Each target can be configured with an URI, the HTTP method to use and optional custom header fields.
@@ -624,6 +624,85 @@ It is recommended to always include a `text` property, even when a `html` proper
 
 *This is an event hook. If the hooks seems not to trigger, the issue is usually fixed by saving the model once again. (Event Hook configuration is stored in etcd, not in PostgreSQL).*
 
+## Conditional Event Hooks
+
+Event Hooks like the Mail Hook above support conditions. This way, you can make the hook trigger only on events that fulfill a condition (e.g. a value change on a PUT event).
+
+Example:
+
+```js
+[
+  {
+    "hook": "event",
+    "type": "mail",
+    "config": {
+      ... // mail-specific config
+    },
+    "hookID": "7fbf9e62-9323-4587-8914-e36aea1e325a",
+    "methods": [
+      "put"
+    ],
+    "conditions": {
+      "and": [
+        {
+          "===": [
+            {
+              "var": "data.status"
+            },
+            "shipped"
+          ]
+        },
+        {
+          "===": [
+            {
+              "var": "oldEntryData.status"
+            },
+            "pending"
+          ]
+        }
+      ]
+    },
+    "description": "Send Shipped Mail"
+  }
+]
+```
+This hook only fires on PUT events where the `status` property has been changed from `"pending"` to `"shipped"`.
+The conditions object is expected to be parseable by [JsonLogic](http://jsonlogic.com). You can look at the [supported Operations here](http://jsonlogic.com/operations.html)
+or [play with it here](http://jsonlogic.com/play.html).
+The data input is always the full event, which looks like this:
+
+```js
+{
+  "entryID": "FkQVvpavsZ",
+  "modelID": "6234144e-38e2-414d-97c5-0faf1b671428",
+  "private": false,
+  "locale": "",
+  "data": {
+    "title": "current value...",
+    ...
+    "_creator": null,
+    "creator": null
+  },
+  "syncID": null,
+  "entryAndAssetRelations": [],
+  "roleRelations": [],
+  "uniqueFields": [],
+  "readOnlyChecked": true,
+  "modelTitle": "mymodel",
+  "dataManagerID": "83538731-4ac3-4a1a-b3b5-e31d09e94d42",
+  "shortID": "33cc6374",
+  "user": {
+    "accountID": "c00803fb-46cb-4af0-a745-34758577b78f",
+    "userType": "ecUser"
+  },
+  "oldEntryData": {
+    "title": "previous value of the 'title' field"
+  },
+  "modified": "2018-06-25T12:48:18.580Z",
+  "hash": null
+}
+```
+Most interesting is probably `data` and `oldEntryData`, as in the example above.
 
 # Synchronization
 

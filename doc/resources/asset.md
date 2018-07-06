@@ -81,6 +81,7 @@ The Asset List Resource is a [Generic List Resource](/#generic-list-resources) w
 To create a new asset, upload a file with content type multipart/form-data ([RFC 2388](http://tools.ietf.org/html/rfc2388)) . MIME Type and basic properties are inferred from the uploaded file(s). The field name should be `file`. 
 Multiple files can be uploaded at once to create multiple assets with one call. 
 Assets always have to be uploaded to exactly one Asset Group.
+It is also possible to create an asset from an url. Simple attach the desired files with the field name `url` and DataManager will load the files and create assets.
 
 Response: **201 created** if everything went well. Response will contain the created Asset resource(s).
 

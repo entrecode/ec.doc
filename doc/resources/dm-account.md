@@ -18,6 +18,10 @@ The JSON Schema is [https://entrecode.de/schema/dm-account](https://entrecode.de
 |email         |String|valid eMail Address or `null`|The primary eMail address of the account. If `null`, it is an anonymous account.| No|
 |hasPassword| Boolean | | Whether or not a password is set | No |
 | oauth | Array[String] | OAuth issuer identifiers | List of connected OAuth accounts | No |
+|created| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the creation/registration of this Account| No. Gets written on creation. |
+|pending| Boolean| | `true` if the email address has not yet been validated, `false` otherwise. | No. Gets written when the user clicks on the link in the validation email. |
+|pendingUpdated| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the last change of the `pending` flag (time of double opt in)| No. Gets written when `pending` changes. |
+
 
 # Relations
 

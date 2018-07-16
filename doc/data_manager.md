@@ -111,6 +111,7 @@ A field definition consists of the following properties:
 |localizable    |Specifies if the field is localizable | `true`, `false` | Every change. Existing entries will have localized/unlocalized values.|
 |mutable        |Specifies if the field is mutable by the Data manager user, or provided by the system. | `true`, `false` | None, since this value is set by the system.|
 |validation     |Validation of field values. Can be a Regular Expression (`text` type), a JSON Schema (`object` type), a model or asset type, or an object with optional `min` and  `max` values (`number` and `decimal` types), depending on `type` (specified below) | `^\d{3}\w+$`, `{ "$ref": "#some-schema" }`, `{ "min": 0, "max": 100 }`| Only removed.|
+| default | The default value, which is set if the field is required but got no value. | `null`, `false`, `'not set'` | Every change. |
 
 If a model has no entries all properties can be changed if the field itself is marked `mutable`. But only some properties can be changed once a model has entries, as listed in the table above.
 

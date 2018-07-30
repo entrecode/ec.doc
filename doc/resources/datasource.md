@@ -12,6 +12,7 @@ The JSON Schema is [https://entrecode.de/schema/datasource](https://entrecode.de
 |dataSourceID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for a DataSource | No. Gets generated on creation. |
 |dataSourceType| String | valid [dataSourceType](#datasource-types) | Specifies the type of the DataSource. | Yes. |
 |config| JSON Object | valid against the JSON Schema of the selected dataSourceType | dataSourceType-dependent configuration options. | Yes. |
+|config.context| JSON Object | Object with `appID`, `shortAppID`, `appTitle`, `buildCount`, `deploymentCount` | Context object used in all platform and plugin types. Contains info about the app | No. |
 
 # Relations
 

@@ -17,6 +17,8 @@ The JSON Schema is [https://entrecode.de/schema/dm-assetgroup](https://entrecode
 |settings.disabledTypes | Array[String] | Array of either types ("image", "video", "audio", "plain", "document", "spreadsheet", "other") or mime-types. | List of asset types and mime types that may not be used in this group. | Yes, but values can only be removed. |
 |settings.imageSizes | Array[Integer] | | List of available image sizes. | Yes, but values can only be added. |
 |settings.thumbSizes | Array[Integer] | | List of available thumbnail sizes. | Yes, but values can only be added. |
+|settings.preserveFilenames| Boolean | | Set if by default the file name should be part of the URL. Can be overridden on upload. | Yes |
+|settings.includeAssetIDInPath| Boolean | | Set if by default the file name should include the assetID for uniqueness. To be used together with preserveFilenames. Can be overridden on upload. | Yes |
 |policies|Array[JSON] |Policy Definition | Permission Policies for Assets in this Asset Group | Yes|
 |policies[].method| String | `get`, `put`, `post`, `delete`| The method the policy should apply to. | Yes |
 |policies[].user| String | `public`, `dmUser`| The user type the policy should apply to. | Yes |

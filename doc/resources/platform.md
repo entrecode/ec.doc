@@ -13,6 +13,7 @@ The JSON Schema is [https://entrecode.de/schema/platform](https://entrecode.de/s
 |platformType| String | valid [platformType](#platform-types) | Specifies the type of the platform. | Yes. |
 |title|String||Friendly name for the Platform|Yes|
 |config| JSON Object | valid against the JSON Schema of the selected platformType | platformType-dependent configuration options. | Yes. |
+|_context| JSON Object | Object with `appID`, `shortAppID`, `appTitle`, `buildCount`, `deploymentCount` | Context object used in all platform and plugin types. Contains info about the app | No. |
 
 # Relations
 

@@ -12,6 +12,7 @@ The JSON Schema is [https://entrecode.de/schema/target](https://entrecode.de/sch
 |targetID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for a Target | No. Gets generated on creation. |
 |targetType| String | valid [targetType](#target-types) | Specifies the type of the Target. | Yes. |
 |config| JSON Object | valid against the JSON Schema of the selected targetType | targetType-dependent configuration options. | Yes. |
+|config._context| JSON Object | Object with `appID`, `shortAppID`, `appTitle`, `buildCount`, `deploymentCount` | Context object used in all platform and plugin types. Contains info about the app | No. |
 
 # Relations
 

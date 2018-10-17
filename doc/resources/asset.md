@@ -95,6 +95,7 @@ The default (`preserveFilenames=true` and `includeAssetIDInPath=true`) may be di
 
 By default, a de-duplication check is performed. Assets that already exist in this Asset Group are rejected with Error 2375.
 If you want to disable this check and enforce uploading the file, you may send the field `ignoreDuplicates` with value `true` in the multipart/form-data request.
+If you want to receive an already uplooaded file, you may send the field `deduplicate` with value `true` in the multipart/form-data request. You will then receive the first duplicate file for any given upload.
 
 *Sending other properties in the fields was a feature of legacy assets and is deprecated.*
 

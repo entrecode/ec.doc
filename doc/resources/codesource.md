@@ -12,6 +12,7 @@ The JSON Schema is [https://entrecode.de/schema/codesource](https://entrecode.de
 |codeSourceID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for a CodeSource | No. Gets generated on creation. |
 |codeSourceType| String | valid [codeSourceType](#codesource-types) | Specifies the type of the CodeSource. | Yes. |
 |config| JSON Object | valid against the JSON Schema of the selected codeSourceType | codeSourceType-dependent configuration options. | Yes. |
+|config._context| JSON Object | Object with `appID`, `shortAppID`, `appTitle`, `buildCount`, `deploymentCount` | Context object used in all platform and plugin types. Contains info about the app | No. |
 
 # Relations
 

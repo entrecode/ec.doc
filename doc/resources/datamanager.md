@@ -13,6 +13,19 @@ The JSON Schema is [https://entrecode.de/schema/datamanager](https://entrecode.d
 |description|String| | A longer description for this Data Manager Space.|Yes|
 |hexColor|String|6-digit hex color `#rrggbb` `/^#[A-Fa-f0-9]{6}$/`|Color identifier for editor.|Yes|
 |config | JSON |  		|A JSON object for various configurations. See Schema for details. config.publicConfig (if set) will be available to the public API root entry point as `config`.| Yes|
+|config.users.anonymous | boolean |  		| Setting for anonymous (token-only, no email, long-lived) user accounts | Yes|
+|config.users.password | boolean |  		| Activates signup/login for users with email and password | Yes|
+|config.users.google | JSON |  		| Activates signup/login for users with google. Properties `clientID` and `clientSecret` are required. | Yes|
+|config.users.facebook | JSON |  		| Activates signup/login for users with facebook. Properties `clientID` and `clientSecret` are required. | Yes|
+|config.users.nwb | JSON |  		| Activates signup/login for users with nwb/kiehl. Properties `url`, `password`, `username` and `requiredRight` are required. | Yes|
+|config.users.snipcart | JSON |  		| Activates signup/login for users with snipcart. Properties `apiKey` and `apiKeyTesting` are required. | Yes|
+|config.users.hector | boolean |  		| Activates login for users with hector. *DEPRECATED* | Yes|
+|config.users.privacyProtection | boolean |  		| If true, no IP addresses are stored when tokens are generated. (Empty String instead) | Yes|
+|config.disableUserEmailVerificationEmail | boolean | | If true, no verification mails are sent after signup of users. Useful for importing legacy users. | Yes|
+|config.publicConfig | JSON |  		| Arbitrary settings that are public in the API Root. | Yes|
+|config.customAuthDomain | string |  URL | Use email templates for a special domain as configured in ec.mail. Must equal a folder in ec.mail's templates. Exclude https, example: `email.myserver.com` | Yes|
+|config.customAssetDomain | string |  URL | Assets will use this domain for link building instead of the generic default. Include https, example: `https://images.myserver.com` | Yes|
+|config.assetSettings | JSON |  		| Global default for Asset Group Settings, see https://doc.entrecode.de/resources/dm-assetgroup/ | Yes|
 |rights  | Array | One of  `manageRights`, `editModel`, `editEntries`, `editAssets`, `manageAPIs`| *Deprecated* Array of available rights. Not included rights are not available. | No |
 |publicAssetRights| Array | One of `get`, `put`, `postPrivate`, `postPublic`, `delete`, `getTags`, `editTags` | Array of available rights for public assets API. Not included rights are not available.| Yes |
 |locales | Array | [RFC4646](https://tools.ietf.org/html/rfc4646)|Available locales in this Data Manager Space.| Yes |

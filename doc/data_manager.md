@@ -625,9 +625,48 @@ It is recommended to always include a `text` property, even when a `html` proper
 
 *This is an event hook. If the hooks seems not to trigger, the issue is usually fixed by saving the model once again. (Event Hook configuration is stored in etcd, not in PostgreSQL).*
 
+## CloudFront Invalidation Hook
+
+The `cloudfront` hook is an `event` hook that can be used to invalidate an AWS CloudFront distribution after updating an entry (e.g. a CMS page). 
+
+> **Invalidations are not for free!** 
+> They currently cost $ 0.005 for each path, so they should be used only when necessary. CloudFront Hooks should always be conditional and it is better to disable them when updating a large set of entries.
+
+The AWS IAM user "event-hook-service" should have invalidation rights on the desired CloudFront distribution (all entrecode CloudFronts by default). You then only need the distribution ID for the hook.
+
+```js
+{
+  "hook": "event",
+  "type": "cloudfront",
+  "description": "Invalidate page if content or title has changed",
+  "config": {
+    "paths": [
+      "/{{data.seoTitle}}*" // one or more paths to invalidate. Note that the wildcard * can only stand at the end!
+    ],
+    "distribution": "EWXXXXXXXP93D" // insert your distribution ID here
+  },
+  "methods": [
+    "put" // the hook is only really reasonable for PUT hooks
+  ],
+  "conditions": { // always recommended
+    "!": {
+      "missingSome": [
+        1, // only triggers, when at least one of the following properties exists
+        [
+          "oldEntryData.title",
+          "oldEntryData.content"
+        ]
+      ]
+    }
+  }
+}
+```
+
+*This is an event hook. If the hooks seems not to trigger, the issue is usually fixed by saving the model once again. (Event Hook configuration is stored in etcd, not in PostgreSQL).*
+
 ## Conditional Event Hooks
 
-Event Hooks like the Mail Hook above support conditions. This way, you can make the hook trigger only on events that fulfill a condition (e.g. a value change on a PUT event).
+Event Hooks like the Mail Hook or CloudFront Hook support conditions. This way, you can make the hook trigger only on events that fulfill a condition (e.g. a value change on a PUT event).
 
 Example:
 

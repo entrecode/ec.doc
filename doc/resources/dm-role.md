@@ -16,7 +16,7 @@ The JSON Schema is [https://entrecode.de/schema/dm-role](https://entrecode.de/sc
 |label| String | | A label for the role (filterable, for categorizing roles) | Yes |
 |addUnregistered| Boolean | | Whether or not new anonymous accounts should be added to this role | Yes |
 |addRegistered | Boolean | | Whether or not new registered accounts should be added to this role | Yes |
-| accounts | Array[String] | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122)) | List of accountIDs in this role | Yes |
+|accountsCount | Integer | | Number of accounts with this role | No |
 
 # Relations
 
@@ -25,8 +25,7 @@ The JSON Schema is [https://entrecode.de/schema/dm-role](https://entrecode.de/sc
 | self          | [DM Role](#)| The resource itself | GET, PUT, DELETE |
 | collection    | [DM Role List](#list)| List of all available Data Manager Roles | GET, POST |
 | ec:datamanager| [Data Manager](./datamanager/) | Data Manager this resource belongs to | GET, PUT |
-| ec:dm-account | [DM Accounts](./dm-account/) | Accounts in this role. Just for hypermedia linking, only editable using the accounts property. | GET, DELETE |
-
+| ec:dm-accounts| [DM Account List](./dm-account#list)| List of accounts with this role | GET |
 
 # List
 

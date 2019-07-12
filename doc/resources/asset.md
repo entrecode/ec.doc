@@ -103,6 +103,10 @@ If you want to receive an already uplooaded file, you may send the field `dedupl
 # Single Asset (Legacy Assets)
 A single (legacy) asset.
 
+## DEPRECATION NOTICE
+
+*Legacy Assets are deprecated. They can be soft-disabled with the data manager setting `"disableLegacyAssets": true`.*
+
 Assets are abstract representations of a file, that can be available in multiple variants (e.g. different image sizes or localizations).
 
 The JSON Schema is [https://entrecode.de/schema/asset](https://entrecode.de/schema/asset)

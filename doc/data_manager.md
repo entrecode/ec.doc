@@ -384,7 +384,7 @@ By default, "Auth" (meaning: Signup, Login, eMail-Change, Password-Reset) is don
 
 You are required to register a (sub-)domain for sending custom eMails. You can still use the domain in your own eMail provider, but it is needed to be registered with entrecode in a manual process including adding some DNS entries for validation of domain ownership. If you do that, not only will auth-related mails be sent from your-data-manager-name-noreply@your-domain.com, but you will also able to use that domain for Mail Hooks! Domains are not restricted to a single Data Manager.
 
-When a domain is registered for your Data Manager, you are eligible to provide mail templates. They are required to support [Handlebars.js](http://handlebarsjs.com) as template engine and should include certain variables (e.g. for the links the user can click). To make the templates available for your domain, a manual process at entrecode is necessary. Mail templates may also be delivered in multiple languages. We recommend [Mailgun Transactional Mail Templates](http://blog.mailgun.com/transactional-html-email-templates/) as a starting point for your own mail templates.
+When a domain is registered for your Data Manager, you are eligible to provide mail templates. They are required to support [Handlebars.js](http://handlebarsjs.com) as template engine and should include certain variables (e.g. for the links the user can click). To make the templates available for your domain, a manual process at entrecode is necessary. Mail templates may also be delivered in multiple languages. We recommend [Mailgun Transactional Mail Templates](http://blog.mailgun.com/transactional-html-email-templates/) as a starting point for your own mail templates. An alternative with an online WYSIWYG-Designer is [Bee](https://beefree.io).
 
 The domain has to be set in your Data Manager configuration as `config.customAuthDomain`.
 
@@ -619,7 +619,7 @@ The `mail` hook is neither a `before` nor an `after` hook, but an `event` hook i
 ```
 
 This example builds a simple mail from an entry. Note the use of [transjson](#json-transformations) functionality to build the mail dynamically.
-The available properties inside `config` map 1:1 to the properties described in the [Mailgun API Documentation](https://documentation.mailgun.com/api-sending.html#sending). Multiple recipients / multiple values for the same properties can be set as array. The `domain` property can be used to send via a specific domain; if it is omitted, the default will be taken. Note that the domain has to be registered with mailgun, which is a manual process for now.
+The available properties inside `config` map 1:1 to the properties described in the [Mailgun API Documentation](https://documentation.mailgun.com/api-sending.html#sending). Multiple recipients / multiple values for the same properties can be set as array. The `domain` property can be used to send via a specific domain; if it is omitted, the default will be taken. Note that the domain has to be registered with mailgun, which is a manual process for now. The property `template` will make ec.mail use a local template file. If you want to use Mailgun´s templates, use the property `mailgunTemplate` instead (translates to mailgun `template` property).
 
 It is recommended to always include a `text` property, even when a `html` property is present.
 

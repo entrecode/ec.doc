@@ -413,6 +413,32 @@ Your also need to configure your own endpoints to use in the links sent in the e
 }
 ```
 
+## Custom Auth subjects
+
+If the default subject for auth emails should be overwritten there is the option to add `customAuthSubjects` and overwrite the ones you want.
+The value of the keys could be either a string or a object with keys `default`, `de`, `en`...
+
+Add the following to your Data Manager config as `config.customAuthSubjects`:
+
+```js
+"customAuthSubjects": {
+  "email-verify": "Bitte bestätigen Sie Ihre eMail-Adresse",
+  "password-reset": "Passwortänderung Ihres ${dataManager.title} Accounts",
+  "change-email-abort": "E-Mail-Adressänderung beauftragt",
+  "change-email-verify": "E-Mail-Adressänderung angefordert, bitte verifizieren"
+}
+```
+
+## Custom Auth from
+
+If the default from for auth emails should be overwritten there is the option to add `customAuthFrom` and overwrite the default one which is the name of the datamanager.
+
+Add the following to your Data Manager config as `config.customAuthFrom`:
+
+```js
+"customAuthFrom": "Sir Send-a-lot"
+```
+
 You are free to define those URLs as you like, but they need to be valid [Template URIs according to RFC 6570](https://tools.ietf.org/html/rfc6570) expecting a variable `jwt`. This token you'll need to make the actual auth requests to your Data Manager API.
 
 They map like this (all relative to your API root):

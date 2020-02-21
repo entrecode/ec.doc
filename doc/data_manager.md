@@ -397,6 +397,11 @@ The domain has to be set in your Data Manager configuration as `config.customAut
 
 All templates receive the variables `to`, `from`, `subject`, `template` and `language`, as well as `data` which has custom properties listed in the table above.
 
+### Template Sets
+
+Additonally to domain based custom Auth E-Mails, you can use template sets. A template set is always preferred to a domain, and can even be combined. A template set is expected to have an own template folder in ec.mail like a domain. Additionally, a domain folder can be inside a template set folder. 
+When using template sets, you can also use `config.users.templatevariables` for some customization. 
+
 ## Custom Auth HTML pages
 
 When clicking on a link in one of the auth mails, or after requesting an email change, by default a HTML page is rendered.

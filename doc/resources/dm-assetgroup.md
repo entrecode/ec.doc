@@ -17,12 +17,30 @@ The JSON Schema is [https://entrecode.de/schema/dm-assetgroup](https://entrecode
 |settings.disabledTypes | Array[String] | Array of either types ("image", "video", "audio", "plain", "document", "spreadsheet", "other") or mime-types. | List of asset types and mime types that may not be used in this group. | Yes, but values can only be removed. |
 |settings.imageSizes | Array[Integer] | | List of available image sizes. | Yes, but values can only be added. |
 |settings.thumbSizes | Array[Integer] | | List of available thumbnail sizes. | Yes, but values can only be added. |
+|settings.urls.public | String | URI | Custom public Asset Domain | Yes |
+|settings.urls.private | String | URI | Custom private Asset Domain | Yes |
 |settings.preserveFilenames| Boolean | | Set if by default the file name should be part of the URL. Can be overridden on upload. | Yes |
 |settings.includeAssetIDInPath| Boolean | | Set if by default the file name should include the assetID for uniqueness. To be used together with preserveFilenames. Can be overridden on upload. | Yes |
+|settings.thumbMimeType | `null` or String | `'image/jpeg'` | Set to `image/jpeg` (currently only supported value) to enforce JPEG Thumbnails. | Yes |
+|settings.variantMimeType | `null` or String | `'image/jpeg'` | Set to `image/jpeg` (currently only supported value) to enforce JPEG Variant Images. | Yes |
+|settings.jpegQuality | Integer | between 10 and 90 | JPEG Quality to use for rendering of Variants and Thumbs. Default is 85. | Yes |
+|settings.deletePermanently | String | `7 days`, `1 month`, `1 second` | Timespan after which a deleted asset is physically deleted. Default is 7 days. Note that a script is periodically running for the deletion. So a value of '1 second' will not necessarily make the deletion instant, but will let deleted assets be removed on the next run of the deletion script. | Yes |
 |policies|Array[JSON] |Policy Definition | Permission Policies for Assets in this Asset Group | Yes|
 |policies[].method| String | `get`, `put`, `post`, `delete`| The method the policy should apply to. | Yes |
 |policies[].user| String | `public`, `dmUser`| The user type the policy should apply to. | Yes |
 |policies[].conditions | JSON or `null` | See [https://entrecode.de/schema/dm-assetgroup#definitions/conditions](https://entrecode.de/schema/dm-assetgroup#definitions/conditions) | Additional conditions the assets need to fulfill. | Yes |
+
+## Example Assetgroup Settings
+Copy and paste, but think about it:
+```json
+{
+  "disabledTypes": ["image", "video", "audio", "plain", "document", "spreadsheet", "other"],
+  "imageSizes": [500],
+  "thumbSizes": [160],
+  "preserveFilenames": false,
+  "includeAssetIDInPath": false
+}
+```
 
 # Relations
 

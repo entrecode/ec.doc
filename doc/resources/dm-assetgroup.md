@@ -30,6 +30,18 @@ The JSON Schema is [https://entrecode.de/schema/dm-assetgroup](https://entrecode
 |policies[].user| String | `public`, `dmUser`| The user type the policy should apply to. | Yes |
 |policies[].conditions | JSON or `null` | See [https://entrecode.de/schema/dm-assetgroup#definitions/conditions](https://entrecode.de/schema/dm-assetgroup#definitions/conditions) | Additional conditions the assets need to fulfill. | Yes |
 
+## Example Assetgroup Settings
+Copy and paste, but think about it:
+```json
+{
+  "disabledTypes": ["image", "video", "audio", "plain", "document", "spreadsheet", "other"],
+  "imageSizes": [500],
+  "thumbSizes": [160],
+  "preserveFilenames": false,
+  "includeAssetIDInPath": false
+}
+```
+
 # Relations
 
 | Relation Name | Target Resource | Description |Possible Methods |

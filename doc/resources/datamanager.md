@@ -126,7 +126,7 @@ The success status code is **204 No Content** with an empty response body.
 
 ## Export
 
-To export the structure of a Data Manager Resource, clients can follow the relation `ec:datamananger/export` and perform a GET request. This will create a [Postman Collection](https://www.getpostman.com/docs/collections) which in turn can be used in [Postman](https://www.getpostman.com/) (or [Newman Runner](https://www.getpostman.com/docs/newman_intro); or [ec.service-newman](https://stash.entrecode.de/projects/MICRO/repos/ec.service-newman/browse)) in order to create a copy of the Data Manager. Note that only the Data Manager config itself, clients, roles, models, and policies are exported. Entries and Assets will be left behind.
+To export the structure of a Data Manager Resource, clients can follow the relation `ec:datamananger/export` and perform a GET request. This will create a [Postman Collection](https://www.getpostman.com/docs/collections) which in turn can be used in [Postman](https://www.getpostman.com/) (or [Newman Runner](https://www.getpostman.com/docs/newman_intro)) in order to create a copy of the Data Manager. Note that only the Data Manager config itself, clients, roles, models, and policies are exported. Entries and Assets will be left behind.
 
 The success status code is **200 OK.** and the response body will be a object containing `collection` and `dataScheme`. `collection` is the Postman Collection and `dataScheme` is a [JSON Schema](http://json-schema.org/) of the required variables for the collection.
 

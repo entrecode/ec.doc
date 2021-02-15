@@ -1,6 +1,6 @@
 {
   "name": "ec.appcms-doc",
-  "version": "0.16.7",
+  "version": "0.16.8",
   "description": "Documentation Repository for App CMS.",
   "repository": "git+https://github.com/entrecode/ec.doc.git",
   "author": "Ruben Deyhle <deyhle@entrecode.de>",

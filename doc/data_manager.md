@@ -637,13 +637,48 @@ The `mail` hook is neither a `before` nor an `after` hook, but an `event` hook i
 		"text": {
 			"__jsonpath": "$.data.content"
 		},
+		"data": {
+			"__jsonpath": "$.data" // to make all loaded data available in ec.mail template
+		},
 		"subject": "{{data.subject}} ",
 		"domain": "entrecode.de",
+    "language": "de", // ec.mail supports different language templates
+    "template": "order-paid", // ec.mail template name
+    "templateSet": "shp", // ec.mail template folder (when missing, it just uses the domain as folder name)
+    "__resolve": [ // resolve entry fields so the values are available in data
+      "account",
+      "shop"
+    ],
+    "mailgunTemplate": "held-open-merchant", // use a native mailgun template instead of ec.mail - use either this or 'template'
+    "h:X-Mailgun-Variables": { // variables for mailgun template
+      "__jsonpath": "$.data",
+      "__modifier": "stringify"
+    }
 		// ... more properties, see https://documentation.mailgun.com/api-sending.html#sending
 	},
 	"methods": [
 		"post"
 	],
+  "conditions": { // conditions can be used to trigger on certain state changes
+    "and": [
+      {
+        "===": [
+          {
+            "var": "data.status"
+          },
+          "paid"
+        ]
+      },
+      {
+        "===": [
+          {
+            "var": "oldEntryData.status"
+          },
+          "unpaid"
+        ]
+      }
+    ]
+  },
 	"description": "Simple Mail Hook",
 	"hookID": "dd53b7c2-a494-44e6-883a-4269a89022c2"
 }
@@ -651,6 +686,7 @@ The `mail` hook is neither a `before` nor an `after` hook, but an `event` hook i
 
 This example builds a simple mail from an entry. Note the use of [transjson](#json-transformations) functionality to build the mail dynamically.
 The available properties inside `config` map 1:1 to the properties described in the [Mailgun API Documentation](https://documentation.mailgun.com/api-sending.html#sending). Multiple recipients / multiple values for the same properties can be set as array. The `domain` property can be used to send via a specific domain; if it is omitted, the default will be taken. Note that the domain has to be registered with mailgun, which is a manual process for now. The property `template` will make ec.mail use a local template file. If you want to use Mailgun´s templates, use the property `mailgunTemplate` instead (translates to mailgun `template` property).
+The property `__resolve` can be used to supply a list of field names which should be loaded. This way, data not included in the event of an updated entry can be used (like linked entries). The dm-event-hook-service Mail Account needs reading rights on the data manager for this.
 
 It is recommended to always include a `text` property, even when a `html` property is present.
 

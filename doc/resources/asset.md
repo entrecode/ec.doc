@@ -91,6 +91,10 @@ By default, a filename is generated using the original file's filename. You can 
 As an option, a random filename can be generated. This may be better for user-uploaded stuff. For that, send the field `preserveFilenames` with value `false`. The file extension is inferred from the uploaded file.
 The default (`preserveFilenames=true` and `includeAssetIDInPath=true`) may be different for single Data Managers or Asset Groups.
 
+### defaultVariants
+
+Variant sizes of image assets are normally generated on request. This should be the default. Once requested for the first time, they are generated. In some cases it may be useful to have a specific variant size right upon creation of the asset. This can be done by sending `defaultVariants` property, which should be a (stringified) Integer or Integer Array. The value(s) should be a subset of the configured image sizes.
+
 ### De-duplication
 
 By default, a de-duplication check is performed. Assets that already exist in this Asset Group are rejected with Error 2375.

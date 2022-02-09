@@ -1,4 +1,4 @@
-## The App Manager
+# The App Manager
 
 The App Manager is a technical tool for configuring, building and deploying Apps. An App can have multiple platforms to run on. 
 

@@ -5,7 +5,7 @@ Dornhaldenstr. 6
 70199 Stuttgart
 info@entrecode.de
 
-Geschäftsführer: Ruben Deyhle, Konstantin Ehlers and Simon Scherzinger
+Geschäftsführer: Simon Scherzinger
 
 UStID: DE297537979, Amtsgericht Stuttgart HRB 750847
 ```

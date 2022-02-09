@@ -1,4 +1,4 @@
-## The Data Manager
+# The Data Manager
 
 The Data Manager is a technical tool for dynamic generation of Hypermedia REST APIs – complete with documentation, JSON schemas, and goodies like static file management and external Hooks. 
 

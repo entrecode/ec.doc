@@ -35,7 +35,9 @@ nav:
   - 'API Basics': 'api-basics.md'
   - 'Errors': 'errors.md'
   - More:
-    - 'privacy.md'
+    - 'GitHub': 'https://github.com/entrecode/'
+    - 'Contact us': 'https://entrecode.de'
+    - 'About': 'privacy.md'
 - SDK:
   - 'ec.sdk': 'sdk/ec.sdk.md'
   - 'ec.dm-cache': 'sdk/ec.dm-cache.md'

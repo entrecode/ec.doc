@@ -1,4 +1,4 @@
-# App CMS Documentation Repository
+## App CMS Documentation Repository
 
 This repository holds documentation in Markdown files. 
 

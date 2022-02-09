@@ -7,6 +7,6 @@
   "scripts": {
     "start": "mkdocs serve",
     "build": "mkdocs build",
-    "postinstall": "pip install mkdocs"
+    "postinstall": "pip install mkdocs-material"
   }
 }

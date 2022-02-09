@@ -1,7 +1,7 @@
-# DEPRECATED
+## DEPRECATED
 > This Module is deprecated. Don't use it anymore! There won't be any bugfixes or improvements.
 
-# ec.datamanager-java-sdk
+## ec.datamanager-java-sdk
 
 Java SDK for [ec.datamanager](https://editor.entrecode.de). By entrecode.
 
@@ -445,11 +445,11 @@ tag.delete()
 	}).go();
 ```
 
-# Documentation
+## Documentation
 
 see JavaDoc.
 
-# Test & Coverage
+## Test & Coverage
 
 Running tests with:
 
@@ -463,7 +463,7 @@ Running tests with coverage:
 ./gradlew jacocoTestReport
 ```
 
-# Changelog
+## Changelog
 
 ### 0.4.2
 - support for nested entries with `level(int)`

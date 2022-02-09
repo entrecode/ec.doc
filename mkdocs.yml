@@ -1,41 +1,79 @@
 site_name: 'entrecode API Documentation'
 docs_dir: ./doc
-theme: readthedocs
+theme: 
+  name: material
+  logo: img/icon.png
+  favicon: img/icon.png
+  palette:
+  - scheme: default
+    primary: indigo
+    accent: red
+    toggle:
+      icon: material/weather-sunny 
+      name: Switch to dark mode
+  - scheme: slate 
+    primary: indigo
+    accent: red
+    toggle:
+      icon: material/weather-night
+      name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
 extra_css: ['style.css']
-pages:
-- Basics: 'index.md'
-- Account Server: 'account_server.md'
-- App Manager: 'app_manager.md'
-- Data Manager: 'data_manager.md'
-- Account Server Resources:
-    - 'Account': 'resources/account.md'
-    - 'Auth': 'resources/auth.md'
-    - 'Client': 'resources/client.md'
-    - 'Invalid Permissions': 'resources/invalid-permissions.md'
-    - 'Invites': 'resources/invite.md'
-    - 'Group': 'resources/group.md'
-    - 'Token': 'resources/token.md'
-- App Manager Resources:
-    - 'App': 'resources/app.md'
-    - 'App Stats': 'resources/app-stats.md'
-    - 'Build': 'resources/build.md'
-    - 'CodeSource': 'resources/codesource.md'
-    - 'DataSource': 'resources/datasource.md'
-    - 'Deployment': 'resources/deployment.md'
-    - 'Platform': 'resources/platform.md'
-    - 'Target': 'resources/target.md'
-    - 'Types': 'resources/apptypes.md'
-- Data Manager Resources:
-    - 'Asset': 'resources/asset.md'
-    - 'Asset Group': 'resources/dm-assetgroup.md'
-    - 'Client': 'resources/dm-client.md'
-    - 'Data Manager': 'resources/datamanager.md'
-    - 'Data Manager Account': 'resources/dm-account.md'
-    - 'Data Manager Role': 'resources/dm-role.md'
-    - 'Data Manager Template': 'resources/dm-template.md'
-    - 'Model': 'resources/model.md'
-    - 'Tag': 'resources/tag.md'
-- SDKs:
+markdown_extensions:
+  - toc:
+      permalink: true
+nav:
+- Basics: 
+  - 'entrecode API Documentation': 'index.md'
+  - 'API Basics': 'api-basics.md'
+  - 'Errors': 'errors.md'
+  - More:
+    - 'privacy.md'
+- SDK:
+  - 'ec.sdk': 'sdk/ec.sdk.md'
+  - 'ec.dm-cache': 'sdk/ec.dm-cache.md'
+  - Legacy SDKs:
     - 'Data Manager Java SDK': 'sdk/datamanager-java.md'
     - 'Data Manager JavaScript SDK': 'sdk/datamanager-js.md'
-- Impressum / Datenschutz / Privacy: 'privacy.md'
+- Account Server: 
+  - 'account/index.md'
+  - Resources:
+    - 'Account': 'account/resources/account.md'
+    - 'Auth': 'account/resources/auth.md'
+    - 'Client': 'account/resources/client.md'
+    - 'Invalid Permissions': 'account/resources/invalid-permissions.md'
+    - 'Invites': 'account/resources/invite.md'
+    - 'Group': 'account/resources/group.md'
+    - 'Token': 'account/resources/token.md'
+- Data Manager:
+  - 'datamanager/index.md'
+  - Resources:
+    - 'Asset': 'datamanager/resources/asset.md'
+    - 'Asset Group': 'datamanager/resources/dm-assetgroup.md'
+    - 'Client': 'datamanager/resources/dm-client.md'
+    - 'Data Manager': 'datamanager/resources/datamanager.md'
+    - 'Data Manager Account': 'datamanager/resources/dm-account.md'
+    - 'Data Manager Role': 'datamanager/resources/dm-role.md'
+    - 'Data Manager Template': 'datamanager/resources/dm-template.md'
+    - 'Model': 'datamanager/resources/model.md'
+    - 'Tag': 'datamanager/resources/tag.md'
+- App Manager:
+  - 'appmanager/index.md'
+  - Resources:
+    - 'App': 'appmanager/resources/app.md'
+    - 'App Stats': 'appmanager/resources/app-stats.md'
+    - 'Build': 'appmanager/resources/build.md'
+    - 'CodeSource': 'appmanager/resources/codesource.md'
+    - 'DataSource': 'appmanager/resources/datasource.md'
+    - 'Deployment': 'appmanager/resources/deployment.md'
+    - 'Platform': 'appmanager/resources/platform.md'
+    - 'Target': 'appmanager/resources/target.md'
+    - 'Types': 'appmanager/resources/apptypes.md'
+copyright: <a href="/privacy">About</a> | <a href="https://www.entrecode.de/datenschutz">Privacy Policy</a>

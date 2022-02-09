@@ -1,5 +1,9 @@
+## DEPRECATED
+> This Module is deprecated. There won't be any bugfixes or improvements. Use [ec.sdk](https://entrecode.github.io/ec.sdk/) instead.
+
+
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage][coveralls-image]][coveralls-url] [![Dependency Status][daviddm-image]][daviddm-url]
-# ec.datamanager.js
+## ec.datamanager.js
 
 JavaScript SDK for [ec.datamanager](https://doc.entrecode.de/en/latest/data_manager/). By entrecode.
 

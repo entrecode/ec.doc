@@ -22,8 +22,10 @@ The JSON Schema is [https://entrecode.de/schema/dm-assetgroup](https://entrecode
 |settings.preserveFilenames| Boolean | | Set if by default the file name should be part of the URL. Can be overridden on upload. | Yes |
 |settings.includeAssetIDInPath| Boolean | | Set if by default the file name should include the assetID for uniqueness. To be used together with preserveFilenames. Can be overridden on upload. | Yes |
 |settings.thumbMimeType | `null` or String | `'image/jpeg'` | Set to `image/jpeg` (currently only supported value) to enforce JPEG Thumbnails. | Yes |
-|settings.variantMimeType | `null` or String | `'image/jpeg'` | Set to `image/jpeg` (currently only supported value) to enforce JPEG Variant Images. | Yes |
-|settings.jpegQuality | Integer | between 10 and 90 | JPEG Quality to use for rendering of Variants and Thumbs. Default is 85. | Yes |
+|settings.variantMimeType | `null` or String | `'image/jpeg'` | Set to `image/jpeg`/`image/png`/ìmage/webp`) to enforce default Variant Images in another format. If not set, variants are in the original mime type. | Yes |
+|settings.additionalVariants | `null` or Array[String] | `['image/webp']` | Enable creation of additional variants in another format (mime type). | Yes |
+|settings.optimize | `null` or Boolean | true/false | enable optimization of JPEG/PNG images using TinyPNG | Yes |
+|settings.jpegQuality | Integer | between 10 and 90 | JPEG/webp Quality to use for rendering of Variants and Thumbs. Default is 85. | Yes |
 |settings.deletePermanently | String | `7 days`, `1 month`, `1 second` | Timespan after which a deleted asset is physically deleted. Default is 7 days. Note that a script is periodically running for the deletion. So a value of '1 second' will not necessarily make the deletion instant, but will let deleted assets be removed on the next run of the deletion script. | Yes |
 |settings.defaultVariants | Array[Integer] | | List of default variant sizes to generate for uploaded assets. Should be a subset of `imageSizes`. | Yes |
 |policies|Array[JSON] |Policy Definition | Permission Policies for Assets in this Asset Group | Yes|

@@ -104,6 +104,11 @@ If you want to receive an already uplooaded file, you may send the field `dedupl
 *Sending other properties in the fields was a feature of legacy assets and is deprecated.*
 
 
+### Re-Rendering of variants
+
+It is possible to re-render an image variant or thumbnail. This is an internal route which needs special privileges (`dm-root:<dataManagerID>:assetgroup:<assetGroupID>:assets:render`). 
+It is not published as hypermedia link. It is a POST to `/a/<shortID>/<assetGroupID>/<assetID>/render` with the post body defined by [https://entrecode.de/schema/dm-asset-render](https://entrecode.de/schema/dm-asset-render).
+
 ## Single Asset (Legacy Assets)
 A single (legacy) asset.
 

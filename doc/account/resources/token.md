@@ -3,7 +3,7 @@
 A single access token.
 Note that the token itself will never be published by the API to prevent misusing them; instead this resource will deliver metadata to enable an overview of issued tokens and the possibility to revoke them.
 
-The JSON Schema is [https://entrecode.de/schema/account-token](https://entrecode.de/schema/account-token).
+The JSON Schema is [https://schema.entrecode.de/schema-acc/account-token](https://schema.entrecode.de/schema-acc/account-token).
 
 ## Properties
 

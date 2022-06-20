@@ -5,7 +5,7 @@ Client registration is needed to obtain access tokens. Due to the authentication
 
 Clients have an alphanumerical ID and some configuration – primarily a callback URL that is used to redirect the user back to the client after successful authentication.
 
-The JSON Schema is [https://entrecode.de/schema/dm-client](https://entrecode.de/schema/dm-client).
+The JSON Schema is [https://schema.entrecode.de/schema-data/dm-client](https://schema.entrecode.de/schema-data/dm-client).
 
 ## Properties
 
@@ -72,7 +72,7 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create a new Data Manager Client Resource, clients may perform a POST on `ec:dm-clients` (the list resource). The JSON Schema for creating a new Data Manager Client is [https://entrecode.de/schema/dm-client-template-post](https://entrecode.de/schema/dm-client-template-post). 
+To create a new Data Manager Client Resource, clients may perform a POST on `ec:dm-clients` (the list resource). The JSON Schema for creating a new Data Manager Client is [https://schema.entrecode.de/schema-data/dm-client-template-post](https://schema.entrecode.de/schema-data/dm-client-template-post). 
 
 Identical to [Edit](#edit), but `clientID` and `callbackURL` are both required. 
 
@@ -81,7 +81,7 @@ The success status code is **201 Created** and the response body is the newly cr
 
 ## Edit
 
-To update an existing Data Manager Client Resource, clients may perform a PUT on `ec:dm-client` or `self` at a single Data Manager Client Resource. The JSON Schema for editing a Data Manager Client is [https://entrecode.de/schema/dm-client-template-put](https://entrecode.de/schema/dm-client-template-put). 
+To update an existing Data Manager Client Resource, clients may perform a PUT on `ec:dm-client` or `self` at a single Data Manager Client Resource. The JSON Schema for editing a Data Manager Client is [https://schema.entrecode.de/schema-data/dm-client-template-put](https://schema.entrecode.de/schema-data/dm-client-template-put). 
 
 It is possible to make partial changes. Missing properties keep their old value.
 

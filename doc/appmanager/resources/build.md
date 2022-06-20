@@ -2,7 +2,7 @@
 
 The single Build Resource represents Build of an [App](./app/) using a specific [Platform](./platform/) configuration. It consists of a status (`success`, `error` or `running`) and events that occurred during build process.
 
-The JSON Schema is [https://entrecode.de/schema/build](https://entrecode.de/schema/build).
+The JSON Schema is [https://schema.entrecode.de/schema-app/build](https://schema.entrecode.de/schema-app/build).
 
 ## Properties
 

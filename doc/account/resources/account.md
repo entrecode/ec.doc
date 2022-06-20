@@ -2,7 +2,7 @@
 
 A single entrecode Account.
 
-The JSON Schema is [https://entrecode.de/schema/account](https://entrecode.de/schema/account).
+The JSON Schema is [https://schema.entrecode.de/schema-acc/account](https://schema.entrecode.de/schema-acc/account).
 
 ## Properties
 | Property | Type | Format | Description | Writable |
@@ -98,7 +98,7 @@ To create a new Account Resource, the Signup process has to be executed. See `ec
 
 ## Edit
 
-To update an existing Account Resource, clients may perform a PUT on `ec:account` or `self` at a single Account Resource. The JSON Schema for editing an Account is [https://entrecode.de/schema/account-template](https://entrecode.de/schema/account-template). 
+To update an existing Account Resource, clients may perform a PUT on `ec:account` or `self` at a single Account Resource. The JSON Schema for editing an Account is [https://schema.entrecode.de/schema-acc/account-template](https://schema.entrecode.de/schema-acc/account-template). 
 
 All fields are optional and need their own permission. Fields where no permission is available will be ignored.
 

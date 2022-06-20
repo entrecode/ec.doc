@@ -2,7 +2,7 @@
 
 The single App Resource represents an isolated “space”. An App can have any number of platforms. 
 
-The JSON Schema is [https://entrecode.de/schema/app](https://entrecode.de/schema/app).
+The JSON Schema is [https://schema.entrecode.de/schema-app/app](https://schema.entrecode.de/schema-app/app).
 
 ## Properties
 
@@ -43,13 +43,13 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create a new App Resource, clients may perform a POST on `ec:apps` (the list resource). The JSON Schema for creating a new App is [https://entrecode.de/schema/app-template](https://entrecode.de/schema/app-template). 
+To create a new App Resource, clients may perform a POST on `ec:apps` (the list resource). The JSON Schema for creating a new App is [https://schema.entrecode.de/schema-app/app-template](https://schema.entrecode.de/schema-app/app-template). 
 
 The success status code is **201 Created** and the response body is the newly created single App resource.
 
 ## Edit
 
-To update an existing App Resource, clients may perform a PUT on `ec:app` or `self` at a single App Resource. The JSON Schema for editing an App is [https://entrecode.de/schema/app-template](https://entrecode.de/schema/app-template). 
+To update an existing App Resource, clients may perform a PUT on `ec:app` or `self` at a single App Resource. The JSON Schema for editing an App is [https://schema.entrecode.de/schema-app/app-template](https://schema.entrecode.de/schema-app/app-template). 
 
 The success status code is **200 OK** and the response body is the updated single App resource.
 

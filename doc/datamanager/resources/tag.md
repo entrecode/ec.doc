@@ -1,7 +1,7 @@
 ## Single Tag 
 Tag in a Data Manager for Assets.
 
-The JSON Schema is [https://entrecode.de/schema/tag](https://entrecode.de/schema/tag)
+The JSON Schema is [https://schema.entrecode.de/schema-data/tag](https://schema.entrecode.de/schema-data/tag)
 
 ## Properties
 

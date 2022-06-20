@@ -2,7 +2,7 @@
 
 The single Data Manager Resource represents an isolated “space”. A Data Manager can have any number models and assets.
 
-The JSON Schema is [https://entrecode.de/schema/datamanager](https://entrecode.de/schema/datamanager).
+The JSON Schema is [https://schema.entrecode.de/schema-data/datamanager](https://schema.entrecode.de/schema-data/datamanager).
 
 ## Properties
 
@@ -67,7 +67,7 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create a new Data Manager Space, clients may perform a POST on `ec:datamanagers` (the list resource). The JSON Schema for creating a new Data Manager is [https://entrecode.de/schema/datamanager-template](https://entrecode.de/schema/datamanager-template).
+To create a new Data Manager Space, clients may perform a POST on `ec:datamanagers` (the list resource). The JSON Schema for creating a new Data Manager is [https://schema.entrecode.de/schema-data/datamanager-template](https://schema.entrecode.de/schema-data/datamanager-template).
 
 The success status code is **201 Created** and the response body is the newly created single Data Manager resource.
 
@@ -99,11 +99,11 @@ Everything created under this data manager (models, asset groups, roles, account
 ### Create from Template
 
 When following the [datamanagers/new-from-template](../datamanager#relation-datamanagers/new-from-template) relation, a query parameter `templateID` is appended to the URI. If the templateID is given, instead of a single Data Manager a new Data Manager is created using the [template](./dm-template) – including models and other configuration defined in the template.
-Then the request body is not required to respect the [datamanager-template](https://entrecode.de/schema/datamanager-template) JSON schema, but instead to respect the schema in the templates' `dataSchema` property.
+Then the request body is not required to respect the [datamanager-template](https://schema.entrecode.de/schema-data/datamanager-template) JSON schema, but instead to respect the schema in the templates' `dataSchema` property.
 
 ## Edit
 
-To update an existing Data Manager Resource, clients may perform a PUT on `ec:datamanager` or `self` at a single Data Manager Resource. The JSON Schema for editing a Data Manager is [https://entrecode.de/schema/datamanager-template](https://entrecode.de/schema/datamanager-template). Title and description of the Data Manager can be changed. Locales can be added or deleted and a defaultLocale can be set.
+To update an existing Data Manager Resource, clients may perform a PUT on `ec:datamanager` or `self` at a single Data Manager Resource. The JSON Schema for editing a Data Manager is [https://schema.entrecode.de/schema-data/datamanager-template](https://schema.entrecode.de/schema-data/datamanager-template). Title and description of the Data Manager can be changed. Locales can be added or deleted and a defaultLocale can be set.
 
 The success status code is **200 OK** and the response body is the updated single Data Manager resource.
 
@@ -112,7 +112,7 @@ The success status code is **200 OK** and the response body is the updated singl
 ### Update from Template
 
 When following the [datamanager/update-from-template](../datamanager#relation-datamanager/update-from-template) relation, a query parameter `templateID` is appended to the URI. If the templateID is given, instead of a single Data Manager a new Data Manager is created using the [template](./dm-template) – including models and other configuration defined in the template.
-Then the request body is not required to respect the [datamanager-template](https://entrecode.de/schema/datamanager-template) JSON schema, but instead to respect the schema in the templates' `dataSchema` property.
+Then the request body is not required to respect the [datamanager-template](https://schema.entrecode.de/schema-data/datamanager-template) JSON schema, but instead to respect the schema in the templates' `dataSchema` property.
 
 An update is only possible if the data manager was created with a parent template of the desired template.
 

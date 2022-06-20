@@ -5,7 +5,7 @@ Data Manager Templates are basically [Postman Collections](https://www.getpostma
 
 Templates are always rooted in a base template (or a are a base template themselves). There are only updates possible, e.g. when a Data Manager Template gets a new model after sometime, there is the first version that is the initial template (creating the Data Manager etc) and then a second version that only adds the new model. When creating a new Data Manager, the base template is run and all update versions up to the desired version. There is no downgrade logic.
 
-The JSON Schema is [https://entrecode.de/schema/dm-template](https://entrecode.de/schema/dm-template).
+The JSON Schema is [https://schema.entrecode.de/schema-data/dm-template](https://schema.entrecode.de/schema-data/dm-template).
 
 ## Properties
 
@@ -64,7 +64,7 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create a new Data Manager Template Resource, you may perform a POST on `ec:dm-templates` (the list resource). The JSON Schema for creating a new Data Manager Template is [https://entrecode.de/schema/dm-template-template](https://entrecode.de/schema/dm-template-template). 
+To create a new Data Manager Template Resource, you may perform a POST on `ec:dm-templates` (the list resource). The JSON Schema for creating a new Data Manager Template is [https://schema.entrecode.de/schema-data/dm-template-template](https://schema.entrecode.de/schema-data/dm-template-template). 
 
 The success status code is **201 Created** and the response body is the newly created single Data Manager Template resource.
 

@@ -2,7 +2,7 @@
 
 The Types Resource indicates which CodeSource-, DataSource-, Target- and Platform-Types are available.
 
-The JSON Schema is [https://entrecode.de/schema/app-plugin-types](https://entrecode.de/schema/app-plugin-types).
+The JSON Schema is [https://schema.entrecode.de/schema-app/app-plugin-types](https://schema.entrecode.de/schema-app/app-plugin-types).
 
 ## Properties
 

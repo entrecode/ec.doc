@@ -9,7 +9,7 @@ Data Manager Accounts represent users of the generated API.
 Data Manager Accounts get created by signing up as a user, either actually with email/password or an OAuth connection, or implicit as anonymous user.
 This resource is for viewing and deleting those users.
 
-The JSON Schema is [https://entrecode.de/schema/dm-account](https://entrecode.de/schema/dm-account).
+The JSON Schema is [https://schema.entrecode.de/schema-data/dm-account](https://schema.entrecode.de/schema-data/dm-account).
 
 ## Properties
 
@@ -76,7 +76,7 @@ Accounts cannot be created using the API, only using the [User Management](../da
 
 ## Edit
 
-To update an existingAccount Resource, clients may perform a PUT on `ec:account` or `self` at a single Account Resource. The JSON Schema for editing a Account is just [HAL](https://entrecode.de/schema/hal). Only linked roles can be changed, by adding or removing the HAL links `ec:dm-role` with a valid `href`.
+To update an existingAccount Resource, clients may perform a PUT on `ec:account` or `self` at a single Account Resource. The JSON Schema for editing a Account is just [HAL](https://schema.entrecode.de/schema-data/hal). Only linked roles can be changed, by adding or removing the HAL links `ec:dm-role` with a valid `href`.
 
 The success status code is **200 OK** and the response body is the updated single Account resource.
 

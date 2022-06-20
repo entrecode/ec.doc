@@ -3,7 +3,7 @@
 The single Platform Resource represents a build configuration for a specific [App](./app/). It has exactly one [CodeSource](./codesource/) and [DataSource](./datasource/), and at least one [Target](./target/). It may have an arbitrary number of [Deployments](./deployment/#list).
 It has a specific [PlatformType](#platform-types) that defines the behavior when deploying.
 
-The JSON Schema is [https://entrecode.de/schema/platform](https://entrecode.de/schema/platform).
+The JSON Schema is [https://schema.entrecode.de/schema-app/platform](https://schema.entrecode.de/schema-app/platform).
 
 ## Properties
 
@@ -50,7 +50,7 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create a new Platform Resource, clients may perform a POST on `ec:app/platforms` (the list resource). The JSON Schema for creating a new Platform is [https://entrecode.de/schema/platform-template](https://entrecode.de/schema/platform-template). 
+To create a new Platform Resource, clients may perform a POST on `ec:app/platforms` (the list resource). The JSON Schema for creating a new Platform is [https://schema.entrecode.de/schema-app/platform-template](https://schema.entrecode.de/schema-app/platform-template). 
 
 The success status code is **201 Created** and the response body is the newly created single Platform resource.
 

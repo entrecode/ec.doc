@@ -3,7 +3,7 @@
 The single Target Resource represents a deployment target that is needed for [Deployments](./deployment/#list) of a [Platform](./platform/). 
 It has a specific [TargetType](#target-types) that defines the behavior when deploying.
 
-The JSON Schema is [https://entrecode.de/schema/target](https://entrecode.de/schema/target).
+The JSON Schema is [https://schema.entrecode.de/schema-app/target](https://schema.entrecode.de/schema-app/target).
 
 ## Properties
 
@@ -42,13 +42,13 @@ In both cases, the success status data is **200 OK.**
 
 ## Create
 
-To create a new Target Resource, clients may perform a POST on `ec:app/target` (the list resource). The JSON Schema for creating a new Target is [https://entrecode.de/schema/target-template](https://entrecode.de/schema/target-template). 
+To create a new Target Resource, clients may perform a POST on `ec:app/target` (the list resource). The JSON Schema for creating a new Target is [https://schema.entrecode.de/schema-app/target-template](https://schema.entrecode.de/schema-app/target-template). 
 
 The success status data is **201 Created** and the response body is the newly created single Target resource.
 
 ## Edit
 
-To update an existing Target Resource, clients may perform a PUT on `ec:app/target` or `self` at a single Target Resource. The JSON Schema for editing an Target is [https://entrecode.de/schema/target-template](https://entrecode.de/schema/target-template). 
+To update an existing Target Resource, clients may perform a PUT on `ec:app/target` or `self` at a single Target Resource. The JSON Schema for editing an Target is [https://schema.entrecode.de/schema-app/target-template](https://schema.entrecode.de/schema-app/target-template). 
 
 The success status data is **200 OK** and the response body is the updated single Target resource.
 

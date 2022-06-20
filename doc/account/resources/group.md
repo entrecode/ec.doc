@@ -4,7 +4,7 @@ A single entrecode Permission Group.
 Groups are instances – just as accounts – that can have permissions assigned to. Accounts can be added to groups, which grants the group permissions to all those accounts.
 Membership in a group is always equal for all users (i.e. there is no "special" group membership). However, the creator of the group gets the right to edit the group (permissions and members) as personal permission assigned to his account.
 
-The JSON Schema is [https://entrecode.de/schema/group](https://entrecode.de/schema/group)
+The JSON Schema is [https://schema.entrecode.de/schema-acc/group](https://schema.entrecode.de/schema-acc/group)
 
 ## Properties
 
@@ -87,7 +87,7 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create a new Group Resource, clients may perform a POST on `ec:groups` (the list resource). The JSON Schema for creating a new Group is [https://entrecode.de/schema/group-template](https://entrecode.de/schema/group-template). 
+To create a new Group Resource, clients may perform a POST on `ec:groups` (the list resource). The JSON Schema for creating a new Group is [https://schema.entrecode.de/schema-acc/group-template](https://schema.entrecode.de/schema-acc/group-template). 
 
 Identical to [Edit](#edit), but `name` and `permissions` are both required. Accounts can also be linked, however the account creating the group is added automatically.
 
@@ -98,7 +98,7 @@ The success status code is **201 Created** and the response body is the newly cr
 
 ## Edit
 
-To update an existing Group Resource, clients may perform a PUT on `ec:group` or `self` at a single Group Resource. The JSON Schema for editing a Group is [https://entrecode.de/schema/group-template](https://entrecode.de/schema/group-template). 
+To update an existing Group Resource, clients may perform a PUT on `ec:group` or `self` at a single Group Resource. The JSON Schema for editing a Group is [https://schema.entrecode.de/schema-acc/group-template](https://schema.entrecode.de/schema-acc/group-template). 
 
 Embedded or linked: partial `ec:account` resources (with one of `accountID`, `email` or `_links.self` correctly set). Note that if at least one account resource is linked or embedded, the member accounts get rewritten. I.e., missing accounts will be removed.
 If no accounts are sent, no changes are done. Therefore, you cannot remove all accounts from a group.

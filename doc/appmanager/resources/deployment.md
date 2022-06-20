@@ -2,7 +2,7 @@
 
 The single Deployment Resource represents Deployment of an [App](./app/) using a specific [Platform](./platform/) configuration. It consists of a status (successful, failed or still running) and events that occurred during deployment.
 
-The JSON Schema is [https://entrecode.de/schema/deployment](https://entrecode.de/schema/deployment).
+The JSON Schema is [https://schema.entrecode.de/schema-app/deployment](https://schema.entrecode.de/schema-app/deployment).
 
 ## Properties
 

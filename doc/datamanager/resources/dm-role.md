@@ -5,7 +5,7 @@ Data Manager Accounts can be organized using Roles (Groups). This is needed to a
 
 There are default roles in Data Managers where new users get added to automatically. This is a behavior that can be configured for each role.
 
-The JSON Schema is [https://entrecode.de/schema/dm-role](https://entrecode.de/schema/dm-role).
+The JSON Schema is [https://schema.entrecode.de/schema-data/dm-role](https://schema.entrecode.de/schema-data/dm-role).
 
 ## Properties
 
@@ -68,7 +68,7 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create a new Data Manager Role Resource, you may perform a POST on `ec:dm-roles` (the list resource). The JSON Schema for creating a new Data Manager Role is [https://entrecode.de/schema/dm-role-template](https://entrecode.de/schema/dm-role-template). 
+To create a new Data Manager Role Resource, you may perform a POST on `ec:dm-roles` (the list resource). The JSON Schema for creating a new Data Manager Role is [https://schema.entrecode.de/schema-data/dm-role-template](https://schema.entrecode.de/schema-data/dm-role-template). 
 
 Identical to [Edit](#edit).
 
@@ -77,7 +77,7 @@ The success status code is **201 Created** and the response body is the newly cr
 
 ## Edit
 
-To update an existing Data Manager Role Resource, you may perform a PUT on `ec:dm-role` or `self` at a single Data Manager Role Resource. The JSON Schema for editing a Data Manager Role is [https://entrecode.de/schema/dm-role-template](https://entrecode.de/schema/dm-role-template). 
+To update an existing Data Manager Role Resource, you may perform a PUT on `ec:dm-role` or `self` at a single Data Manager Role Resource. The JSON Schema for editing a Data Manager Role is [https://schema.entrecode.de/schema-data/dm-role-template](https://schema.entrecode.de/schema-data/dm-role-template). 
 
 It is possible to make partial changes. Missing properties keep their old value.
 

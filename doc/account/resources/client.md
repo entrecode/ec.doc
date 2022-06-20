@@ -3,7 +3,7 @@ A single entrecode Client.
 
 Clients are needed to be registered using this resource.
 
-The JSON Schema is [https://entrecode.de/schema/client](https://entrecode.de/schema/client)
+The JSON Schema is [https://schema.entrecode.de/schema-acc/client](https://schema.entrecode.de/schema-acc/client)
 
 ## Properties
 
@@ -63,7 +63,7 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create a new Client Resource, clients may perform a POST on `ec:clients` (the list resource). The JSON Schema for creating a new Client is [https://entrecode.de/schema/client](https://entrecode.de/schema/client). 
+To create a new Client Resource, clients may perform a POST on `ec:clients` (the list resource). The JSON Schema for creating a new Client is [https://schema.entrecode.de/schema-acc/client](https://schema.entrecode.de/schema-acc/client). 
 
 Identical to [Edit](#edit), but `clientID` is writable and required.
 
@@ -72,7 +72,7 @@ The success status code is **201 Created** and the response body is the newly cr
 
 ## Edit
 
-To update an existing Client Resource, clients may perform a PUT on `ec:client` or `self` at a single Client Resource. The JSON Schema for editing a Client is [https://entrecode.de/schema/client](https://entrecode.de/schema/client). 
+To update an existing Client Resource, clients may perform a PUT on `ec:client` or `self` at a single Client Resource. The JSON Schema for editing a Client is [https://schema.entrecode.de/schema-acc/client](https://schema.entrecode.de/schema-acc/client). 
 
 Note that the `clientID` cannot be changed.
 

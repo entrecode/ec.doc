@@ -7,7 +7,7 @@ Assets are abstract representations of files. Usually, they also contain one or 
 ## Single Asset
 A single asset.
 
-The JSON Schema is [https://entrecode.de/schema/dm-asset](https://entrecode.de/schema/dm-asset)
+The JSON Schema is [https://schema.entrecode.de/schema-data/dm-asset](https://schema.entrecode.de/schema-data/dm-asset)
 
 ## Properties
 
@@ -107,7 +107,7 @@ If you want to receive an already uplooaded file, you may send the field `dedupl
 ### Re-Rendering of variants
 
 It is possible to re-render an image variant or thumbnail. This is an internal route which needs special privileges (`dm-root:<dataManagerID>:assetgroup:<assetGroupID>:assets:render`). 
-It is not published as hypermedia link. It is a POST to `/a/<shortID>/<assetGroupID>/<assetID>/render` with the post body defined by [https://entrecode.de/schema/dm-asset-render](https://entrecode.de/schema/dm-asset-render).
+It is not published as hypermedia link. It is a POST to `/a/<shortID>/<assetGroupID>/<assetID>/render` with the post body defined by [https://schema.entrecode.de/schema-data/dm-asset-render](https://schema.entrecode.de/schema-data/dm-asset-render).
 
 ## Single Asset (Legacy Assets)
 A single (legacy) asset.
@@ -118,7 +118,7 @@ A single (legacy) asset.
 
 Assets are abstract representations of a file, that can be available in multiple variants (e.g. different image sizes or localizations).
 
-The JSON Schema is [https://entrecode.de/schema/asset](https://entrecode.de/schema/asset)
+The JSON Schema is [https://schema.entrecode.de/schema-data/asset](https://schema.entrecode.de/schema-data/asset)
 
 ## Properties (Legacy Assets)
 

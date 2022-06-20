@@ -3,7 +3,7 @@
 The single DataSource Resource represents a data source that is needed for [Deployments](./deployment/#list) of a [Platform](./platform/). 
 It has a specific [DataSourceType](#datasource-types) that defines the behavior when deploying.
 
-The JSON Schema is [https://entrecode.de/schema/datasource](https://entrecode.de/schema/datasource).
+The JSON Schema is [https://schema.entrecode.de/schema-app/datasource](https://schema.entrecode.de/schema-app/datasource).
 
 ## Properties
 
@@ -41,13 +41,13 @@ In both cases, the success status data is **200 OK.**
 
 ## Create
 
-To create a new DataSource Resource, clients may perform a POST on `ec:app/datasource` (the list resource). The JSON Schema for creating a new DataSource is [https://entrecode.de/schema/datasource-template](https://entrecode.de/schema/datasource-template). 
+To create a new DataSource Resource, clients may perform a POST on `ec:app/datasource` (the list resource). The JSON Schema for creating a new DataSource is [https://schema.entrecode.de/schema-app/datasource-template](https://schema.entrecode.de/schema-app/datasource-template). 
 
 The success status data is **201 Created** and the response body is the newly created single DataSource resource.
 
 ## Edit
 
-To update an existing DataSource Resource, clients may perform a PUT on `ec:app/datasource` or `self` at a single DataSource Resource. The JSON Schema for editing an DataSource is [https://entrecode.de/schema/datasource-template](https://entrecode.de/schema/datasource-template). 
+To update an existing DataSource Resource, clients may perform a PUT on `ec:app/datasource` or `self` at a single DataSource Resource. The JSON Schema for editing an DataSource is [https://schema.entrecode.de/schema-app/datasource-template](https://schema.entrecode.de/schema-app/datasource-template). 
 
 The success status data is **200 OK** and the response body is the updated single DataSource resource.
 

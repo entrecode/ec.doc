@@ -3,7 +3,7 @@
 The single CodeSource Resource represents a file source that is needed for [Deployments](./deployment/#list) of a [Platform](./platform/). 
 It has a specific [CodeSourceType](#codesource-types) that defines the behavior when deploying.
 
-The JSON Schema is [https://entrecode.de/schema/codesource](https://entrecode.de/schema/codesource).
+The JSON Schema is [https://schema.entrecode.de/schema-app/codesource](https://schema.entrecode.de/schema-app/codesource).
 
 ## Properties
 
@@ -41,13 +41,13 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create a new CodeSource Resource, clients may perform a POST on `ec:app/codesource` (the list resource). The JSON Schema for creating a new CodeSource is [https://entrecode.de/schema/codesource-template](https://entrecode.de/schema/codesource-template). 
+To create a new CodeSource Resource, clients may perform a POST on `ec:app/codesource` (the list resource). The JSON Schema for creating a new CodeSource is [https://schema.entrecode.de/schema-app/codesource-template](https://schema.entrecode.de/schema-app/codesource-template). 
 
 The success status code is **201 Created** and the response body is the newly created single CodeSource resource.
 
 ## Edit
 
-To update an existing CodeSource Resource, clients may perform a PUT on `ec:app/codesource` or `self` at a single CodeSource Resource. The JSON Schema for editing an CodeSource is [https://entrecode.de/schema/codesource-template](https://entrecode.de/schema/codesource-template). 
+To update an existing CodeSource Resource, clients may perform a PUT on `ec:app/codesource` or `self` at a single CodeSource Resource. The JSON Schema for editing an CodeSource is [https://schema.entrecode.de/schema-app/codesource-template](https://schema.entrecode.de/schema-app/codesource-template). 
 
 The success status code is **200 OK** and the response body is the updated single CodeSource resource.
 

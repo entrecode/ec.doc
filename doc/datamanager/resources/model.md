@@ -2,7 +2,7 @@
 
 Model in a Data Manager. A model describes a resource available in the generated Data Manager API.
 
-The JSON Schema is [https://entrecode.de/schema/model](https://entrecode.de/schema/model).
+The JSON Schema is [https://schema.entrecode.de/schema-data/model](https://schema.entrecode.de/schema-data/model).
 
 ## Properties
 
@@ -148,13 +148,13 @@ Example:
 
 ## Create
 
-To create a new Model, clients may perform a POST on `ec:models` (the list resource). The JSON Schema for creating a new Model is [https://entrecode.de/schema/model-template](https://entrecode.de/schema/model-template). 
+To create a new Model, clients may perform a POST on `ec:models` (the list resource). The JSON Schema for creating a new Model is [https://schema.entrecode.de/schema-data/model-template](https://schema.entrecode.de/schema-data/model-template). 
 
 The success status code is **201 Created** and the response body is the newly created single Model resource.
 
 ## Edit
 
-To update an existing Model Resource, clients may perform a PUT on `ec:model` or `self` at a single Model Resource. The JSON Schema for editing a Model is [https://entrecode.de/schema/model-template](https://entrecode.de/schema/model-template). 
+To update an existing Model Resource, clients may perform a PUT on `ec:model` or `self` at a single Model Resource. The JSON Schema for editing a Model is [https://schema.entrecode.de/schema-data/model-template](https://schema.entrecode.de/schema-data/model-template). 
 All fields are optional. Some changes cannot be done when there are already entries (generated API resources).
 
 The success status code is **200 OK** and the response body is the updated single Model resource.

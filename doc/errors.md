@@ -3,7 +3,7 @@
 Error responses across all APIs are always returned with an HTTP status code ≥ 400, i.e. 400, 401, 403, 404, 429, 500.
 The media type is `application/problem+json`. Error responses comply to the [Problem Details IETF Draft](http://tools.ietf.org/html/draft-nottingham-http-problem-07) *and* to [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-06).
  
-JSON Schema: [https://entrecode.de/schema/error](https://entrecode.de/schema/error)
+JSON Schema: [https://schema.entrecode.de/schema-acc/error](https://schema.entrecode.de/schema-acc/error)
 
 The following properties are REQUIRED:
  

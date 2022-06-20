@@ -4,7 +4,7 @@ Asset Group in a Data Manager. Asset Groups are used to organize Assets. Every (
 Asset Groups can have settings that overwrite the global or Data Manager settings for its assets. 
 Also, an Asset Group defines if the file URLs of its Asset are signed URLs or just plain URLs. This can never change in an Asset Group.
 
-The JSON Schema is [https://entrecode.de/schema/dm-assetgroup](https://entrecode.de/schema/dm-assetgroup).
+The JSON Schema is [https://schema.entrecode.de/schema-data/dm-assetgroup](https://schema.entrecode.de/schema-data/dm-assetgroup).
 
 ## Properties
 
@@ -31,7 +31,7 @@ The JSON Schema is [https://entrecode.de/schema/dm-assetgroup](https://entrecode
 |policies|Array[JSON] |Policy Definition | Permission Policies for Assets in this Asset Group | Yes|
 |policies[].method| String | `get`, `put`, `post`, `delete`| The method the policy should apply to. | Yes |
 |policies[].user| String | `public`, `dmUser`| The user type the policy should apply to. | Yes |
-|policies[].conditions | JSON or `null` | See [https://entrecode.de/schema/dm-assetgroup#definitions/conditions](https://entrecode.de/schema/dm-assetgroup#definitions/conditions) | Additional conditions the assets need to fulfill. | Yes |
+|policies[].conditions | JSON or `null` | See [https://schema.entrecode.de/schema-data/dm-assetgroup#definitions/conditions](https://schema.entrecode.de/schema-data/dm-assetgroup#definitions/conditions) | Additional conditions the assets need to fulfill. | Yes |
 
 ## Example Assetgroup Settings
 Copy and paste, but think about it:
@@ -72,13 +72,13 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create a new Asset Group, clients may perform a POST on `ec:dm-assetgroups` (the list resource). The JSON Schema for creating a new Asset Group is [https://entrecode.de/schema/dm-assetgroup-template-post](https://entrecode.de/schema/dm-assetgroup-template-post). 
+To create a new Asset Group, clients may perform a POST on `ec:dm-assetgroups` (the list resource). The JSON Schema for creating a new Asset Group is [https://schema.entrecode.de/schema-data/dm-assetgroup-template-post](https://schema.entrecode.de/schema-data/dm-assetgroup-template-post). 
 
 The success status code is **201 Created** and the response body is the newly created single Asset Group resource.
 
 ## Edit
 
-To update an existing Asset Group Resource, clients may perform a PUT on `ec:dm-assetgroup` or `self` at a single Asset Group Resource. The JSON Schema for editing a Asset Group is [https://entrecode.de/schema/dm-assetgroup-template-put](https://entrecode.de/schema/dm-assetgroup-template-put). 
+To update an existing Asset Group Resource, clients may perform a PUT on `ec:dm-assetgroup` or `self` at a single Asset Group Resource. The JSON Schema for editing a Asset Group is [https://schema.entrecode.de/schema-data/dm-assetgroup-template-put](https://schema.entrecode.de/schema-data/dm-assetgroup-template-put). 
 All fields are optional. Some changes are restricted (see table above).
 
 The success status code is **200 OK** and the response body is the updated single Asset Group resource.

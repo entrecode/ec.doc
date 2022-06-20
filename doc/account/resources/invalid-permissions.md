@@ -4,7 +4,7 @@ List of invalid Permissions.
 
 > Note: This resource requires `acc:invalid-permissions:view,delete`, `dm-stats`, and `app-stats` permission.
 
-The JSON Schema is [https://entrecode.de/schema/invalidpermissions](https://entrecode.de/schema/invalidpermissions).
+The JSON Schema is [https://schema.entrecode.de/schema-acc/invalidpermissions](https://schema.entrecode.de/schema-acc/invalidpermissions).
 
 ## Properties
 | Property | Type | Format | Description | Writable |

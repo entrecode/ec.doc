@@ -632,7 +632,8 @@ The `mail` hook is neither a `before` nor an `after` hook, but an `event` hook i
 	"hook": "event",
 	"type": "mail",
 	"config": {
-		"to": "{{data.recipient}}",
+		"to": "{{data.recipient}}", // if omitted, "to" is set to "undisclosed-recipients:; <no-reply@<domain>>
+    "bccToGroup": "77566e8f-399b-4fcf-a968-7d4f148978ac" // send as bcc to all members of ec.account server group with this id
 		"from": "{{data.sender}}",
 		"text": {
 			"__jsonpath": "$.data.content"

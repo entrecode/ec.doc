@@ -26,6 +26,7 @@ The JSON Schema is [https://schema.entrecode.de/schema-data/dm-assetgroup](https
 |settings.additionalVariants | `null` or Array[String] | `['image/webp']` | Enable creation of additional variants in another format (mime type). | Yes |
 |settings.optimize | `null` or Boolean | true/false | enable optimization of JPEG/PNG images using TinyPNG | Yes |
 |settings.jpegQuality | Integer | between 10 and 90 | JPEG/webp Quality to use for rendering of Variants and Thumbs. Default is 85. | Yes |
+|settings.autoDelete | `null` or String | `7 days`, `1 month`, `1 second` | Automatically delete Assets after specified timespan. Do not set to retain assets. Note that a script is periodically running for the deletion. So a value of '1 second' will not necessarily make the deletion instant, but will delete assets on the next run of the deletion script. | Yes |
 |settings.deletePermanently | String | `7 days`, `1 month`, `1 second` | Timespan after which a deleted asset is physically deleted. Default is 7 days. Note that a script is periodically running for the deletion. So a value of '1 second' will not necessarily make the deletion instant, but will let deleted assets be removed on the next run of the deletion script. | Yes |
 |settings.defaultVariants | Array[Integer] | | List of default variant sizes to generate for uploaded assets. Should be a subset of `imageSizes`. | Yes |
 |policies|Array[JSON] |Policy Definition | Permission Policies for Assets in this Asset Group | Yes|

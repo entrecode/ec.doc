@@ -22,6 +22,7 @@ The JSON Schema is [https://schema.entrecode.de/schema-acc/invite](https://schem
 | invite| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The invite codes | No |
 |permissions   |Array[String]|[Shiro](https://www.npmjs.com/package/shiro-trie) permission string|Permissions that are assigned to this invite. |Yes|
 |groups        |Array|objects containing `name`, and `groupID` (not `permissions`!)| Groups this invite is assigned to. | Yes|
+|email         |String|Email address|Email address of the user that was invited. | Yes |
 
 
 ## Relations
@@ -49,15 +50,15 @@ In both cases, the success status code is **200 OK.**
 
 ## Create
 
-To create new invite(s), clients may perform a POST on `ec:invites`. The JSON Schema for creating new Invites is [https://schema.entrecode.de/schema-acc/invites-template-post](https://schema.entrecode.de/schema-acc/invites-template-post). It may be an empty body, or a JSON containing a `count` number. An empty body is equivalent to using `"count": 1`. It indicates how much new invites will be generated. It is also possible to set `permissions` and `groups` to set those for the newly generated invites.
+To create new invite(s), clients may perform a POST on `ec:invites`. The JSON Schema for creating new Invites is [https://schema.entrecode.de/schema-acc/invites-template-post](https://schema.entrecode.de/schema-acc/invites-template-post). It may be an empty body, or a JSON containing a `count` number. An empty body is equivalent to using `"count": 1`. It indicates how much new invites will be generated. It is also possible to set `email`, `permissions` and `groups` to set those for the newly generated invites.
 
 The success status code is **201 Created** and the response body is the Invites Resource containing the new invite(s).
 
 ## Edit
 
-To update an existing Invite Resource, clients may perform a PUT on `ec:invite` or `self` at a single Invite Resource. The JSON Schema for editing a Group is [https://schema.entrecode.de/schema-acc/invite-template-put](https://schema.entrecode.de/schema-acc/invite-template-put). 
+To update an existing Invite Resource, clients may perform a PUT on `ec:invite` or `self` at a single Invite Resource. The JSON Schema for editing a Invite is [https://schema.entrecode.de/schema-acc/invite-template-put](https://schema.entrecode.de/schema-acc/invite-template-put). 
 
-Editable fields are the `permissions` array, and the `groups` array. Note that the elements of the `groups` array are expected to be objects with a `groupID` property. The response will also contain the group's `name` property.
+Editable fields are the `email` field, the `permissions` array, and the `groups` array. Note that the elements of the `groups` array are expected to be objects with a `groupID` property. The response will also contain the group's `name` property.
 
 The success status code is **200 OK** and the response body is the updated single Invite resource.
 

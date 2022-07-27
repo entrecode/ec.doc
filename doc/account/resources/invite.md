@@ -64,4 +64,6 @@ The success status code is **200 OK** and the response body is the updated singl
 
 ## Delete
 
-It is not possible to delete generated invite codes. However, they get invalidated on usage and will not be visible through this resource anymore.
+Since version 0.20.0 of Account Server it is possible to delete Invite Resources. For this you will need to send a DELETE on `ec:invite` or `self` at a single Invite Resource.
+
+Additionally, Invites Resources get invalidated on usage and will not be visible through this resource anymore.

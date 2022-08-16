@@ -1,12 +1,12 @@
 {
   "name": "ec.appcms-doc",
-  "version": "0.17.4",
+  "version": "0.17.5",
   "description": "Documentation Repository for App CMS.",
   "repository": "git+https://github.com/entrecode/ec.doc.git",
   "author": "Ruben Deyhle <deyhle@entrecode.de>",
   "scripts": {
     "start": "mkdocs serve",
     "build": "mkdocs build",
-    "postinstall": "pip install mkdocs-material"
+    "postinstall": "pip3 install mkdocs-material"
   }
 }

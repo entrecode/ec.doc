@@ -13,6 +13,8 @@ The JSON Schema is [https://schema.entrecode.de/schema-acc/group](https://schema
 |groupID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for a group | No. Gets generated on creation. |
 |name   | String | | Name of the permission group. Has to be unique. | Yes|
 |permissions   |Array[String]|[Shiro](https://www.npmjs.com/package/shiro-trie) permission string|Permissions that are assigned to this group. |Yes|
+|customAuthDomain|String|URL|The custom domain from wich users in this group receive their auth mails.|Yes|
+|customAuthDomainPriority|Number|0 - 100|The priority of the custom auth domain. Higher values means higher priority|Yes|
 
 ## Relations
 
@@ -47,6 +49,8 @@ In both cases, the success status code is **200 OK.**
     "a:b:c",
     "d:e:f
   ],
+  "customAuthDomain": "entrecode.de
+  "customAuthDomainPriority": 50,
   "_embedded": {
     "ec:account":
       [
@@ -103,7 +107,7 @@ To update an existing Group Resource, clients may perform a PUT on `ec:group` or
 Embedded or linked: partial `ec:account` resources (with one of `accountID`, `email` or `_links.self` correctly set). Note that if at least one account resource is linked or embedded, the member accounts get rewritten. I.e., missing accounts will be removed.
 If no accounts are sent, no changes are done. Therefore, you cannot remove all accounts from a group.
 
-It is also possible to make partial changes (i.e. only edit `name`, only edit `permissions` or only edit embedded accounts). In this case, the existing values should just be sent along to prevent errors.
+It is also possible to make partial changes (i.e. only edit `name`, `permissions`, `customAuthDomain`, `customAuthDomainPriority`, or only edit embedded accounts). In this case, the existing values should just be sent along to prevent errors.
 If a property is changed, the client needs the corresponding permission – otherwise the change is being ignored while the rest of the edit is processed.
 
 Note that it is possible to remove the client's own account (that gets added to the group on creation automatically). 

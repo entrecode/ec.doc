@@ -44,6 +44,10 @@ In both cases, the success status code is **200 OK.**
 ## Create
 
 A new token gets generated on [Login](./auth/#login).
+For API Keys, a long-lived token gets generated on creation.
+
+It is possible to add 1 additional token to API Key Accounts (Accounts without password and without email address). POST to `ec:account/tokens` with account edit permission.
+An API Key Account can have a maximum of 2 valid tokens at any time. To create more, invalidate an old one first.
 
 ## Edit
 

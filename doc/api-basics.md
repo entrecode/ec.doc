@@ -61,6 +61,10 @@ To sort by a different than the default property, the following query string par
 ##### Filtering:
 **Exact Match:** A query string parameter of the form `{property}={value}` can be used for an exact-match filter. If used with an ID parameter, only one item will be returned and no list resource.
 
+**Empty/Null:** A query string parameter of the form `{property}=` (empty value) can be used for an is empty / is null filter, where supported (PublicAPI).
+
+**Not:** A query string parameter of the form `{property}!={value}`  can be used for an "is not exact match" filter, where supported (PublicAPI) - can also be combined with empty value for "not empty" filter.
+
 **Search:** A query string parameter of the form `{property}~={value}` can be used for searching (non-exact-match filter).
 
 **Ranges:** A query string parameter of the form `{property}From={value}` and `{property}To={value}` can be used for specifying ranges. If only one of the two is given, the other is minimum resp. maximum.
@@ -76,6 +80,9 @@ To sort by a different than the default property, the following query string par
 * `resource?sort=-price` ordered by price in descending order (highest first)
 * `resource?id=38fa21` item with id 38fa21
 * `resource?name=Doe` all items with the value Doe as name
+* `resource?name!=Doe` all items with a name other than "Doe"
+* `resource?name=` all items with no name
+* `resource?name!=` all items with any name (not empty)
 * `resource?email~=gmail` all items that contain gmail in the email property
 * `resource?priceFrom=100` all items with a price >= 100
 * `resource?priceTo=100` all items with a price <=100

@@ -29,6 +29,7 @@ The JSON Schema is [https://schema.entrecode.de/schema-data/dm-assetgroup](https
 |settings.autoDelete | `null` or String | `7 days`, `1 month`, `1 second` | Automatically delete Assets after specified timespan. Do not set to retain assets. Note that a script is periodically running for the deletion. So a value of '1 second' will not necessarily make the deletion instant, but will delete assets on the next run of the deletion script. | Yes |
 |settings.deletePermanently | String | `7 days`, `1 month`, `1 second` | Timespan after which a deleted asset is physically deleted. Default is 7 days. Note that a script is periodically running for the deletion. So a value of '1 second' will not necessarily make the deletion instant, but will let deleted assets be removed on the next run of the deletion script. | Yes |
 |settings.defaultVariants | Array[Integer] | | List of default variant sizes to generate for uploaded assets. Should be a subset of `imageSizes`. | Yes |
+|settings.download | Boolean | true/false | Set to `true` to trigger a `Content-Disposition: attachment` header. Default is `false`. | Yes |
 |policies|Array[JSON] |Policy Definition | Permission Policies for Assets in this Asset Group | Yes|
 |policies[].method| String | `get`, `put`, `post`, `delete`| The method the policy should apply to. | Yes |
 |policies[].user| String | `public`, `dmUser`| The user type the policy should apply to. | Yes |

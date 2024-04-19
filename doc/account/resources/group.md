@@ -10,11 +10,14 @@ The JSON Schema is [https://schema.entrecode.de/schema-acc/group](https://schema
 
 | Property | Type | Format | Description | Writable |
 |----------|------|--------|-------------|----------|
-|groupID| String | Version 4 UUID ([RFC 4122](http://tools.ietf.org/html/rfc4122))| The unique identifier for a group | No. Gets generated on creation. |
+|groupID| String | `^[a-zA-Z0-9_\\-:]+$` | The unique identifier for a group | Yes, optionally - otherwise gets generated on creation. |
 |name   | String | | Name of the permission group. Has to be unique. | Yes|
 |permissions   |Array[String]|[Shiro](https://www.npmjs.com/package/shiro-trie) permission string|Permissions that are assigned to this group. |Yes|
 |customAuthDomain|String|URL|The custom domain from wich users in this group receive their auth mails.|Yes|
 |customAuthDomainPriority|Number|0 - 100|The priority of the custom auth domain. Higher values means higher priority|Yes|
+|groupSettings.mfaRequired | Boolean | | If `true`, all users in this group are required to use MFA. Default `false` | Yes |
+|groupSettings.authenticatorRequires2FA | Boolean | | If `true`, second factor is required even when first factor was biometric. Default `false` | Yes |
+|groupSettings.legacyLoginDisabled | Boolean | | If `true`, all users in this group are required to use OIDC for login. Default `false` | Yes |
 
 ## Relations
 

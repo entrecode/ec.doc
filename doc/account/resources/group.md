@@ -9,13 +9,13 @@ Starting with Account Server v1.2 it is also possible to add sub-groups to group
 The JSON Schema is [https://schema.entrecode.de/schema-acc/group](https://schema.entrecode.de/schema-acc/group)
 
 ### Subgroups and permissions
-Group IDs are permissions itself. If subgroups are added to a group, the subgroup's permissions are also included in the group's permissions.
-The permissions array always includes all permissions that this group grants. 
-The group's own groupID permission cannot be removed.
-Permissions that are also in the subgroups array are actually subgroups which can be linked.
-Permissions that are also in the nativePermissions array are permissions or subgroups directly attached to this group, (only) they can be removed.
-To add permissions or subgroups, add them to nativePermissions or (for backwards-compatibility) the subgroups- or permissions-array.
-All permission arrays are always sorted alphabetically.
+Group IDs are permissions itself. All permissions of the group and all of its sub- and subsub-groups are listed in the `permissions` poperty. All group IDs of sub- and subsub-groups are listed in the `subgroups` property. Permissions directly associated with the group are listed in the groups `nativePermissions` property.
+
+When editing the permissions of the group the property `nativePermissions` is used. Adding sub-groups is done by adding the group ID of the sub-group to `nativePermissions`. Adding subsub-groups is done via the sub-group and cannot be done in the group directly.
+
+Note that for backward-compatibility editing `permissions` property can be used as well but is desregarded with v1.2 of Account Server. 
+
+The group's own groupID permission cannot be removed. Subsub-groups must be edited by editing the Sub-group.
 
 ## Properties
 

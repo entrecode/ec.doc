@@ -324,7 +324,7 @@ or
 
 The property `field` must be the field name of a field of the model. May also be a system-generated field like `_creator`.
 
-The property `operator` can be `=`, `!=`, `<`, `<=`, `>`, `>=`, `in`, `notIn`, `hasRole` and `hasNotRole`.
+The property `operator` can be `=`, `!=`, `<`, `<=`, `>`, `>=`, `in`, `notIn`, `hasRole` and `hasNotRole`. `contains`, `containsNot`, `stringContains`, and `stringContainsNot` are available as well.
 
 The property `constant` can be a JavaScript literal, like a string, a number or `null`. When used with the `in` operator, it can also be an Array containing literals.
 

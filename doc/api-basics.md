@@ -61,7 +61,7 @@ To sort by a different than the default property, the following query string par
 ##### Filtering:
 **Exact Match:** A query string parameter of the form `{property}={value}` can be used for an exact-match filter. If used with an ID parameter, only one item will be returned and no list resource.
 
-**Empty/Null:** A query string parameter of the form `{property}=` (empty value) can be used for an is empty / is null filter, where supported (PublicAPI).
+**Empty/Null:** A query string parameter of the form `{property}=` (empty value) can be used for an is empty / is null filter, where supported (PublicAPI). Up until Data Manager 0.33.0 dm users could use an empty value for `_creator` to filter implicitly for resources created by the user – this was changed in favor of the is empty / is null filter. To filter for resources created by the user, use `_creator={userId}` or `_creator=me`. 
 
 **Not:** A query string parameter of the form `{property}!={value}`  can be used for an "is not exact match" filter, where supported (PublicAPI) - can also be combined with empty value for "not empty" filter.
 

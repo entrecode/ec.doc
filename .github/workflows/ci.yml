@@ -13,10 +13,10 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material 
-      - name: Copy CNAME file to docs directory
+      - name: Copy CNAME file to doc directory
         run: |
           if [ -f "CNAME" ]; then
-            cp CNAME docs/
+            cp CNAME doc/
           else
             echo "CNAME file not found in repository root"
           fi

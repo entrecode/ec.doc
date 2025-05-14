@@ -13,4 +13,11 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material 
+      - name: Copy CNAME file to docs directory
+        run: |
+          if [ -f "CNAME" ]; then
+            cp CNAME docs/
+          else
+            echo "CNAME file not found in repository root"
+          fi
       - run: mkdocs gh-deploy --force

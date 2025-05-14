@@ -4,7 +4,18 @@ A single entrecode Permission Group.
 Groups are instances – just as accounts – that can have permissions assigned to. Accounts can be added to groups, which grants the group permissions to all those accounts.
 Membership in a group is always equal for all users (i.e. there is no "special" group membership). However, the creator of the group gets the right to edit the group (permissions and members) as personal permission assigned to his account.
 
+Starting with Account Server v1.2 it is also possible to add sub-groups to groups, which recursively grants the sub-group's permissions to the group. 
+
 The JSON Schema is [https://schema.entrecode.de/schema-acc/group](https://schema.entrecode.de/schema-acc/group)
+
+### Subgroups and permissions
+Group IDs are permissions itself. All permissions of the group and all of its sub- and subsub-groups are listed in the `permissions` poperty. All group IDs of sub- and subsub-groups are listed in the `subgroups` property. Permissions directly associated with the group are listed in the groups `nativePermissions` property.
+
+When editing the permissions of the group the property `nativePermissions` is used. Adding sub-groups is done by adding the group ID of the sub-group to `nativePermissions`. Adding subsub-groups is done via the sub-group and cannot be done in the group directly.
+
+Note that for backward-compatibility editing `permissions` property can be used as well but is desregarded with v1.2 of Account Server. 
+
+The group's own groupID permission cannot be removed. Subsub-groups must be edited by editing the Sub-group.
 
 ## Properties
 
@@ -12,7 +23,9 @@ The JSON Schema is [https://schema.entrecode.de/schema-acc/group](https://schema
 |----------|------|--------|-------------|----------|
 |groupID| String | `^[a-zA-Z0-9_\\-:]+$` | The unique identifier for a group | Yes, optionally - otherwise gets generated on creation. |
 |name   | String | | Name of the permission group. Has to be unique. | Yes|
-|permissions   |Array[String]|[Shiro](https://www.npmjs.com/package/shiro-trie) permission string|Permissions that are assigned to this group. |Yes|
+|permissions   |Array[String]|[Shiro](https://www.npmjs.com/package/shiro-trie) permission string|All Permissions that are assigned to this group, including permissions from sub-groups. |Yes, but disregarded with v1.2|
+|subgroups   |Array[String]|[Shiro](https://www.npmjs.com/package/shiro-trie) permission string|All subgroups of this group. Subset of permissions.|Yes, but only direct subgroups can be removed (which are also included in nativePermissions)|
+|nativePermissions   |Array[String]|[Shiro](https://www.npmjs.com/package/shiro-trie) permission string|Permissions and Subgroups that are directly attached to this group. Only permissions in this array are removable |Yes|
 |customAuthDomain|String|URL|The custom domain from wich users in this group receive their auth mails.|Yes|
 |customAuthDomainPriority|Number|0 - 100|The priority of the custom auth domain. Higher values means higher priority|Yes|
 |groupSettings.mfaRequired | Boolean | | If `true`, all users in this group are required to use MFA. Default `false` | Yes |
@@ -46,11 +59,24 @@ In both cases, the success status code is **200 OK.**
 #### Example
 ```
 {
-  "groupID": "00000000-0000-4444-8888-000000000000",
+  "groupID": "group:an-example-group",
   "name": "an example group",
   "permissions": [
     "a:b:c",
-    "d:e:f
+    "a:subgroup-permission",
+    "d:e:f,
+    "group:an-example-group",
+    "group:subgroup",
+    "group:subsubgroup"
+  ],
+  "nativePermissions": [
+    "a:b:c",
+    "d:e:f,
+    "group:subgroup"
+  ],
+  "subgroups": [
+    "group:subgroup",
+    "group:subsubgroup"
   ],
   "customAuthDomain": "entrecode.de
   "customAuthDomainPriority": 50,
@@ -78,7 +104,7 @@ In both cases, the success status code is **200 OK.**
       ]
   "_links": {
     "self": {
-      "href": "https://accounts.entrecode.de/group?groupID=00000000-0000-4444-8888-000000000000"
+      "href": "https://accounts.entrecode.de/group?groupID=group:an-example-group"
     },
     "curies": {
       "href": "https://entrecode.de/doc/rel/{rel}",

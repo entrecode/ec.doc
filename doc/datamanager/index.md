@@ -460,6 +460,115 @@ To request an email change, POST a JSON with key `email` to `/_auth/change-email
 
 The JSON responses triggered using `?rest=true` contain an object with all necessary data for rendering an HTML page, or an error. 
 
+## OpenID Connect (OIDC) Third-Party login
+
+Third party authentication providers can be used via OIDC (Login with Apple, Google, Microsoft, …).
+
+### Prerequesites
+- Frontend client with deployment URL ("UI Client")
+- For each desired authentication provider ("Issuer"): clientID and clientSecret with redirect URI of UI Client
+- configure a DM client for that:
+
+```
+{
+  "grantTypes": [
+    "refresh_token"
+  ],
+  "callbackURL": "https://this-is-my-cool-app.com/oidc/callback",
+  "federatedOIDC": [
+    {
+      "uri": "https://accounts.google.com/.well-known/openid-configuration",
+      "scope": "openid email profile",
+      "button": "Login mit Google",
+      "clientID": "00000000-mycoolclientidfromgoogle.apps.googleusercontent.com",
+      "clientSecret": "supersecretsecretformycoolclient"
+    }
+  ]
+}
+```
+(note the difference between DM Client and Google Client!)
+
+### OIDC third party login flow
+
+1. now you can dynamically check which federated oidc providers are configured, using ec.sdk:
+
+```js
+const thirdPartyLogins = await publicAPI.getOIDCConfig('my-dm-client-id');
+```
+This will result in:
+```json
+[
+  {
+    "issuer": "https://accounts.google.com/.well-known/openid-configuration",
+    "button": "Login mit Google"
+  }
+]
+```
+
+Use that to render a "Login with XYZ" button.
+
+2. generate state and nonce secrets. They are needed to make sure, the third party response is actually from your request and not man-in-the-middled. They should be random strings. 
+It is best practice to use state for, well, state of your app and encode some session information in it. 
+
+3. When the user taps the "Login with XYZ" button, you should call this function with the "issuer" of the button:
+
+```js
+const redirectTo = await publicAPI.getURLForThirdPartyOIDC(clientID: string, issuer: string, state: string, nonce: string);
+```
+Redirect the user to the URI coming back. This will bring them to the third party login page, and afterwards back to your DM client's configured callbackURL.
+
+4. When your callbackURL is called, look at the query parameters. 
+It contains either an error, or `code`.
+Send that `code` using ec.sdk:
+```js
+const tokenResponse = await publicAPI.tokenExchangeForThirdPartyOIDC(clientID: string, issuer: string, code: string, nonce: string)
+```
+(`nonce` should be the same as in `getURLForThirdPartyOIDC` and unique for each call).
+This SDK instance is then logged in, so it should be a user-SDK.
+
+If you get back a tokenResponse, the third party id token is linked to an DM account. 
+You get back:
+
+```
+{ 
+  access_token,
+  token_type,
+  expires_in,
+  refresh_token,
+  account: {
+    accountID,
+    email,
+    isNewAccount,
+  },
+  profile: {
+    email,
+    name,
+    picture,
+    familyName,
+    givenName,
+  }
+}
+```
+Note that you may not get all profile properties, depending on the issuer. 
+Also, they are not stored to the account in any way (DM Accounts have no metadata other than email). So store them in an entry linked to the account or something.
+
+### helper functions
+
+```js
+await publicAPI.addOIDCIdenitityToAccount(
+    accountID: string,
+    idToken: {
+      iss: string;
+      sub: string;
+      exp: number;
+      iat: number;
+    },
+);
+```
+
+If you have an id token from a third party from some other flow, you can assign it to an existing DM account with this.
+
+
 ## Hooks
 Hooks can be used to add additional functionality to models. E.g. they enable you to alter values before saving or to pass data on to another server.
 

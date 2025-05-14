@@ -535,6 +535,11 @@ You get back:
   token_type,
   expires_in,
   refresh_token,
+  account: {
+    accountID,
+    email,
+    isNewAccount,
+  },
   profile: {
     email,
     name,

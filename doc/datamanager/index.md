@@ -482,11 +482,17 @@ Third party authentication providers can be used via OIDC (Login with Apple, Goo
       "button": "Login mit Google",
       "clientID": "00000000-mycoolclientidfromgoogle.apps.googleusercontent.com",
       "clientSecret": "supersecretsecretformycoolclient"
+    },
+    {
+      "uri": "https://account.apple.com/.well-known/openid-configuration",
+      "button": "Login mit Apple",
+      "clientID": "de.entrecode.cachena.login",
+      "clientSecret": "supersecretjwtfromapplewhichdoesexpiresorememberchangingitintime"
     }
   ]
 }
 ```
-(note the difference between DM Client and Google Client!)
+(note the difference between DM-Client and Google-/Apple-Client!)
 
 ### OIDC third party login flow
 

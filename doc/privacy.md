@@ -1,8 +1,8 @@
 ## Impressum
 ```
 entrecode GmbH
-Dornhaldenstr. 6
-70199 Stuttgart
+Epplestraße 60
+70597 Stuttgart
 info@entrecode.de
 
 Geschäftsführer: Simon Scherzinger

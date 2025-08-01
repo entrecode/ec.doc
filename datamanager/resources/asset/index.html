@@ -1,0 +1,2889 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../">
+      
+      
+        <link rel="next" href="../dm-assetgroup/">
+      
+      
+      <link rel="icon" href="../../../img/icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Asset - entrecode API Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#assets" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="entrecode API Documentation" class="md-header__button md-logo" aria-label="entrecode API Documentation" data-md-component="logo">
+      
+  <img src="../../../img/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            entrecode API Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Asset
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="red"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Basics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../sdk/ec.sdk/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  SDK
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../account/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Account Server
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Data Manager
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../appmanager/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  App Manager
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="entrecode API Documentation" class="md-nav__button md-logo" aria-label="entrecode API Documentation" data-md-component="logo">
+      
+  <img src="../../../img/icon.png" alt="logo">
+
+    </a>
+    entrecode API Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Basics
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Basics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Errors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    More
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            More
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/entrecode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GitHub
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://entrecode.de" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    SDK
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            SDK
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sdk/ec.sdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ec.sdk
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sdk/ec.dm-cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ec.dm-cache
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Legacy SDKs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Legacy SDKs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sdk/datamanager-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager Java SDK
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sdk/datamanager-js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager JavaScript SDK
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../account/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Account Server
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Account Server
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Resources
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../account/resources/account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Account
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../account/resources/auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Auth
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../account/resources/client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Client
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../account/resources/invalid-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Invalid Permissions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../account/resources/invite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Invites
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../account/resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Group
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../account/resources/token/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Data Manager
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Data Manager
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Resources
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Asset
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Asset
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-asset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single Asset
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating Assets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list" class="md-nav__link">
+    <span class="md-ellipsis">
+      List
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Assets
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating Assets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filenames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filenames
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defaultvariants" class="md-nav__link">
+    <span class="md-ellipsis">
+      defaultVariants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#de-duplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      De-duplication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-rendering-of-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Re-Rendering of variants
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-asset-legacy-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single Asset (Legacy Assets)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deprecation-notice" class="md-nav__link">
+    <span class="md-ellipsis">
+      DEPRECATION NOTICE
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties-legacy-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties (Legacy Assets)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations-legacy-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relations (Legacy Assets)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-subresource-legacy-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Subresource (Legacy Assets)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-legacy-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      List (Legacy Assets)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read" class="md-nav__link">
+    <span class="md-ellipsis">
+      Read
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deleted-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deleted Assets
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dm-assetgroup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Asset Group
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dm-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Client
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datamanager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dm-account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager Account
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dm-role/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager Role
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dm-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager Template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tag
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../appmanager/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    App Manager
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            App Manager
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Resources
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appmanager/resources/app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    App
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appmanager/resources/app-stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    App Stats
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appmanager/resources/build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appmanager/resources/codesource/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CodeSource
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appmanager/resources/datasource/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DataSource
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appmanager/resources/deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appmanager/resources/platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Platform
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appmanager/resources/target/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Target
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../appmanager/resources/apptypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-asset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single Asset
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating Assets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list" class="md-nav__link">
+    <span class="md-ellipsis">
+      List
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Assets
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating Assets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filenames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filenames
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defaultvariants" class="md-nav__link">
+    <span class="md-ellipsis">
+      defaultVariants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#de-duplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      De-duplication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-rendering-of-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Re-Rendering of variants
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-asset-legacy-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single Asset (Legacy Assets)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deprecation-notice" class="md-nav__link">
+    <span class="md-ellipsis">
+      DEPRECATION NOTICE
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties-legacy-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties (Legacy Assets)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations-legacy-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relations (Legacy Assets)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-subresource-legacy-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Subresource (Legacy Assets)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-legacy-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      List (Legacy Assets)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read" class="md-nav__link">
+    <span class="md-ellipsis">
+      Read
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deleted-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deleted Assets
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Asset</h1>
+
+<h2 id="assets">Assets<a class="headerlink" href="#assets" title="Permanent link">&para;</a></h2>
+<p>Assets are abstract representations of files. Usually, they also contain one or more thumbnails in different sizes. Image assets also support different image dimensions. </p>
+<p><em>Note on legacy assets: the <a href="#single-asset-legacy-assets">former implementation</a> is still available but deprecated.</em></p>
+<h2 id="single-asset">Single Asset<a class="headerlink" href="#single-asset" title="Permanent link">&para;</a></h2>
+<p>A single asset.</p>
+<p>The JSON Schema is <a href="https://schema.entrecode.de/schema-data/dm-asset">https://schema.entrecode.de/schema-data/dm-asset</a></p>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+<th>Writable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>assetID</td>
+<td>String</td>
+<td>base64url-encoded UUIDv4 (<code>^[a-zA-Z0-9\\-_]{22}$</code>)</td>
+<td>The unique identifier for an Asset</td>
+<td>No. Gets generated on creation.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>String</td>
+<td></td>
+<td>A string title for this Asset. Inferred from the original file name of the uploaded file.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>caption</td>
+<td>String</td>
+<td></td>
+<td>A string caption for this Asset.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>one of <code>image</code>, <code>video</code>, <code>audio</code>, <code>plain</code>, <code>document</code>, <code>spreadsheet</code>, <code>other</code></td>
+<td>Asset type</td>
+<td>No</td>
+</tr>
+<tr>
+<td>mimetype</td>
+<td>String</td>
+<td><code>^(image|video|audio|text|application)\/[a-z0-9\\.+-]+$</code></td>
+<td>MIME-Type of the Asset file</td>
+<td>No</td>
+</tr>
+<tr>
+<td>created</td>
+<td>String</td>
+<td>ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, <a href="http://tools.ietf.org/html/rfc3339">RFC 3339</a>)</td>
+<td>Timestamp of the creation of the Asset</td>
+<td>No. Gets written on creation.</td>
+</tr>
+<tr>
+<td>modified</td>
+<td>String, <code>null</code></td>
+<td>ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, <a href="http://tools.ietf.org/html/rfc3339">RFC 3339</a>)</td>
+<td>Timestamp of the last modification of the Asset</td>
+<td>No. Gets written on updates.</td>
+</tr>
+<tr>
+<td>creator</td>
+<td>String, <code>null</code></td>
+<td>Version 4 UUID (<a href="http://tools.ietf.org/html/rfc4122">RFC 4122</a>)</td>
+<td>The accountID of the creator, if available.</td>
+<td>No. Gets written on creation.</td>
+</tr>
+<tr>
+<td>creatorType</td>
+<td>String</td>
+<td><code>ecUser</code>, <code>dmUser</code>, or <code>public</code></td>
+<td>The type of user that created the asset.</td>
+<td>No. Gets written on creation.</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Array[String]</td>
+<td><a href="./tag/">Tag</a></td>
+<td>Array of string tags for this asset</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>file</td>
+<td>JSON</td>
+<td></td>
+<td>Main Asset file</td>
+<td>No. Gets written on creation.</td>
+</tr>
+<tr>
+<td>file.url</td>
+<td>String</td>
+<td>URL</td>
+<td>The generated URL to retrieve the asset file.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>file.size</td>
+<td>Integer</td>
+<td></td>
+<td>Bytesize of the uploaded File</td>
+<td>No</td>
+</tr>
+<tr>
+<td>file.resolution</td>
+<td>JSON, <code>null</code></td>
+<td>Properties <code>width</code> and <code>height</code></td>
+<td>Resolution of the image file variant in pixels.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>fileVariants</td>
+<td>Array[JSON]</td>
+<td></td>
+<td>List of File Variants, if this is an image.</td>
+<td>No. Missing image resolutions can created by requesting them.</td>
+</tr>
+<tr>
+<td>fileVariants[].url</td>
+<td>String</td>
+<td>URL</td>
+<td>The generated URL to retrieve the asset file variant.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>fileVariants[].size</td>
+<td>Integer</td>
+<td></td>
+<td>Bytesize of the uploaded File</td>
+<td>No</td>
+</tr>
+<tr>
+<td>fileVariants[].resolution</td>
+<td>JSON, <code>null</code></td>
+<td>Properties <code>width</code> and <code>height</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>thumbnails</td>
+<td>Array[JSON]</td>
+<td></td>
+<td>List of Thumbnails.</td>
+<td>No. Missing thumbnail resolutions can created by requesting them.</td>
+</tr>
+<tr>
+<td>thumbnails[].url</td>
+<td>String</td>
+<td>URL</td>
+<td>The generated URL to retrieve the asset thumbnail.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>thumbnails[].dimension</td>
+<td>Integer</td>
+<td></td>
+<td>Resolution of the square thumbnail image in pixel.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>isUsed</td>
+<td>Boolean</td>
+<td></td>
+<td>Indicates if this Asset is used in an Asset/Assets field of an Entry in this Data Manager.</td>
+<td>No, dynamically changes its value.</td>
+</tr>
+<tr>
+<td>duplicates</td>
+<td>Integer</td>
+<td></td>
+<td>Number of duplicate Assets of this Asset in the same Asset Group.</td>
+<td>No, dynamically changes its value.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="relations">Relations<a class="headerlink" href="#relations" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Relation Name</th>
+<th>Target Resource</th>
+<th>Description</th>
+<th>Possible Methods</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td><a href="#">Asset</a></td>
+<td>The resource itself</td>
+<td>GET, PUT, DELETE</td>
+</tr>
+<tr>
+<td>collection</td>
+<td><a href="#list">Asset List</a></td>
+<td>List of all available Assets in this Asset Group</td>
+<td>GET, POST</td>
+</tr>
+<tr>
+<td>ec:dm-asset/file</td>
+<td>File</td>
+<td>The main file URL.</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>ec:dm-asset/file-variant</td>
+<td>File</td>
+<td>File variant URL(s)</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>ec:dm-asset/thumbnail</td>
+<td>File</td>
+<td>Thumbnail URL(s)</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>ec:dm-asset/duplicates</td>
+<td><a href="#list">Asset List</a></td>
+<td>List of Assets that are duplicates, if applicable</td>
+<td>GET</td>
+</tr>
+</tbody>
+</table>
+<p>Using the <code>ec:dm-asset/file-variant</code> and <code>ec:dm-asset/thumbnail</code> relations (both are templated URLs) you can get different sizes of images and thumbnails. 
+The size property is a minimum-size the target image should have. The next bigger configured size is returned. There are global default sizes, that can be overwritten in Data Manager settings and Asset Group Settings. 
+In the <code>fileVariants</code>/<code>thumbnails</code> JSON properties only files that were requested before are included. Use the relations to trigger rendering of new sizes; they get returned immediately. </p>
+<h2 id="updating-assets">Updating Assets<a class="headerlink" href="#updating-assets" title="Permanent link">&para;</a></h2>
+<p>To update an existing Asset Resource, clients may perform a PUT on <code>ec:dm-asset</code> or <code>self</code> at a single Asset Resource.</p>
+<p>Partial updates are possible.
+Changeable properties are <code>title</code>, <code>tags</code> and <code>caption</code>. 
+It is not possible to change the file itself.</p>
+<h2 id="list">List<a class="headerlink" href="#list" title="Permanent link">&para;</a></h2>
+<p>The Asset List Resource is a <a href="/#generic-list-resources">Generic List Resource</a> with embedded Asset Resources.</p>
+<h2 id="relations_1">Relations<a class="headerlink" href="#relations_1" title="Permanent link">&para;</a></h2>
+<p>(additionally to the default relations)</p>
+<table>
+<thead>
+<tr>
+<th>Relation Name</th>
+<th>Target Resource</th>
+<th>Description</th>
+<th>Possible Methods</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td><a href="#list">Asset List</a></td>
+<td>The Assets List</td>
+<td>GET, POST</td>
+</tr>
+<tr>
+<td>ec:dm-asset/by-id</td>
+<td><a href="#">Asset</a></td>
+<td>Templated Link to Assets</td>
+<td>GET, PUT, DELETE</td>
+</tr>
+<tr>
+<td>ec:dm-assets/options</td>
+<td><a href="#list">Asset List</a></td>
+<td>Templated Link to Assets list</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>ec:dm-assetgroup</td>
+<td><a href="./dm-assetgroup/">Asset Group</a></td>
+<td>Asset Group of this Asset List</td>
+<td>GET, PUT</td>
+</tr>
+<tr>
+<td>ec:api</td>
+<td>Generated API Entry point</td>
+<td>Root page of the generated API</td>
+<td>GET</td>
+</tr>
+</tbody>
+</table>
+<h2 id="creating-assets">Creating Assets<a class="headerlink" href="#creating-assets" title="Permanent link">&para;</a></h2>
+<p>To create a new asset, upload a file with content type multipart/form-data (<a href="http://tools.ietf.org/html/rfc2388">RFC 2388</a>) . MIME Type and basic properties are inferred from the uploaded file(s). The field name should be <code>file</code>. 
+Multiple files can be uploaded at once to create multiple assets with one call. 
+Assets always have to be uploaded to exactly one Asset Group.
+It is also possible to create an asset from an url. Simple attach the desired files with the field name <code>url</code> and DataManager will load the files and create assets.</p>
+<p>Response: <strong>201 created</strong> if everything went well. Response will contain the created Asset resource(s).</p>
+<h3 id="filenames">Filenames<a class="headerlink" href="#filenames" title="Permanent link">&para;</a></h3>
+<p>By default, a filename is generated using the original file's filename. You can also set the field name to something else than <code>file</code> to overwrite the filename – even sub-paths are possible this way. Note that if you want a file extension, you still have to deliver the file extension in the field name. On the other hand, it is possible this way to have files online without an extension.
+As an option, a random filename can be generated. This may be better for user-uploaded stuff. For that, send the field <code>preserveFilenames</code> with value <code>false</code>. The file extension is inferred from the uploaded file.
+The default (<code>preserveFilenames=true</code> and <code>includeAssetIDInPath=true</code>) may be different for single Data Managers or Asset Groups.</p>
+<h3 id="defaultvariants">defaultVariants<a class="headerlink" href="#defaultvariants" title="Permanent link">&para;</a></h3>
+<p>Variant sizes of image assets are normally generated on request. This should be the default. Once requested for the first time, they are generated. In some cases it may be useful to have a specific variant size right upon creation of the asset. This can be done by sending <code>defaultVariants</code> property, which should be a (stringified) Integer or Integer Array. The value(s) should be a subset of the configured image sizes.</p>
+<h3 id="de-duplication">De-duplication<a class="headerlink" href="#de-duplication" title="Permanent link">&para;</a></h3>
+<p>By default, a de-duplication check is performed. Assets that already exist in this Asset Group are rejected with Error 2375.
+If you want to disable this check and enforce uploading the file, you may send the field <code>ignoreDuplicates</code> with value <code>true</code> in the multipart/form-data request.
+If you want to receive an already uplooaded file, you may send the field <code>deduplicate</code> with value <code>true</code> in the multipart/form-data request. You will then receive the first duplicate file for any given upload.</p>
+<p><em>Sending other properties in the fields was a feature of legacy assets and is deprecated.</em></p>
+<h3 id="re-rendering-of-variants">Re-Rendering of variants<a class="headerlink" href="#re-rendering-of-variants" title="Permanent link">&para;</a></h3>
+<p>It is possible to re-render an image variant or thumbnail. This is an internal route which needs special privileges (<code>dm-root:&lt;dataManagerID&gt;:assetgroup:&lt;assetGroupID&gt;:assets:render</code>). 
+It is not published as hypermedia link. It is a POST to <code>/a/&lt;shortID&gt;/&lt;assetGroupID&gt;/&lt;assetID&gt;/render</code> with the post body defined by <a href="https://schema.entrecode.de/schema-data/dm-asset-render">https://schema.entrecode.de/schema-data/dm-asset-render</a>.</p>
+<h2 id="single-asset-legacy-assets">Single Asset (Legacy Assets)<a class="headerlink" href="#single-asset-legacy-assets" title="Permanent link">&para;</a></h2>
+<p>A single (legacy) asset.</p>
+<h2 id="deprecation-notice">DEPRECATION NOTICE<a class="headerlink" href="#deprecation-notice" title="Permanent link">&para;</a></h2>
+<p><em>Legacy Assets are deprecated. They can be soft-disabled with the data manager setting <code>"disableLegacyAssets": true</code>.</em></p>
+<p>Assets are abstract representations of a file, that can be available in multiple variants (e.g. different image sizes or localizations).</p>
+<p>The JSON Schema is <a href="https://schema.entrecode.de/schema-data/asset">https://schema.entrecode.de/schema-data/asset</a></p>
+<h2 id="properties-legacy-assets">Properties (Legacy Assets)<a class="headerlink" href="#properties-legacy-assets" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+<th>Writable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>assetID</td>
+<td>String</td>
+<td>Version 4 UUID (<a href="http://tools.ietf.org/html/rfc4122">RFC 4122</a>)</td>
+<td>The unique identifier for an Asset</td>
+<td>No. Gets generated on creation.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>String</td>
+<td></td>
+<td>A string title for this Asset. Inferred from the original file name of the uploaded file.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>one of <code>image</code>, <code>video</code>, <code>audio</code>, <code>plain</code>, <code>document</code>, <code>spreadsheet</code></td>
+<td>Asset type</td>
+<td>No</td>
+</tr>
+<tr>
+<td>created</td>
+<td>String</td>
+<td>ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, <a href="http://tools.ietf.org/html/rfc3339">RFC 3339</a>)</td>
+<td>Timestamp of the creation of the Asset</td>
+<td>No. Gets written on creation.</td>
+</tr>
+<tr>
+<td>deleted</td>
+<td>String</td>
+<td>ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, <a href="http://tools.ietf.org/html/rfc3339">RFC 3339</a>)</td>
+<td>Timestamp of the deletion of the Asset. Only included when the asset is in the trash.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Array[String]</td>
+<td><a href="./tag/">Tag</a></td>
+<td>Array of string tags for this asset</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>files</td>
+<td>Array[JSON]</td>
+<td><a href="#file-subresource">File</a></td>
+<td>Array of actual files for this asset</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>private</td>
+<td>Boolean</td>
+<td></td>
+<td>Whether or not the asset was created private.</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="relations-legacy-assets">Relations (Legacy Assets)<a class="headerlink" href="#relations-legacy-assets" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Relation Name</th>
+<th>Target Resource</th>
+<th>Description</th>
+<th>Possible Methods</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td><a href="#">Asset</a></td>
+<td>The resource itself</td>
+<td>GET, PUT, DELETE</td>
+</tr>
+<tr>
+<td>collection</td>
+<td><a href="#list">Asset List</a></td>
+<td>List of all available Assets</td>
+<td>GET, POST</td>
+</tr>
+<tr>
+<td>ec:asset/best-file</td>
+<td>File</td>
+<td>Content-negotiated “best suited” file of this asset</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>ec:datamanager</td>
+<td><a href="./datamanager/">Data Manager</a></td>
+<td>Data Manager this resource belongs to</td>
+<td>GET, PUT</td>
+</tr>
+<tr>
+<td>ec:tag</td>
+<td><a href="./tag/">Tag</a></td>
+<td>Tag of this asset </td>
+<td>GET, PUT, DELETE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="file-subresource-legacy-assets">File Subresource (Legacy Assets)<a class="headerlink" href="#file-subresource-legacy-assets" title="Permanent link">&para;</a></h2>
+<p>This subresource is included in the <a href="#">Asset</a> resource.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+<th>Writable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mimetype</td>
+<td>String </td>
+<td><a href="http://tools.ietf.org/html/rfc2046">RFC 2046</a></td>
+<td>The MIME Media type for this file</td>
+<td> No </td>
+</tr>
+<tr>
+<td>url</td>
+<td>String</td>
+<td><a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a></td>
+<td>The URL of the file for retrieval. Can be overwritten with custom asset url (datamanager config <code>customAssetDomain</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Number</td>
+<td>Integer</td>
+<td>Size of the file in Bytes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>resolution</td>
+<td>JSON</td>
+<td></td>
+<td>JSON object with additional metadata for this file. For image assets, it will contain properties like <code>width</code> and <code>height</code> to indicate the image resolution.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>locale</td>
+<td>String</td>
+<td><a href="http://tools.ietf.org/html/rfc5646">RFC5646</a> Syntax (<code>en-US</code>, <code>de-DE</code>, …)</td>
+<td>Locale of the asset file</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>created</td>
+<td>String</td>
+<td>ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, <a href="http://tools.ietf.org/html/rfc3339">RFC 3339</a>)</td>
+<td>Timestamp of the creation of the file</td>
+<td>No</td>
+</tr>
+<tr>
+<td>modified</td>
+<td>String</td>
+<td>ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, <a href="http://tools.ietf.org/html/rfc3339">RFC 3339</a>)</td>
+<td>Timestamp of the last modification of this file</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h2 id="list-legacy-assets">List (Legacy Assets)<a class="headerlink" href="#list-legacy-assets" title="Permanent link">&para;</a></h2>
+<p>The Asset List Resource is a <a href="/#generic-list-resources">Generic List Resource</a> with embedded Asset Resources.</p>
+<h2 id="read">Read<a class="headerlink" href="#read" title="Permanent link">&para;</a></h2>
+<p>To read a single Asset Resource, clients may perform GET on a <code>ec:asset</code> relation.</p>
+<p>To read the Asset List Resource, clients may perform GET on a <code>ec:assets</code> relation or on the <code>collection</code> relation of a single Asset resource.</p>
+<p>In both cases, the success status code is <strong>200 OK.</strong></p>
+<h2 id="create">Create<a class="headerlink" href="#create" title="Permanent link">&para;</a></h2>
+<p>To create a new asset, upload a file with content type multipart/form-data (<a href="http://tools.ietf.org/html/rfc2388">RFC 2388</a>). MIME Type and basic properties are inferred from the uploaded file(s). The field name has to be <code>file</code>. 
+Multiple files can be uploaded at once to create multiple assets with one call. You can also send a field <code>tags</code> or <code>title</code> to overwrite the default title and tags. <code>tags</code> must be a JSON.stringified array of strings.</p>
+<p>Additionally a boolean field <code>private</code> can be sent to specify if the created asset should be private (read: only accessible by the creating user) or public (read: accessible by everyone in the data manager).</p>
+<p>Response: <strong>201 created</strong> if everything went well. Response will contain link relations to newly created asset(s). They will not be embedded, however.</p>
+<h2 id="edit">Edit<a class="headerlink" href="#edit" title="Permanent link">&para;</a></h2>
+<p>To update an existing Asset Resource, clients may perform a PUT on <code>ec:asset</code> or <code>self</code> at a single Asset Resource.</p>
+<p>Partial updates are possible.</p>
+<p>Files:  Include to change locale of single files (<code>ec:asset/file</code> resource properties <code>url</code> and <code>locale</code> are required). If included, all files have to be included in the array. Files not included will be deleted.</p>
+<p>To merge two assets, include a link relation to another asset in a PUT request (HAL links list should contain an <code>ec:api/asset</code> link relation). The target asset(s) will be merged into this one, if possible. </p>
+<p>To add an additional representation to an asset resource (e.g. another image resolution or document localized for another locale), the new file is POSTed to the <code>ec:api/asset</code> resource with content type multipart/form-data (<a href="http://tools.ietf.org/html/rfc2388">RFC 2388</a>). The field name has to be <code>file</code>.</p>
+<h2 id="delete">Delete<a class="headerlink" href="#delete" title="Permanent link">&para;</a></h2>
+<p>To delete an asset, including its file representations, send a DELETE request to the <code>ec:api/asset</code> resource. This will move the asset to the trash.</p>
+<h2 id="deleted-assets">Deleted Assets<a class="headerlink" href="#deleted-assets" title="Permanent link">&para;</a></h2>
+<p>Deleted assets are the same as regular assets, however they have the <code>deleted</code> timestamp set. They get permanently deleted after some time.</p>
+<p>To <em>permanently delete</em> a deleted asset right away, it has to be called with HTTP DELETE and the query string parameter <code>destroy=destroy</code>.
+Output is <strong>204 NO CONTENT</strong>.</p>
+<p>To <em>restore</em> a deleted asset, simple call DELETE on the deleted asset, without any additional query string parameter.
+Output is <strong>200 OK</strong>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <a href="/privacy">About</a> | <a href="https://www.entrecode.de/datenschutz">Privacy Policy</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  </body>
+</html>

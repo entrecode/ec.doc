@@ -1,0 +1,4433 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../account/resources/token/">
+      
+      
+        <link rel="next" href="resources/asset/">
+      
+      
+      <link rel="icon" href="../img/icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>The Data Manager - entrecode API Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-data-manager" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="entrecode API Documentation" class="md-header__button md-logo" aria-label="entrecode API Documentation" data-md-component="logo">
+      
+  <img src="../img/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            entrecode API Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              The Data Manager
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="red"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Basics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../sdk/ec.sdk/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  SDK
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../account/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Account Server
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Data Manager
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../appmanager/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  App Manager
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="entrecode API Documentation" class="md-nav__button md-logo" aria-label="entrecode API Documentation" data-md-component="logo">
+      
+  <img src="../img/icon.png" alt="logo">
+
+    </a>
+    entrecode API Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href=".." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Basics
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Basics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Errors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    More
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            More
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/entrecode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GitHub
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://entrecode.de" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    SDK
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            SDK
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk/ec.sdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ec.sdk
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk/ec.dm-cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ec.dm-cache
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Legacy SDKs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Legacy SDKs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk/datamanager-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager Java SDK
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk/datamanager-js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager JavaScript SDK
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../account/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Account Server
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Account Server
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Resources
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Account
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Auth
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Client
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/invalid-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Invalid Permissions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/invite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Invites
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Group
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/token/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  
+  <span class="md-ellipsis">
+    Data Manager
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Data Manager
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Resources
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/asset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Asset
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/dm-assetgroup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Asset Group
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/dm-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Client
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/datamanager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/dm-account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager Account
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/dm-role/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager Role
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/dm-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager Template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/tag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tag
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../appmanager/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    App Manager
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            App Manager
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Resources
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    App
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/app-stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    App Stats
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/codesource/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CodeSource
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/datasource/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DataSource
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Platform
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/target/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Target
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/apptypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-manager-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Manager API
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      State Diagram
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#link-relations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Link Relations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#field-data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Field data types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-modelfield-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change model/field definition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Change model/field definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fields
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mandatory-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mandatory fields
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mandatory fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#id-type-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      id (Type: id)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#created-type-datetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      created (Type: datetime)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modified-type-datetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      modified (Type: datetime)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creator-type-account" class="md-nav__link">
+    <span class="md-ellipsis">
+      creator (Type: account)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#allowed-field-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      Allowed field names
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primitive-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primitive Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convenience-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convenience Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linked-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linked Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assets-in-the-generated-api-aka-getbestfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assets in the Generated API (aka. getBestFile)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assets in the Generated API (aka. getBestFile)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-asset-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Asset Domain
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Asset Domain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Management
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permission-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permission Policies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customization-of-user-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customization of User Authentication
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-emails" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom eMails
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom eMails">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#template-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Sets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-auth-html-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Auth HTML pages
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-auth-subjects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Auth subjects
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-auth-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Auth from
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openid-connect-oidc-third-party-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenID Connect (OIDC) Third-Party login
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenID Connect (OIDC) Third-Party login">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequesites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequesites
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oidc-third-party-login-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      OIDC third party login flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helper-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      helper functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hooks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-hook" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web Hook
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Web Hook">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#web-hook-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web hook configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mail-hook" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mail Hook
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudfront-invalidation-hook" class="md-nav__link">
+    <span class="md-ellipsis">
+      CloudFront Invalidation Hook
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conditional-event-hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conditional Event Hooks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synchronization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sync-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sync Types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-request-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Request sequence
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supplying-a-json-web-token-jwt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supplying a JSON Web Token (JWT)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapping-entry-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mapping entry fields
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sync-object-json-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sync object JSON Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      JSON Transformations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="JSON Transformations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Static values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json-mask" class="md-nav__link">
+    <span class="md-ellipsis">
+      JSON-Mask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jsonpath" class="md-nav__link">
+    <span class="md-ellipsis">
+      JSONPath
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modifier-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modifier functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modifier functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parseint" class="md-nav__link">
+    <span class="md-ellipsis">
+      parseInt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parsefloat" class="md-nav__link">
+    <span class="md-ellipsis">
+      parseFloat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stringify" class="md-nav__link">
+    <span class="md-ellipsis">
+      stringify
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace" class="md-nav__link">
+    <span class="md-ellipsis">
+      replace
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uppercase" class="md-nav__link">
+    <span class="md-ellipsis">
+      uppercase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lowercase" class="md-nav__link">
+    <span class="md-ellipsis">
+      lowercase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#date" class="md-nav__link">
+    <span class="md-ellipsis">
+      date
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#date_add-and-date_subtract" class="md-nav__link">
+    <span class="md-ellipsis">
+      date_add and date_subtract
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple modifiers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concatenation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concatenation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#string-concatenation" class="md-nav__link">
+    <span class="md-ellipsis">
+      String concatenation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="the-data-manager">The Data Manager<a class="headerlink" href="#the-data-manager" title="Permanent link">&para;</a></h1>
+<p>The Data Manager is a technical tool for dynamic generation of Hypermedia REST APIs – complete with documentation, JSON schemas, and goodies like static file management and external Hooks. </p>
+<h2 id="workflow">Workflow<a class="headerlink" href="#workflow" title="Permanent link">&para;</a></h2>
+<p>A <a href="resources/datamanager/">Data Manager</a> is a single, isolated entity. All other resources are dependent on a single Data Manager – they cannot be shared between Data Managers. </p>
+<p>Resource Media Types (“Templates”) are called <a href="resources/model/">Models</a>. They define a structure for resources, consisting of different <a href="#field-data-types">fields</a> – similar to Database tables. </p>
+<p><a href="resources/asset/">Assets</a> are wrappers for static files. They can be organized using <a href="resources/tag/">Tags</a> and can contain multiple variants of a file (e.g. multiple image sizes or different localizations). </p>
+<p>After defining models for a Data Manager, a Hypermedia REST API is automatically generated and deployed to the cloud – including <a href="#user-management">user management</a>.</p>
+<p>External APIs can be connected using <a href="#hooks">Hooks</a>.</p>
+<h2 id="data-manager-api">Data Manager API<a class="headerlink" href="#data-manager-api" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Entry Point:</strong> <a href="https://datamanager.entrecode.de/">https://datamanager.entrecode.de/</a></li>
+<li><strong><a href="http://martinfowler.com/articles/richardsonMaturityModel.html">Richardson</a> Maturity Level:</strong> 3 (full Hypermedia)</li>
+<li><strong>Media Type:</strong> <code>application/hal+json</code> (<a href="https://tools.ietf.org/html/draft-kelly-json-hal-06">HAL</a>)</li>
+<li><strong>Root Resource:</strong> <code>ec:datamanagers</code> <a href="resources/datamanager/#list">(Data Manager List)</a></li>
+<li><strong>Authentication:</strong> Bearer Token aquired using the <a href="account_server/#authentication">Account Server API</a></li>
+</ul>
+<p>Make sure to read <a href="../">entrecode API Basics</a> first.</p>
+<h2 id="state-diagram">State Diagram<a class="headerlink" href="#state-diagram" title="Permanent link">&para;</a></h2>
+<p><a href="../img/statediagram-dm.svg"><img alt="State Diagram" src="../img/statediagram-dm.svg" /></a></p>
+<h2 id="link-relations">Link Relations<a class="headerlink" href="#link-relations" title="Permanent link">&para;</a></h2>
+<p>Link Relation names are those registered with the <a href="http://www.iana.org/assignments/link-relations/link-relations.xhtml">IANA</a>. Additionally, custom link relations are used which are built in the form <code>https://doc.entrecode.de/en/latest/App_Manager/#link-relations/&lt;relation&gt;</code>. Those relations are also links to their own documentation (on this page). 
+For brevity, <a href="http://www.w3.org/TR/curie/">CURIE Syntax</a> is used which results in relation names of the form <code>ec:&lt;relation&gt;/&lt;optional_subrelation&gt;</code>. </p>
+<p>Additional to the official link relations defined by <a href="http://www.iana.org/assignments/link-relations/link-relations.xhtml">IANA</a> the Data Manager uses the following:</p>
+<table>
+<thead>
+<tr>
+<th>Link Relation</th>
+<th>Target Resource</th>
+<th> Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ec:api</code>  <a name="relation-api"></a></td>
+<td>Generated API</td>
+<td>Links to the generated API.</td>
+</tr>
+<tr>
+<td><code>ec:dm-asset</code>  <a name="relation-dm-asset"></a></td>
+<td><a href="resources/asset/">Asset</a></td>
+<td>A single Asset</td>
+</tr>
+<tr>
+<td><code>ec:dm-asset/file</code>  <a name="relation-dm-asset/file"></a></td>
+<td>File</td>
+<td>The file of an asset</td>
+</tr>
+<tr>
+<td><code>ec:dm-asset/file-variant</code>  <a name="relation-dm-asset/file-variant"></a></td>
+<td>File</td>
+<td>A file variant of an asset</td>
+</tr>
+<tr>
+<td><code>ec:dm-asset/thumbnail</code>  <a name="relation-dm-asset/thumbnail"></a></td>
+<td>File</td>
+<td>A thumbnail of an asset</td>
+</tr>
+<tr>
+<td><code>ec:dm-asset/duplicates</code>  <a name="relation-dm-asset/duplicates"></a></td>
+<td><a href="resources/asset/#list">Asset List</a></td>
+<td>List of duplicates of the asset</td>
+</tr>
+<tr>
+<td><code>ec:dm-asset/by-id</code>  <a name="relation-dm-asset/by-id"></a></td>
+<td><a href="resources/asset/">Asset</a></td>
+<td>A single Asset by <code>assetID</code></td>
+</tr>
+<tr>
+<td><code>ec:dm-assets</code>  <a name="relation-dm-assets"></a></td>
+<td><a href="resources/asset/#list">Asset List</a></td>
+<td>List of assets</td>
+</tr>
+<tr>
+<td><code>ec:dm-assets/options</code>  <a name="relation-dm-assets/options"></a></td>
+<td><a href="resources/asset/#list">Asset List</a></td>
+<td>List of assets (templated)</td>
+</tr>
+<tr>
+<td><code>ec:dm-assetgroup</code>  <a name="relation-dm-assetgroup"></a></td>
+<td><a href="resources/dm-assetgroup/">Asset Group</a></td>
+<td>A single Asset Group</td>
+</tr>
+<tr>
+<td><code>ec:dm-assetgroups</code>  <a name="relation-dm-assetgroups"></a></td>
+<td><a href="resources/dm-assetgroup/#list">Asset Group</a></td>
+<td>List of Asset Groups</td>
+</tr>
+<tr>
+<td><code>ec:asset</code>  <a name="relation-asset"></a></td>
+<td><a href="resources/asset/">Asset</a></td>
+<td><em>(Legacy)</em> A single Asset</td>
+</tr>
+<tr>
+<td><code>ec:asset/best-file</code>  <a name="relation-asset/best-file"></a></td>
+<td>File Subresource</td>
+<td><em>(Legacy)</em> The content-negotiated “best suited” file</td>
+</tr>
+<tr>
+<td><code>ec:asset/by-id</code>  <a name="relation-asset/by-id"></a></td>
+<td><a href="resources/asset/">Asset</a></td>
+<td><em>(Legacy)</em> A single Asset by <code>assetID</code></td>
+</tr>
+<tr>
+<td><code>ec:asset/deleted</code>  <a name="relation-asset/deleted"></a></td>
+<td><a href="resources/asset/">Deleted Asset</a></td>
+<td><em>(Legacy)</em> An Asset in the trash</td>
+</tr>
+<tr>
+<td><code>ec:asset/deleted/by-id</code>  <a name="relation-asset/deleted/by-id"></a></td>
+<td><a href="resources/asset/">Deleted Asset</a></td>
+<td><em>(Legacy)</em> An Asset in the trash by <code>assetID</code></td>
+</tr>
+<tr>
+<td><code>ec:asset/deleted/best-file</code>  <a name="relation-asset/best-file"></a></td>
+<td>File Subresource</td>
+<td><em>(Legacy)</em> The content-negotiated “best suited” file for a deleted asset</td>
+</tr>
+<tr>
+<td><code>ec:asset/file</code>  <a name="relation-asset/file"></a></td>
+<td>File Subresource</td>
+<td><em>(Legacy)</em> A file of an Asset</td>
+</tr>
+<tr>
+<td><code>ec:assets</code>  <a name="relation-assets"></a></td>
+<td><a href="resources/asset/#list">Asset List</a></td>
+<td><em>(Legacy)</em> List of Assets</td>
+</tr>
+<tr>
+<td><code>ec:assets/deleted</code>  <a name="relation-assets/deleted"></a></td>
+<td><a href="resources/asset/#list">Deleted Assets List</a></td>
+<td><em>(Legacy)</em> Assets in the trash</td>
+</tr>
+<tr>
+<td><code>ec:assets/deleted/options</code>  <a name="relation-assets/deleted/options"></a></td>
+<td><a href="resources/asset/#list">Deleted Assets List</a></td>
+<td><em>(Legacy)</em> Assets in the trash, filtered</td>
+</tr>
+<tr>
+<td><code>ec:assets/options</code>  <a name="relation-assets/options"></a></td>
+<td><a href="resources/asset/#list">Asset List</a></td>
+<td><em>(Legacy)</em> List of Assets, filtered</td>
+</tr>
+<tr>
+<td><code>ec:assets/download</code> <a name="relation-assets/download"></a></td>
+<td><a href="resources/asset/#list">Asset List</a></td>
+<td><em>(Legacy)</em> Downloads all Assets of the list in a single Zip-File</td>
+</tr>
+<tr>
+<td><code>ec:assets/with-tag</code>  <a name="relation-assets/with-tag"></a></td>
+<td><a href="resources/asset/#list">Asset List</a></td>
+<td><em>(Legacy)</em> List of Assets with a specific <code>tag</code></td>
+</tr>
+<tr>
+<td><code>ec:datamanager</code>  <a name="relation-datamanager"></a></td>
+<td><a href="resources/datamanager/">Data Manager</a></td>
+<td>A single Data Manager</td>
+</tr>
+<tr>
+<td><code>ec:datamanager/by-id</code>  <a name="relation-datamanager/by-id"></a></td>
+<td><a href="resources/datamanager/">Data Manager</a></td>
+<td>A single Data Manager by <code>dataManagerID</code></td>
+</tr>
+<tr>
+<td><code>ec:datamanager/export</code>  <a name="relation-datamanager/export"></a></td>
+<td><a href="resources/datamanager/">Data Manager</a></td>
+<td>Postman Collection export of a single Data Manager</td>
+</tr>
+<tr>
+<td><code>ec:datamanager/update-from-template</code>  <a name="relation-datamanager/update-from-template"></a></td>
+<td><a href="resources/datamanager/">Data Manager</a></td>
+<td>(only PUT) Try to update Data Manager to template</td>
+</tr>
+<tr>
+<td><code>ec:datamanagers</code>  <a name="relation-datamanagers"></a></td>
+<td><a href="resources/datamanager/#list">Data Managers</a></td>
+<td>List of Data Managers</td>
+</tr>
+<tr>
+<td><code>ec:datamanagers/options</code>  <a name="relation-datamanagers/options"></a></td>
+<td><a href="resources/datamanager/#list">Data Managers</a></td>
+<td>List of Data Managers, filtered</td>
+</tr>
+<tr>
+<td><code>ec:datamanagers/new-from-template</code> <a name="relation-datamanagers/new-from-template"></a></td>
+<td><a href="resources/datamanager/#list">Data Managers</a></td>
+<td>(only POST) Create a new Data Manager from Template</td>
+</tr>
+<tr>
+<td><code>ec:dm-account</code>  <a name="relation-dm-account"></a></td>
+<td><a href="resources/dm-account/">Data Manager Account</a></td>
+<td>A single Data Manager Account</td>
+</tr>
+<tr>
+<td><code>ec:dm-account/by-id</code>  <a name="relation-dm-account/by-id"></a></td>
+<td><a href="resources/dm-account/">Data Manager Account</a></td>
+<td>A single Data Manager Account by <code>accountID</code></td>
+</tr>
+<tr>
+<td><code>ec:dm-accounts</code>  <a name="relation-dm-accounts"></a></td>
+<td><a href="resources/dm-account/#list">Data Manager Accounts</a></td>
+<td>List of Data Manager Accounts</td>
+</tr>
+<tr>
+<td><code>ec:dm-accounts/options</code>  <a name="relation-dm-accounts/options"></a></td>
+<td><a href="resources/dm-account/#list">Data Manager Accounts</a></td>
+<td>List of Data Manager Accounts, filtered</td>
+</tr>
+<tr>
+<td><code>ec:dm-client</code>  <a name="relation-dm-client"></a></td>
+<td><a href="resources/dm-client/">Data Manager Client</a></td>
+<td>A single Data Manager Client</td>
+</tr>
+<tr>
+<td><code>ec:dm-client/by-id</code>  <a name="relation-dm-client/by-id"></a></td>
+<td><a href="resources/dm-client/">Data Manager Client</a></td>
+<td>A single Data Manager Client by <code>clientID</code></td>
+</tr>
+<tr>
+<td><code>ec:dm-clients</code>  <a name="relation-dm-clients"></a></td>
+<td><a href="resources/dm-client/#list">Data Manager Clients</a></td>
+<td>List of Data Manager Clients</td>
+</tr>
+<tr>
+<td><code>ec:dm-clients/options</code>  <a name="relation-dm-clients/options"></a></td>
+<td><a href="resources/dm-client/#list">Data Manager Clients</a></td>
+<td>List of Data Manager Clients, filtered</td>
+</tr>
+<tr>
+<td><code>ec:dm-role</code>  <a name="relation-dm-role"></a></td>
+<td><a href="resources/dm-role/">Data Manager Role</a></td>
+<td>A single Data Manager Role</td>
+</tr>
+<tr>
+<td><code>ec:dm-role/by-id</code>  <a name="relation-dm-role/by-id"></a></td>
+<td><a href="resources/dm-role/">Data Manager Role</a></td>
+<td>A single Data Manager Role by <code>roleID</code></td>
+</tr>
+<tr>
+<td><code>ec:dm-roles</code>  <a name="relation-dm-roles"></a></td>
+<td><a href="resources/dm-role/#list">Data Manager Roles</a></td>
+<td>List of Data Manager Roles</td>
+</tr>
+<tr>
+<td><code>ec:dm-roles/options</code>  <a name="relation-dm-roles/options"></a></td>
+<td><a href="resources/dm-role/#list">Data Manager Roles</a></td>
+<td>List of Data Manager Roles, filtered</td>
+</tr>
+<tr>
+<td><code>ec:dm-template</code>  <a name="relation-dm-template"></a></td>
+<td><a href="resources/dm-template/">Data Manager Template</a></td>
+<td>A single Data Manager template</td>
+</tr>
+<tr>
+<td><code>ec:dm-template/by-id</code>  <a name="relation-dm-template/by-id"></a></td>
+<td><a href="resources/dm-template/">Data Manager Template</a></td>
+<td>A single Data Manager template by <code>templateID</code></td>
+</tr>
+<tr>
+<td><code>ec:dm-templates</code>  <a name="relation-dm-templates"></a></td>
+<td><a href="resources/dm-template/#list">Data Manager Templates</a></td>
+<td>List of Data Manager templates</td>
+</tr>
+<tr>
+<td><code>ec:dm-templates/options</code>  <a name="relation-dm-templates/options"></a></td>
+<td><a href="resources/dm-template/#list">Data Manager Templates</a></td>
+<td>List of Data Manager templates, filtered</td>
+</tr>
+<tr>
+<td><code>ec:model</code>  <a name="relation-model"></a></td>
+<td><a href="resources/model/">Model</a></td>
+<td>A single Model</td>
+</tr>
+<tr>
+<td><code>ec:model/purge</code>  <a name="relation-model/purge"></a></td>
+<td><a href="resources/model/">Model</a></td>
+<td>Deletes all entries of the Model</td>
+</tr>
+<tr>
+<td><code>ec:model/by-id</code>  <a name="relation-model/by-id"></a></td>
+<td><a href="resources/model/">Model</a></td>
+<td>A single Model by <code>modelID</code></td>
+</tr>
+<tr>
+<td><code>ec:model/purge/by-id</code>  <a name="relation-model/purge"></a></td>
+<td><a href="resources/model/">Model</a></td>
+<td>Deletes all entries of the single Model by <code>modelID</code></td>
+</tr>
+<tr>
+<td><code>ec:models</code>  <a name="relation-models"></a></td>
+<td><a href="resources/model/#list">Model List</a></td>
+<td>List of Models</td>
+</tr>
+<tr>
+<td><code>ec:models/options</code>  <a name="relation-models/options"></a></td>
+<td><a href="resources/model/#list">Model List</a></td>
+<td>List of Models, filtered</td>
+</tr>
+<tr>
+<td><code>ec:tag</code>  <a name="relation-tag"></a></td>
+<td><a href="resources/tag/">Tag</a></td>
+<td>A single Asset Tag </td>
+</tr>
+<tr>
+<td><code>ec:tags</code>  <a name="relation-tags"></a></td>
+<td><a href="resources/tag/#list">Tag List</a></td>
+<td>List of Asset Tags</td>
+</tr>
+<tr>
+<td><code>ec:tags/options</code>  <a name="relation-tags/options"></a></td>
+<td><a href="resources/tag/#list">Tag List</a></td>
+<td>List of Asset Tags, filtered</td>
+</tr>
+</tbody>
+</table>
+<h2 id="field-data-types">Field data types<a class="headerlink" href="#field-data-types" title="Permanent link">&para;</a></h2>
+<p>A field definition consists of the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Examples</th>
+<th>Allowed change with entries</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>Identifier of the field</td>
+<td><code>description</code>, <code>recipeIngredients</code></td>
+<td>This results in the removal of the old field and creates a new field with the given title (Only allowed if required is <code>false</code>).</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Additional information about the purpose of this field for documentation.</td>
+<td><code>Lists ingredients of the recipe.</code></td>
+<td>Every change.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>The field type, a value as specified below</td>
+<td><code>text</code>, <code>boolean</code>, <code>url</code>, <code>asset</code></td>
+<td>only formattedText &lt;&gt; text</td>
+</tr>
+<tr>
+<td>readOnly</td>
+<td>Specifies if the field can be written with updates (or only at creation)</td>
+<td><code>true</code>, <code>false</code> </td>
+<td>Every change.</td>
+</tr>
+<tr>
+<td>required</td>
+<td>Specifies if the field always needs a value or can also be null</td>
+<td><code>true</code>, <code>false</code></td>
+<td>Only change to <code>false</code>. </td>
+</tr>
+<tr>
+<td>unique</td>
+<td>Specifies if the value needs to be unique</td>
+<td><code>true</code>, <code>false</code></td>
+<td>Only change to <code>false</code>.</td>
+</tr>
+<tr>
+<td>localizable</td>
+<td>Specifies if the field is localizable</td>
+<td><code>true</code>, <code>false</code></td>
+<td>Every change. Existing entries will have localized/unlocalized values.</td>
+</tr>
+<tr>
+<td>mutable</td>
+<td>Specifies if the field is mutable by the Data manager user, or provided by the system. </td>
+<td><code>true</code>, <code>false</code></td>
+<td>None, since this value is set by the system.</td>
+</tr>
+<tr>
+<td>validation</td>
+<td>Validation of field values. Can be a Regular Expression (<code>text</code> type), a JSON Schema (<code>object</code> type), a model or asset type, or an object with optional <code>min</code> and  <code>max</code> values (<code>number</code> and <code>decimal</code> types), depending on <code>type</code> (specified below)</td>
+<td><code>^\d{3}\w+$</code>, <code>{ "$ref": "#some-schema" }</code>, <code>{ "min": 0, "max": 100 }</code></td>
+<td>Only removed.</td>
+</tr>
+<tr>
+<td>default</td>
+<td>The default value, which is set if the field is required but got no value.</td>
+<td><code>null</code>, <code>false</code>, <code>'not set'</code></td>
+<td>Every change.</td>
+</tr>
+</tbody>
+</table>
+<p>If a model has no entries all properties can be changed if the field itself is marked <code>mutable</code>. But only some properties can be changed once a model has entries, as listed in the table above.</p>
+<p>Note that the Data Manager Field data type is published in the generated API as part of the generated JSON schema: the <code>title</code> property, which has only descriptive semantics, holds the type (useful for generating forms).</p>
+<h2 id="change-modelfield-definition">Change model/field definition<a class="headerlink" href="#change-modelfield-definition" title="Permanent link">&para;</a></h2>
+<p>If a model has no entries <strong>all</strong> properties and fields can be changed if the field itself is marked <code>mutable</code>. But only some properties and fields can be changed once a model has entries.</p>
+<h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
+<p>In the following table is specified if and how a property can be changed once it has entries:</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>no change</td>
+</tr>
+<tr>
+<td>description</td>
+<td>always</td>
+</tr>
+<tr>
+<td>titleField</td>
+<td>always</td>
+</tr>
+<tr>
+<td>policies</td>
+<td>always</td>
+</tr>
+<tr>
+<td>fields</td>
+<td>see table below</td>
+</tr>
+<tr>
+<td>locales</td>
+<td>always</td>
+</tr>
+</tbody>
+</table>
+<h4 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">&para;</a></h4>
+<p>In the following table is specified if and how a field can be changed once it has entries:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>text</th>
+<th>formattedText</th>
+<th>decimal</th>
+<th>number</th>
+<th>boolean</th>
+<th>datetime</th>
+<th>location</th>
+<th>email</th>
+<th>url</th>
+<th>phone</th>
+<th>json</th>
+<th>entry</th>
+<th>entries</th>
+<th>asset</th>
+<th>assets</th>
+<th>account</th>
+<th>role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text</td>
+<td></td>
+<td>x</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>formattedText</td>
+<td>x</td>
+<td></td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>decimal</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+<td>o</td>
+<td>*</td>
+<td>o</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>number</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+<td>*</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>x</td>
+<td>x</td>
+<td>*</td>
+<td>*</td>
+<td></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>x</td>
+<td>x</td>
+<td>o</td>
+<td>o</td>
+<td>-</td>
+<td></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>location</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>email</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>url</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>json</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>*</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td>-</td>
+<td>*</td>
+<td>-</td>
+<td>*</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>entry</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>entries</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>o</td>
+<td></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>asset</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>assets</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>o</td>
+<td></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>account</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr>
+<td>role</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Icon Description:</strong> x = OK, o = with data loss, * = with migration, - = not possible, rows are source fields, columns are target fields</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="mandatory-fields">Mandatory fields<a class="headerlink" href="#mandatory-fields" title="Permanent link">&para;</a></h2>
+<p>Those fields are mandatory and included in all models by default. They cannot be deleted or otherwise modified (mutable = <code>false</code>).</p>
+<h3 id="id-type-id">id (Type: <code>id</code>)<a class="headerlink" href="#id-type-id" title="Permanent link">&para;</a></h3>
+<p>The <code>id</code> field is a unique identification for an entry and an own, non-reusable type.</p>
+<h3 id="created-type-datetime">created (Type: <code>datetime</code>)<a class="headerlink" href="#created-type-datetime" title="Permanent link">&para;</a></h3>
+<p>The timestamp of the creation of an entry. All date and time values are UTC in <a href="https://tools.ietf.org/html/rfc3339">RFC3339</a> format.</p>
+<h3 id="modified-type-datetime">modified (Type: <code>datetime</code>)<a class="headerlink" href="#modified-type-datetime" title="Permanent link">&para;</a></h3>
+<p>The timestamp of the last modification of an entry. All date and time values are UTC in <a href="https://tools.ietf.org/html/rfc3339">RFC3339</a> format.</p>
+<h3 id="creator-type-account">creator (Type: <code>account</code>)<a class="headerlink" href="#creator-type-account" title="Permanent link">&para;</a></h3>
+<p>The user account that created this entry. If the entry was created by an ec.user or without authentication, the value is <code>null</code></p>
+<h2 id="allowed-field-names">Allowed field names<a class="headerlink" href="#allowed-field-names" title="Permanent link">&para;</a></h2>
+<p>A field title may consist of up to 256 characters, but is limited to lowercase- and uppercase characters, digits, _ and -.
+Field titles <em>should</em> only use lowercase characters and be singular (e.g. <code>article</code> instead of <code>articles</code>).
+The following field names are reserved, since they are used internally by the system.</p>
+<ul>
+<li>id</li>
+<li>created</li>
+<li>modified</li>
+<li>creator</li>
+<li>page</li>
+<li>size</li>
+<li>sort</li>
+<li>private</li>
+<li>ending with "from"</li>
+<li>ending with "to"</li>
+<li>ending with "~"</li>
+<li>starting with "_"</li>
+</ul>
+<h2 id="types">Types<a class="headerlink" href="#types" title="Permanent link">&para;</a></h2>
+<h3 id="primitive-types">Primitive Types<a class="headerlink" href="#primitive-types" title="Permanent link">&para;</a></h3>
+<p>These types are simple data types.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Entry<br/>Structure</th>
+<th>Validation</th>
+<th>Sort-<br/>able</th>
+<th>Filterable</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>A simple string value of any length. For common formats, better use <a href="#convenience-types">Convenience Types</a>.</td>
+<td>String</td>
+<td>Regular Expression</td>
+<td>yes</td>
+<td>exact, search, multiple</td>
+<td><code>"foo"</code></td>
+</tr>
+<tr>
+<td><code>formattedText</code></td>
+<td>Same as <code>text</code> type, but for formatted text.</td>
+<td>String</td>
+<td>Regular Expression</td>
+<td>yes</td>
+<td>exact, search, multiple</td>
+<td><code>"foo"</code></td>
+</tr>
+<tr>
+<td><code>number</code></td>
+<td>A signed integer number. Keep integer limits in mind.</td>
+<td>Number</td>
+<td>Object with <code>min</code> and/or <code>max</code> values</td>
+<td>yes</td>
+<td>exact, range, multiple</td>
+<td><code>7</code></td>
+</tr>
+<tr>
+<td><code>decimal</code></td>
+<td>A floating point number. Keep precision limits in mind.</td>
+<td>Number</td>
+<td>Object with <code>min</code> and/or <code>max</code> values</td>
+<td>yes</td>
+<td>exact, range, multiple</td>
+<td><code>4.2</code></td>
+</tr>
+<tr>
+<td><code>boolean</code></td>
+<td>A simple true/false flag.</td>
+<td>Boolean</td>
+<td>—</td>
+<td>no</td>
+<td>exact</td>
+<td><code>true</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="convenience-types">Convenience Types<a class="headerlink" href="#convenience-types" title="Permanent link">&para;</a></h3>
+<p>These types are more complex types with a specific domain that abstract from primitive types.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Entry<br/>Structure</th>
+<th>Validation</th>
+<th>Sort-<br/>able</th>
+<th>Filterable</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>Unique identification for an entry. This is an own, non-resuable type.</td>
+<td>String</td>
+<td>—</td>
+<td>no</td>
+<td>exact, multiple</td>
+<td><code>"j4kd68fz"</code></td>
+</tr>
+<tr>
+<td><code>datetime</code></td>
+<td>A date and/or time data type in <a href="https://tools.ietf.org/html/rfc3339">RFC3339</a> format (always including Time Zone).</td>
+<td>Date</td>
+<td>—</td>
+<td>yes</td>
+<td>exact, range, multiple</td>
+<td><code>"2015-01-14T13:33:43.168Z"</code></td>
+</tr>
+<tr>
+<td><code>location</code></td>
+<td>A latitude/longitude definition of a location. Uses the JSON schema <a href="http://json-schema.org/geo">http://json-schema.org/geo</a></td>
+<td>JSON Object with keys <code>latitude</code> and <code>longitude</code></td>
+<td>—</td>
+<td>no</td>
+<td>exact, range <br/>(with values <code>lat,long</code>)</td>
+<td><code>{latitude: 48.774702,</code><br/><code>longitude: 9.1827263}</code></td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>A valid eMail address. Internally, <a href="https://github.com/chriso/validator.js">validator.js</a> is used.</td>
+<td>String</td>
+<td>—</td>
+<td>yes</td>
+<td>exact, search, multiple</td>
+<td><code>"info@domain.com"</code></td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>A valid URL. Internally, <a href="https://github.com/chriso/validator.js">validator.js</a> is used.</td>
+<td>String</td>
+<td>—</td>
+<td>yes</td>
+<td>exact, search, multiple</td>
+<td><code>"http://entrecode.de"</code></td>
+</tr>
+<tr>
+<td><code>phone</code></td>
+<td>A valid Phone number according to <a href="http://www.itu.int/rec/T-REC-E.164/en">E.164</a>. Will automatically formatted in international format according to the default locale of the current Data Manager with <a href="https://github.com/googlei18n/libphonenumber">libphonenumber</a></td>
+<td>String</td>
+<td>—</td>
+<td>yes</td>
+<td>exact, search, multiple</td>
+<td><code>"+49711832468234"</code></td>
+</tr>
+<tr>
+<td><code>json</code></td>
+<td>A generic JSON object.</td>
+<td>JSON Object or Array</td>
+<td>A valid <a href="https://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Schema</a></td>
+<td>no</td>
+<td>—</td>
+<td><code>{key: "value"}</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="linked-types">Linked Types<a class="headerlink" href="#linked-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Entry<br/>Structure</th>
+<th>Validation</th>
+<th>Sort-<br/>able</th>
+<th>Filterable</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entry</code></td>
+<td>Link to a single entry that is related to this one.</td>
+<td>String (<code>entry.id</code>)</td>
+<td>A model to enforce a specific entry type</td>
+<td>—</td>
+<td>exact, multiple</td>
+<td><code>"49a8f3b4"</code></td>
+</tr>
+<tr>
+<td><code>entries</code></td>
+<td>Link to entries that are related to this one.</td>
+<td>Array<br/>(of <code>entry.id</code> Strings)</td>
+<td>A model to enforce a specific entry type</td>
+<td>—</td>
+<td>search<br/>(single id that is included), multiple</td>
+<td><code>["8fa398d2","49a8f3b4"]</code></td>
+</tr>
+<tr>
+<td><code>asset</code></td>
+<td>Link to a single asset that is related to this entry.</td>
+<td>String (<code>asset.assetID</code>)</td>
+<td>An asset type to enforce a specific type</td>
+<td>—</td>
+<td>exact, multiple</td>
+<td><code>"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"</code></td>
+</tr>
+<tr>
+<td><code>assets</code></td>
+<td>Link to assets that are related to this one.</td>
+<td>Array<br/>(of <code>asset.assetID</code> Strings)</td>
+<td>An asset type to enforce a specific type</td>
+<td>—</td>
+<td>search<br/>(single id that is included), multiple</td>
+<td><code>["371393a6-ab7f-4591-8d5d-54261a52d28b",</code><br/><code>"a8c44bd8-d225-433b-94e4-20fd38ea2d8f"]</code></td>
+</tr>
+<tr>
+<td><code>account</code></td>
+<td>Link to an account.</td>
+<td>UUID (v4)</td>
+<td>–</td>
+<td>—</td>
+<td>exact, multiple</td>
+<td><code>"371393a6-ab7f-4591-8d5d-54261a52d28b"</code></td>
+</tr>
+<tr>
+<td><code>role</code></td>
+<td>Link to a role.</td>
+<td>UUID (v4)</td>
+<td>String (role label)</td>
+<td>—</td>
+<td>exact, multiple</td>
+<td><code>"a118f6a0-0d74-463d-b1d7-afcf3eb6da3a"</code></td>
+</tr>
+</tbody>
+</table>
+<p>For every <code>asset</code> and <code>assets</code> type a part of the linked resource is embedded into the entry resource. This will allow users to get file urls for linked assets directly without making an extra request to the api. For example this can be used in list view to show thumbnails of logos directly.</p>
+<h2 id="assets-in-the-generated-api-aka-getbestfile">Assets in the Generated API (aka. getBestFile)<a class="headerlink" href="#assets-in-the-generated-api-aka-getbestfile" title="Permanent link">&para;</a></h2>
+<p>Assets have a file-independent URL (consisting of the asset ID). Calling it returns the best fitting file, depending on the requested Locale (Accept-Language header).
+Image resources also support requesting a specific size: The query string parameter <code>size</code> can be used to specify the size in pixels the largest edge should have at least. Note that if the image is smaller than that, the largest possible image is returned (but possibly smaller than <code>size</code>). To request thumbnail sizes (thumbnails are square-cropped images of size 50, 100, 200, 400px), send the parameter <code>thumb</code> with the request. If you do not want the file directly you cann add <code>/url</code> to the request and you will get a JSON with a field <code>url</code> containing the url of the file you would have received.</p>
+<p>Examples:</p>
+<pre><code>https:/datamanager.entrecode.de/files/:assetID/:url?{?size,thumb}
+</code></pre>
+<p>general description of the best file route.</p>
+<pre><code>https:/datamanager.entrecode.de/files/853a931b-2091-4f92-acad-cd0c0e6fedbc?size=100&amp;thumb
+</code></pre>
+<p>will get the thumbnail <code>file</code> for the asset with <code>size</code> 100.</p>
+<pre><code>https:/datamanager.entrecode.de/files/853a931b-2091-4f92-acad-cd0c0e6fedbc/url?size=100
+</code></pre>
+<p>will get the <code>url</code> for the asset with <code>size</code> 100.</p>
+<p>Additionally there is a API for public assets similar to the <code>ec:asset[s]</code>. Please refer to the public documentation found in any data manager in editor.</p>
+<h4 id="custom-asset-domain">Custom Asset Domain<a class="headerlink" href="#custom-asset-domain" title="Permanent link">&para;</a></h4>
+<p>It is possible to use a custom asset domain. In order to get this working simply edit the <code>config</code> of a Data Manager to include the property <code>customAssetDomain</code>. Set the value to the custom domain. After configuring the Data Manager you'll need to set up your Domain to proxy the requests to the original url of the file (original links will always work).</p>
+<h6 id="example">Example:<a class="headerlink" href="#example" title="Permanent link">&para;</a></h6>
+<pre><code>Original URL:
+https://cdn2.entrecode.de/beefbeef/QwB6QDJ5V9jrLkEd6OdBvXqh.jpg
+
+Custom Domain:
+https://www.example.com/static/QwB6QDJ5V9jrLkEd6OdBvXqh.jpg
+</code></pre>
+<p>Your proxy should redirect all <code>https://www.example.com/beefbeef/(.*)</code> requests to <code>https://cdn2.entrecode.de/beefbeef/$1</code>. We do this by configuring a AWS CloudFront to serve <code>/beefbeef/*</code> requests from the same origin as our <code>cnd2.entrecode.de</code> does.</p>
+<h2 id="user-management">User Management<a class="headerlink" href="#user-management" title="Permanent link">&para;</a></h2>
+<p>While Data Manager owners (users with an entrecode Account) can generally do anything, the generated APIs have their own User Management. It knows three types of users: <em>Public</em>, which is everybody without any authentication (Web Users). <em>Anonymous</em> which are users that are created by software, but that never actively registered – useful to have users store their own data in an app without requiring an registration. And finally <em>Registered</em> which are users that have actively signed up, providing an email address and at least one login method.</p>
+<p>Anonymous users have one access token that is valid indefinitely or until they sign up and become a registered user. Login and Signup can be done using a registered <a href="resources/dm-client/">Data Manager Client</a>.</p>
+<p>To get an anonymous user, POST to the <code>&lt;dataManagerShortID&gt;:_auth/anonymous</code> relation. Optional query parameter can be set to adjust the token validity time. It returns an object containing the long-lived <code>jwt</code>, as well as an <code>accountID</code> and information about the token validity time.</p>
+<p>Which user levels are available can be configured for a data manager. </p>
+<p>While Anonymous and Registered users automatically get added to default user roles, one can also create additional roles and assign users to those roles.</p>
+<p>Roles can be used in Permission Policies.</p>
+<h2 id="permission-policies">Permission Policies<a class="headerlink" href="#permission-policies" title="Permanent link">&para;</a></h2>
+<p>There are four possible methods to interact with entries of a model: create (POST), read (GET), update (PUT) and delete (DELETE). By default, none of those methods is permitted (the data manager user can still do everything, however).</p>
+<p>Interaction can be permitted using Policies that are specified on the model level. Every model can have any number of policies.</p>
+<p>A <strong>Policy</strong> consists of the following properties:</p>
+<ul>
+<li><strong>Which Method</strong> does the policy allow? (one of <code>get</code>, <code>put</code>, <code>post</code>, <code>delete</code>) </li>
+<li>does it consider the whole entry or is it <strong>restricted to some fields?</strong> E.g. only allow reading of two specific entry fields.</li>
+<li><strong>Who</strong> is getting the permission? Can be either <code>public</code>, or one or multiple <code>roles</code></li>
+<li>Additional <strong>Conditions</strong> the entry has to fulfill</li>
+</ul>
+<p>Example:</p>
+<pre><code>{
+    "method": "get",
+    "restrictToFields": [ "title", "description"],
+    "public": false,
+    "roles": ["registered"]
+}
+</code></pre>
+<p><em>Only registered users can read entries of this model, and only the <code>title</code> and <code>description</code> property.</em></p>
+<p><strong>Conditions</strong> restrict the policy to a subset of entries that fulfill the conditions. They can be nested and are pretty much logical boolean expressions.</p>
+<p>A <strong>Condition</strong> can either be</p>
+<ul>
+<li>an Array containing three elements: a condition, <code>and</code> or <code>or</code>, and another condition</li>
+</ul>
+<p>or </p>
+<ul>
+<li>an Object with the properties <code>field</code>, <code>operator</code> and either <code>constant</code> or <code>variable</code>.</li>
+</ul>
+<p>The property <code>field</code> must be the field name of a field of the model. May also be a system-generated field like <code>_creator</code>.</p>
+<p>The property <code>operator</code> can be <code>=</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>in</code>, <code>notIn</code>, <code>contains</code>, <code>containsNot</code>, <code>hasRole</code> and <code>hasNotRole</code>.</p>
+<p>The property <code>constant</code> can be a JavaScript literal, like a string, a number or <code>null</code>. When used with the <code>in</code> operator, it can also be an Array containing literals.</p>
+<p>The property <code>variable</code> can either be <code>accountID</code> or <code>roles</code> for fields of type <code>account</code>, or <code>now</code> for fields of type <code>datetime</code>.</p>
+<p>Some combinations are not valid. E.g. <code>&lt;</code>/<code>&gt;</code> only makes sense on numerical fields. The <code>hasRole</code> operator only works on <code>account</code> type fields and either expects one or more roles as <code>constant</code> or the variable <code>roles</code> (containing all roles the current user has). <code>null notIn [Array]</code> is always false, even if <code>null</code> is in the Array – only Arrays with actual values are considered.
+It is not possible to have conditions on policies for the <code>post</code> method, and it is also not possible to have <code>restrictToFields</code> populated on policies for the <code>delete</code> method.</p>
+<p>Note that when someone has policies for <code>put</code> or <code>post</code>, they probably also should have a <code>get</code> policy. Otherwise created or modified entries will not be returned, instead a HTTP 204 will be returned without a body. And yes, it is possible to model policies that allow editing of a field that cannot be seen.</p>
+<p>Example 1:</p>
+<pre><code>{
+    "method": "put",
+    "restrictToFields": ["editableField"],
+    "public": false,
+    "roles": ["anonymous"],
+    "conditions": [
+        {
+            "field": "_creator",
+            "operator": "=",
+            "variable": "accountID"
+        },
+        "or",
+        {
+            "field": "public",
+            "operator": "="
+            "constant": true
+        }
+    ]
+}
+</code></pre>
+<p><em>Only anonymous users can update the field <code>editableField</code> on entries they created or that have the value <code>true</code> in the field <code>public</code>. Note that the <code>public</code> field has to be created manually, if needed.</em></p>
+<p>Example 2:</p>
+<pre><code>{
+    "method": "post",
+    "restrictToFields": ["data"],
+    "public": false,
+    "roles": ["freeUsers"]
+},
+{
+    "method": "post",
+    "restrictRuleToFields": ["data", "hideAds"],
+    "public": false,
+    "roles": ["paidUsers"]
+}
+</code></pre>
+<p><em>Accounts with the role <code>freeUsers</code> can only create entries with the <code>data</code> field, whereas accounts with the role <code>paidUsers</code> can also set <code>hideAds</code>. Unallowed fields get their default value (probably <code>null</code> or <code>false</code>)</em></p>
+<h2 id="customization-of-user-authentication">Customization of User Authentication<a class="headerlink" href="#customization-of-user-authentication" title="Permanent link">&para;</a></h2>
+<p>By default, "Auth" (meaning: Signup, Login, eMail-Change, Password-Reset) is done using ec.passport with dynamically generated, but generic looking templates. This means that the eMails your users receive and the rendered HTML Forms they'll see in the process are labeled with the name of your Data Manager, but have a very generic look. If you're building a Web App, you probably want to style those forms yourself and maybe even want to send mails in a custom format.</p>
+<h2 id="custom-emails">Custom eMails<a class="headerlink" href="#custom-emails" title="Permanent link">&para;</a></h2>
+<p>You are required to register a (sub-)domain for sending custom eMails. You can still use the domain in your own eMail provider, but it is needed to be registered with entrecode in a manual process including adding some DNS entries for validation of domain ownership. If you do that, not only will auth-related mails be sent from your-data-manager-name-noreply@your-domain.com, but you will also able to use that domain for Mail Hooks! Domains are not restricted to a single Data Manager.</p>
+<p>When a domain is registered for your Data Manager, you are eligible to provide mail templates. They are required to support <a href="http://handlebarsjs.com">Handlebars.js</a> as template engine and should include certain variables (e.g. for the links the user can click). To make the templates available for your domain, a manual process at entrecode is necessary. Mail templates may also be delivered in multiple languages. We recommend <a href="http://blog.mailgun.com/transactional-html-email-templates/">Mailgun Transactional Mail Templates</a> as a starting point for your own mail templates. An alternative with an online WYSIWYG-Designer is <a href="https://beefree.io">Bee</a>.</p>
+<p>The domain has to be set in your Data Manager configuration as <code>config.customAuthDomain</code>.</p>
+<table>
+<thead>
+<tr>
+<th>template name</th>
+<th>purpose</th>
+<th>data variables</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>email-verification</td>
+<td>Sent after signup to verify a user's mail address</td>
+<td><code>link</code>, <code>email</code>, <code>title</code> (the Data Manager Title)</td>
+</tr>
+<tr>
+<td>change-email</td>
+<td>Sent to a new mail address after a change for verification</td>
+<td><code>link</code>, <code>email</code>, <code>title</code> (the Data Manager Title)</td>
+</tr>
+<tr>
+<td>change-email-abort</td>
+<td>Sent to the old mail address after a change for resetting it</td>
+<td><code>link</code>, <code>email</code>, <code>newMail</code>, <code>title</code> (the Data Manager Title)</td>
+</tr>
+<tr>
+<td>password-reset</td>
+<td>Sent to the user if a new password is requested</td>
+<td><code>resetLink</code>, <code>abortLink</code>, <code>email</code>, <code>newMail</code>, <code>title</code> (the Data Manager Title)</td>
+</tr>
+</tbody>
+</table>
+<p>All templates receive the variables <code>to</code>, <code>from</code>, <code>subject</code>, <code>template</code> and <code>language</code>, as well as <code>data</code> which has custom properties listed in the table above.</p>
+<h3 id="template-sets">Template Sets<a class="headerlink" href="#template-sets" title="Permanent link">&para;</a></h3>
+<p>Additonally to domain based custom Auth E-Mails, you can use template sets. A template set is always preferred to a domain, and can even be combined. A template set is expected to have an own template folder in ec.mail like a domain. Additionally, a domain folder can be inside a template set folder. 
+When using template sets, you can also use <code>config.users.templatevariables</code> for some customization. </p>
+<h2 id="custom-auth-html-pages">Custom Auth HTML pages<a class="headerlink" href="#custom-auth-html-pages" title="Permanent link">&para;</a></h2>
+<p>When clicking on a link in one of the auth mails, or after requesting an email change, by default a HTML page is rendered.
+You can customize those pages inside your Web App and make the calls to your Data Manager API manually using XHR. For that to work, you have to send your calls to Data Manager with the query string <code>?rest=true</code> appended, which results in JSON responses instead of finished HTML pages.
+Your also need to configure your own endpoints to use in the links sent in the eMails. Add the following to your Data Manager config as <code>config.customAuthLinks</code>:</p>
+<pre><code class="language-js">&quot;customAuthLinks&quot;: {
+  &quot;email-verify&quot;: &quot;https://your-domain/email-verification{?jwt}&quot;,
+  &quot;password-reset-abort&quot;: &quot;https://your-domain/password-reset/abort{?jwt}&quot;,
+  &quot;password-reset&quot;: &quot;https://your-domain/password-reset{?jwt}&quot;,
+  &quot;change-email-abort&quot;: &quot;https://your-domain/change-email/abort{?jwt}&quot;,
+  &quot;change-email-verify&quot;: &quot;https://your-domain/change-email{?jwt}&quot;
+}
+</code></pre>
+<h2 id="custom-auth-subjects">Custom Auth subjects<a class="headerlink" href="#custom-auth-subjects" title="Permanent link">&para;</a></h2>
+<p>If the default subject for auth emails should be overwritten there is the option to add <code>customAuthSubjects</code> and overwrite the ones you want.
+The value of the keys could be either a string or a object with keys <code>default</code>, <code>de</code>, <code>en</code>...</p>
+<p>Add the following to your Data Manager config as <code>config.customAuthSubjects</code>:</p>
+<pre><code class="language-js">&quot;customAuthSubjects&quot;: {
+  &quot;email-verify&quot;: &quot;Bitte bestätigen Sie Ihre eMail-Adresse&quot;,
+  &quot;password-reset&quot;: &quot;Passwortänderung Ihres ${dataManager.title} Accounts&quot;,
+  &quot;change-email-abort&quot;: &quot;E-Mail-Adressänderung beauftragt&quot;,
+  &quot;change-email-verify&quot;: &quot;E-Mail-Adressänderung angefordert, bitte verifizieren&quot;
+}
+</code></pre>
+<h2 id="custom-auth-from">Custom Auth from<a class="headerlink" href="#custom-auth-from" title="Permanent link">&para;</a></h2>
+<p>If the default from for auth emails should be overwritten there is the option to add <code>customAuthFrom</code> and overwrite the default one which is the name of the datamanager.</p>
+<p>Add the following to your Data Manager config as <code>config.customAuthFrom</code>:</p>
+<pre><code class="language-js">&quot;customAuthFrom&quot;: &quot;Sir Send-a-lot&quot;
+</code></pre>
+<p>You are free to define those URLs as you like, but they need to be valid <a href="https://tools.ietf.org/html/rfc6570">Template URIs according to RFC 6570</a> expecting a variable <code>jwt</code>. This token you'll need to make the actual auth requests to your Data Manager API.</p>
+<p>They map like this (all relative to your API root):</p>
+<ul>
+<li><code>email-verify</code>: <code>/_auth/email-verification/{jwt}?rest=true</code></li>
+<li><code>password-reset-abort</code>: <code>/_auth/password-reset/abort/{jwt}?rest=true</code></li>
+<li><code>password-reset</code>: <code>/_auth/password-reset/{jwt}?rest=true</code></li>
+<li><code>change-email-abort</code>: <code>/_auth/email-verification/abort/{jwt}?rest=true</code></li>
+<li><code>change-email-verify</code>: <code>/_auth/email-verification/{jwt}?rest=true</code></li>
+</ul>
+<p>Note: the <code>password-reset</code> route is only for validating the JWT, that it is still valid to set a new password. If you don't customize it, it will render a form to change the password. It is recommended to use the route after the user opened the link in the password reset mail to check if the request is valid. Then render a form requesting a new password. The new password has then to be sent in a POST request to <code>/_auth/password-reset/callback/{jwt}?rest=true</code> as JSON key <code>password</code>.</p>
+<p>To request an email change, POST a JSON with key <code>email</code> to <code>/_auth/change-email?rest=true</code> to receive JSON response instead of a rendered HTML.</p>
+<p>The JSON responses triggered using <code>?rest=true</code> contain an object with all necessary data for rendering an HTML page, or an error. </p>
+<h2 id="openid-connect-oidc-third-party-login">OpenID Connect (OIDC) Third-Party login<a class="headerlink" href="#openid-connect-oidc-third-party-login" title="Permanent link">&para;</a></h2>
+<p>Third party authentication providers can be used via OIDC (Login with Apple, Google, Microsoft, …).</p>
+<h3 id="prerequesites">Prerequesites<a class="headerlink" href="#prerequesites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Frontend client with deployment URL ("UI Client")</li>
+<li>For each desired authentication provider ("Issuer"): clientID and clientSecret with redirect URI of UI Client</li>
+<li>configure a DM client for that:</li>
+</ul>
+<pre><code>{
+  &quot;grantTypes&quot;: [
+    &quot;refresh_token&quot;
+  ],
+  &quot;callbackURL&quot;: &quot;https://this-is-my-cool-app.com/oidc/callback&quot;,
+  &quot;federatedOIDC&quot;: [
+    {
+      &quot;uri&quot;: &quot;https://accounts.google.com/.well-known/openid-configuration&quot;,
+      &quot;scope&quot;: &quot;openid email profile&quot;,
+      &quot;button&quot;: &quot;Login mit Google&quot;,
+      &quot;clientID&quot;: &quot;00000000-mycoolclientidfromgoogle.apps.googleusercontent.com&quot;,
+      &quot;clientSecret&quot;: &quot;supersecretsecretformycoolclient&quot;
+    },
+    {
+      &quot;uri&quot;: &quot;https://account.apple.com/.well-known/openid-configuration&quot;,
+      &quot;button&quot;: &quot;Login mit Apple&quot;,
+      &quot;clientID&quot;: &quot;de.entrecode.cachena.login&quot;,
+      &quot;clientSecret&quot;: &quot;supersecretjwtfromapplewhichdoesexpiresorememberchangingitintime&quot;
+    }
+  ]
+}
+</code></pre>
+<p>(note the difference between DM-Client and Google-/Apple-Client!)</p>
+<h3 id="oidc-third-party-login-flow">OIDC third party login flow<a class="headerlink" href="#oidc-third-party-login-flow" title="Permanent link">&para;</a></h3>
+<ol>
+<li>now you can dynamically check which federated oidc providers are configured, using ec.sdk:</li>
+</ol>
+<pre><code class="language-js">const thirdPartyLogins = await publicAPI.getOIDCConfig('my-dm-client-id');
+</code></pre>
+<p>This will result in:</p>
+<pre><code class="language-json">[
+  {
+    &quot;issuer&quot;: &quot;https://accounts.google.com/.well-known/openid-configuration&quot;,
+    &quot;button&quot;: &quot;Login mit Google&quot;
+  }
+]
+</code></pre>
+<p>Use that to render a "Login with XYZ" button.</p>
+<ol>
+<li>
+<p>generate state and nonce secrets. They are needed to make sure, the third party response is actually from your request and not man-in-the-middled. They should be random strings. 
+It is best practice to use state for, well, state of your app and encode some session information in it. </p>
+</li>
+<li>
+<p>When the user taps the "Login with XYZ" button, you should call this function with the "issuer" of the button:</p>
+</li>
+</ol>
+<pre><code class="language-js">const redirectTo = await publicAPI.getURLForThirdPartyOIDC(clientID: string, issuer: string, state: string, nonce: string);
+</code></pre>
+<p>Redirect the user to the URI coming back. This will bring them to the third party login page, and afterwards back to your DM client's configured callbackURL.</p>
+<ol>
+<li>When your callbackURL is called, look at the query parameters. 
+It contains either an error, or <code>code</code>.
+Send that <code>code</code> using ec.sdk:</li>
+</ol>
+<pre><code class="language-js">const tokenResponse = await publicAPI.tokenExchangeForThirdPartyOIDC(clientID: string, issuer: string, code: string, nonce: string)
+</code></pre>
+<p>(<code>nonce</code> should be the same as in <code>getURLForThirdPartyOIDC</code> and unique for each call).
+This SDK instance is then logged in, so it should be a user-SDK.</p>
+<p>If you get back a tokenResponse, the third party id token is linked to an DM account. 
+You get back:</p>
+<pre><code>{ 
+  access_token,
+  token_type,
+  expires_in,
+  refresh_token,
+  account: {
+    accountID,
+    email,
+    isNewAccount,
+  },
+  profile: {
+    email,
+    name,
+    picture,
+    familyName,
+    givenName,
+  }
+}
+</code></pre>
+<p>Note that you may not get all profile properties, depending on the issuer. 
+Also, they are not stored to the account in any way (DM Accounts have no metadata other than email). So store them in an entry linked to the account or something.</p>
+<h3 id="helper-functions">helper functions<a class="headerlink" href="#helper-functions" title="Permanent link">&para;</a></h3>
+<pre><code class="language-js">await publicAPI.addOIDCIdenitityToAccount(
+    accountID: string,
+    idToken: {
+      iss: string;
+      sub: string;
+      exp: number;
+      iat: number;
+    },
+);
+</code></pre>
+<p>If you have an id token from a third party from some other flow, you can assign it to an existing DM account with this.</p>
+<h2 id="hooks">Hooks<a class="headerlink" href="#hooks" title="Permanent link">&para;</a></h2>
+<p>Hooks can be used to add additional functionality to models. E.g. they enable you to alter values before saving or to pass data on to another server.</p>
+<p>A hook is always enabled on a per-model basis and can be triggered either before or after processing the request. A before-hook is able to transform the request (and e.g. alter values before saving them). An after-hook can be used to for example communicate the creation of an entry to another server. Hooks can be set up for all four standard HTTP methods (GET, PUT, POST, DELETE).</p>
+<p>Hooks are defined in the <code>hooks</code> property of a model. It is always a JSON Array. There can be an arbitrary number of hooks for a model. If two hooks are configured for the same trigger point (e.g. 'before put'), they are triggered in the order they are listed in the <code>hooks</code> array.</p>
+<p>There are different types of hooks that each have their own necessary configuration.
+Hooks are normally asynchronous. This means, the normal Data Manager execution is not influenced by the hook and not delayed. If a hook throws an error (e.g. a remote web server could not be reached), this does not influence the data manager request. However, “before” hooks can optionally be synchronous. This enables transformation of requests.</p>
+<p>Example JSON:</p>
+<pre><code class="language-js">[
+    {
+        &quot;hook&quot;: &quot;after&quot;, // 'before' or 'after'
+        &quot;type&quot;: &quot;web&quot;, // a valid type
+        &quot;methods&quot;: [&quot;post&quot;], // 'get', 'put', 'post' or 'delete'
+        &quot;description&quot;: &quot;my test hook&quot; // optional. Makes the hook identifiable in logs etc.
+        &quot;config&quot;: {
+            // type specific
+        },
+        &quot;hookID&quot;: &quot;a0603b90-ee1e-49ce-8201-aa6e06124e2f&quot; // identifier for simpler sorting of multiple hooks. May change.
+    },
+    {
+    // another hook. If it has the same signature ('after' 'post'), it will be executed after the first one.
+    }
+]
+</code></pre>
+<h2 id="web-hook">Web Hook<a class="headerlink" href="#web-hook" title="Permanent link">&para;</a></h2>
+<p>The web hook sends data to another server via HTTP/HTTPS.</p>
+<p>Multiple targets can be set, so it is possible to notify multiple servers. Each target can be configured with an URI, the HTTP method to use and optional custom header fields.</p>
+<h3 id="web-hook-configuration">Web hook configuration<a class="headerlink" href="#web-hook-configuration" title="Permanent link">&para;</a></h3>
+<p>The available data to use in Web hooks is the following JSON object containing all available information about the request:</p>
+<pre><code class="language-js">{
+    &quot;request&quot;: {
+        &quot;method&quot;: &quot;put&quot;,
+        &quot;uri&quot;: &quot;https://datamanager.entrecode.de/beef1337/mymodel?myfield=filtered&quot;,
+        &quot;body&quot;: {
+            &quot;myfield&quot;: &quot;newValue&quot;
+        },
+        &quot;headers&quot;: {
+            &quot;my-custom-header&quot;: &quot;my custom header value&quot;
+        }
+    },
+    &quot;response&quot;: { // the response property is only available if it is an 'after' hook.
+        &quot;status&quot;: 200,
+        &quot;body&quot;: {
+            &quot;count&quot;: 1,
+            &quot;total&quot;: 1,
+            &quot;_links&quot;: {
+                // ... HAL links
+            },
+            &quot;_embedded&quot;: {
+                &quot;beef1337:mymodel&quot;: {
+                    &quot;id&quot;: &quot;l231ij4&quot;,
+                    &quot;myfield&quot;:&quot;newValue&quot;
+                    // ... full response
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p><em>The <code>response</code> property is currently not available in hooks!</em></p>
+<p>This object can be transformed to only send the required information.
+See <a href="./#transformations">Transformations</a> below for details.</p>
+<p>The following example is a complete web hook configuration:</p>
+<pre><code class="language-js">[
+  {
+    &quot;hook&quot;: &quot;after&quot;, // 'before' or 'after' – when should the hook be fired?
+    &quot;type&quot;: &quot;web&quot;, // indicates that this is a web hook
+    &quot;methods&quot;: [&quot;put&quot;], // which methods should this hook watch
+    &quot;description&quot;: &quot;send updated entry&quot;, // describe what the hook does
+    &quot;config&quot;: { // this config object is web-hook-specific
+      &quot;createJWT&quot;: { // optional. Will create a JWT before syncing
+        &quot;variableToSet&quot;: &quot;jwt&quot;, // required. The context variable that will hold the generated JWT
+        &quot;algorithm&quot;: &quot;HS256&quot;, // required. The algorithm to use: HS256, HS384, HS512 (HMAC) or RS256, RS384, RS512 (RSA)
+        &quot;issuer&quot;: &quot;entrecode&quot;, // optional, can be any string and can use context variables
+        &quot;secret&quot;: &quot;GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk&quot;, // only needed if the algorithm is HMAC (HS***)
+        &quot;subject&quot;: &quot;{{username}}&quot;, // optional. Can use context variables
+        &quot;expiresIn&quot;: &quot;5min&quot; // optional. Expiration time in seconds or a timespan according to https://github.com/rauchg/ms.js
+      },
+      &quot;requests&quot;: [ // you can list any number of requests here, they get executed sequentially.
+        {
+          &quot;uri&quot;: &quot;https://my-other-server/endpoint?remoteID={{response.body._embedded['beef1337:mymodel'].id}}&quot;, // you may access variables from the context here
+          &quot;headers&quot;: {
+            &quot;Authorization&quot;: &quot;Bearer 1o32iru1oi3rj&quot;,
+          },
+          &quot;method&quot;: &quot;post&quot;
+          &quot;body&quot;: {
+            &quot;__jsonmask&quot;: &quot;response/body/_embedded/*(id,property1,property2)&quot;, 
+            &quot;__jsonpath&quot;: &quot;$.response.body._embedded['beef1337:mymodel']&quot;,
+            &quot;__array&quot;: false
+          },
+          &quot;responseMapping&quot;: { // maps the response to new context variables (optional)
+            &quot;accessToken&quot;: { // the value of $.body.accesstoken will be available in the next request as {{accessToken}}
+              &quot;__array&quot;: false,
+              &quot;__jsonpath&quot;: &quot;$.body.accesstoken&quot; // $ is the full response object, so you may also access headers
+            }
+          }
+        },
+        {
+          uri&quot;: &quot;https://my-other-server/endpoint?remoteID={{response.body._embedded['beef1337:mymodel'].id}}&quot;,
+          &quot;headers&quot;: {
+            &quot;Authorization&quot;: &quot;Bearer {{accessToken}}&quot;, // the variable set in the previous request
+          },
+        }
+      ]
+    }
+  }
+]
+</code></pre>
+<p>It sends the <code>id</code>, <code>property1</code> and <code>property2</code> values of the edited entry to <code>https://my-other-server/endpoint?remoteID=l231ij4</code>.
+A “before” web hook can also be synchronous:</p>
+<pre><code class="language-js">{
+    &quot;hook&quot;: &quot;before&quot;,
+    &quot;type&quot;: &quot;web&quot;,
+    &quot;methods&quot;: [&quot;put&quot;],
+    &quot;description&quot;: &quot;external validation&quot;,
+    &quot;config&quot;: {
+        &quot;requests&quot;: [
+            {
+                &quot;uri&quot;: &quot;https://my-other-server/endpoint&quot;,
+                &quot;headers&quot;: {
+                    &quot;Authorization&quot;: &quot;Bearer 1o32iru1oi3rj&quot;,
+                },
+                &quot;method&quot;: &quot;get&quot;
+                &quot;validate&quot;: {
+                  &quot;status&quot;: 200 // you may enforce a specific http status code from the remote (only in before hooks)
+                }
+            }
+        ],
+        &quot;responseMapping&quot;: { // the original request body will get those properties assigned additionally
+            &quot;property1&quot;: {
+                &quot;__jsonpath&quot;: &quot;$.body.property1&quot; // this is a property of the last request's response body
+                &quot;__array&quot;: false
+            },
+            &quot;property2&quot;: &quot;hard coded&quot; 
+        }
+    }
+}
+</code></pre>
+<p>The <code>validate</code> property (which is only effective in “before” hooks) can be configured to expect a certain HTTP status of the remote server, in this case the request is only executed if the remote server answers with HTTP status 200. If the target server(s) respond with another status code, the data manager request is rejected with an error. An optional error response of the validating server is sent back to the data manager client. </p>
+<p>The <code>responseMapping</code> property in the root level (not the individual requests) can be used to amend the request body with data from a foreign server. Properties can also get hardcoded values. Properties not written remain at the value provided by the original request.</p>
+<h2 id="mail-hook">Mail Hook<a class="headerlink" href="#mail-hook" title="Permanent link">&para;</a></h2>
+<p><em>Note: there are currently two implementations available. The deprecated one sends mails directly. The favored one is event-based and supports custom Domains. The deprecated mail hook is hook type <code>mailgun</code> and should not be used anymore.</em></p>
+<p>The <code>mail</code> hook is neither a <code>before</code> nor an <code>after</code> hook, but an <code>event</code> hook instead. This means that the main data manager process does not execute this hook, but ec.event-hook service does after the desired action produced an event (same behaviour as an <code>after</code> hook). It is not possible to have a mail hook on the <code>get</code> method, because reads do not trigger an event.</p>
+<pre><code class="language-js">{
+    &quot;hook&quot;: &quot;event&quot;,
+    &quot;type&quot;: &quot;mail&quot;,
+    &quot;config&quot;: {
+        &quot;to&quot;: &quot;{{data.recipient}}&quot;, // if omitted, &quot;to&quot; is set to &quot;undisclosed-recipients:; &lt;no-reply@&lt;domain&gt;&gt;
+    &quot;bccToGroup&quot;: &quot;77566e8f-399b-4fcf-a968-7d4f148978ac&quot; // send as bcc to all members of ec.account server group with this id
+        &quot;from&quot;: &quot;{{data.sender}}&quot;,
+        &quot;text&quot;: {
+            &quot;__jsonpath&quot;: &quot;$.data.content&quot;
+        },
+        &quot;data&quot;: {
+            &quot;__jsonpath&quot;: &quot;$.data&quot; // to make all loaded data available in ec.mail template
+        },
+        &quot;subject&quot;: &quot;{{data.subject}} &quot;,
+        &quot;domain&quot;: &quot;entrecode.de&quot;,
+    &quot;language&quot;: &quot;de&quot;, // ec.mail supports different language templates
+    &quot;template&quot;: &quot;order-paid&quot;, // ec.mail template name
+    &quot;templateSet&quot;: &quot;shp&quot;, // ec.mail template folder (when missing, it just uses the domain as folder name)
+    &quot;__resolve&quot;: [ // resolve entry fields so the values are available in data
+      &quot;account&quot;,
+      &quot;shop&quot;
+    ],
+    &quot;mailgunTemplate&quot;: &quot;held-open-merchant&quot;, // use a native mailgun template instead of ec.mail - use either this or 'template'
+    &quot;h:X-Mailgun-Variables&quot;: { // variables for mailgun template
+      &quot;__jsonpath&quot;: &quot;$.data&quot;,
+      &quot;__modifier&quot;: &quot;stringify&quot;
+    }
+        // ... more properties, see https://documentation.mailgun.com/api-sending.html#sending
+    },
+    &quot;methods&quot;: [
+        &quot;post&quot;
+    ],
+  &quot;conditions&quot;: { // conditions can be used to trigger on certain state changes
+    &quot;and&quot;: [
+      {
+        &quot;===&quot;: [
+          {
+            &quot;var&quot;: &quot;data.status&quot;
+          },
+          &quot;paid&quot;
+        ]
+      },
+      {
+        &quot;===&quot;: [
+          {
+            &quot;var&quot;: &quot;oldEntryData.status&quot;
+          },
+          &quot;unpaid&quot;
+        ]
+      }
+    ]
+  },
+    &quot;description&quot;: &quot;Simple Mail Hook&quot;,
+    &quot;hookID&quot;: &quot;dd53b7c2-a494-44e6-883a-4269a89022c2&quot;
+}
+</code></pre>
+<p>This example builds a simple mail from an entry. Note the use of <a href="#json-transformations">transjson</a> functionality to build the mail dynamically.
+The available properties inside <code>config</code> map 1:1 to the properties described in the <a href="https://documentation.mailgun.com/api-sending.html#sending">Mailgun API Documentation</a>. Multiple recipients / multiple values for the same properties can be set as array. The <code>domain</code> property can be used to send via a specific domain; if it is omitted, the default will be taken. Note that the domain has to be registered with mailgun, which is a manual process for now. The property <code>template</code> will make ec.mail use a local template file. If you want to use Mailgun´s templates, use the property <code>mailgunTemplate</code> instead (translates to mailgun <code>template</code> property).</p>
+<p>The property <code>__resolve</code> can be used to supply a list of field names which should be loaded. This way, data not included in the event of an updated entry can be used (like linked entries). <strong>The 'dm-event-hook-service Mail'-Account needs reading permissions on the data manager for this</strong> (hook model and entry target model).</p>
+<p>It is recommended to always include a <code>text</code> property, even when a <code>html</code> property is present.</p>
+<p><em>This is an event hook. If the hooks seems not to trigger, the issue is usually fixed by saving the model once again. (Event Hook configuration is stored in etcd, not in PostgreSQL).</em></p>
+<h2 id="cloudfront-invalidation-hook">CloudFront Invalidation Hook<a class="headerlink" href="#cloudfront-invalidation-hook" title="Permanent link">&para;</a></h2>
+<p>The <code>cloudfront</code> hook is an <code>event</code> hook that can be used to invalidate an AWS CloudFront distribution after updating an entry (e.g. a CMS page). </p>
+<blockquote>
+<p><strong>Invalidations are not for free!</strong> 
+They currently cost $ 0.005 for each path, so they should be used only when necessary. CloudFront Hooks should always be conditional and it is better to disable them when updating a large set of entries.</p>
+</blockquote>
+<p>The AWS IAM user "event-hook-service" should have invalidation rights on the desired CloudFront distribution (all entrecode CloudFronts by default). You then only need the distribution ID for the hook.</p>
+<pre><code class="language-js">{
+  &quot;hook&quot;: &quot;event&quot;,
+  &quot;type&quot;: &quot;cloudfront&quot;,
+  &quot;description&quot;: &quot;Invalidate page if content or title has changed&quot;,
+  &quot;config&quot;: {
+    &quot;paths&quot;: [
+      &quot;/{{data.seoTitle}}*&quot; // one or more paths to invalidate. Note that the wildcard * can only stand at the end!
+    ],
+    &quot;distribution&quot;: &quot;EWXXXXXXXP93D&quot; // insert your distribution ID here
+  },
+  &quot;methods&quot;: [
+    &quot;put&quot; // the hook is only really reasonable for PUT hooks
+  ],
+  &quot;conditions&quot;: { // always recommended
+    &quot;!&quot;: {
+      &quot;missingSome&quot;: [
+        1, // only triggers, when at least one of the following properties exists
+        [
+          &quot;oldEntryData.title&quot;,
+          &quot;oldEntryData.content&quot;
+        ]
+      ]
+    }
+  }
+}
+</code></pre>
+<p><em>This is an event hook. If the hooks seems not to trigger, the issue is usually fixed by saving the model once again. (Event Hook configuration is stored in etcd, not in PostgreSQL).</em></p>
+<h2 id="conditional-event-hooks">Conditional Event Hooks<a class="headerlink" href="#conditional-event-hooks" title="Permanent link">&para;</a></h2>
+<p>Event Hooks like the Mail Hook or CloudFront Hook support conditions. This way, you can make the hook trigger only on events that fulfill a condition (e.g. a value change on a PUT event).</p>
+<p>Example:</p>
+<pre><code class="language-js">[
+  {
+    &quot;hook&quot;: &quot;event&quot;,
+    &quot;type&quot;: &quot;mail&quot;,
+    &quot;config&quot;: {
+      ... // mail-specific config
+    },
+    &quot;hookID&quot;: &quot;7fbf9e62-9323-4587-8914-e36aea1e325a&quot;,
+    &quot;methods&quot;: [
+      &quot;put&quot;
+    ],
+    &quot;conditions&quot;: {
+      &quot;and&quot;: [
+        {
+          &quot;===&quot;: [
+            {
+              &quot;var&quot;: &quot;data.status&quot;
+            },
+            &quot;shipped&quot;
+          ]
+        },
+        {
+          &quot;===&quot;: [
+            {
+              &quot;var&quot;: &quot;oldEntryData.status&quot;
+            },
+            &quot;pending&quot;
+          ]
+        }
+      ]
+    },
+    &quot;description&quot;: &quot;Send Shipped Mail&quot;
+  }
+]
+</code></pre>
+<p>This hook only fires on PUT events where the <code>status</code> property has been changed from <code>"pending"</code> to <code>"shipped"</code>.
+The conditions object is expected to be parseable by <a href="http://jsonlogic.com">JsonLogic</a>. You can look at the <a href="http://jsonlogic.com/operations.html">supported Operations here</a>
+or <a href="http://jsonlogic.com/play.html">play with it here</a>.
+The data input is always the full event, which looks like this:</p>
+<pre><code class="language-js">{
+  &quot;entryID&quot;: &quot;FkQVvpavsZ&quot;,
+  &quot;modelID&quot;: &quot;6234144e-38e2-414d-97c5-0faf1b671428&quot;,
+  &quot;private&quot;: false,
+  &quot;locale&quot;: &quot;&quot;,
+  &quot;data&quot;: {
+    &quot;title&quot;: &quot;current value...&quot;,
+    ...
+    &quot;_creator&quot;: null,
+    &quot;creator&quot;: null
+  },
+  &quot;syncID&quot;: null,
+  &quot;entryAndAssetRelations&quot;: [],
+  &quot;roleRelations&quot;: [],
+  &quot;uniqueFields&quot;: [],
+  &quot;readOnlyChecked&quot;: true,
+  &quot;modelTitle&quot;: &quot;mymodel&quot;,
+  &quot;dataManagerID&quot;: &quot;83538731-4ac3-4a1a-b3b5-e31d09e94d42&quot;,
+  &quot;shortID&quot;: &quot;33cc6374&quot;,
+  &quot;user&quot;: {
+    &quot;accountID&quot;: &quot;c00803fb-46cb-4af0-a745-34758577b78f&quot;,
+    &quot;userType&quot;: &quot;ecUser&quot;
+  },
+  &quot;oldEntryData&quot;: {
+    &quot;title&quot;: &quot;previous value of the 'title' field&quot;
+  },
+  &quot;modified&quot;: &quot;2018-06-25T12:48:18.580Z&quot;,
+  &quot;hash&quot;: null
+}
+</code></pre>
+<p>Most interesting is probably <code>data</code> and <code>oldEntryData</code>, as in the example above.</p>
+<h2 id="synchronization">Synchronization<a class="headerlink" href="#synchronization" title="Permanent link">&para;</a></h2>
+<p>A Sync configuration can be added to models to synchronize the entries with another API. The Sync is read-only – writing to remote servers is possible using Hooks. 
+The remote API is required to support JSON over HTTP. It is not required to be RESTful. Remote API Resources need to have a unique ID.</p>
+<p>Multiple subsequent HTTP requests can be done to get the required data.</p>
+<p>Sync is defined in the <code>sync</code> property of a model. It is always a JSON Object. Only one sync setting is available for each model.</p>
+<p>Synchronization is triggered using a special request on the generated API. It requires Authentication of an authorized ec user.</p>
+<h2 id="sync-types">Sync Types<a class="headerlink" href="#sync-types" title="Permanent link">&para;</a></h2>
+<p>There are different types of synchronization with slightly different necessary configuration:</p>
+<ul>
+<li>
+<p><strong>Type 1: Full list sync</strong></p>
+<p>This kind of synchronization syncs with a remote API that provides a complete list of resources that map 1:1 on entries. Example: we have a model <code>person</code>, and the remote server provides a resource returning a list of all persons. A sync will create an entry for each person in the remote entry. Subsequent syncs will update changed entries (overwriting changes to the local entries) and also delete entries whose related resources on the remote API are no longer existing.</p>
+</li>
+<li>
+<p><strong>Type 2: Subresource sync</strong></p>
+<p>This kind of synchronization is also a full list sync, but it is done multiple times: for each entry of a parent model. The returned resources are merged into a full list of all resources. The relation to the parent model is set using an <code>entry</code> type field to the parent entry. Example: we have the above model <code>person</code> and also a model <code>task</code> with tasks for each person. The remote API only provides a list of tasks for a single person. The subresource sync is then set to obtain the task list for each entry in the <code>person</code> model (that model does not necessarily need to have a own sync configuration). The synced task entries all have an <code>entry</code> type field pointing to the related <code>person</code> entry.</p>
+</li>
+<li>
+<p><strong>Type 3: Single Resource sync</strong></p>
+<p>This kind of synchronization does not add new entries or delete entries of the model, but merely updates them using data from a remote API. Therefor it does a request for each entry in the model. Properties set to assume a value from the remote server will be overwritten on sync. Example: we have a local model holding user data, <code>users</code>. It is filled when a new user registers for our app. For each user we want to save the profile picture of a social network providing a REST API. Therefor we ask the user to enter his username of the social network. The sync is configured to obtain the profile picture URI for each user from the remote API.</p>
+</li>
+</ul>
+<h2 id="the-request-sequence">The Request sequence<a class="headerlink" href="#the-request-sequence" title="Permanent link">&para;</a></h2>
+<p>As mentioned above, multiple successive HTTP requests can be done to get the remote data. It is possible to pass data from request to request. The available data is called the <em>context</em>. By default, the context will contain the old entry (for Single Resource sync) or the properties <code>parentID</code> and <code>parentResource</code> (for subresource sync); as well as the public Data Manager Config (config.publicConfig as <code>config</code>). The full list sync initially has an empty context. Each request can have a <code>responseMapping</code> property containing a <a href="#json-transformations">JSON Transformation</a>. The returned object's properties will be added to the context and be accessible for subsequent requests. Subsequent requests may overwrite those properties.
+The context is also available when building the response mapping for the next request, in the JSONPath <code>$.__context</code>. </p>
+<h2 id="supplying-a-json-web-token-jwt">Supplying a JSON Web Token (JWT)<a class="headerlink" href="#supplying-a-json-web-token-jwt" title="Permanent link">&para;</a></h2>
+<p>For authentication of the Data Manager Server against a remote API it is possible to create and sign a JSON Web Token. It can be signed using HMAC with a supplied secret or using RSA with public/private key signing.
+The public key for validating generated JWTs is:</p>
+<pre><code>-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFFGDQFysjXTmiA1vjWTRB9bSy
+2SGOPpxMLzetgj1TlWwdzX5GdpooqAjZgJOd4fkXDFUlKKIHukiow1EqYNpxZ60w
+7chYF4s40fRGx62G8Qcx7kzrtDBQfC8mVjNUHXTsaYV/AiNb2FhRd3vniYyVqD7X
+pKyyITayPNKNHme3SQIDAQAB
+-----END PUBLIC KEY-----
+</code></pre>
+<p>The jti is always a newly generated UUIDv4 for each request. Subject, issuer and expiration can optionally be set. The generated JWT is assigned to a context variable and can be used in the requests.</p>
+<h2 id="mapping-entry-fields">Mapping <code>entry</code> fields<a class="headerlink" href="#mapping-entry-fields" title="Permanent link">&para;</a></h2>
+<p>Fields of the type <code>entry</code> can be mapped to entries of another model that is also synced. This means, when the value of the property supplied by the sync remote is the same as the <code>syncID</code> value of an entry in another model, a link to that entry will be inserted in the entry field. 
+To configure that, supply the modelID of the target model to look in. See example below.</p>
+<h2 id="sync-object-json-structure">Sync object JSON Structure<a class="headerlink" href="#sync-object-json-structure" title="Permanent link">&para;</a></h2>
+<p>It is included in the Model JSON Schema. 
+Explanation using an Example:</p>
+<pre><code class="language-js">{
+  &quot;locale&quot;: &quot;&quot;, // locale of all generated entries. MUST be set, but can be empty.
+  &quot;createJWT&quot;: { // optional. Will create a JWT before syncing
+    &quot;variableToSet&quot;: &quot;jwt&quot;, // required. The context variable that will hold the generated JWT
+    &quot;algorithm&quot;: &quot;HS256&quot;, // required. The algorithm to use: HS256, HS384, HS512 (HMAC) or RS256, RS384, RS512 (RSA)
+    &quot;issuer&quot;: &quot;entrecode&quot;, // optional, can be any string and can use context variables
+    &quot;secret&quot;: &quot;GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk&quot;, // only needed if the algorithm is HMAC (HS***)
+    &quot;subject&quot;: &quot;{{username}}&quot;, // optional. Can use context variables
+    &quot;expiresIn&quot;: &quot;5min&quot; // optional. Expiration time in seconds or a timespan according to https://github.com/rauchg/ms.js
+  },
+  &quot;requests&quot;: [ // array of requests to perform. Needs at least one entry. 
+    {
+      &quot;uri&quot;: &quot;https://myapi/myroute&quot;, // required: the URI. Can use context variables.
+      &quot;method&quot;: &quot;post&quot;, // HTTP method. Currently supported: get, put, post, delete. Default is get.
+      &quot;body&quot;: { // available for post and put method. Can use context variables.
+        &quot;key&quot;: &quot;{{value}}&quot;
+      },
+      &quot;headers&quot;: { // Object to set additional headers. Can use context variables.
+        &quot;My-API-Key&quot;: &quot;{{jwt}}&quot;
+      },
+      &quot;responseMapping&quot;: { // maps the response to new context variables (optional)
+        &quot;accessToken&quot;: { // the value of $.body.accesstoken will be available in the next request as {{accessToken}}
+          &quot;__array&quot;: false,
+          &quot;__jsonpath&quot;: &quot;$.body.accesstoken&quot;
+        }
+      }
+    }
+  ],
+  &quot;pathToArray&quot;: &quot;$.body.values&quot;, // required: path to the resource list to sync (single object in Single Resource Sync)
+  &quot;remoteID&quot;: {
+    &quot;__array&quot;: false,
+    &quot;__jsonpath&quot;: &quot;$.id&quot;, // required: path to the unique ID of the remote resource. All JSON Transformations are possible, so you may also build ids out of multiple properties
+  },
+  &quot;itemMapping&quot;: { // Mapping of the final result to properties of the entry
+    &quot;name&quot;: [ 
+          {
+            &quot;__array&quot;: false,
+            &quot;__jsonpath&quot;: &quot;$.renewal&quot;, // by default, only the value of &quot;pathToArray&quot; of the last request is accessable. 
+            &quot;__modifier&quot;: &quot;stringify&quot;
+          },
+          {
+            &quot;__modifier&quot;: &quot;replace&quot;,
+            &quot;__arguments&quot;: [
+              &quot;^(\\d+)$&quot;, // remember to escape Regular Expressions
+              &quot;P$1M&quot;
+            ]
+          } 
+    ],
+    &quot;title&quot;: { // in this example, `name` and `title` of the entries will be set.
+      &quot;__array&quot;: false,
+      &quot;__jsonpath&quot;: &quot;$.__context.accessToken&quot; // Previous responses can be accessed by setting a context variable and accessing $.__context.
+    }
+  },
+  &quot;entryRelationTargetModelIDs&quot;: {
+    &quot;country&quot;: &quot;17d6e37f-5ab8-46d7-a2f1-a3de1832104c&quot; // country field links to synced entry in other model. Can also be the model title instead of modelID.
+  }
+  &quot;subResource&quot;: { // if this property is set, a sub resource sync (sync Type 2) is done
+    &quot;parentModelID&quot;: &quot;461bc760-5fb1-47c9-9a81-449f7ae99afd&quot;, // required: model ID of the parent model. You can also use the modelTitle instead. However, you should then use the modelTitle everywhere, and not mix the ID notation with the title notation.
+    &quot;parentIDForRequests&quot;: &quot;$.username&quot;, // required: this value of the parent entry will be {{parentID}} in the request context. Either &quot;syncID&quot; (the generated ID of a remote resource), a jsonpath, or a JSON Transformation object.
+    &quot;entryFieldForParentRelation&quot;: &quot;parentEntry&quot; // required: the entry field that will hold the relation to the parent resource
+  },
+  &quot;singleResource&quot;: { // if this property is set (and not &quot;subResource&quot;), a single resource sync (sync Type 3) is done
+    &quot;resourceMapping&quot;: { // each of the here defined properties will be available in the request context
+      &quot;username&quot;: {
+        &quot;__array&quot;: false,
+        &quot;__jsonpath&quot;: &quot;$.remoteData.username&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<h2 id="json-transformations">JSON Transformations<a class="headerlink" href="#json-transformations" title="Permanent link">&para;</a></h2>
+<p>Hooks and Sync configurations on models allow for JSON transformations.</p>
+<p>Basically, a source object gets transformed into a new JSON object using various functions.
+To transform a JSON object, a transformation definition is needed which holds the basic desired JSON structure and some magic properties that trigger insertion of data from the source object.</p>
+<p>Supported transformations are:</p>
+<ul>
+<li>static values</li>
+<li>a subset of the whole source JSON structure, using JSON-Mask</li>
+<li>certain values of the source JSON, using JSONPath</li>
+<li>modification of values using standard JavaScript functions</li>
+<li>Concatenation of multiple values</li>
+</ul>
+<h4 id="static-values">Static values<a class="headerlink" href="#static-values" title="Permanent link">&para;</a></h4>
+<p>Values can get fixed, static values (without anything from the source object).</p>
+<p>Example:</p>
+<pre><code class="language-js">{
+  &quot;property&quot;: &quot;value&quot;
+}
+</code></pre>
+<p>just stays the same.</p>
+<h4 id="json-mask"><a href="https://github.com/nemtsov/json-mask">JSON-Mask</a><a class="headerlink" href="#json-mask" title="Permanent link">&para;</a></h4>
+<p>JSON-Mask is a notation to mask specific parts of a JSON object, hiding the rest. For example, to only pass on the request body of the <a href="./#web-hook">Web Hook object</a>, the following JSON mask would be used: </p>
+<p><code>request/body</code></p>
+<p>To only pass on the request method/uri and the response status, the following JSON mask would be used:</p>
+<p><code>request(method,uri),response/status</code></p>
+<p>Full Example:</p>
+<pre><code class="language-js">{
+  &quot;__jsonmask&quot;: &quot;request(method,uri),response/status&quot;
+}
+</code></pre>
+<p>This would return an object containing request with method and uri properties, as well as response with status property.</p>
+<p>JSON-Mask does not alter the structure of the JSON, it just hides specific parts of it. This means, that the data will always have the <code>request</code>/<code>response</code> root level properties. To get rid of those, you can additionally use JSONPath:</p>
+<h4 id="jsonpath"><a href="https://github.com/dchester/jsonpath">JSONPath</a><a class="headerlink" href="#jsonpath" title="Permanent link">&para;</a></h4>
+<p>JSONPath can be used to query JSON objects similar to XPath for XML. It returns an array of “matches” and works similar to CSS and JQuery selectors. To only return the actual request body, the following JSONPath expression would be used:</p>
+<p><code>$.request.body</code></p>
+<p>It also lets you get a response body without the HAL container:</p>
+<p><code>$.response.body._embedded['beef1337:mymodel']</code></p>
+<p>Arrays may even be filtered with <a href="https://github.com/dchester/jsonpath#jsonpath-syntax">JSONPath syntax</a>.</p>
+<p>Full Example:</p>
+<pre><code class="language-js">{
+  &quot;__jsonpath&quot;: &quot;$.request.body&quot;,
+  &quot;__array&quot;: true
+}
+</code></pre>
+<p>This would return only the request body, put in an array.</p>
+<p>Note that by default JSONPath a single object or an array. With the optional <code>__array</code> flag you can instead enforce returning always an array, even if only one object was matched.</p>
+<p><em>This was a change introduced in version 0.7.9. In previous versions, the default value for <code>__array</code> was <code>true</code>.</em> </p>
+<h4 id="modifier-functions">Modifier functions<a class="headerlink" href="#modifier-functions" title="Permanent link">&para;</a></h4>
+<p>Values (typically provided using a <code>__jsonpath</code> property) can be modified using a predefined set of functions. To use this functionality, an additional <code>__modifier</code> property with the desired function name is required. Valid function names are:</p>
+<h5 id="parseint">parseInt<a class="headerlink" href="#parseint" title="Permanent link">&para;</a></h5>
+<p>Parses an Integer value out of a string (using radix 10).</p>
+<h5 id="parsefloat">parseFloat<a class="headerlink" href="#parsefloat" title="Permanent link">&para;</a></h5>
+<p>Parses a Float value out of a string. Keep in mind that the <code>.</code> is used as decimal point, not comma.</p>
+<h5 id="stringify">stringify<a class="headerlink" href="#stringify" title="Permanent link">&para;</a></h5>
+<p>Calls <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify()</a> on the value, returning a string value. Note that calling JSON.stringify on Strings double-escapes the string.</p>
+<h5 id="replace">replace<a class="headerlink" href="#replace" title="Permanent link">&para;</a></h5>
+<p>Calls <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace">String.replace()</a> on the value. 
+It is required to provide an additional property <code>__arguments</code> containing a two-element array with the search string or regular expression as first element, and the replacement as second element.
+Important: because of the JSON structure, Regular Expressions have to be supplied as strings. This means that special JSON characters (like <code>\</code>) inside Regular Expressions need to be escaped. Basically, things like <code>\d</code> have to be sent as <code>\\d</code> to work.</p>
+<h5 id="uppercase">uppercase<a class="headerlink" href="#uppercase" title="Permanent link">&para;</a></h5>
+<p>Make all characters uppercase characters</p>
+<h5 id="lowercase">lowercase<a class="headerlink" href="#lowercase" title="Permanent link">&para;</a></h5>
+<p>Make all characters lowercase characters</p>
+<h5 id="date">date<a class="headerlink" href="#date" title="Permanent link">&para;</a></h5>
+<p>Converts a value into a Date. If no value is given (e.g. using <code>__jsonpath</code>), the current timestamp is the value. String values are transformed into a date using <a href="http://momentjs.com/docs/#/parsing/string/">Moment.js String parsing</a>. The output value is by default an ISO 8601 String (including time zone).
+Optionally, formats can be given for parsing and output formatting. 
+The property <code>__arguments</code> can contain a two-element array (both values optional). Optional means that the value may be <code>null</code> or <code>false</code> to be ignored (which falls back to the default). The <strong>first</strong> argument is the optional string parsing format (see <a href="http://momentjs.com/docs/#/parsing/string-format/">Moment.js doc</a>. Default is String parsing without a specific format, which supports a wide range of formats that are detected automatically. The <strong>second</strong> argument is output formatting (see <a href="http://momentjs.com/docs/#/displaying/format/">Moment.js doc</a>). By default (value <code>null</code> or <code>false</code>) an ISO 8601 Date String is output.</p>
+<h5 id="date_add-and-date_subtract">date_add and date_subtract<a class="headerlink" href="#date_add-and-date_subtract" title="Permanent link">&para;</a></h5>
+<p>Allows for manipulation of date values by adding or subtracting values. Other than that, the functions do exactly the same as the <em>date</em> modifier function. However, there are two additional (and required) arguments. Therefor, the <code>__arguments</code> array is always required for these two functions. The <strong>first</strong> argument is the same as for the <em>date</em> function: a string parsing format or null. The <strong>second</strong> argument is a number value. The <strong>third</strong> argument is the unit for the value in the second argument. The <strong>fourth</strong> argument is the same as for the <em>date</em> function: a string output format or null.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code class="language-js">{
+  &quot;__modifier&quot;: &quot;date_add&quot;,
+  &quot;__arguments&quot;: [null, 7, &quot;days&quot;, &quot;YY-MM-DD&quot;]
+}
+</code></pre>
+<p>Output: 7 days from now in YY-MM-DD.</p>
+<p><strong>Example 2:</strong></p>
+<pre><code class="language-js">{
+  &quot;__jsonpath&quot;: &quot;$.dateValue&quot;,
+  &quot;__modifier&quot;: &quot;date_subtract&quot;,
+  &quot;__arguments&quot;: [&quot;DD.MM.YYYY&quot;, 3, &quot;years&quot;, &quot;YY-MM-DD&quot;]
+}
+</code></pre>
+<p>Input of the JSONPath function: '19.05.2016'</p>
+<p>Output: 13-05-19</p>
+<h4 id="multiple-modifiers">Multiple modifiers<a class="headerlink" href="#multiple-modifiers" title="Permanent link">&para;</a></h4>
+<p>Blocks with modifiers can be nested using <code>__value</code>. </p>
+<p>Example: take property and replace <code>,</code> with <code>.</code>, then call parseFloat:</p>
+<pre><code class="language-js">{
+  &quot;__value&quot;: {
+    &quot;__jsonpath&quot;: &quot;$.path.to.value&quot;,
+    &quot;__array&quot;: false,
+    &quot;__modifier&quot;: &quot;replace&quot;,
+    &quot;__arguments&quot;: [&quot;,&quot;, &quot;.&quot;]
+  },
+  &quot;__modifier&quot;: &quot;parseFloat&quot;,
+}
+</code></pre>
+<p>For more modifiers this recursive structure becomes confusing. Because of that, you can also define an array of JSON Transformation objects that will be called in sequence.
+The example from above in array notation:</p>
+<pre><code class="language-js">[
+  {
+    &quot;__jsonpath&quot;: &quot;$.path.to.value&quot;,
+    &quot;__array&quot;: false
+  },
+  {
+    &quot;__modifier&quot;: &quot;replace&quot;,
+    &quot;__arguments&quot;: [&quot;,&quot;, &quot;.&quot;]
+  },
+  {
+    &quot;__modifier&quot;: &quot;parseFloat&quot;
+  }
+]
+</code></pre>
+<h4 id="concatenation">Concatenation<a class="headerlink" href="#concatenation" title="Permanent link">&para;</a></h4>
+<p>It is also possible to build new values out of multiple values of the source object. 
+It is done using an array of values (or value definitions) as <code>__composite</code> property, as well as a <code>__modifier</code> function to concatenate.</p>
+<h5 id="string-concatenation">String concatenation<a class="headerlink" href="#string-concatenation" title="Permanent link">&para;</a></h5>
+<p>Example: concatenating street name and house number into one value</p>
+<pre><code class="language-js">{
+  &quot;street&quot;: {
+    &quot;__composite&quot;: [
+      {
+        &quot;__jsonpath&quot;: &quot;$.path.to.streetname&quot;,
+        &quot;__array&quot;: false
+      },
+      &quot; &quot;,
+      {
+        &quot;__jsonpath&quot;: &quot;$.path.to.housenumber&quot;,
+        &quot;__array&quot;: false
+      },
+    ],
+    &quot;__modifier&quot;: &quot;stringConcat&quot;
+  }
+}
+</code></pre>
+<p>Note the fixed value <code>" "</code> for the space between the two values.</p>
+<p>Currently only string concatenation is supported, more may come in the future (numerical calculations, array concatenation, …)</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <a href="/privacy">About</a> | <a href="https://www.entrecode.de/datenschutz">Privacy Policy</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2699 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../api-basics/">
+      
+      
+        <link rel="next" href="../privacy/">
+      
+      
+      <link rel="icon" href="../img/icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Errors - entrecode API Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#errors" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="entrecode API Documentation" class="md-header__button md-logo" aria-label="entrecode API Documentation" data-md-component="logo">
+      
+  <img src="../img/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            entrecode API Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Errors
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="red"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Basics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../sdk/ec.sdk/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  SDK
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../account/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Account Server
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../datamanager/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Data Manager
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../appmanager/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  App Manager
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="entrecode API Documentation" class="md-nav__button md-logo" aria-label="entrecode API Documentation" data-md-component="logo">
+      
+  <img src="../img/icon.png" alt="logo">
+
+    </a>
+    entrecode API Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href=".." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Basics
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Basics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Errors
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Errors
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Codes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Codes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-number-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      First Number: System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#second-number-error-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Second Number: Error Code
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guidelines-for-definition-of-new-error-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guidelines for definition of new error codes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    More
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            More
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/entrecode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GitHub
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://entrecode.de" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    SDK
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            SDK
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk/ec.sdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ec.sdk
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk/ec.dm-cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ec.dm-cache
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Legacy SDKs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Legacy SDKs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk/datamanager-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager Java SDK
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk/datamanager-js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager JavaScript SDK
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../account/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Account Server
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Account Server
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Resources
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Account
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Auth
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Client
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/invalid-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Invalid Permissions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/invite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Invites
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Group
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/resources/token/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Token
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../datamanager/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Data Manager
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Data Manager
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Resources
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datamanager/resources/asset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Asset
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datamanager/resources/dm-assetgroup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Asset Group
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datamanager/resources/dm-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Client
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datamanager/resources/datamanager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datamanager/resources/dm-account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager Account
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datamanager/resources/dm-role/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager Role
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datamanager/resources/dm-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Manager Template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datamanager/resources/model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datamanager/resources/tag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tag
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../appmanager/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    App Manager
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            App Manager
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Resources
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    App
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/app-stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    App Stats
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/codesource/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CodeSource
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/datasource/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DataSource
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Platform
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/target/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Target
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appmanager/resources/apptypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Codes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Codes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-number-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      First Number: System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#second-number-error-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Second Number: Error Code
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guidelines-for-definition-of-new-error-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guidelines for definition of new error codes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="errors">Errors<a class="headerlink" href="#errors" title="Permanent link">&para;</a></h1>
+<p>Error responses across all APIs are always returned with an HTTP status code ≥ 400, i.e. 400, 401, 403, 404, 429, 500.
+The media type is <code>application/problem+json</code>. Error responses comply to the <a href="http://tools.ietf.org/html/draft-nottingham-http-problem-07">Problem Details IETF Draft</a> <em>and</em> to <a href="https://tools.ietf.org/html/draft-kelly-json-hal-06">HAL</a>.</p>
+<p>JSON Schema: <a href="https://schema.entrecode.de/schema-acc/error">https://schema.entrecode.de/schema-acc/error</a></p>
+<p>The following properties are REQUIRED:</p>
+<ul>
+<li><code>status</code> is the HTTP status code of the error and the same status code as the actual HTTP response</li>
+<li><code>code</code> is a four digit error code as defined below</li>
+<li><code>title</code> is the generic, short description of the error code</li>
+<li><code>type</code> is the URL to the description of the error code</li>
+<li><code>_links</code> is a HAL link object that includes <code>up</code> and <code>describedby</code> link relations; <code>describedby</code> is the same URL as <code>type</code>.</li>
+</ul>
+<p>The following properties are OPTIONAL:</p>
+<ul>
+<li><code>detail</code> is the name of the object the error occurred on (e.g. the invalid property)</li>
+<li><code>verbose</code> any additional information about the error</li>
+<li><code>_embedded</code> is a HAL embed object that MAY include <code>error</code> sub-resources.</li>
+</ul>
+<p>Error sub-resources can be used to indicate more errors that occurred or would have occurred, if the enclosing <em>main</em> error would not have occurred.
+Error sub-resources have a subset of the properties described above: <code>code</code>, <code>title</code>, <code>type</code> and <code>detail</code>.</p>
+<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
+<pre><code>{
+    "status": 400,
+    "code": 2202,        
+    "title": "Missing property in query string",
+    "type": "https://entrecode.de/doc/errors/2202",
+    "detail": "count",
+    "_links": {
+        "up": {
+            "title": "Data Manager Home Page",
+            "href": "https://datamanager.entrecode.de" 
+        },
+        "describedby": {
+            "title": "Error Description",
+            "href": "https://entrecode.de/doc/errors/2202"
+        }
+    }
+    "_embedded": {
+        "error": {
+            "code": 2201,
+            "title": "Missing property in JSON Body",
+            "type": "https://entrecode.de/doc/errors/2201",
+            "detail": "property"
+        }
+    }
+}
+</code></pre>
+<h2 id="error-codes">Error Codes<a class="headerlink" href="#error-codes" title="Permanent link">&para;</a></h2>
+<p>Error codes are 4 digit decimal codes.
+They consist of two parts. The first number identifies the system the error occurred in, the last three numbers identify the error, they are the actual error codes.
+Examples:</p>
+<p><strong>2100:</strong> A requested resource in the Datamanager does not exist.</p>
+<p><strong>2202:</strong> A request to a resource in the Datamanager misses a required property in its query string. The detail field of the error response will indicate which property.</p>
+<p><strong>3000:</strong> An internal error occurred in the Appserver, probably a server-side bug.</p>
+<h3 id="first-number-system">First Number: System<a class="headerlink" href="#first-number-system" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>System</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1xxx</td>
+<td>Account Server</td>
+</tr>
+<tr>
+<td>2xxx</td>
+<td>Data Manager</td>
+</tr>
+<tr>
+<td>3xxx</td>
+<td>App Manager</td>
+</tr>
+</tbody>
+</table>
+<p>More Codes may be added in the future.</p>
+<h3 id="second-number-error-code">Second Number: Error Code<a class="headerlink" href="#second-number-error-code" title="Permanent link">&para;</a></h3>
+<p>The actual error code (<code>code</code>) is partitioned in error types (bold in the table below).
+The <code>detail</code> field includes further information about the subject of the error.
+The <code>verbose</code> field may be used for further information what is actually wrong with the subject in <code>detail</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+<th>Detail</th>
+<th>Verbose</th>
+<th>HTTP Status Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>000</strong></td>
+<td><strong>Internal Error.</strong> No further information disclosured to client.</td>
+<td></td>
+<td></td>
+<td>500</td>
+</tr>
+<tr>
+<td><strong>1xx</strong></td>
+<td><strong>Generic Error</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>100  <a name="error-100"></a></td>
+<td>Resource not found</td>
+<td></td>
+<td></td>
+<td>404</td>
+</tr>
+<tr>
+<td>101  <a name="error-101"></a></td>
+<td>No resource entity matching body property filter found</td>
+<td>the body property that did not produce a match</td>
+<td></td>
+<td>404</td>
+</tr>
+<tr>
+<td>102  <a name="error-102"></a></td>
+<td>No resource entity matching query string filter found</td>
+<td>the query string property that did not produce a match</td>
+<td></td>
+<td>404</td>
+</tr>
+<tr>
+<td>110  <a name="error-110"></a></td>
+<td>Method not allowed</td>
+<td>the request method that is not allowed</td>
+<td></td>
+<td>405</td>
+</tr>
+<tr>
+<td>150  <a name="error-150"></a></td>
+<td>Error in remote API</td>
+<td>description of the error</td>
+<td>the Error returned from the remote API</td>
+<td>400</td>
+</tr>
+<tr>
+<td><strong>2xx</strong></td>
+<td><strong>Syntax Error</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>200  <a name="error-200"></a></td>
+<td>Missing body</td>
+<td></td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>201  <a name="error-201"></a></td>
+<td>Missing property in JSON body</td>
+<td>the property that is missing</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>202  <a name="error-202"></a></td>
+<td>Missing property in query string</td>
+<td>the property that is missing</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>203  <a name="error-203"></a></td>
+<td>Missing file in upload</td>
+<td></td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>204  <a name="error-204"></a></td>
+<td>Missing HAL link or embed in JSON body</td>
+<td>the relation that is missing</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>211  <a name="error-211"></a></td>
+<td>Invalid format for property in JSON body</td>
+<td>the property with an invalid format</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>212  <a name="error-212"></a></td>
+<td>Invalid format for property in query string</td>
+<td>the property with an invalid format</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>213  <a name="error-213"></a></td>
+<td>Invalid file format in upload</td>
+<td>the recognized mime type that is not allowed</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>214  <a name="error-214"></a></td>
+<td>Invalid linked or embedded HAL resource in JSON body, or link not found</td>
+<td>the relation that is invalid</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>215  <a name="error-215"></a></td>
+<td>Resource cannot be sorted after given property</td>
+<td>the property that is not allowed for sorting</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>216  <a name="error-216"></a></td>
+<td>Resource cannot be filtered with given property</td>
+<td>the property that is not allowed for filtering</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>217  <a name="error-217"></a></td>
+<td>Resource cannot be range-filtered with given property</td>
+<td>the property that is not comparable</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>251  <a name="error-251"></a></td>
+<td>Password is too short (on registration, only 1251 is defined)</td>
+<td></td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>252  <a name="error-252"></a></td>
+<td>Unmatched validation error</td>
+<td>TinyValidator4 Error Code with message</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>253  <a name="error-253"></a></td>
+<td>Invalid asset to merge</td>
+<td></td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>254  <a name="error-254"></a></td>
+<td>Exceeded maximum levels for nested request.</td>
+<td>Number of maximum levels</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>255  <a name="error-255"></a></td>
+<td>Could not get nested resources.</td>
+<td>entryID which produced the error</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>256  <a name="error-256"></a></td>
+<td>Could not create download file.</td>
+<td>detailed error response</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td><strong>3xx</strong></td>
+<td><strong>Semantics Error</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>311  <a name="error-311"></a></td>
+<td>Invalid value for property in JSON body</td>
+<td>the property with an invalid value</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>351  <a name="error-351"></a></td>
+<td>eMail address is unavailable (on registration and email change, only 1351 is defined)</td>
+<td></td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>352  <a name="error-352"></a></td>
+<td>Cannot delete openID connection (only 1352 is defined)</td>
+<td></td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>353  <a name="error-353"></a></td>
+<td>Duplicate model/assetgroup in same data manager (only 2352 is defined)</td>
+<td></td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>354  <a name="error-354"></a></td>
+<td>Cannot delete Model, has entries (only 2354 is defined)</td>
+<td></td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>355  <a name="error-355"></a></td>
+<td>Cannot delete Model, mandatory model (only 2355 is defined)</td>
+<td></td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>356  <a name="error-356"></a></td>
+<td>Cannot change Model, has Entries. (only 2356 is defined)</td>
+<td>More detailed description of error</td>
+<td>Affected Field</td>
+<td>403</td>
+</tr>
+<tr>
+<td>357  <a name="error-357"></a></td>
+<td>Model must support default locale (only 2357 is defined)</td>
+<td>Affected modelID</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>358  <a name="error-358"></a></td>
+<td>Unsupported locale (only 2358 is defined)</td>
+<td>Affected modelID</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>359  <a name="error-359"></a></td>
+<td>Violates unique constraint (only 2359 is defined)</td>
+<td>title of violating field</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>360  <a name="error-360"></a></td>
+<td>Cannot delete entry. Referenced as required. (only 2360 is defined)</td>
+<td>entryID holding the reference</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>361  <a name="error-361"></a></td>
+<td>Cannot change entry. Read Only. (only 2361 is defined)</td>
+<td></td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>362  <a name="error-362"></a></td>
+<td>Cannot change entry. Reference not allowed due to type validation. (only 2362 is defined)</td>
+<td></td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>363  <a name="error-363"></a></td>
+<td>Cannot change Model, edit of mandatory/unmutable field. (only 2363 is defined)</td>
+<td>More detailed description of error</td>
+<td>Affected field</td>
+<td>403</td>
+</tr>
+<tr>
+<td>364  <a name="error-364"></a></td>
+<td>Cannot change Model, reserved field title. (only 2364 is defined)</td>
+<td>Field title</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>365  <a name="error-365"></a></td>
+<td>Cannot change Model, duplicate model title. (only 2365 is defined)</td>
+<td>Model title</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>366  <a name="error-366"></a></td>
+<td>Duplicate field name in model.</td>
+<td>Field title</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>367  <a name="error-367"></a></td>
+<td>Field cannot be unique and localizable.</td>
+<td>Field title</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>368  <a name="error-368"></a></td>
+<td>Field of type boolean must be required.</td>
+<td>Field title</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>369  <a name="error-369"></a></td>
+<td>Title field not a field in the model.</td>
+<td>Title field</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>370  <a name="error-370"></a></td>
+<td>Cannot delete Resource. Is used.</td>
+<td></td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>371  <a name="error-371"></a></td>
+<td>Cannot change entry. Reference not found. (only 2371 is defined)</td>
+<td></td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>372  <a name="error-372"></a></td>
+<td>Required field must have a default value set.</td>
+<td>Field title</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>373  <a name="error-373"></a></td>
+<td>Other parallel request already added tag(s)</td>
+<td></td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td>374  <a name="error-374"></a></td>
+<td>Cannot export datamanager. Required field has no default value.</td>
+<td>model title</td>
+<td>field title</td>
+<td>400</td>
+</tr>
+<tr>
+<td>375  <a name="error-375"></a></td>
+<td>A duplicate asset already exists in this AssetGroup. Set <code>ignoreDuplicates</code> flag to ignore. No assets were uploaded.</td>
+<td>model title</td>
+<td>field title</td>
+<td>400</td>
+</tr>
+<tr>
+<td>376  <a name="error-376"></a></td>
+<td>Cannot export datamanager. Required field has no default value.</td>
+<td>model title</td>
+<td>field title</td>
+<td>400</td>
+</tr>
+<tr>
+<td><strong>4xx</strong></td>
+<td><strong>Rights Management Error</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>400  <a name="error-400"></a></td>
+<td>Missing Access Token</td>
+<td></td>
+<td></td>
+<td>401</td>
+</tr>
+<tr>
+<td>401  <a name="error-401"></a></td>
+<td>Invalid Access Token</td>
+<td></td>
+<td></td>
+<td>401</td>
+</tr>
+<tr>
+<td>402  <a name="error-402"></a></td>
+<td>Outdated Access Token</td>
+<td></td>
+<td></td>
+<td>401</td>
+</tr>
+<tr>
+<td>403  <a name="error-403"></a></td>
+<td>Invalid Password</td>
+<td>the email address that attempted the login</td>
+<td>Timestamp until login is locked for this email address</td>
+<td>401</td>
+</tr>
+<tr>
+<td>404  <a name="error-404"></a></td>
+<td>Account not found (unknown email address)</td>
+<td></td>
+<td></td>
+<td>404</td>
+</tr>
+<tr>
+<td>410  <a name="error-410"></a></td>
+<td>Insufficient rights to access the requested resource</td>
+<td>The rejected permission</td>
+<td></td>
+<td>401</td>
+</tr>
+<tr>
+<td>411  <a name="error-411"></a></td>
+<td>Insufficient rights to access the requested resource with this method</td>
+<td></td>
+<td></td>
+<td>405</td>
+</tr>
+<tr>
+<td>444  <a name="error-444"></a></td>
+<td>Denied because of stupidity</td>
+<td></td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>451  <a name="error-451"></a></td>
+<td>Too many wrong login attempts (on login, only 1451 is defined)</td>
+<td></td>
+<td></td>
+<td>429</td>
+</tr>
+<tr>
+<td>452  <a name="error-452"></a></td>
+<td>User blocked (on login and internal account API, only 1452 is defined)</td>
+<td></td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>453  <a name="error-453"></a></td>
+<td>Invalid invite (on registration, only 1453 is defined)</td>
+<td></td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>460  <a name="error-460"></a></td>
+<td>Generic OAuth Error</td>
+<td></td>
+<td>more information</td>
+<td>400</td>
+</tr>
+<tr>
+<td>461  <a name="error-461"></a></td>
+<td>Facebook OAuth Request failed</td>
+<td>Facebook Error Code</td>
+<td>Facebook Error Message</td>
+<td>400</td>
+</tr>
+<tr>
+<td>462  <a name="error-462"></a></td>
+<td>Facebook API call failed to receive eMail address</td>
+<td></td>
+<td>more verbose Error Message</td>
+<td>400</td>
+</tr>
+<tr>
+<td>470  <a name="error-470"></a></td>
+<td> Target resource does not fulfill permission policy conditions</td>
+<td></td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>471  <a name="error-471"></a></td>
+<td>Property cannot be written due to permission policy restrictions</td>
+<td>the property that is not allowed</td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>472  <a name="error-472"></a></td>
+<td>Error while processing asset file.</td>
+<td>The original error message</td>
+<td></td>
+<td>400</td>
+</tr>
+<tr>
+<td><strong>5xx</strong></td>
+<td>Plan error (not in Accountserver, only 25xx and 35xx are defined)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>500  <a name="error-500"></a></td>
+<td>Missing plan for this product</td>
+<td>the product that is not included in the current plan</td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>510  <a name="error-510"></a></td>
+<td>Insufficient plan for this product</td>
+<td>the product whose limit is exceeded in the current plan</td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td>511  <a name="error-511"></a></td>
+<td>Insufficient plan for creation</td>
+<td>the product whose limit is exceeded in the current plan</td>
+<td></td>
+<td>403</td>
+</tr>
+<tr>
+<td><strong>9xx</strong></td>
+<td><strong>Other</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="guidelines-for-definition-of-new-error-codes"><em>Guidelines for definition of new error codes</em><a class="headerlink" href="#guidelines-for-definition-of-new-error-codes" title="Permanent link">&para;</a></h3>
+<ul>
+<li><em>a suitable HTTP error code should still be used</em></li>
+<li><em>codes should be added to the defined error types (1xx-5xx)</em></li>
+<li><em>codes are logically sub-partitioned in groups of ten</em></li>
+<li><em>codes above x5x should be used for very (resource- or system-)specific errors</em></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <a href="/privacy">About</a> | <a href="https://www.entrecode.de/datenschutz">Privacy Policy</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  </body>
+</html>

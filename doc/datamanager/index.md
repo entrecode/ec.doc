@@ -484,7 +484,7 @@ Third party authentication providers can be used via OIDC (Login with Apple, Goo
       "clientSecret": "supersecretsecretformycoolclient"
     },
     {
-      "uri": "https://account.apple.com/.well-known/openid-configuration",
+      "uri": "https://appleid.apple.com/.well-known/openid-configuration",
       "button": "Login mit Apple",
       "clientID": "de.entrecode.cachena.login",
       "clientSecret": "supersecretjwtfromapplewhichdoesexpiresorememberchangingitintime"

@@ -561,19 +561,23 @@ Also, they are not stored to the account in any way (DM Accounts have no metadat
 ### helper functions
 
 ```js
-await publicAPI.addOIDCIdenitityToAccount(
+await publicAPI.addOIDCIdentityToAccount(
     accountID: string,
-    idToken: {
+    body: {
       iss: string;
       sub: string;
       exp: number;
       iat: number;
-    },
+    } | {
+      code: string;
+      nonce: string;
+      clientID: string;
+      issuer: string;
+    }
 );
 ```
 
-If you have an id token from a third party from some other flow, you can assign it to an existing DM account with this.
-
+If you have an id token from a third party from some other flow, you can assign it to an existing DM account with this. You can also send `code`, `nonce`, `clientID` and `issuer` to let the server get a token. 
 
 ## Hooks
 Hooks can be used to add additional functionality to models. E.g. they enable you to alter values before saving or to pass data on to another server.

@@ -6,34 +6,37 @@ The JSON Schema is [https://schema.entrecode.de/schema-app/deployment](https://s
 
 ## Properties
 
-| Property | Type | Format | Description | Writable |
-|----------|------|--------|-------------|----------|
-|deploymentID| Integer | 32 Bit signed (max. 2147483647) | The unique identifier for a Deployment | No. Gets generated on creation. |
-|started| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the beginning of the deployment.| No. Gets written on creation. |
-|finished| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the end of the deployment.| No. Gets written on success/failure. |
-|successful| Enum | success, error, running | Indicates if the deployment is still running or finished successfully or with an error. | No. |
-|events | Array | | List of deployment Events. | No. |
-|results| Array | Array of anything. | Contains the results each target plugin reports on a successful deployment. | No. |
+| Property      | Type    | Format                                                                                                        | Description                                                                             | Writable                             |
+| ------------- | ------- | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------ |
+| deploymentID  | Integer | 32 Bit signed (max. 2147483647)                                                                               | The unique identifier for a Deployment                                                  | No. Gets generated on creation.      |
+| started       | String  | ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339)) | Timestamp of the beginning of the deployment.                                           | No. Gets written on creation.        |
+| finished      | String  | ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339)) | Timestamp of the end of the deployment.                                                 | No. Gets written on success/failure. |
+| successful    | Enum    | success, error, running                                                                                       | Indicates if the deployment is still running or finished successfully or with an error. | No.                                  |
+| events        | Array   |                                                                                                               | List of deployment Events.                                                              | No.                                  |
+| results       | Array   | Array of anything.                                                                                            | Contains the results each target plugin reports on a successful deployment.             | No.                                  |
+| comment       | String  |                                                                                                               | A comment added when starting the deployment                                            | No.                                  |
+| outsideConfig | JSON    |                                                                                                               | Additional config added when starting the deployment                                    | No.                                  |
 
-<h3>Events Array Item Properties</h3>
-| Property | Type | Format | Description | Writable |
-|----------|------|--------|-------------|----------|
-|deploymentEventID|Integer | 64 Bit signed (max. 9223372036854775807) | The unique identifier for a Deployment Event | No. |
-|deploymentEventType| String | valid deployment event type| Specifies the type of the deployment event. | No. |
-|timestamp| String| ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339))| Timestamp of the occurrence of the event.| No. |
-|message| String || Human-readable description of the Event|No.|
-|temporary |Boolean | not null | A temporary event marks the start of an action that will be finished with either a success or a failure event. | No.|
-|info| JSON || Additional information about the event in any format. | No. |
+### Events Array Item Properties
+
+| Property            | Type    | Format                                                                                                        | Description                                                                                                    | Writable |
+| ------------------- | ------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------- |
+| deploymentEventID   | Integer |  64 Bit signed (max. 9223372036854775807)                                                                     | The unique identifier for a Deployment Event                                                                   | No.      |
+| deploymentEventType | String  | valid deployment event type                                                                                   | Specifies the type of the deployment event.                                                                    | No.      |
+| timestamp           | String  | ISO-8601 formatted UTC Date String (YYYY-MM-DDTHH:mm:ss.sssZ, [RFC 3339](http://tools.ietf.org/html/rfc3339)) | Timestamp of the occurrence of the event.                                                                      | No.      |
+| message             | String  |                                                                                                               | Human-readable description of the Event                                                                        | No.      |
+| temporary           | Boolean | not null                                                                                                      | A temporary event marks the start of an action that will be finished with either a success or a failure event. | No.      |
+| info                | JSON    |                                                                                                               | Additional information about the event in any format.                                                          | No.      |
 
 ## Relations
 
-| Relation Name | Target Resource | Description |Possible Methods |
-|---------------|-----------------|-------------|-----------------|
-| self          | [Deployment](#)| The resource itself | GET |
-| collection    | [Deployment List](#list)| List of all available Deployments | GET, POST|
-| ec:app | [App](./app/) | The app this Deployment is corresponding to. | GET, PUT, DELETE |
-| ec:app/build | [Build](./build/) | The build used in this deployment. | GET |
-| ec:app/platform | [Platform](./platform/) | The Platform that is deployed | GET, DELETE |
+| Relation Name   | Target Resource          | Description                                  | Possible Methods |
+| --------------- | ------------------------ | -------------------------------------------- | ---------------- |
+| self            | [Deployment](#)          | The resource itself                          | GET              |
+| collection      | [Deployment List](#list) | List of all available Deployments            | GET, POST        |
+| ec:app          | [App](./app/)            | The app this Deployment is corresponding to. | GET, PUT, DELETE |
+| ec:app/build    | [Build](./build/)        | The build used in this deployment.           | GET              |
+| ec:app/platform | [Platform](./platform/)  | The Platform that is deployed                | GET, DELETE      |
 
 ## List
 
@@ -41,7 +44,7 @@ The Deployment List Resource is a [Generic List Resource](/#generic-list-resourc
 
 ## Possible Actions
 
-*Modifying (editing or deleting) a Deployment Resource is not possible.* 
+_Modifying (editing or deleting) a Deployment Resource is not possible._
 
 ## Read
 
